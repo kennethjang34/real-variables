@@ -1,0 +1,3 @@
+[submodule "math-321"]
+	path = math-321
+	url = git@github.com:kennethjang34/MATH-321.git
