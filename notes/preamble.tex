@@ -196,43 +196,40 @@
 \declaretheorem[style=thmbox, numbered=yes, name=Corollary,sibling=theorem]{corollary}
 \declaretheorem[style=thmproofbox, name=Proof]{replacementproof}
 
-% \renewenvironment{definition}[1][]{
-% \def\argI{#1}
+\newenvironment{define}[1][]{
+\def\argI{#1}
+\ifstrempty{#1}{
+	\begin{definition*}
+}{
+	\IfInteger{#1}{
+		\setcounter{definition}{#1-1}
+		\begin{definition}
+		\label{def:\thechapter.#1}
+	}
+	{
+		\begin{definition*}[#1]
+			\label{def:#1}
+			}
+			}
+			}
+			{
+			\IfInteger{\argI}{
+			\end{definition}
+			}
+			{\end{definition*}}
+}
+%
+% \newenvironment{define}[1][]{
 % \ifstrempty{#1}
 % {
-% 	\begin{definition*}
+% 	\begin{definition}
 % }
 % {
-% 	\IfInteger{#1}{
-% 		\setcounter{definition}{#1-1}
-% 		\begin{definition}
-% 		\label{def:\thechapter.#1}
-% 	}
-% 	{
-% 		\begin{definition*}[#1]
-% 			\label{def:#1}
-% 			}
-% 			}
-% 		}
-% 			{
-% 			\IfInteger{\argI}{
-% 			\end{definition}
-% 		}
-% 			{
-% 		\end{definition*}
-% 	}}
+% 	\setcounter{definition}{#1-1}
+% 	\begin{definition}
+% 		\label{def:\thechapter.#1}}}
+% 		{\end{definition}}
 %
-\newenvironment{define}[1][]{
-\ifstrempty{#1}
-{
-	\begin{definition}
-}
-{
-	\setcounter{definition}{#1-1}
-	\begin{definition}
-		\label{def:\thechapter.#1}}}
-		{\end{definition}}
-
 \renewenvironment{proof}[1][]{
 % \vspace{-10pt}
 \ifstrempty{#1}{
