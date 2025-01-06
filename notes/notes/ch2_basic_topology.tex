@@ -1,0 +1,652 @@
+\chapter{Basic Topology}
+
+\begin{definition}
+	Sets $A$ and $B$ have the same cardinality, if $\exists f: A \to B$ that is 1-1 and onto (i.e., bijective).
+\end{definition}
+
+\begin{thm}
+	Let $A\sim B$ be a relation between two sets having the same cardinality. Then $~$ is an equivalence relation. That is,
+	\begin{enumerate}
+		\item $A\sim A$ (Reflexive)
+		\item $A\sim B \implies B\sim A$ (Symmetry)
+		\item $A\sim B \& B\sim C\implies A \sim C$ (Transitivity)
+	\end{enumerate}
+\end{thm}
+\begin{definition}
+	Let $\N =\{1,2,3,\ldots\}$. Let $J_{n}=\{1,2,\ldots,n\}$ for $n \in \N $.
+	\begin{itemize}
+		\item A set $A$ is finite if $A\sim J_{n}$ for some $n \in \N $(or if $A=\O $).
+		\item A set $A$ is countably infinite if $A\sim \N $.
+		\item A set $A$ is countable if $A$ is finite or countably infinite.
+	\end{itemize}
+\end{definition}
+\begin{example}
+	$\Z $ is a countably infinite.
+	For $n \in \Z=\{0,+1,-1,+2,-2,\ldots\}$, \\
+	Let $f(n)=\begin{cases}
+			1      & \text{ if $n=0$} \\
+			2n     & \text{ if $n>0$} \\
+			-2n +1 & \text{ if $n<0$} \\
+		\end{cases}$\\
+	Then $f$ is bijective and therefore $|\Z|=|\N|$
+\end{example}
+
+\begin{thm}[8]
+	A subset of a countably infinite set is countable.
+	\begin{proof}
+		Let $A$ be some countably infinite set and $S$ be a infinite subset of $A$.\\
+		As $A$ is a countably infinite set, we can remove duplicates and arrange
+		$A$ so that $A=\{a_1,a_2,a_3,\ldots\}$.
+		Let $n_1$ be the smallest positive integer such that $x_{n_1} \in S$.
+		Let $n_k$ be the smallest positive integer greater than $n_{k-1}$ such that $x_{n_{k}} \in E$ for $k=2,3,\ldots$. Let $f(k)=x_{n_k}$ for $k=1,2,3,\ldots$. Then this is a bijection from $\N $ to $S$.
+	\end{proof}
+	\begin{remark}
+		Roughly speaking, countable sets represent the \textbf{smallest infinity}, as no uncountable set can be a subset of a countable set.
+	\end{remark}
+\end{thm}
+\begin{thm}[12]
+	\label{thm:countableunion}
+	Let $E_1, E_2, \ldots$ be countably infinite sets.
+	Then $S=\cup_{n=1}^{\infty} E_n$ is countably infinite.
+	\begin{proof}
+		Write
+		$E_1=\{x_{11},x_{12},x_{13},x_{14},\ldots\} $\\
+		$E_2=\{x_{21},x_{22},x_{23},x_{24},\ldots\}$\\
+		Form an array: \\
+		$
+			\begin{Bmatrix}
+				x_{11} & x_{12} & x_{13} & x_{14} & \ldots \\
+				x_{21} & x_{22} & x_{23} & x_{24} & \ldots \\
+				x_{31} & x_{32} & x_{33} & x_{34} & \ldots \\
+				x_{41} & x_{42} & x_{43} & x_{44} & \ldots \\
+				\vdots & \vdots & \vdots & \vdots & \ddots \\
+			\end{Bmatrix}
+		$.\\
+		This matrix might have duplicates.
+		Let $T$ be a subset of $\N$ such that $t \in T$ if and only if
+		$t$ is the smallest positive integer such that $x_{t} \in E_1 \cup E_2 \cup \ldots \cup E_n$.\\ Then a set $\{x_t|t \in T \text{ and } \exists_{i \in \N }: x_t \in E_{i}\}$ is $S$.
+		Clearly, $|S|=|T|$, or $S\sim T$, and $T$ is a subset of a countably infinite set, $\N $.
+		Therefore, $T$ is also countable, implying $S$ is also countable. As $S$ is infinite, $S$ is countably infinite.
+	\end{proof}
+\end{thm}
+
+\begin{corollary}
+	If $A$ is countable and $n \in \N $, then $\{(a_1,a_2, \ldots ,a_n)| a_1,a_2, \ldots , a_n \in A  \} $ is countable.
+\end{corollary}
+
+
+\begin{thm}[14]
+	Let $A= \{(b_1,b_2,b_3 \ldots )| b_i \in \{0,1\} \}$. I.e., $A$ is a set of all infinite binary strings.
+	Then $A$ is uncountable.
+	\begin{proof}[Contor's Diaganalization argument,1891]
+		Let $E \subset A$ be countably infinite. $E=\{s^{(1)},s^{(2)},s^{(3)}, \ldots\ | s^{(i)} \in A\} $.
+		It suffices to find some $s \in A \setminus E$, for this shows every countably infinite subset of $A$ is proper construction of $s$.
+		Write
+		\begin{align}
+			s^{(1)} & = b_1^{1}b_2^{1} \ldots       \\
+			s^{(2)} & =b^{2}_1b^{2}_2b^{2}_3 \ldots \\
+			s^{(3)} & =b^{3}_1b^{3}_2b^{3}_3 \ldots \\
+			\vdots  & \nonumber
+		\end{align}
+		On diagonal, flip each bit, i.e., $0\to 1$ and $1\to 0$ and represent the flipped bit of $b_i^{i}$ by $\tilde{b_i^{i}}$.
+		Let $s=\tilde{b_1^{1}}\tilde{b_2^{2}}\tilde{b_3^{3}}\ldots$.
+		Then $s \in A$ and $s \notin E$ as $s$ differs from each $s^{(i)}$ in the $i$-th bit. Therefore, $A$ is uncountable.
+	\end{proof}
+\end{thm}
+
+\begin{corollary}
+	The set $\powerset{\N}$ of subsets of $\N $ is uncountable.
+	\begin{proof}
+		We can create $f: \powerset{\N} \to A$ be a bijection, where $A$ is the set of all infinite binary strings, by
+		\begin{align}
+			f(S)_i & = \begin{cases}
+				           1 & \text{ if $i \in S$}    \\
+				           0 & \text{ if $i \notin S$}
+			           \end{cases}
+		\end{align}
+		For example, if $f(\{\text{odd natural numbers}\})= (1,0,1,0,1,0,1,0\ldots)$.
+		This $f$ is a bijection, and therefore $A$ is uncountable.\\
+	\end{proof}
+\end{corollary}
+
+\begin{thm}
+	$\R $ is uncountable.
+	\begin{proof}
+		This is a rough sketch of the proof:
+		\begin{enumerate}
+			\item It's enough to show that $[0,1]$ is uncountable.
+			\item Consider binary decimal representation of $x \in [0,1]$.
+			      For example, $x=0.101001001\ldots$.
+			      Given $x$, choose maximal $b_1 \in \{0,1\}$ such that $\frac{b_1}{2}\le x$.
+			      Then choose $b_2 \in \{0,1\} $ such that $\frac{b_1}{2}+\frac{b_2}{2} \le x$.
+			      Continue this process to get $b_1,b_2,b_3,\ldots$.
+			      Then $x=\sup{ \left\{ \sum_{i=1}^{n} \frac{b_i}{2^{i}} \right\} }$.
+			      Consider any dyadic rational of the form $\frac{m}{2^{n}}$.
+			      Let it be $\frac{3}{2^{4}}$. Then this maps $\frac{3}{2^{4}}\to 0,0,1,1,0,0,0, \ldots $ and never produce $0,0,1,0, 1,1,1,1, \ldots $, which also represents $\frac{3}{2^{4}}$.
+			      Let $A_1$ be a subset of $A=\{\text{infinite binary strings}\}$ such that $A_1$ does not contain any strings ending in $1,1,1,1, \ldots $.
+			      Then the decimal representation defines a bijection
+			      $f: [0)\to A \setminus A_1$.
+			\item $A_1$ is countable because $A=(A \setminus A_1) \cup A_1$, which is uncountable.
+		\end{enumerate}
+		This shows that $[0,1]$ is uncountable, and therefore $\R $ is uncountable.
+	\end{proof}
+\end{thm}
+
+\begin{definition}[Metric Spaces]
+	A set $X$ is a metric space with metric $d: X \times X \to \R $ if
+	\begin{enumerate}
+		\item $d(p,q)>0$ if $p\neq q$ and $d(p,q)=0$ if $p=q$, $\forall p,q \in X$
+		\item $ \forall_{p,q \in X}: d(p,q)=d(q,p)$
+		\item $ \forall_{p,q,r \in X}: d(p,q) \le d(p,r)+d(r,q)$ (Triangle Inequality)
+	\end{enumerate}
+	\begin{remark}
+		A metric space does not need to be an ordered set or to have addition or multiplication defined on it.
+	\end{remark}
+
+\end{definition}
+\begin{example}[Metric Spaces]
+	\begin{enumerate}
+		\item $\N , \Z , \Q ,\R , \C , \R^{k}$ are metric spaces with $d(p,q)=|p-q|$. Note the meaning of $|x|$ depends on the context.
+		\item Every subset of a metric space is a metric space.
+		\item $X=\{1,2,3,4,5,6\} $ \label{ex:metric_space_graph}
+		      \hfill \\
+		      \tikz{
+			      \begin{scope}[name, prefix=top-]
+				      \node (1) at (0,0){1};
+				      \node (2) at (2,0){2};
+				      \node (3) at (0,-2){3};
+				      \node (4) at (2,-2){4};
+				      \node (5) at (-2,-4){5};
+				      \node (6) at (4,0){6};
+				      \draw (1) -- (2);
+				      \draw (1) -- (3);
+				      \draw (2) -- (4);
+				      \draw (2) -- (6);
+				      \draw (3) -- (4);
+				      \draw (1) -- (5);
+				      \draw (4) -- (5);
+			      \end{scope}
+		      }
+	\end{enumerate}
+\end{example}
+\begin{definition}[Neighborhood]
+	A neighborhood in $X$ is a set $N_r(p):=\{q: d(q,p)<r\}$, where $p \in X, r>0$.
+	\begin{remark}
+		If $r_1 \le r_2$, then $N_{r_1}(p) \subset N_{r_2}(p)$.
+	\end{remark}
+\end{definition}
+\begin{example}
+	\item $\R^{1} $ intervals, $N_r(x)=\{y \in R^{1}: |x-y| < r\} $
+	\item $\R ^2$ disks $N_r(x)=\{y \in R^2: |x-y|<r\} $
+	\item $\R ^3$ balls, $N_r(x)=\{y \in R^3: |x-y|<r\} $
+	\item Given example~\ref{ex:metric_space_graph}, $N_1(2)=\{2\}=N_{\frac{1}{2}}(2)$, $N_2(2)=\{1,2,4,6\}$, $N_3(2)=\{1,2,3,4,5,6\} = X$.
+\end{example}
+\begin{definition}
+	Let $E \subset X$. $p \in E$ is an interior point of $E$ if $\exists r>0$ such that $N_r(p) \subset E$.
+\end{definition}
+\begin{example}
+	\item $X=\R^2, E=\{x \in \R : |x|\le 1\} $
+	\item $X=\N, E \subset X$.
+\end{example}
+
+\begin{definition}
+	$E \subset X$ is an open set if $\forall_{x\in E}$ is an interior point of $E$.
+
+\end{definition}
+
+\begin{thm}[19]
+	Every neighborhood is an open set.
+	\begin{proof}
+		Let $g \in N_r(p)$. Then we must find $s>0$, such that $N_s(g) \subset N_r(p)$.
+		We know $d(p,q)<r$. Choose $s$ such that $0<s<r-d(p,q)$.
+		Let $x \in N_s(q)$, then $d(q,x) < s<r-d(p,q)$.
+		By triangle inequality, $d(p,x) \le d(p,q)+d(q,x)<d(p,q)+r-d(p,q)$, so $x \in N_r(p)$, so $N_s(q) \subset N_r(p)$.
+	\end{proof}
+\end{thm}
+
+\begin{definition}
+	Let $E \subset X$ and $p \in X$.
+	$p$ is a limit point of $E$ if $\forall_{r>0} \exists_{q \in E}$ such that $q \neq p$ and $q \in N_r(p)$
+\end{definition}
+\begin{example}
+	$E=\{\frac{1}{n}: n \in  \N \}\subset \R  $ has exactly one limit point, $0$. note $0 \not\in E$.
+\end{example}
+
+\begin{thm}[20]
+	If $p$ is a limit point of $E \subset S$, then every neighborhood of $p$ contains infinitely many points of $E$.
+	\begin{proof}
+		Let $N_r(p)$ be a neighborhood of $p$. Then $N_r(p)$ contains at least one point $q_1 \in E$ such that $q_1 \neq p$.
+		Let $r_1=d(p,q_1)$. Then $N_{r_1}(p)$ contains some $q_2 \in E$ such that $q_2 \neq p$.
+		Let $r_2=d(p,q_2)$. Then $N_{r_2}(p)$ contains some $q_3 \in E$ such that $q_3 \neq p$.
+		Continue this process to get $q_1,q_2,q_3,\ldots$.
+	\end{proof}
+
+\end{thm}
+
+\begin{corollary}
+	If $E \subset X$ is finite then $E$ has no limit points.
+\end{corollary}
+
+\begin{definition}[Closed Set]
+	A set $E \subset X$ is closed if every limit point of $E$ is in $E$.
+\end{definition}
+\begin{thm}[23]
+	$E \subset X$ is open iff $E^{c}=\{x \in X: x \not\in E\}$ is closed.
+	\begin{proof}
+		\label{prf:open_closed}
+		\hfill
+		\begin{itemize}
+			\item $E$ is open $\implies E^{c}$ is closed.\\
+			      Let $p$ be a limit point of $E^{c}$. Then every neighborhood of $p$ contains some $q \in E^{c}$ such that $q \neq p$. If $p \in E$, then because $E$ is open, $p$ is an interior point, i.e., there exists some neighborhood of $p$ that is a subset of $E$, which does not contain any points of $E^{c}$.
+			      This implies $p \not\in E$ and therefore $p \in E^{c}$.
+			\item $E^{c}$ is closed $\implies E$ is open.\\
+			      Let $p \in E$. Then $p \not\in E^{c}$, so $p$ is not a limit point of $E^{c}$.
+			      Therefore, there exists some neighborhood of $p$ that contains no points of $E^{c}$, i.e., all points of the neighborhood are in $E$. $p$
+			      Thus, Every $p \in E$ is an interior point of $E$, and hence $E$ is open.
+		\end{itemize}
+	\end{proof}
+\end{thm}
+
+\begin{thm}[]
+	[De Morgan's Laws]
+	\hfill
+	\begin{enumerate}[label=(\alph*)]
+		\item $(\bigcup _{\alpha} E_{\alpha})^{c}=\bigcap_{\alpha} E_{\alpha}^{c}$
+		\item $(\bigcap_{\alpha} E_{\alpha})^{c}=\bigcup_{\alpha} E_{\alpha}^{c}$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[24]
+	\hfill
+	\begin{enumerate}[label=(\alph*)]
+		\item For all collection $\{G_{\alpha}\} \text{ of open sets}:\bigcup_{\alpha} G_{\alpha}$ is open.
+		\item For all collection $\{F_{\alpha}\} \text{ of closed sets}:\bigcap_{\alpha} F_{\alpha}$ is closed.
+		\item For all finite collection $\{G_{1},G_{2},\ldots,G_{n}\} \text{ of open sets}:\bigcap_{i=1}^{n} G_{i}$ is open.
+		\item For all finite collection $\{F_{1},F_{2},\ldots,F_{n}\} \text{ of closed sets}:\bigcup_{i=1}^{n} F_{i}$ is closed.
+	\end{enumerate}
+
+	\begin{proof}
+		\begin{enumerate}[label=(\alph*)]
+			\item Let $x \in \bigcup_{\alpha}G_{\alpha}$. Then $x \in G_{\alpha_0}$ for some $\alpha_0$. So there exists a neighborhood $N$ of $x$ such that $N \subset G_{\alpha_0} \subset \bigcup_{\alpha}G_{\alpha}$.
+			\item it's suffice to prove that $(\bigcap_{\alpha} F_{\alpha})^{c}$ is open. But $(\bigcap_{\alpha} F_{\alpha})^{c}=\bigcup_{\alpha} F_{\alpha}^{c}$ is open by (a).
+			\item Let $x \in \bigcap_{i=1}^{n} G_{i}$. Then $x \in G_{i}$ for $i=1,2,\ldots,n$. So there exists a $r_i>0$ such that $N_{r_i}(x) \subset G_i$. Let $r=\min \{r_1,r_2,\ldots, r_n\}$. Then $N_r(x) \subset N_{r_i} \subset G_i$ for $i=1,2,\ldots,n$ and therefore $N_r(x) \subset \bigcap_{i=1}^{n} G_{i}$.
+			\item  $(\bigcup_{i=1}^{n} F_{i})^{c}=\bigcap_{i=1}^{n} F_{i}^{c}$ is open by (c).
+		\end{enumerate}
+	\end{proof}
+\end{thm}
+
+\begin{definition}[Closure]
+	Let $E \subset X$. Let $E'$ be a set of limit points of $E$ in $X$.
+	The set $\overline{E}=E \cup E'$ is the closure of $E$.
+\end{definition}
+\begin{thm}[27]
+	\label{thm:closure}
+	\hfill
+	\begin{enumerate}
+		\item  $\overline{E}$ is closed.
+		\item $E=\overline{E} \Leftrightarrow   \text{$E$ is closed}$.
+		\item If $F \subset X$ is closed and $E \subset  F$, then $\overline{E} \subset F$. (i.e., $\overline{E}$ is the smallest closed set containing $E$, and $\overline{E}= \bigcap_{F:\text{closed set with $F \supset E$}} F$.)
+	\end{enumerate}
+	\begin{proof}
+		\begin{enumerate}
+			\item Let $p$ be a limit point of $\overline{E}$. It suffices to show $p \in E'$ since this implies that $p \in E' \subset E \cup E'=\overline{E}$.
+			      Let $r>0$. $\exists_{q\in \overline{E}, q\neq p}: q \in N_{\frac{r}{2}}(p), \text{ i.e., } d(p,q) < \frac{r}{2}$. Since $q \in E \cup E'$, $\exists_{s \in \overline{E}}$ such that $d(q,s)<\frac{r}{2}$ (if $q \in E$, take $s=q$).
+			      But $d(p,s) \le d(p,q)+d(q,s)<\frac{r}{2}+\frac{r}{2}=r$.
+			\item
+			      \begin{itemize}
+				      \item[$(\implies)$] by (a)
+				      \item[$(\impliedby)$] Suppose $E$ is closed. Then $E' \subset E$, so $\overline{E}=E \cup E'=E$.
+			      \end{itemize}
+			\item Suppose $F$ is closed. Then $F' \supset E'$ and also $F \supset F'$. So $F=\overline{F}=F \cup F' \supset E \cup E'=\overline{E}$
+		\end{enumerate}
+
+	\end{proof}
+\end{thm}
+
+\begin{theorem}[28]
+	Let $E$ be a nonempty set of real numbers which is bounded above. Let $y=\sup\{E\}$. Then $y \in \overline{E}$. Hence, $y \in E$ if $E$ is closed.
+\end{theorem}
+
+\begin{example}
+	Let $X=\R , d(p,q)=|p-q|$. Let $E \subset \R $ be nonempty and bounded above, and let $y=\sup E$. Then $y \in \overline{E}$.
+	\begin{proof}
+		Suppose for contradiction $y \not\in \overline{E}$. Then $y$ is neither a point in $E$ nor a limit point of $E$, so $\exists$ some interval $N_r(y)=(y-r,y+r)$ such that $(y-r,y+r) \cap  E=\emptyset $. However, then $y-r$ in an upper bound for $E$ since $y$ is a least upper bound, which is a contradiction. Therefore, $y \in \overline{E}$.
+	\end{proof}
+\end{example}
+
+\begin{definition}[Relative Openness]
+	Suppose $X$ is a metric space, so $Y \in X$ is a metric space with the same metric. Let $E \subset Y$. Then $E$ is open relative to $Y$ if $E$ is an open set in the metric space $Y$
+\end{definition}
+
+\begin{example}
+	$X=R^2 \supset \R =y, E=(0,1) \subset Y$. Then $E$ is open relative to $Y$, but $E$ is neither open nor closed in $X$.
+\end{example}
+
+\begin{thm}[30]
+	A set $E \subset Y \subset X$ is open relative to $Y$ $\Leftrightarrow $ $\exists_{\text{open set }G \subset  X}: E=G \cap Y$
+	\begin{proof}
+		\begin{itemize}
+			\item[($\implies$)] Suppose $E \subset Y$ is open relative to $Y$. Given $p \in E$, $\exists_{r_p>0}: {N_{r_p}}^{Y}(p) \subset E$, where ${N_r}^{Y}(p)=\{q \in Y: d(p,q)<r\}$.
+			      Then $E \subset \bigcup_{p \in E} {N_{r_p}}^{Y}(p)$ and $\bigcup_{p \in E} {N_{r_p}}^{Y}(p) \subset E$.
+			      Therefore, $E= \bigcup_{p \in E} {N_{r_p}}^{Y}(p)$.\\
+			      Let $G= \bigcup_{p \in E}{N_{r_p}}^{X}(p)$.
+			      This time, we are considering $p$'s neighborhood in $X$, so each ${N_{r_p}}^{X}$ is open.
+			      Thus $G$ is a union of open sets in $X$, and therefore open.\\
+			      $\forall_{p \in E}: p \in {N_{r_p}(p)}^{X}$, so $E \subset G \cap Y$.\\
+			      Let $p \in G \cap Y$. Then $p \in G$ and $p \in Y$. So $p \in {N_{r_p}}^{X}(p)$ for some $r_p>0$. But $p \in Y$, so $p \in {N_{r_p}}^{Y}(p)$. Therefore, $p \in E$. This implies $G \cap Y \subset E$, and therefore $E=G \cap Y$.
+			\item [($\impliedby$)]
+			      Suppose $G \subset X$ is open and $E= G \cap Y$.
+			      Then $\forall_{p \in E}: \exists_{r_p>0}: {N_{r_p}}^{X}(p) \subset G $, so ${N_{r_p}}^{Y}(p)={N_{r_p}}^{X}(p) \cap Y \subset G \cap Y=E$.
+		\end{itemize}
+	\end{proof}
+\end{thm}
+
+\textbf{Note:} Midterm 1 material ends here.
+
+
+\begin{definition}[Open Cover]
+	An open cover of $E \subset X$ is a collection $\{G_{\alpha}\}$ of open subsets of $X \text{ s.t } E \subset \bigcup_{\alpha} G_{\alpha}$.
+\end{definition}
+
+\begin{definition}[Compact]
+	A set $K \subset X$ is compact if every open cover has a finite subcover; i.e., $\exists_{\alpha_1,\alpha_2, \ldots \alpha_n}: \text{ s.t } K \subset G_{\alpha_1} \cup G_{\alpha_2} \cup \ldots  \cup G_{\alpha_n}$
+\end{definition}
+\begin{example}\hfill
+	\begin{itemize}
+		\item If $E$ is finite, then $E$ is compact.
+		\item $(0,1) \subset \R $ is not compact. Bad cover: $(\frac{1}{n},1), n>2$
+		\item $[0, \infty ] \subset \R $ is not compact. Bad cover: $(-1,n) \text{ for } n \in \N$.
+		\item $E \subset \R^{k}$ is compact if and only if $E$ is closed and bounded.
+	\end{itemize}
+\end{example}
+\begin{thm}[34]
+	If $K$ is compact then $K$ is closed.
+	\begin{proof}
+		Suppose $K$ is compact. It suffices to prove that $K^{c}$ is open. Let $ p \in K ^{c}$. We need to produce $r>0 \text{ s.t. } N_r(p) \subset K^{c}$.
+		For $q \in K$, let $W_q=N_{r_q}(q)$, where $r_q=\frac{1}{2}d(p,q)>0$.
+		$\forall_{x \in N_{r_q}\left(p\right)}: x \in W_q \implies d(x,p)+d(x,q)<2r_q=d(p,q)$. However, $X$ is a metric space and $p,q,x \in X$, so $d(p,q) \le d(p,x)+d(x,q)$, leading to $d(p,q)\le d(p,x)+d(x,q)<d(p,q)$, which is a contradiction.
+		Hence, $\forall_{x \in N_{r_q}}: x \not\in W_q$.
+		$N_{r_{q}}(p) \subset {W_q}^{c} \text{ for } \forall_{q \in K}$.
+		Note that $\{W_q\}_{q \in K} $ is an open cover of $K$.
+		$K$ compact $\implies \exists_{\text{finite number of open sets } W_{q_1},W_{q_2}, \ldots W_{q_n}} \text{ s.t. }  K \subset \bigcup_{i=1}^{n}{W_{q_i}}$. Let $r= \min\{r_{q_1},r_{q_2}, \ldots r_{q_n}\}>0$.
+		\[
+			\therefore {N_r}(p) \subset  \left(\bigcap_{i \in \{1,2, \ldots n\} } N_{r_p}(p)\right)  \subset  \left(\bigcap_{i \in  \{1,2,\ldots n\}} {W_{q_i}}^{c}\right)=\left(\bigcup_{i \in \{1,2,\ldots \N \}}W_{q_i}\right)^{c} \subset K^{c}
+		\]
+	\end{proof}
+\end{thm}
+\begin{thm}
+	If $K \subset X$ is compact then $K$ is bounded; i.e., $\exists_{M< \infty } \text{ s.t. }  \forall_{p,q \in K}: d(p,q) \le M$
+	\begin{proof}
+		Fix $p \in K$. An open cover of $K$ is $\{N_n(p)\}_{n \in \N }$. In fact, this is an open cover of $X$.
+		$K \text{ compact }\implies \exists_{\text{finite subcover} N_{n_1}(p),N_{n_2}(p) \ldots N_{n_m}(p)}$.\\
+		Let $R = \max\{n_1,n_1,\ldots n_m\} $. $K \subset N_{R}(p)$. Let $M=2R$. $\forall_{q,r \in K}: d(q,r)\le d(q,p)+d(p,r)<R+R=2R=M$.
+	\end{proof}
+\end{thm}
+\begin{thm}[35]
+	If $F$ is closed, $K$ is compact, and $F \subset K$ then $F$ is compact.
+	\begin{proof}
+		Suppose $F \subset K$. Let $\{V_{\alpha}\}$ be an open cover of $F$. It suffice to produce a finite subcover:\\
+		Consider $\{V_{\alpha}\}$ together with $F^{c}$. This gives an open cover of $X$, hence of $K$, so $\exists_{\text{subcover of $K$}}$.
+		Drop $F^{c}$ from this finite subcover. The result is a finite subcover of $\{V_{\alpha}\}$, which covers $F$
+	\end{proof}
+	\begin{corollary}
+		If $F$ is closed and $K$ is compact then $F \cap K$ is compact.
+	\end{corollary}
+\end{thm}
+
+\begin{thm}[33]
+	Suppose $K \subset Y \subset  X$.
+	Then $K$ is compact relative to $X$ iff $K$ is compact relative to $Y$.
+	\begin{note}
+		This is not true for open sets.
+		For instance, let $K=Y=[0,1] \subset X=\R $.
+		$Y$ is open and closed relative to $Y$, but $Y$ is not open relative to $X$
+	\end{note}
+	\begin{proof}\hfill
+		\begin{itemize}
+			\item [($\implies$)] Suppose $K$ is compact relative to $X$. Let $\{V_{\alpha}\}$ be an open cover of $K$ relative to $Y$. For any subset of a metric space, there always exists an open cover relative to the whole space, as the whole metric space is trivially an open cover of itself.
+			      Then $\{V_{\alpha}\}$ is an open cover of $K$ relative to $X$. Since $K$ is compact relative to $X$, $\exists_{\text{finite subcover}}$.
+			\item [($\impliedby$)] Suppose $K$ is compact relative to $Y$. Let $\{V_{\alpha}\}$ be an open cover of $K$ relative to $X$.
+			      Then $\{V_{\alpha} \cap Y\}$ is an open cover of $K$ relative to $Y$. Since $K$ is compact relative to $Y$, $\exists_{\text{finite subcover}}$.
+		\end{itemize}
+	\end{proof}
+\end{thm}
+\begin{thm}[36]
+	Suppose $\{K_\alpha\} $ is a collection of compact sets such that $\bigcap_{i \in \{1,2, \ldots, n\} } K_{\alpha_i} \neq \emptyset$ for any $n<\infty, \alpha_i$. Then,
+	$\lim_{n\to \infty}{\bigcap_{i \in \{1,2, \ldots ,n\}}K_{\alpha_i}}\neq \emptyset$, or equivalently, $\bigcap_{\alpha} K_{\alpha} \neq \emptyset $.
+	\begin{example}
+		Let $G_j=(0,\frac{1}{j}) \subset \R$. Then $\{G_j\}$ is a collection of open sets, but none of them are compact. (compact sets are closed)
+		Then $\{G_j\}$ satisfies non-empty finite intersection property but $\bigcap_{j \in \N }G_j=\emptyset$.
+	\end{example}
+	\begin{proof}
+		Suppose for contradiction $\bigcap_{i \in \{1,2, \ldots, n\} } K_{\alpha_i} \neq \emptyset$ for any $n<\infty, \alpha_i$ and $\bigcap_{\alpha}K_{\alpha}=\emptyset$.
+		For any $\alpha_0$, $K_{\alpha_0} \cap \left( \bigcap_{\alpha\neq \alpha_0}K_{\alpha} \right)=\emptyset$.
+		Hence, $K_{\alpha_0} \subset \left( \bigcap_{\alpha\neq \alpha_0}K_{\alpha}\right)^{c}=\bigcup_{\alpha\neq \alpha_0}\left( K_{\alpha}\right)^{c} \text{ and } \{\left( K_{\alpha} \right)^{c}\}_{\alpha\neq \alpha_0}$ is an open cover of $K_{\alpha_0}$, so $\exists$ a finite subcover of $K_{\alpha_0} \subset \bigcup_{i=1}^{n} {K_{\alpha_i}}^{c} $, which implies $K_{\alpha_0} \cap  \left(\bigcap_{i=1}^{n}K_{\alpha_i}   \right)=\emptyset  $, contradiction.
+	\end{proof}
+	\begin{corollary}
+		If $\{K_1,K_2, \ldots \} $ are non-empty compact sets with $\forall_{n}: K_n \supset K_{n+1}$, then $\bigcap_{n=1}^{\infty}K_n \neq \emptyset$.
+	\end{corollary}
+	\begin{proof}
+		If $n_1<n_N$ then $\bigcap_{i=1}^{N}K_{n_i}=K_{n_N}\neq \emptyset $
+	\end{proof}
+
+\end{thm}
+
+\begin{thm}[37]
+	If $K$ is compact and $E \subset K$ is infinite, then $E$ has a limit point in $K$.
+	\begin{proof}
+		Contrapositive of the statement is : \textit{if $E \subset K$ has no limit point in $K$, then $E$ is finite.}\\
+		Suppose every point $q \in K$ is not a limit point of $E$.
+		Then \[\exists_{V_q= N_{r_q}(q)}: V_q \cap E =
+			\begin{cases}
+				\emptyset & \text{ if $q \not\in E$} \\
+				\{q\}     & \text{ if $q \in E$}     \\
+			\end{cases}
+			.\]
+		$\{V_q\}_{q \in K}$ is an open cover of $K$, so $\exists_{\text{finite subcover } V_{q_1} \cup V_{q_2}\cup  \cdots \cup V_{q_n}}$. Then $E=E \cap K \subset \left( \bigcup_{i=1}^{n}{V_{q_i}} \cap  E \right) \subset \{q_1,q_2, \ldots q_n\} $, so $E$ is finite.
+
+	\end{proof}
+\end{thm}
+
+\begin{thm}[38]
+	Let $I_n = [a_n,b_n] \subset \R $ be such that $\forall_{n}: I_n \supset I_{n+1}$. Then $\bigcap_{n=1}^{\infty}I_n \neq \emptyset$.
+	\begin{proof}
+		Since $I_n \supset I_{n+1}$, $\forall_{n,m}: a_n \le a_{n+m} \le b_{n+m} \le b_n$.
+		Let $E=\{a_1,a_2,\ldots \} $. Then $E \neq \emptyset $, every $b_k$ is an upper bound for $E$, so $\exists x= \sup{E}$ and $a_k \le x \le b_k$ for all $k$.
+		Therefore, $x \in I_k$ for all $k$, so $x \in \bigcap_{n=1}^{\infty}I_n$.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[39]
+	Let $\{I_n\} $ be a sequence of $k$-cells such that $i_n \supset I_{n+1}$;i.e.,
+	$I_n=\{\mathbf{x}=(x_1,x_2, \ldots ,x_k) \in \R^{k}: a_{nj}\le x_j \le b_{nj}$, $a_{nj} \le a_{n+1,j} \le b_{n+1,j} \le b_{nj}$ for $j=1,2,\ldots ,k\}$.
+	Then $\bigcap_{n=1}^{\infty}I_n \neq \emptyset$.
+	% Above theorem holds for  $I_n$, $k$-cells in $\R^{k}$.
+	\begin{proof}
+		Apply previous theorem to each component.
+	\end{proof}
+	\begin{note}
+		$k$-cell is a higher dimensional analog of a rectangle or rectangular solid, which is a Cartesian product of $k$ \textit{closed intervals on the real line}.\\
+		Formally,
+		Given real numbers $a_{i}$ and $b_{i}$ such that $a_{i} < b_{i}$ for every integer $i$ from $1$ to $k$,
+		\[
+			I=\{x=(x_1,x_2, \ldots ,x_k) \in \R^{k}: a_i \le x_i \le b_i \text{ for } i=1,2,\ldots ,k\}
+		\]
+	\end{note}
+\end{thm}
+
+\begin{thm}[40]
+	Let $I \subset \R ^{k}$ be a $k$-cell. Then $I$ is compact.
+	\begin{proof}
+		Let $I=I_0=\{x=(x_1,x_2, \ldots ,x_k), a_j \le x_j \le b_j\}$.\\
+		Let $\Delta=\left\{\Sigma_{i}^{k}(b_j - a_j)^{2}  \right\}^{1/2}$. Then $|\mathbf{x}-\mathbf{y}|\le \Delta$ for $\mathbf{x,y} \in I$.\\
+		Suppose for contradiction $\{G_{\alpha}\}$ is an open cover of $I$ that has no finite subcover.\\
+		Let $c_j=\frac{1}{2}(a_j + b_j) \text{ for }  j=1,2, \ldots ,k$.
+		Using $[a_j,c_j], [c_j,b_j]$, we get $2^{k}$ $k$-cells $Q_i$ with $I=\bigcup_{i=1}^{2^{k}}Q_i$.
+		At least one $Q_i$, call it $I_1$, has no finite subcover. Otherwise, every $Q_i$ has a finite subcover, and $I$ would have a finite subcover, namely the union of the finite subcovers of each $Q_i$.
+		Repeat this step to construct $I_0=I,I_1,I_2, \ldots $.
+		Then the sequence $\{I_n\}$ constructed by this process satisfies the following properties:
+		\begin{enumerate}
+			\item $I_0=I \supset I_1 \supset I_2 \supset I_3 \supset \ldots $
+			\item $\forall_{n}: I_n$ has no finite subcover from $\{G_{\alpha}\}$
+			\item if $x,y \in I_n$ then $|x-y|\le  2^{-n}\Delta$, where $\Delta= \text{diagonal of }I=\left( \sum_{j=1}^{k}{(b_j-a_j)^2} \right)^{1/2}$.
+		\end{enumerate}
+		By theorem ~\ref{thm:2.38} and (a), $\exists_{x^{*} \in \bigcap_{n=1}^{\infty}I_n }$.
+		Since $x^{*} \in  I$, $x^{*} \in G_{\alpha_0}$ for some $\alpha_0$, so $\exists r>0$ such that $N_r(x^{*}) \subset G_{\alpha_0}$. But by (c), $I_n \subset N_{2^{-n}\Delta}(x^{*})$. As soon as $n$ is large enough that $2^{-n} \Delta <r$, we have $I_n \subset N_{2^{-n}\Delta}(x^{*}) \subset G_{\alpha_0}$, which contradicts (b).
+	\end{proof}
+	\begin{tikzpicture}
+		\draw (0,0) rectangle (2,2);
+	\end{tikzpicture}
+\end{thm}
+
+\begin{note}
+	Reverse triangle inequality\\
+	$\forall_{a,b,c \in X}: d(a,b)\ge d(a,c)-d(c,b)$ because $d(a,c)\le d(a,b)+d(b,c)$.
+\end{note}
+
+\begin{thm}[41]
+	\def\currentprefix{2.41}
+	For $E \subset \R^{k}$, the following are equivalent:
+	\begin{enumerate}[label=(\alph*)]
+		\item $E$ is closed and bounded. \locallabel{a}
+		\item $E$ is compact. \locallabel{b}
+		\item Every infinite subset of $E$ has a limit point in $E$. \locallabel{c}
+	\end{enumerate}
+	\begin{proof}
+		\hfill
+		\begin{description}
+			\item[$\localref{a}\implies \localref{b}$] Because $E$ is bounded, i.e., $\exists_{M} \text{ s.t. } \forall_{x,y \in E}: |x-y|\le M$, there exists a $k$-cell $I$ such that $E \subset I$. Since every $k$-cell is compact, this implies $E$ is a closed subset of a compact set. Hence, $E$ is also compact.
+			\item [$\localref{b}\implies \localref{c} $] by theorem ~\ref{thm:2.37}
+			\item [$\localref{c} \implies \localref{a}$] To see that $E$ is bounded, suppose it were not. Then $E$ has an infinite subset $S=\{x_1,x_2,x_3,\ldots\}$ with $\forall_{n }: |x_n|\ge n$. $S$ has no limit point in $\R ^{k}$
+			      Let $S=\{(x_1,x_2, x_3, \ldots) \in E: |x_n -x_0|<\frac{1}{n}\}$.
+			      Then $S$ is an infinite set because if $S$ is finite, there exists a point $\mathbf{x} \in S$ such that $|\mathbf{x}|\ge |\mathbf{x'}| \text{ for } \mathbf{x'} \in S$.
+			      However, there exists $n \in \N$ such that $n>|\mathbf{x}|$ and by definition of $S$, there exists $x_n \in S$ such that $|x_n|\ge n>|\mathbf{x}|$, which is a contradiction. Thus, $S$ is infinite.
+			      This $S$ however, cannot have a limit point in $E$. By triangle inequality, for any $y \in R^k$, $|x_n|\le |x_n-y|+|y|$, and from archimedean property, $\exists_{m \in \N} \text{ s.t. } m > |x_n-y|+|y|$, which implies for any $y \in R^{k}, r>0$, $\exists_{m \in \N}: |x-y|<r<m$. However, by the definition of $S$, there are at most $m$ such elements in $S$. Since a limit point $y$ of $E$ must contain an infinite number of points of $E$ such that $d(x,y)<r$ for any $r>0$, $y$ cannot be a limit point, which contradicts the assumption that any infinite subset of $E$ contains a limit point in $E$. Therefore, $E$ must be bounded.\\
+			      To see that $E$ is closed, suppose it were not closed.
+			      Then $\exists_{x_0 \in }: E' \setminus E$.
+			      If $T$ has no limit point in $E$ except $x_0 \not\in E$, it contradicts (c) because $T$ is infinite and there must be a limit point of $T$ in $E$.\\
+			      Therefore, we can show that $E$ is closed by showing that $T$ has no limit point in $E$ except $x_0$.
+			      Form an infinite sequence $(x_1,x_2, x_3, \ldots ), x_n \in E$ with $|x_n -x_0|<\frac{1}{n}$.
+			      Let $y \in E$, $y\neq x_0$. We'll show that $y$ cannot be a limit point of $T$.
+			      $|y-x_n|\ge |y-x_0|+|x_0-x_n|> |y-x_0|-|x_0-x_n| >|y-x_0|-\frac{1}{n}$. Choose $n\ge \frac{2}{|y-x_0|}$, so $\frac{1}{n}\le \frac{|y-x_0|}{2}$. Then $|y-x_n|\ge |y-x_0|-\frac{1}{2}|y-x_0|=\frac{1}{2}|y-x_0|$. So only finitely many $x_{n}$ can lie in $N_{\frac{1}{2}|y-x_0|}(y)$.
+			      So $y$ cannot be a limit point of $S$. Therefore, $E$ is closed.
+		\end{description}
+	\end{proof}
+	\begin{remark}
+		\localref{b} and \localref{c} are equivalent in any metric space, but \localref{a} does not, in general, imply \localref{b} or \localref{c} in a metric space other than $\R^{k}$.
+	\end{remark}
+
+\end{thm}
+
+\begin{example}
+	Failure of Heine-Borel theorem in general metric spaces.\\
+	$\text{some infinite set}$ , discrete metric $d(x,y)=
+		\begin{cases}
+			0 & \text{ if } x=y     \\
+			1 & \text{ if } x\neq y
+		\end{cases}
+	$.
+	Then $E$ is bounded and closed but not compact.
+\end{example}
+
+\begin{thm}[42][Weirstrass's theorem]
+	Every bounded infinite subset $E \subset \R ^{k}$ has a limit point in $\R ^{k}$.
+	\begin{proof}
+		Choose a $k$-cell $I \supset E$.
+		Since $I$ is compact, by theorem ~\ref{thm:2.41}, $E$ has a limit point in $I$.
+	\end{proof}
+\end{thm}
+\begin{example}
+	\label{eg:2.42}
+	Let
+	\begin{align}
+		E_0 & =[0,1]                                                                                               \\
+		E_1 & =[0,\frac{1}{3}] \cup [\frac{2}{3},1]                                                                \\
+		E_2 & = [0,\frac{1}{9}] \cup [\frac{2}{9},\frac{1}{3}] \cup [\frac{2}{3},\frac{7}{9}] \cup [\frac{8}{9},1] \\
+		\vdots
+	\end{align}
+	This gives $E_0 \supset E_1 \supset E_2 \supset E_3 \supset \ldots $, where each $E_n$ is the union of $2^{n}$ closed intervals of length $\frac{1}{3^{n}}$.
+\end{example}
+
+
+\begin{definition}[Perfect Sets]
+	A set $P$ is perfect if there is no isolated point in $P$; i.e., \[
+		P=P'
+		.\]
+\end{definition}
+
+\begin{thm}[43]
+	Let $P$ be a non-empty perfect set in $R^{k}$. Then $P$ is uncountable.
+	\begin{proof}
+		Suppose for contradiction $P$ is countable.
+		Since $P$ is non-empty, there exists some $p_1 \in P$.
+		$p_1$ is then also a limit point of $P$.
+		Let $p_2 \in P(\neq p_1)$ be a point in $V_1=N_{r_1}(p_1)$ for some $r_1$ such that $d(p_1,p_2)>r_1/2$.
+		Let $r_2=r_1-d(p_1,p_2)$, $V_2=N_{r_2}{p_2}$.
+		Then $\forall_{x \in V_2}: d(p_1,x)\le d(p_1,p_2)+d(p_2,x)<d(p_1,p_2)+r_2=r_1$.
+		Hence, $V_2 \subset V_1$.
+		$\overline{V_2} \subset V_1$ as well.
+		Also, note that $d(p_1,p_2)>r_1/2$, so $r_2=r_1-d(p_1,p_2)<r_1/2<d(p_1,p_2)$. So $p_1 \not\in V_2$.
+		Repeat this process, and let $K_n=\overline{ V_n} \cap P$.  $K_n \subset \overline{V_n}$. Since $\overline{V_n}$ is closed and bounded, it's compact.
+		$\overline{V_n} \cap P$ is a closed subset of $\overline{V_n}$, so $K_n$ is also compact.
+		However, for any $p_n$, $p_n \not\in K_{n+1}$, so $\bigcap_{1 \in  \infty}K_n \cap P=\emptyset$.
+		Since $K_n \subset P$, this implies $\bigcap_{1 \in  \infty}K_n=\emptyset$, but each $K_n$ is not empty, $K_n \supset K_{n+1}$, and $K_n$ is compact.
+		Thus, $\bigcap_{1 \in  \infty}K_n \cap P$ can't be empty, so this is a contradiction.
+	\end{proof}
+\end{thm}
+
+
+\begin{definition}[Cantor Set]
+	The cantor set $P:=\bigcap_{n}^{\infty} E_{n} $.
+\end{definition}
+\begin{proposition}
+	$P$ is compact, non-empty and contains no open intervals $(a,b)$ and uncountable.
+	\begin{proof}
+		\begin{description}
+			\item[Compactness]
+			      $P$ is compact because $P \subset E_0=[0,1]$ and $E_0$ is compact.
+			\item[Non-emptiness]
+			      $P$ is non-empty because $P \subset E_0$ and $E_0$ is non-empty.
+			\item[No open intervals]
+			      $P$ contains no open intervals $(a,b)$ because any $(a,b)$ contains some $(\frac{3k+1}{3^{n}},\frac{3k+2}{3^{n}})$ and these are all removed.
+			\item[Uncountability]
+			      $P$ is uncountable because $P$ is a perfect set. Equivalently, $P$ consists of points in $[0,1]$ whose ternary, i.e., base 3, representation contains only 0's and 2's.
+			      \begin{note}
+				      ternary representation: $0.a_1 a_2 a_3 \ldots = \sum_{n=1}^{\infty} \frac{a_n}{3^{n}}$ where $a_n \in \{0,1,2\}$.
+			      \end{note}
+
+		\end{description}
+	\end{proof}
+\end{proposition}
+
+\begin{example}[Cantor Set\label{eg:2.44}]
+	Let $E=[0,1]$, $E_1=[0,\frac{1}{3}] \cup [\frac{2}{3},1]$.
+	$E_2=[0,\frac{1}{9}]\cup [\frac{2}{9},\frac{1}{3}] \cup [\frac{2}{3},\frac{7}{9}] \cup [\frac{8}{9},1]$, etc. Keep removing open middle third. This gives $E_0 \supset E_1 \supset E_2\ldots $. Each $E_n$ is the union of $2^{n}$ closed intervals of length $\frac{1}{3^{n}}$.
+\end{example}
+
+
+\begin{definition}[Separated Sets]
+	\begin{description}
+		\item[Separated Sets\label{def:sepratedSets}]
+		      $A,B \subset X$ are separated if $\overline{A} \cap B = A \cap \overline{B} = \emptyset$.
+		\item[Connected Sets\label{def:connectedSets}]
+		      $E \subset X$ is connected if there is no non-empty separated sets $A,B \subset E$.
+	\end{description}
+\end{definition}
+
+\begin{example}[Separated Sets\label{eg:separatedSet}]
+	In $\R^{1}$, $[0,1) \text{ and }  (1,2]$ are separated so $[0,1) \cup  (1,2]$ is not connected. Every interval is connected (open, closed, semi-open).
+\end{example}
+
+\begin{thm}[47]
+	$E \subset \R^{1}$ is connected if and only if $E$ is an interval; i.e., $\forall_{x,y \in E,x<y} \text{ s.t. }  \forall_{z \in (x,y)}:z \in E $
+	\begin{proof}
+		Let $x,y \in E$.
+	\end{proof}
+\end{thm}
+
+\begin{thm}
+	A metric space $X$ is connected if and only if the only nonempty subset of $X$ which is both open and closed is $X$ itself.
+	$|\limsup_{n\to \infty}{|\gamma_n|}|\le 0+\epsilon \alpha$. Since $\epsilon$ is arbitrary, this implies $|\limsup_{n\to \infty}{|\gamma_n|}|=0$, so $\lim_{n\to \infty}{|\gamma_n|}=0$.
+\end{thm}
+

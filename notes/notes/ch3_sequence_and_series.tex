@@ -1,0 +1,626 @@
+\chapter{Sequence and Series}
+
+\section{Sequences}
+
+\begin{definition}
+	In a metric space $(X,d)$, a sequence $\{p_n\}$ converges to $p$ if $\forall_{\epsilon>0}\exists_{N} \text{ s.t. } n\ge N \implies d(p_n,p)<\epsilon$.\\
+	We write $\lim_{n\to\infty} p_n = p$ or $p_n \to p$.
+\end{definition}
+
+
+If $\{p_n\}$ does not converge to any $p$ then it is said to diverge.
+
+
+
+
+
+
+\begin{thm}[3]
+	If ${s}_{n}$ and ${t}_{n}$ are sequences in $\C$ with ${s}_{n} \to s$ and ${t}_{n} \to t$, then the following hold:
+	\begin{enumerate}
+		\item ${s}_{n} + {t}_{n} \to s + t$
+		\item $c s_n \to cs$, $c+s_n\to c+s$ for any $c\in \C$
+		\item $s_n t_n\to st$
+		\item $\frac{1}{s_n}\to \frac{1}{s}$ if $s\neq 0$
+	\end{enumerate}
+\end{thm}
+
+\begin{lemma}[Squeeze Lemma]
+	\label{lem:3.4}
+	In $\R$, if $\forall_{n \in \N}: 0 \le x_n \le s_n$ and $\lim_{n\to \infty }s_n \to 0$, then $\lim_{n\to \infty} x_n = 0$.
+	\begin{proof}
+		Let $\epsilon > 0$. Choose $N$ such that $n\ge N \implies 0\le s_n < \epsilon$. Then $0 \le x_n \le s_n < \epsilon$ for $n\ge N$, so $x_n \to 0$.
+	\end{proof}
+\end{lemma}
+
+\begin{thm}[20]
+	\begin{enumerate}[label=(\alph*)]
+		\item If $p>0$ then $\frac{1}{n^{p}} \to 0$.
+		      \begin{proof}
+			      Let $\epsilon>0$. Choose $N$ such that $\frac{1}{N^{p}} <\epsilon$; i.e., $N>\frac{1}{\epsilon^{\frac{1}{p}}}$. Then for $n\ge N$, $\frac{1}{n^{p}}  \le \frac{1}{N^{p}} <\epsilon$.
+		      \end{proof}
+		\item If $p>0$ then $\sqrt[n]{p} \to 1$.
+		      \begin{proof}
+			      $p=1$ is obvious.\\
+			      Suppose $p>1$. Let $x_n=\sqrt[n]{p} -1>0$.
+			      Want to show $x_n \to 0$.\\
+			      Since $(x_n +1)^{n}$, we have $p=(x_n+1)^{n}=\sum_{k=0}^{n}{\binom{n}{k}x_n ^{k}>\binom{n}{1} x_n'=nx_n}$. Therefore, $x_n \le  \frac{p}{n}$, so $x_n \to 0$ by the Squeeze Lemma.
+			      \\
+			      Suppose $p \in (0,1)$. Let $q=\frac{1}{p}>1$. Then $\sqrt[n]{q} \to 1$ by the previous case. By ~\ref{thm:3.3}, $\sqrt[n]{p} = \frac{1}{\sqrt[n]{q}} \to 1$.
+		      \end{proof}
+		\item $\sqrt[n]{n}\to 1$
+		      \begin{proof}
+			      Let $x_n=\sqrt[n]{n}-1>0$, for $n\ge 2$.
+			      $n=(x_n+1)^{n}=\sum_{k=0}^{n}{\binom{n}{k}(x_n)^{k}}>\binom{n}{2}{x_n}^{2}=\frac{n(n-1)}{2} x_n ^2$. Therefore, $x_n \le \sqrt{\frac{2}{n-1}}$.
+		      \end{proof}
+		\item If $p>0$ and $\alpha \in \R$, then $\frac{n^{\alpha}}{(1+p)^{n}}\to 0$; i.e., Exponentials beat powers.
+		      \begin{proof}
+			      We want an upper bound on $\frac{n^{\alpha}}{(1+p)^{n}}$, so seek a lower bound on $(1+p)^{n}$.\\
+			      $(1+p)^{n}=\sum_{k=0}^{n}\binom{n}{k}p^{k}>\binom{n}{k}p^{k}$ for $k\le n$\\
+			      $(1+p)^{n}>\binom{n}{k}p^{k}=\frac{n(n-1) \cdots (n-k+1)}{k!}p^{k}$.
+			      Then for $k \le \frac{n}{2}$,  $\binom{n}{k}p^{k} > (\frac{n}{2})^{k}\frac{p^{k}}{k!}$.
+			      Therefore, $\frac{n^{\alpha}}{(1+p)^{n}}<(\frac{2}{p})^{k} k! \frac{1}{n^{k-\alpha}}$. Let $k_0 \in \Z \text{ s.t. } k>\alpha$. Then for $n\ge 2 k_0$, RHS $\to 0$ by (a).
+			      \item If $|x| <1 $ then $x^{n}\to 0$.
+			      \begin{proof}
+				      $|x^{n}-0| = |x|^{n}$, so $x^{n}\to 0 \Leftrightarrow |x|^{n}\to 0$ and $|x|^{n}=\frac{n_0}{(\frac{1}{|x|})^{n}}\to 0$ by (d) with $\alpha=0$ and $1+p=\frac{1}{|x|}>1$, so $p=\frac{1}{|x|}-1>0$.
+			      \end{proof}
+		      \end{proof}
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[2]
+	\begin{enumerate}[label=(\alph*)]
+		\item $p_n\to p \Leftrightarrow \forall_{r >0}: N_r(p)$ contains all but finitely many $p_n$.
+		      \begin{proof}
+			      $\forall_{n \ge N}: p_n \in N_r(p)$
+		      \end{proof}
+		\item If $p_n\to p$ and $p_n \to p'$ then $p=p'$.
+		      \begin{proof}
+			      $d(p,p')\le d(p_n,p)+d(p_n,p')$ for all $n$.
+			      Fix $\epsilon$. Choose $N$ such that $d(p_n,p)<\frac{\epsilon}{2}$ and $d(p_n,p')<\frac{\epsilon}{2}$ for $n\ge N'$. Then $d(p,p')< \epsilon$.
+			      Then for $n\ge \max\{N,N'\}$, $d(p,p')< \epsilon$. This is true for all $\epsilon>0$, so $d(p,p')=0$.
+		      \end{proof}
+		\item If $\{p_n\}$ converges, then ${p}_{n} $ is bounded, in a sense that $\exists_{M>0,q \in X} \text{ s.t. } d(p_n,q)\le M$ for all $n$.
+		      \begin{proof}
+			      If $p_n \to p$, then $\exists N \text{ s.t. } d(p_n,p)<1 $ for all $n\ge N$. Thus, $\forall_{n \ge 1}: d(p_n,p)\le \max\{1,d(p,p_1),\ldots ,d(p,p_{N-1})\}=M$
+		      \end{proof}
+		\item If $E \subset X$ has a limit point $p$, then $\exists_{{p}_{n} \in E} \text{ s.t. } p_n \to p$.
+		      \begin{proof}
+			      We need to choose $p_n \in E$ s.t. $d(p,p_n)<\frac{1}{n}$.
+			      Let $\epsilon>0$. Then $d(p,p_n)<\epsilon$ if $n>\frac{1}{\epsilon}$
+		      \end{proof}
+	\end{enumerate}
+\end{thm}
+
+\begin{definition}
+	\label{def:3.5}
+	Given ${p}_{n}, n_1<n_2<n_3<\ldots $, we say ${p}_{n_i}=(p_{n_1},p_{n_2},\ldots )$ is a subsequence of ${p}_{n}$.
+\end{definition}
+
+\begin{lemma}
+	$p_n\to p \Leftrightarrow \text{every subsequence of $\{p_n\}$ converges to $p$} $
+
+	\begin{proof}
+		Look at assignment 6
+	\end{proof}
+\end{lemma}
+
+
+\begin{thm}[6]
+	\begin{enumerate}
+		\item $\{p_n\}$ in $X$, $X$ compact, then $\exists$ convergent subsequence.
+		      \begin{proof}
+			      Let $E=\text{range of} \{p_n\} $. If $E$ is finite, then $\exists {p\in X}$ and $n_1<n_2<\ldots \text{ s.t. } p_n=p \text{ for } \forall i$. This subsequence converges to $p$. If $E$ is infinite then by Theorem~\ref{thm:2.37}, $E$ has a limit point $p \in X$; i.e., every neighborhood of $p$ contains infinitely many points of $E$. Choose $n_1$ s.t. $d(p,p_{n_1})<1$.
+
+		      \end{proof}
+
+		\item $\{ p_n \} $ in $\R^{k}$, bounded, then $\exists$ convergent subsequence.
+		      \begin{proof}
+			      Choose a $k$-cell $I$ that contains $\{p_{n}\} $. $I$ is compact. Apply (a).
+
+		      \end{proof}
+
+	\end{enumerate}
+\end{thm}
+
+\begin{definition}[Cauchy Sequence]
+	$\{p_n\}$ is a Cauchy sequence in $(X,d)$ if $\forall{\epsilon}: \exists_{N \in \N} \text{ s.t. } d(p_{m},p_{n})<\epsilon \forall m,n\ge N$.
+\end{definition}
+\begin{definition}
+	\label{def:3.9}
+	For $E \subset X$, $E \neq \emptyset$, we define $\text{diam } E=\sup{\{d(p,q): p,q \in E\}}$. $\text{diam } E=\infty$ if the set is not bounded above.
+	\begin{example}
+		For a sequence ${p_{n}}$ in $X$, let $E_{n}=\{p_N,p_{N+1},\ldots \}$. Then $\{p_{n}\}$ is a Cauchy sequence iff $\lim_{N\to \infty }{\text{diam }E_N}=0$.
+	\end{example}
+\end{definition}
+\begin{thm}[11]
+	\begin{enumerate}
+		\item \label{thm:3.11a}
+		      If $p_{n}\to p$ then $\{p_{n}\} $ is a Cauchy sequence.
+		\item If $X$ is a compact metric space and $\{p_{n}\}$ in $X$ is a Cauchy sequence, then $\exists_{p \in  X} \text{ s.t. } p_{n}\to p$.
+		\item In $R^{K}$ every Cauchy sequence converges.
+	\end{enumerate}
+	\hfill
+	\begin{remark}
+		If a Cauchy sequence has a convergent subsequence in a metric space,
+		then the full sequence itself converges to the same point the subsequence converges to.
+	\end{remark}
+	\begin{proof}
+		\item
+		Let $\epsilon>0$. Choose $N$ s.t., $d(p_{n},p)<\epsilon/2$ if $n\ge N$. Then for $m,n\ge N$, $d(p_m,p_{n})\le d(p_{n},p)+d(p,p_n)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
+		\item
+		Suppose $\{p_n\} $ is Cauchy. Let $E_{N}=\{p_{N},P_{N+1},\ldots \} $. Then $\overline{E_{N}}$ is closed, hence compact.
+		Also $\overline{E_{N}} \supset \overline{E_{N+1}}$ and $\lim_{N\to \infty }{\text{diam }\overline{E_N}}=0$ (use Theorem 3.10(a) to see $\text{diam }\overline{E_N}=\text{diam }E_N $)
+		By theorem 3.10(b), $\exists! {p \in \bigcap_{N=1}^{\infty } \overline{E_N}}$. Claim: $p_{n}\to p$.\\
+		Proof of the claim: Let $\epsilon>0$. Choose $N_0$ s.t.diam $\overline{E_{N_0}}<\epsilon $, so $d(p,q)<\epsilon \forall g \in \overline{E_{N_0}}$, and hence $\forall{g \in N_0}$; i.e., $d(p,p_{n})<\epsilon$ if $n\ge N_0$.
+
+		Let $\epsilon>0$. Choose $N$ s.t., $d(p_{n},p)<\epsilon/2$ if $n\ge N$. Then for $m,n\ge N$, $d(p_m,p_{n})\le d(p_{n},p)+d(p,p_n)<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
+		\item Suppose $\{p_{n}\} $ in $\R^{k}$ is Cauchy. Cauchy sequences are bounded in any metric space. Therefore, $\exists$ $k$-cell $I$, which is compact, containing $\{p_{n}\}$. Then (b) applies
+	\end{proof}
+
+\end{thm}
+\begin{note}
+	The converse of Theorem~\ref{thm:3.11}(a) does not hold in general.
+	\begin{example}
+		$X=\Q$ has a Cauchy sequence with no limit in $\Q$. (see assignment 6).
+		\textit{Converse does hold if $X$ is compact.}
+	\end{example}
+\end{note}
+
+\begin{theorem}
+	\begin{enumerate}
+		\item $\text{diam }\overline{E} = \text{diam } E$
+		\item If $K_{n} \subset X$, $K_{n} \neq \emptyset$, $K$ compact, $K_{n} \supset K_{n+1} \forall n \text{ and } \text{ if } \lim_{n\to \infty }{\text{diam }K_n}=0$, then $\bigcap_{n=1}^{\infty }K_{n} $ is a single point.
+	\end{enumerate}
+	\hfill
+	\begin{proof}
+		\begin{enumerate}
+			\item
+			      $E \subset \overline{E} \implies \text{diam }E \le \text{diam }\overline{E}$. For the opposite inequality, let $\epsilon>0, p,q \in \overline{E}$,. Choose $p',q' \in E$ s.t. $d(p,p') < \epsilon, d(q,q')<\epsilon$. Then $d(p,q)\le d(p,p')+d(p',q')+d(q',q)<\epsilon+\epsilon=2 \epsilon$. diam $\overline{E} \le \text{diam }E+2 \epsilon $. Since $\epsilon$ is arbitrary, $\text{diam }\overline{E}\le \text{diam }E$.
+
+			\item
+			      Let $K=\bigcap_{n=1}^{\infty} K_{n}$.
+			      By Theorem 2.36, $K\neq \emptyset$. Since $K \subset K_{n} \forall n$, diam $k \le \text{diam } K_{n} \forall n$ , so $\text{diam }K=0$.
+			      Therefore, $d(p,q)=0 \forall {p,q \in K}$, so $K$ is a simple point.
+		\end{enumerate}
+	\end{proof}
+
+\end{theorem}
+
+\begin{definition}[Complete Metric Space]
+	A metric space $(X,d)$ is complete if every Cauchy sequence in $X$ converges to a point in $X$.
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item $X$ compact $\implies X$ complete.
+		\item $\R^{k}$ is complete, so is $\C$.
+		\item $\Q$ is not complete. (see assignment 6)
+		\item See assignment 6 for reference to completion of a metric space.
+	\end{enumerate}
+\end{example}
+
+We've seen that convergent sequences are bounded. $p_{n}=(-1)^{n}$ shows the converse if false.
+However the converse does hold for monotonic sequences.
+\begin{definition}[Monotone]
+	\begin{itemize}
+		\item
+		      A sequence $\{s_n\}$ in $\R$ is monotonically increasing if $s_{n}\le s_{n+1} \forall n$.
+		\item A sequence $\{s_n\}$ in $\R$ is monotonically decreasing if $s_{n}\ge s_{n+1} \forall n$.
+	\end{itemize}
+\end{definition}
+
+\begin{thm}[14]
+	A monotone sequence in $\R$ converges if and only if it is bounded.
+	\begin{proof}
+		\begin{description}
+			\item[$\Rightarrow$] all convergent sequences are bounded in any metric space.
+			\item [$\Leftarrow$]
+			      \begin{description}
+				      \item[Increasing case]
+				            Let $\{s_n\}$ be monotonically increasing and $s_n \le M \forall n$.
+				            Let $s=\sup \{ s_n:n \in \N\}$. Then $s_{n} \le s \forall n$. Let $\epsilon>0$. $\exists N $ s.t. $s-\epsilon<s_N\le s$.
+				            But then $s-\epsilon<s_N\le s_{N+1}\le s_{N+2}\ldots \le s$, so $|s-s_n|<\epsilon \forall n\ge N$, and therefore $s_{n}\to s$.
+			      \end{description}
+		\end{description}
+	\end{proof}
+\end{thm}
+
+
+\begin{definition}[Infinite Limits]
+	\label{def:3.15}
+	We say
+	\begin{itemize}
+		\item
+		      $s_{n}\to \infty $ if $\forall_{M \in \R}: \exists_{N} \text{ s.t. } s_n\ge M \forall_{n \in N}$.
+
+		\item $s_{n}\to -\infty $ if $\forall_{M \in \R}: \exists_{N} \text{ s.t. } s_n\le M \forall_{n \in N}$.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}
+	\label{def:3.16}
+	Let $\{ {s}_{n}\}$ be a sequence in $\R$. We define $\limsup_{n\to \infty }{s_{n}}=\overline{\lim_{n\to \infty } }s_n=\inf_{n\ge 1}\{\sup_{m\ge n}\{s_m\}\}=\lim_{n\to \infty }{\sup_{m\ge n}\{s_m\}}$.\\
+	$\liminf_{n\to \infty }{s_{n}}=\underline{\lim_{n\to \infty} }s_n=\sup_{n\ge 1}\{\inf_{m\ge n}\{s_m\}\}=\lim_{n\to \infty }{\inf_{m\ge n}\{s_m\}}$.
+	\begin{note}
+		Alternate definition; see ass 7 for equivalence
+	\end{note}
+	\begin{remark}
+		\begin{enumerate}
+			\item
+			      If $a_{n}\le b_{n} \forall n$ and $a_{n}\to a \text{ and } b_{n}\to b$, then $a\le b$.
+			\item $\liminf_{n\to \infty }s_n \le \limsup_{n\to \infty }s_{n}$
+		\end{enumerate}
+	\end{remark}
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item $s_{n}=(-1)^{n}(1+\frac{1}{n^2})$
+		      $1\le \sup_{m\ge n}{s_{m}}\le 1+\frac{1}{n^2}$, so $\limsup_{n\to \infty }{s_{n}}=1$. Similarly, $\liminf_{n\to \infty }{s_{n}}=-1$
+		\item If $\{ {s}_{n}\}$ has no upper bound, then $\sup_{m\ge n}{s_m}=\infty $ and in this case we say $\limsup_{n\to \infty}{s_{n}}=\infty $; e.g.,
+		      \[
+			      s_n=
+			      \begin{cases}
+				      n  & n\text{ odd }  \\
+				      -n & n\text{ even }
+			      \end{cases}
+		      \]
+		      has
+		      $\limsup_{n\to \infty}{s_{n}}=\infty $,
+		      $\liminf_{n\to \infty}{s_{n}}=-\infty $
+	\end{enumerate}
+\end{example}
+
+\begin{lemma}
+	$\limsup_{n\to \infty}{s_{n}}= \liminf_{n\to \infty}{s_{n}}=L \Leftrightarrow s_{n}\to L$.
+	\begin{proof}[$L$ finite]\hfill
+		\begin{description}
+			\item[$\implies $] This follows from $\inf_{m\ge n}{s_m}\le s_{n}\le \sup_{m\ge n}{s_m}$. $\lim_{n\to \infty}{\inf_{m\ge n}{s_m}}=\liminf_{n\to \infty}{s_{n}}$, and $\lim_{n\to \infty}{\sup_{m\ge n}{s_m}}=\limsup_{n\to \infty}{s_{n}}$.
+			      Therefore, $\lim_{n\to \infty}{s_{n}}=L$.
+			\item[$\impliedby$]
+			      If $s_{n}\to L$, then $\forall_{\epsilon > 0}: \exists_{N} \text{ s.t. } s_{m} \in [L-\epsilon,L+\epsilon] \forall m\ge N $.
+			      Therefore, $\forall_{n \ge  N}: L-\epsilon\le \inf_{m\ge N}s_m\le \inf_{m\ge n}s_m \le \sup_{m\ge n}s_m\le \sup_{m\ge N}s_m\le L+\epsilon$.
+			      Let $n\to \infty$: $L-\epsilon\le \liminf_{n\to \infty}{s_{n}}\le \limsup_{n\to \infty}{s_n}\le L+\epsilon$. Since $\epsilon$ is arbitrary, so $L\le \liminf_{n\to \infty}{s_{n}}\le \limsup_{n\to \infty}{s_{n}}\le L$.
+		\end{description}
+	\end{proof}
+\end{lemma}
+
+
+\section{Series}
+\begin{definition}[Series]
+	Let $\{a_{n}\}$ be a sequence in $\C$.
+	Form a new sequence $\{ {s}_{n}\}$, the sequence of partial sums, by $s_{n}=a_1+a_2+\ldots +a_{n}=\sum_{k=1}^{n}{a_{k}}$. If $s_n \to s$, we say \textbf{ the series $\sum_{k=1}^{\infty }{a_{k}}$ converges} and that $\sum_{k=1}^{\infty }{a_{k}}=s$. If $\{ {s}_{n}\}$ diverges then we say $\sum_{k=1}^{\infty }{a_{k}}$ diverges.
+\end{definition}
+
+\begin{thm}
+	$\sum_{n \in \N}{a_{n}}$ converges if and only if $\forall_{\epsilon >0}: \exists N \text{ s.t. }\forall{n\ge m\ge  N}: |\sum_{k=m}^{n}{a_{k}}| <\epsilon $.
+	\begin{proof}
+		$\sum_{n}{a_{n}}$ converges $\Leftrightarrow $ $\{ {s}_{n}\}$ converges $\Leftrightarrow$ $\{ {s}_{n}\}$ is a Cauchy sequence ($\because\; \C$ is compact). Use $s_{n}-s_{m-1}=\sum_{k=m}^{n}{a_k}$.
+	\end{proof}
+\end{thm}
+\begin{corollary}
+	\label{cor:3.23}
+	If $\sum_{n}{a_{n}}$ converges then $a_{n}\to 0$.
+	\begin{proof}
+		Take $m=n$ in Theorem 3.22. $\sum_{n}{a_{n}}$ converges $\implies \forall_{\epsilon > 0}: \exists_{N} \text{ s.t. } |a_{n}| <\epsilon $ if $n\ge N$.
+	\end{proof}
+	\begin{remark}
+		$n$-th term test for divergence: If $a_{n}\not\to 0$ then $\sum_n{a_{n}}$ diverges.
+		\begin{example}
+			$\sum_{n=1}^{\infty }{\frac{n}{n+1}}$ diverges because $\frac{n}{n+1}\to 1\neq 0$.
+		\end{example}
+		Converse to Corollary~\ref{cor:3.23} is false! E.g., $\sum_{n}{\frac{1}{n}}$ diverges but $\frac{1}{n}\to 0$.
+	\end{remark}
+\end{corollary}
+
+\begin{thm}[24]
+	If $a_{n}\ge 0$ , then $\sum_{n}{a_{n}}$ converges if and only if $\{ {s}_{n}\}$ is bounded.
+	\begin{proof}
+		$\{ {s}_{n}\}$ is monotone increasing, so by Theorem~\ref{thm:3.14}, it converges if and only if it is bounded.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[25][Comparison Test]
+	\begin{enumerate}[label=(\alph*)]
+		\item If $|a_{n}| \le c_n \forall n\ge N_0$ and $\sum_{n}{c_{n}}$ converges, then $\sum_{n}{a_{n}}$ converges.
+		      \begin{proof}
+			      Suppose $|a_{n}|\le c_{n} \forall n\ge N_0$ and $\sum_{n}^{}{c_{n}}$ converges. Let $\epsilon>0$. By theorem 3.22, $\exists N \text{ s.t. } \sum_{k=m}^{n}{c_{k}}< \epsilon $ if $n\ge m\ge N$. Can take $N\ge N_0$. Then $|N\ge N_0|$. $|\sum_{k=m}^{n}{a_{k}}|\le \sum_{k=m}^{n}{|a_{k}|}\le \sum_{k=m}^{n}{c_k}<\epsilon$ if $n\ge m\ge N$. By theorem 3.22 again, $\sum_{n}{a_{n}}$ converges.
+		      \end{proof}
+		\item If $a_{n}\ge d_{n}\ge 0 \forall n\ge N_0$ and if $\sum_{n}{d_n}$ diverges, then $\sum_{n}{a_{n}}$ diverges.
+		      \begin{proof}
+			      This follows from (a): if $\sum_{n}{a_{n}}$ converges then $\sum_{n}{d_{n}}$ converges. Thus it's contrapositive, (b) is true.
+		      \end{proof}
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[26][Geometric Series]
+	$\sum_{n=0}^{\infty }{x^{n}}=
+		\begin{cases}
+			\frac{1}{1-x}   & \text{if $-1<x<1$} \\
+			\text{diverges} & \text{otherwise}
+		\end{cases}
+	$
+	\begin{proof}
+		Let $S_n=1+x+x^2+\cdots +x^{n}$, $xS_n= x + x^2+ \cdots x^{n}+x^{n+1}$. Then
+		\[
+			S_n-xS_n=1-x^{n+1} \implies S_n=\frac{1-x^{n+1}}{1-x}
+		\]
+		If $|x|<1 (\Leftrightarrow -1<x<1)$, then $x^{n+1}\to 0$ and $S_n\to \frac{1}{1-x}$. If $|x|\ge 1$, then $x^{n+1}$ does not converge to 0, so $\sum_{n=0}^{\infty}{x^{n}}$ diverges.
+	\end{proof}
+\end{thm}
+
+
+
+\begin{thm}[27]
+	Suppose $a_1\ge a_2\ge a_3\ge \cdots \ge 0$. Then $\sum_{n=1}^{\infty}{a_{n}}$ converges $\Leftrightarrow $ $\sum_{k=1}^{\infty}{2^{k}a_{2^{k}}}$ converges.
+	\begin{proof}
+		\begin{description}
+			\item[$(\impliedby )$] We show that if $\sum_{n}{a_{n}}$ diverges, then $\sum_{k}{2^{k}a_{2^{k}}}$ diverges.
+			      For this, note that $a_1+a_2+\ldots +a_{n}\le a_1+(a_2+a_3)+(a_4+a_5+a_6+a_7)+\cdots (a_{2^{k}}+a_{2^{k}+1}+\cdots + a_{2^{k+1}-1})$ if $2^{k+1}>n$.\\
+			      $a_1+a_2 \cdots + a_{n} \le a_1+ 2 a_2 + 4 a_4 + \cdots + 2^{k}a_{2^{k}}$.
+			      LHS unbounded as $n\to \infty $, so RHS is also unbounded as $k \to \infty $.
+
+			\item[($\implies$)]
+			      $a_1+a_2+a_3+\cdots+a_{n}\ge a_1+a_2+(a_3+a_4)+(a_5+a_6+a_7+a_8)+\cdots +(a_{2^{k-1}+1}+a_{2^{k-1}+2}+ \cdots + a_{2^{k}})$ if $2^{k}\le n$.
+			      $a_1+a_2+(a_3+a_4)+(a_5+a_6+a_7+a_8)+\cdots +(a_{2^{k-1}+1}+a_{2^{k-1}+2}+ \cdots + a_{2^{k}})\ge a_1+a_2 + 2a_4 + 4a_8 +\cdots + 2^{k-1}a_{2^{k}}\ge
+				      \frac{1}{2}(a_1+2a_2+4a_4+ \cdots +2^{k}a_{2^{k}})
+			      $.
+			      If $\sum_{n}{a_{n}}$ converges, then LHS is bounded for all $n$ so RHS is bounded for all $k$. Hence RHS converges since it is monotone.
+		\end{description}
+	\end{proof}
+\end{thm}
+
+\begin{thm}[28][$p$-series]
+	$\sum_{n=1}^{\infty }{\frac{1}{n^{p}}}$ converges if $p>1$ and diverges if $p\le 1$.
+	\begin{proof}
+		For $p\le 0$, $\frac{1}{n^{p}} \not \to 0$, so series diverges.
+		For $p>0$, $\frac{1}{n^{p}}$ is decreasing, so $\sum_{n=1}{\frac{1}{n^{p}}}$ converges iff $\sum_{k}{2^{k} \cdot \frac{1}{(2^{k})^{p}}}$ converges.
+		But $\sum_{k}{2^{k}\cdot \frac{1}{(2^{k})^{p}}}=\sum_{k}{(\frac{1}{2^{p-1}})^{k}}$ converges iff $\frac{1}{2^{p-1}}<1(\Leftrightarrow p-1>0)$, which is equivalent to $p>1$.
+	\end{proof}
+\end{thm}
+\begin{thm}[29]
+	$\sum_{n=3}^{\infty }{\frac{1}{n(\log{n})^{p}}}$ converges if $p>1$ and diverges if $p\le 1$. ($\log$ is to base $e$.)
+	\begin{proof}
+		If $p\le 0$, then $\frac{1}{n (\log{n})^{p}}\ge \frac{1}{n}$, so $\sum_{n}{\frac{1}{n(\log{n})^{p}}}$ diverges by the comparison test.
+		If $p>0$ then $\frac{1}{n(\log{n})^{p}}$ decreases since $\log{n}$ increases. By theorem~\ref{thm:3.27}, $\sum_{n}{\frac{1}{n(\log{n})^{p}}}$ converges $\Leftrightarrow \sum_{k}{2^{k} \cdot \frac{1}{2^{k}(\log{2^{k}})^{p}}}$ converges  $\Leftrightarrow $  $\sum_{k}{\frac{1}{(\log{2})^{p}} \cdot \frac{1}{k^p}}$ converges $\Leftrightarrow $ $p>1$
+	\end{proof}
+\end{thm}
+
+\begin{definition}[e]
+	$e:= \sum_{n=0}^{\infty}{\frac{1}{n!}}$.
+	\begin{remark}
+		\begin{description}
+			\item[Convergence]
+			      $\frac{1}{n!}=\frac{1}{(n(n-1)(n-2)\cdots 3\cdot 2 \cdot 1)}\le \frac{1}{2\cdot 2\cdot 2 \cdot 2 \cdots \cdot 2 \cdot 1}=\frac{1}{2^{n-1}}$. Therefore, $S_n= \sum_{k=0}^{n}{\frac{1}{k!}}\le 1+\sum_{k=1}^{n}{\frac{1}{2^{k-1}}}<1+\sum_{k=1}^{\infty }{\frac{1}{2^{k-1}}}=1+\frac{1}{1- 1/2}=3$. Then $S_n$ is a monotonically increasing sequence that's also bounded. Hence, $e \le 3$
+			\item[Rate of Convergence]\hfill\\
+			      $0<e-S_n=\sum_{k=n+1}^{\infty}{\frac{1}{k!}}$
+			      $< \sum_{k=n+1}^{\infty}{\frac{1}{(n+1)^{k-n+1}}\cdot  \frac{1}{(n+1)!}}$
+
+			      $= \frac{1}{(n+1)!} \sum_{k=n+1}^{\infty} \frac{1}{(n+1)^{k-(n+1)}}$
+
+			      $=\frac{1}{(n+1)!} \cdot \frac{1}{1-1/(n+1)}=\frac{1}{(n!)\cdot n}$.
+
+		\end{description}
+	\end{remark}
+\end{definition}
+
+\begin{thm}[32]
+	$e \not\in \Q$.
+	\begin{proof}
+		For contradiction, suppose $e=\frac{p}{q}, p,q \in \N$.
+		As $0<e-S_q<\frac{1}{q\cdot q!}$, $0<q!\cdot e - q! \cdot S_q< \frac{1}{q}$. Since $S_q=\sum_{k=0}^{q}{\frac{1}{k!}}$, $q!\cdot e$ and $S_q \cdot q!$ are both integers.
+		However, then $q! \cdot e - q! \cdot S_q$ is an integer between $0$ and $\frac{1}{q}<1$, which is a contradiction.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[31]
+	$e= \lim_{n\to \infty}{(1+\frac{1}{n})^{n}}$.
+	\begin{proof}
+		Let $t_n=(1+\frac{1}{n})^{n}$. Then $t_n= \sum_{k=0}^{n}{\binom{n}{k} \cdot \frac{1}{n^{k}}}= \sum_{k=0}^{n}{\frac{1}{k!} \cdot (\frac{n}{n} \cdot \frac{n-1}{n} \cdots \frac{n-k+1}{n})} \le S_n$. So $\limsup_{n\to \infty}{t_n}\le \limsup_{n\to \infty}{S_n}=\lim_{n\to \infty}{S_n}=e$.
+		On the other hand, for fixed $m$ and $n\ge m$, $t_n \ge \sum_{k=0}^{m}{\binom{n}{k} \cdot \frac{1}{n^{k}}}= \sum_{k=0}^{m}{\frac{1}{k!} (1-\frac{1}{n}) (1- \frac{2}{n}) \cdots \cdot (1-\frac{k-1}{n})}$. Let $n\to \infty$ with $m$ fixed.
+		$\liminf_{n\to \infty}{t_n}\ge \sum_{k=0}^{m}{\frac{1}{k!} \cdot_1}=S_m$. This is true for any $m$.
+		Now let $m\to \infty$. $\liminf_{n\to \infty}{t_{n}}\ge  \limsup_{m\to \infty}{s_{m}}=e$.
+		$e \le \liminf_{n\to \infty}{t_{n}} \le \limsup_{n\to \infty}{t_{n}}\le e$.
+		Therefore, $\lim_{n\to \infty}{t_{n}}$ exists and equals $e$.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[33][Root test]
+	Let $\alpha=\limsup_{n\to \infty}{\sqrt[n]{|a_n|}}$. Then,
+	\[
+		\sum{a_{n}}
+		\begin{cases}
+			\text{converges}    & \text{if } \alpha<1 \\
+			\text{diverges}     & \text{if } \alpha>1 \\
+			\text{inconclusive} & \text{if } \alpha=1
+		\end{cases}
+	\]
+
+	\begin{proof}[Just outline]
+		\begin{description}
+			\item[$\alpha< \beta < 1$]
+			      Eventually $|a_n|\le \beta^{n}$, thus convergence.
+			\item[$\alpha > 1$]
+			      $|a_{n}|>1$ for infinitely many $n$, thus divergence.
+			\item[$\alpha=1$]
+			      $\frac{1}{n}$ diverges, $\frac{1}{n^2}$ converges.
+		\end{description}
+	\end{proof}
+\end{thm}
+\begin{thm}[34][Ratio test]
+	The series $\sum_{n=1}^{\infty}{a_{n}}$ with $a_{n}\neq 0$ converges if $\limsup_{n\to \infty}{|\frac{a_{n+1}}{a_{n}}|}<1$ and diverges if $\exists_{N \in \N} \text{ s.t. } \forall_{n \ge  N}:  |\frac{a_{n+1}}{a_{n}}|\ge 1 $. Otherwise, inconclusive.
+	\begin{proof}
+		(see textbook).\\
+		\begin{description}
+			\item[Convergence]
+			      $\sum_{}{a_{n}}
+				      \begin{cases}
+					      \text{converges}    & \text{if } \lim_{n\to \infty}{|\frac{a_{n+1}}{a_{n}}|}<1               \\
+					      \text{diverges}     & \text{if } \lim_{n\to \infty}{|\frac{a_{n+1}}{a_{n}}|}>1               \\
+					      \text{diverges}     & \text{if } \liminf_{n\to \infty}{|\frac{a_{n+1}}{a_{n}}|}>1            \\
+					      \text{inconclusive} & \text{otherwise. e.g., } \lim_{n\to \infty}{|\frac{a_{n+1}}{a_{n}}|}=1
+				      \end{cases}
+			      $
+		\end{description}
+		\begin{note}
+			Note that we cannot replace $\liminf$ with $\limsup$ in the third case.
+			For inconclusive case, check $\sum{1/n}\to \infty$ and $\sum{1/n^2}\to \pi ^2 /6$
+		\end{note}
+	\end{proof}
+\end{thm}
+
+
+
+\begin{example}
+	\label{ex:3.35b}
+	Let $s_{n}=\sum_{n=0}^{\infty}{a_{n}}=\frac{1}{2}+1+\frac{1}{8}+\frac{1}{4}+\frac{1}{32}+\frac{1}{16}+\frac{1}{128}+\frac{1}{64}+ \cdots$.
+	First, note that $a_{2k}=\frac{1}{2}\cdot\frac{1}{4^{k}}, a_{2k+1}=2a_{2k}=\frac{1}{4^{k}} \text{ for } k \ge 0$.
+	\begin{description}
+		\item[Ratio test]
+		      Then the ratio $\frac{a_{n+1}}{a_n}$ is the sequence $2, \frac{1}{8}, 2, \frac{1}{8},2, \frac{1}{8}, \ldots $. Therefore, $\liminf_{n\to \infty}{\frac{a_{n+1}}{a_{n}}}=\frac{1}{8}, \limsup_{n\to \infty}{\frac{a_{n+1}}{a_{n}}}=2$.
+		      The ratio test is inconclusive for $s_{n}$.
+		\item[Root test]
+		      $a_{n}= \begin{cases}
+				      \frac{1}{2} \cdot \frac{1}{2^{n}} & n \text{ even} \\
+				      \frac{2}{2^{n}}                   & n \text{ odd}
+			      \end{cases}
+		      $, so $(\frac{1}{2})^{1/n}\cdot \frac{1}{2} \le  \sqrt[n]{a_{n}}\le \frac{2^{1/n}}{2}$, thus $\lim_{n\to \infty}{\sqrt[n]{a_{n}}}=\frac{1}{2}<1$. Therefore, $s_{n}=\sum_{n=0}^{\infty}{a_{n}}$ converges.
+	\end{description}
+	This is an example where the ratio test is inconclusive but the root test is conclusive.
+\end{example}
+
+\begin{thm}[47]
+	If $\sum{a_{n}}=A$ and $\sum{b_{n}}=B$, then $\sum{a_{n} + b_{n}}=A+B$ and $\sum{c \cdot a_{n}}=c  A$.
+\end{thm}
+
+\section{Power Series}
+\begin{definition}[Power Series]
+	\label{def:3.38}
+	For $z \in \C$ and a complex sequence $\{ {c}_{n}\}$, $\sum_{n=0}^{\infty}{c_{n}z^{n}}$ is a power series.
+	\begin{remark}
+		As $z^{0}=1$ for all $z \in \C$, by convention we write $\sum_{n=0}^{\infty}{c_{n}z^{n}}=c_0+\sum_{n=1}^{\infty}{c_{n}z^{n}}$.
+	\end{remark}
+\end{definition}
+
+\begin{thm}[39]
+	Let $R=\frac{1}{\limsup_{n\to \infty}{\sqrt[n]{|c_{n}|}}}$, where
+	\[
+		R= \begin{cases}
+			0      & \text{if } \limsup_{n\to \infty}{\sqrt[n]{|c_{n}|}}=\infty \\
+			\infty & \text{if } \limsup_{n\to \infty}{\sqrt[n]{|c_{n}|}}=0      \\
+		\end{cases}.
+	\]
+	Then $\sum{c_{n}z^{n}} \begin{cases}
+			\text{converges}    & \text{if } |z|<R \\
+			\text{diverges}     & \text{if } |z|>R \\
+			\text{inconclusive} & \text{if } |z|=R
+		\end{cases}$. Note $R=0$ implies the series diverges for $z\neq 0$, and $R=\infty$ implies the series converges for any $z \in \C$.
+	\begin{proof}
+		$\limsup_{n\to \infty}{\sqrt[n]{|c_{n}z^{n}|}}=|z| \cdot \limsup_{n\to \infty}{\sqrt[n]{|c_{n}|}}=\frac{|z|}{R}$.
+		By root test, the series converges if $\frac{|z|}{R}<1$ and diverges if $\frac{|z|}{R}>1$.
+		\begin{note}
+			In practice, often use the ratio test to find $R$.
+		\end{note}
+	\end{proof}
+\end{thm}
+
+\begin{example}
+	\begin{enumerate}
+		\item $\sum{n! \cdot z^{n}}$ has $R=0$.
+		      \begin{description}
+			      \item [By ratio test]
+			            $\forall z \neq 0: \left| \frac{(n+1)! \cdot z^{n+1}}{n! \cdot z^{n}} \right|=|z|\cdot(n+1) \to \infty$. Hence, the series diverges .
+			      \item[By root test]
+			            Note $n\neq \frac{1}{2}(\frac{2}{3})^{2}(\frac{3}{4})^{3} \cdots (\frac{n-1}{n})^{n-1} n^{n}$ for $n\ge 2$.
+			            Then $n\neq  \frac{n^{n}}{(1+1)^{1}(1+\frac{1}{2})^{2}(1+\frac{1}{n-1})^{n-1}}$. In the proof of Theorem~\ref{thm:3.31}, we saw $(1+\frac{1}{j})\le e$. So $n! \ge \frac{n^{n}}{e^{n-1}}=e \cdot (\frac{n}{e})^{n}$.
+			            $\sqrt[n]{n!}\ge e^{1/n} \cdot \frac{n}{e} \to \infty$ as $n\to \infty$. Therefore, $R=\frac{1}{\infty}=0$.
+			            \begin{note}
+				            Cf. Stirling's formula: $n! \sim \sqrt{2\pi n} \left( \frac{n}{e} \right)^{n}$.
+			            \end{note}
+		      \end{description}
+	\end{enumerate}
+\end{example}
+\begin{definition}[Absolute Convergence, Conditional Convergence]
+	\hfill
+	\begin{enumerate}
+		\item
+		      $\sum{a_{n}}$ converges absolutely if $\sum{|a_{n}|}$ converges.
+		\item $\sum{a_{n}}$ converges conditionally if $\sum{a_{n}}$ converges but $\sum{|a_{n}|}$ diverges.
+	\end{enumerate}
+	\hfill
+	\begin{remark}
+		All other convergence tests seen so far are actually tests for absolute convergence.
+	\end{remark}
+\end{definition}
+
+\begin{example}
+	\begin{itemize}
+		\item $\sum_{n=1}^{\infty}{(-1)^{n-1}\frac{1}{n}}$ converges conditionally by the alternating series test of assignment 7's practice problem 1. See also Theorem 3.43. (MUST TAKE A LOOK!)
+		\item Given $a_1\ge a_2\ge a_3\ge \cdots \ge 0$ and $a_{n}\to 0$, then $\sum{(-1)^{n}a_{n}}$ converges.
+		\item $\sum_{n=0}^{\infty}{n!2^{n}}$ has $R=0$
+		\item $\sum_{n=0}^{\infty}{\frac{z^{n}}{n^{n}}}$ has $R=\infty$ since $R=\frac{1}{\limsup_{n\to \infty}{\sqrt[n]{|c_{n}|}}}=\frac{1}{\limsup_{n\to \infty}{\frac{1}{n}}}=1/0=\infty$, or use ratio test, $|\frac{z^{n+1}/(n+1)^{n+1}}{z^{n}/n^{n}}|=|z|=\frac{n^{n}}{(n+1)^{n+1}}=|z|\frac{1}{n+1} \frac{1}{(1+\frac{1}{n})^{n}}$.
+		      Since $(1+\frac{1}{n})^{n} \to  \frac{1}{e}$ as $n\to \infty$,
+		      $|z|\frac{1}{n+1} \frac{1}{(1+\frac{1}{n})^{n}} \to 0$ as $n\to \infty \forall_{z \in \C}$ so $R=\infty$.
+	\end{itemize}
+\end{example}
+
+\begin{thm}[45]
+	If $\sum{a_{n}}$ converges absolutely, then $\sum{a_{n}}$ converges.
+\end{thm}
+
+\begin{thm}[54]
+	Suppose $\sum_{}{a_{n}}$ converges conditionally.
+	Let $-\infty\le \alpha\le \beta\le +\infty$. Then $\exists \text{bijection }f: \N\to \N$ such that with $a'_{n}=a_{f(n)}$ and $S'_n=\sum_{k=1}^{n}{a'_k}$, $\liminf_{n\to \infty}{s'_n}=\alpha$ and $\limsup_{n\to \infty}{s'_n}=\beta$. In other words, there exists a rearrangement of $\sum{a_n}$, say $\sum{a'_n}$, such that $\liminf_{n\to \infty}{\sum{a'_n}}=\alpha, \limsup_{n\to \infty}{\sum{a'_n}}=\beta$.
+	\begin{proof}
+		Take a look at the textbook
+	\end{proof}
+\end{thm}
+
+\begin{thm}[55]
+	If $\sum{a_{n}}$ converges absolutely, then every rearrangement of $\sum{a_{n}}$ converges to the same sum.
+	\begin{proof}
+		Take a look at the textbook
+	\end{proof}
+\end{thm}
+
+\section{Products of Series}
+\paragraph{Motivation}
+% The coefficient of 
+Consider $z^{N}$ in $(\sum_{n=0}^{\infty}{a_{n}z^{n}})(\sum_{n=0}^{\infty}{b_{n}z^{n}})$.
+Since $(\sum_{n=0}^{\infty}{a_{n}z^{n}})(\sum_{n=0}^{\infty}{b_{n}z^{n}})
+	=(a_0+a_1z+a_2z^2+\cdots)(b_0+b_1z+b_2z^2+\cdots)=(a_0b_0)+(a_0b_1+a_1b_0)z+(a_0b_2+a_1b_1+a_2b_0)z^2+\cdots$, $z^{N}$ has coefficient $\sum_{k=0}^{N}{a_kb_{N-k}}$.
+\begin{definition}
+	The product of $\sum_{n=0}^{\infty}{a_{n}}$ and $\sum_{n=0}^{\infty}{b_{n}}$ is $\sum_{n=0}^{\infty}{c_{n}}$ where $c_{n}=\sum_{k=0}^{n}{a_kb_{n-k}}$.
+	\begin{note}
+		This is a discrete convolution.
+	\end{note}
+\end{definition}
+
+\paragraph{Question}
+If $\sum_{}{a_{n}}=A$ and $\sum_{}{b_{n}}=B$ both converge, does $\sum_{}{c_{n}}$ converge and if so, does it converge to $AB$?
+\paragraph{Answer}
+$\sum_{}{c_{n}}$ converges if $\sum_{}{a_{n}}$ and $\sum_{}{b_{n}}$ converge absolutely. (Theorem~\ref{thm:3.50}). Moreover, if $\sum_{}{c_{n}}$ does converge, then it must converge to $AB$ (Theorem~\ref{thm:3.51}). Maybe no otherwise (ref: Example 3.49).
+
+
+\begin{thm}[50]
+	Suppose $\sum_{}{a_{n}}$ converges absolutely to $A$ and $\sum_{}{b_{n}}$ converges to $B$. Then $\sum_{}{c_n}$ converges to $AB$.
+	\begin{proof}
+		Let $A_{n}=\sum_{k=0}^{n}{a_{k}}$, $B_{n}=\sum_{k=0}^{n}{b_{k}}$, $C_{n}=\sum_{k=0}^{n}{c_{k}}$.
+		Then $A_{n} \to  A, B_{n}\to B$.
+		By definition, $C_{n}=\sum_{k=0}^{n}{\sum_{j=0}^{k}{a_{j}b_{k-j}}}=\sum_{j=0}^{n}{\sum_{k=j}^{n}{a_j b_{k-j}}}=\sum_{j=0}^{n}{a_{j} \sum_{k=j}^{n}{b_{k-j}}}
+			=\sum_{j=0}^{n}{a_{j}B_{n-j}}=\sum_{j=0}^{n}{a_{j}B}+\sum_{j=0}^{n}{a_{j}(B_{n-j}-B)}$. Let $\beta_{n-j}$, where $\beta_k=B_k -B$.
+		Then $C_n=A_nB + \sum_{j=0}^{n}{a_{j}\beta_{n-j}}$. Let $\gamma_n=\sum_{j=0}^{n}{a_{j}\beta_{n-j}}$.
+		Note that $A_nB \to AB, \beta_k \to 0$ as $n\to \infty$.
+		Let $\alpha=\sum_{k=0}^{\infty}{|a_k|}<\infty $  ($\because$ $a_{n}$ converges absolutely by assumption). Rewrite $\gamma_n$ as $\gamma_n=\sum_{j=0}^{n}{a_{n-j} \beta_j}$. We know $\beta_j \to 0$ as $j\to \infty$.
+		Let $\epsilon>0$. Choose $N$ s.t. $|\beta_j|<\epsilon$ if $j\ge N$.
+		Then for $n\ge N+1$, $|\gamma_n|\le |\sum_{j=0}^{N}{a_{n-j}\beta_j}|+|\sum_{j=N+1}^{n}{a_{n-j}\beta_j}|$. Note $|\sum_{j=N+1}^{n}{a_{n-j}\beta_j}| \le \epsilon \sum_{j=N+1}^{n}{|a_{n-j}|}\le \epsilon \alpha$.
+		Let $n\to \infty$ with $N$ fixed. Then $a_{n-j}\to 0$ for $0 \le j \le N$ since $|a_{n}|\to 0$.
+	\end{proof}
+\end{thm}
+
+\begin{theorem}[51]
+	If the series $\Sigma a_{n},\Sigma b_{n},\Sigma c_{n}$ converge to $A,B,C$ respectively and $c_{n}=\sum_{k=0}^{n}{a_k b_{n-k}}$, then $C=AB$.
+\end{theorem}
+
+Midterm 2 covers up to this point (TB p.36-82, A.5-8)
