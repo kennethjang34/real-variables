@@ -100,9 +100,17 @@
 	\end{remark}
 \end{thm}
 
-\begin{note}
-	READ THEOREM 6.7. in Rudin's
-\end{note}
+\begin{thm}[7]
+	Let $\epsilon_0>0$ be fixed. Suppose there exists a partition $P=\{x_0=a,\ldots ,x_n=b\} $ s.t. $U(P,f,\alpha)-L(P,f,\alpha)<\epsilon_0$.
+	Let $s_{i},t_{i}$ are arbitrary points in $[x_{i-1},x_i]$.
+	Then,
+	\begin{enumerate}
+		\item For any refinement of $P$, denoted by $P^{*}$, $U(P^{*},f,\alpha)-L(P^{*},f,\alpha)<\epsilon_0$ also holds true
+		\item  $\sum_{i=1}^{n}{\left|f(s_i)-f(t_i)\right| \Delta \alpha_i}<\epsilon_0$
+		\item If $f \in \mathscr{R}_{\alpha}$, then $\left| \sum_{i=1}^{n}{f(t_i) \Delta \alpha_i}-\int_{a}^{b}{f\mathrm{d}\alpha} \right| <\epsilon_0$
+	\end{enumerate}
+\end{thm}
+
 
 \begin{thm}[8]
 	If $f$ is continuous on $[a,b]$ then $f \in \mathscr{R}_{\alpha}[a,b]$.
@@ -117,5 +125,52 @@
 
 \begin{thm}[9]
 	If $f$ is monotone increasing or decreasing on $[a,b]$ and $\alpha$ is continuous on $[a,b]$ then $f \in \mathscr{R}_{\alpha}[a,b]$.
+	\begin{proof}
+		By definition, $U(P)-L(P)=\sum_{i=1}^{n}{(M_{i}-m_{i}) \Delta \alpha_i}$.
+		Given $n \in \N$, let $P$ s.t. $\Delta \alpha_i = \dfrac{\alpha(b)-\alpha(a)}{n}$ for all $i$.
+		Then, $U(P)-L(P)=\dfrac{\alpha(b)-\alpha(a)}{n} \sum_{i=1}^{n}{M_{i}-m_{i}}$.
+		Suppose $f$ is increasing, so $M_i - m_i=f(x_i)-f(x_{i-1})$.
+		Then $U(P)-L(P)=\dfrac{\alpha(b)-\alpha(a)}{n}\sum_{i=1}^{n}{f(x_i)-f(x_{i-1})}=\dfrac{\alpha(b)-\alpha(a)}{n}[f(b)-f(a)]$.
+		Given $\epsilon>0$, we can choose $n$ (hence $P$) s.t. $U(P)-L(P)<\epsilon$. Therefore, $f \in \mathscr{R}_{\alpha}[a,b]$ by Theorem~\ref{thm:6.6}.
+	\end{proof}
+	\begin{note}
+		We always assume $\alpha$ is monotone.
+	\end{note}
 \end{thm}
 
+\begin{thm}[10]
+	If $f$ is bounded on $[a,b]$ and has only finitely many discontinuities, and $\alpha$ is continuous at each point where $f$ is not, then $f \in \mathscr{R}_{\alpha}[a,b]$.
+	\begin{proof}
+		We apply Theorem~\ref{thm:6.6}.
+		Use $U(P)-L(P)=\sum_{i=1}^{n}{( M_{i}-m_{i} )\Delta_{i}}$.
+		Let $\epsilon>0$ and $E=\{e_1,\ldots ,e_{k}\} $ be the set of points where $f$ is discontinuous.
+		$\alpha$ is assumed to be continuous at each $e_i$, which implies $\exists{(u_j,v_j)} \text{ s.t. } u_j<e_j<v_j \text{ and } \alpha(v_j)-\alpha(u_j)<\epsilon$. (Relax inequality to include equality if $e_1=a$, $e_k=b$)
+		Let $K=[a,b] \cap \left(\bigcup_{j=1}^{k}(u_j,v_j)\right)^{c}$. $K$ is compact.
+		$f$ is continuous on $K$, so $f$ is uniformly continuous on $K$ by Theorem~\ref{thm:4.19}.
+		Hence, $\exists{\delta>0} \text{ s.t. } s , t \in K \text{ and }  |s-t|<\delta \implies |f(s)-f(t)|<\epsilon$.
+		Form $P$ to consist of $\{u_1,v_1,\ldots ,u_{k},v_{k}\}$ and additional points $x_i$ in $K$ with $\Delta x_i < \delta$. For such $i$, $M_i-m_i<\epsilon$.
+		Then $U(P)-L(P)<\epsilon$.
+		For $[u_{j},v_{j}], M_j-m_j \le 2M$, where $M=\sup\{|f(x)|: x \in [a,b]\}$, and $\Delta \alpha_{j}<\epsilon$.
+		Then $0\le U(P)-L(P)=\sum_{i=1}^{n}{(M_{i}-m_{i}) \Delta \alpha_i}\le \underbrace{K \cdot 2M \epsilon}_{\text{From $[u_j,v_j]$ intervals}}+\underbrace{\epsilon[\alpha(b)-\alpha(a)]}_{\text{From $K$ intervals}}$.
+		RHS is as small as we want by taking $\epsilon$ small enough.
+	\end{proof}
+	\begin{remark}
+		\begin{enumerate}
+			\item Theorem~\ref{thm:6.10} implies part of A1.2 but do the problem from first principles. Do not apply Theorem~\ref{thm:6.10} directly.
+			\item A1.4 shows what can happen if $f,\alpha$ are discontinuous at the same point.
+		\end{enumerate}
+	\end{remark}
+\end{thm}
+
+\begin{thm}[11]
+	If $f \in \mathscr{R}_{\alpha}[a,b], m \le f(x)\le M$ for all $x \in [a,b]$, and $\phi:[m,M]\to \R$ is continuous, then $\phi \circ f \in \mathscr{R}_{\alpha}[a,b]$.
+	\begin{proof}
+		See textbook. pf similar to pf of Theorem~\ref{thm:6.10}.
+	\end{proof}
+	\begin{example}
+		$f \in \mathscr{R}_{\alpha}[a,b]\implies f^2 \in \mathscr{R}_{\alpha}[a,b], |f| \in \mathscr{R}_{\alpha}[a,b]$ where $phi(t)=t^2$ and $\phi(t)=|t|$ respectively.
+	\end{example}
+	\begin{note}
+		$\phi \in \mathscr{R}_{\alpha}[m,M]$ does not imply $\phi \circ f \in \mathscr{R}_{\alpha}[a,b]$. See A2.
+	\end{note}
+\end{thm}
