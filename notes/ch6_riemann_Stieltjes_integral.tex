@@ -38,7 +38,7 @@
 
 \begin{define}[2]
 	Given $P$, let $\Delta \alpha_i=\alpha(x_{i})-\alpha(x_{i-1})$. (Note: $\Delta \alpha_i\ge 0$).\\
-	For bounded $f$, let $U(p,f,\alpha)=\sum_{i=1}^{n}{M_{i} \Delta \alpha_i}$, $L(P,f,\alpha)=\sum_{i=1}^{n}{m_{i}}\delta \alpha_i$.\\
+	For bounded $f$, let $U(P,f,\alpha)=\sum_{i=1}^{n}{M_{i} \Delta \alpha_i}$, $L(P,f,\alpha)=\sum_{i=1}^{n}{m_{i}}\Delta \alpha_i$.\\
 	\begin{description}
 		\item[Upper Riemann-Stieltjes Integral] $\overline{\int_{a}^{b}}f(x)d\alpha=\overline{\int_{a}^{b}}f(x)d\alpha(x)=\inf_{P}\{U(P,f,\alpha)\}=\inf\{U(P,f,\alpha):P\text{ is a partition of }[a,b]\}$.
 		\item[Lower Riemann-Stieltjes Integral] $\underline{\int_{a}^{b}}f(x)d\alpha=\underline{\int_{a}^{b}}f(x)d\alpha(x)=\sup_{P}\{L(P,f,\alpha)\}=\sup\{L(P,f,\alpha):P\text{ is a partition of }[a,b]\}$.
@@ -115,10 +115,11 @@
 \begin{thm}[8]
 	If $f$ is continuous on $[a,b]$ then $f \in \mathscr{R}_{\alpha}[a,b]$.
 	\begin{proof}
-		For any $P$, $U(P)-L(P)=\sum_{i=1}^{n}{(M_i - m_i) \Delta \alpha_i}$
+		For any $P$, $U(P)-L(P)=\sum_{i=1}^{n}{(M_i - m_i) \Delta \alpha_i}$.
 		Since $[a,b]$ is compact, $f$ is uniformly continuous on $[a,b]$ (Theorem~\ref{thm:4.19}), so $\forall{\eta > 0}: \exists{\delta > 0} \text{ s.t. } |x-t|<\delta \implies |f(x)-f(t)|<\eta$.
 		Given $\epsilon > 0$, choose $\eta$ s.t. $\eta[\alpha(b)-\alpha(a)]<\epsilon$ and choose $P$ with $\Delta x_i<\delta=\delta(\eta)$ for all $i$.
-		Then $U(P)-L(P)<\sum_{i=1}^{n}{\eta \Delta \alpha_i }=\eta[\alpha(b)-\alpha(a)]<\epsilon$.
+		For such $P$, $M_i-m_i \le \eta$.
+		Then $U(P)-L(P)\le \sum_{i=1}^{n}{\eta \Delta \alpha_i }=\eta[\alpha(b)-\alpha(a)]<\epsilon$.
 		Therefore, $f \in \mathscr{R}_{\alpha}[a,b]$.
 	\end{proof}
 \end{thm}
@@ -128,6 +129,7 @@
 	\begin{proof}
 		By definition, $U(P)-L(P)=\sum_{i=1}^{n}{(M_{i}-m_{i}) \Delta \alpha_i}$.
 		Given $n \in \N$, let $P$ s.t. $\Delta \alpha_i = \dfrac{\alpha(b)-\alpha(a)}{n}$ for all $i$.
+		Such $P$ exists by the intermediate value theorem (Theorem~\ref{thm:4.23}) as $\alpha$ is continuous.
 		Then, $U(P)-L(P)=\dfrac{\alpha(b)-\alpha(a)}{n} \sum_{i=1}^{n}{M_{i}-m_{i}}$.
 		Suppose $f$ is increasing, so $M_i - m_i=f(x_i)-f(x_{i-1})$.
 		Then $U(P)-L(P)=\dfrac{\alpha(b)-\alpha(a)}{n}\sum_{i=1}^{n}{f(x_i)-f(x_{i-1})}=\dfrac{\alpha(b)-\alpha(a)}{n}[f(b)-f(a)]$.
@@ -142,17 +144,21 @@
 	If $f$ is bounded on $[a,b]$ and has only finitely many discontinuities, and $\alpha$ is continuous at each point where $f$ is not, then $f \in \mathscr{R}_{\alpha}[a,b]$.
 	\begin{proof}
 		We apply Theorem~\ref{thm:6.6}.
-		Use $U(P)-L(P)=\sum_{i=1}^{n}{( M_{i}-m_{i} )\Delta_{i}}$.
+		Use $U(P)-L(P)=\sum_{i=1}^{n}{( M_{i}-m_{i} )\Delta \alpha_{i}}$.
 		Let $\epsilon>0$ and $E=\{e_1,\ldots ,e_{k}\} $ be the set of points where $f$ is discontinuous.
-		$\alpha$ is assumed to be continuous at each $e_i$, which implies $\exists{(u_j,v_j)} \text{ s.t. } u_j<e_j<v_j \text{ and } \alpha(v_j)-\alpha(u_j)<\epsilon$. (Relax inequality to include equality if $e_1=a$, $e_k=b$)
+		$\alpha$ is assumed to be continuous at each $e_i$, which implies $\exists{(u_j,v_j)} \text{ s.t. } u_j<e_j<v_j \text{ and } \alpha(v_j)-\alpha(u_j)<\epsilon$. (Relax inequality to include equality if $e_1=a$, $e_k=b$).\\
 		Let $K=[a,b] \cap \left(\bigcup_{j=1}^{k}(u_j,v_j)\right)^{c}$. $K$ is compact.
 		$f$ is continuous on $K$, so $f$ is uniformly continuous on $K$ by Theorem~\ref{thm:4.19}.
-		Hence, $\exists{\delta>0} \text{ s.t. } s , t \in K \text{ and }  |s-t|<\delta \implies |f(s)-f(t)|<\epsilon$.
-		Form $P$ to consist of $\{u_1,v_1,\ldots ,u_{k},v_{k}\}$ and additional points $x_i$ in $K$ with $\Delta x_i < \delta$. For such $i$, $M_i-m_i<\epsilon$.
-		Then $U(P)-L(P)<\epsilon$.
-		For $[u_{j},v_{j}], M_j-m_j \le 2M$, where $M=\sup\{|f(x)|: x \in [a,b]\}$, and $\Delta \alpha_{j}<\epsilon$.
-		Then $0\le U(P)-L(P)=\sum_{i=1}^{n}{(M_{i}-m_{i}) \Delta \alpha_i}\le \underbrace{K \cdot 2M \epsilon}_{\text{From $[u_j,v_j]$ intervals}}+\underbrace{\epsilon[\alpha(b)-\alpha(a)]}_{\text{From $K$ intervals}}$.
-		RHS is as small as we want by taking $\epsilon$ small enough.
+		Hence, $\exists{\delta>0} \text{ s.t. } \text{ for } s ,t \in K$, $|s-t|<\delta \implies |f(s)-f(t)|<\epsilon$.\\
+		Form $P$ to consist of $\{u_1,v_1,\ldots ,u_{k},v_{k}\}$ and additional points in $K$ so that $\Delta x_i < \delta$.
+		If $x_i$ is in $K$, then $M_i-m_i<\epsilon$.
+		Otherwise, $x_i=u_j$ or $x_i=v_j$ for some $j$, so $\Delta \alpha_i \le \epsilon$. Then
+		\begin{align*}
+			0\le U(P)-L(P) & =\sum_{i=1}^{n}{(M_{i}-m_{i}) \Delta \alpha_i}                                                                                                                         \\
+			               & \le \underbrace{k \cdot 2M \epsilon}_{\text{from intervals in $\bigcup_{j=1}^{k}(u_j,v_j)$}}+\underbrace{\epsilon[\alpha(b)-\alpha(a)]}_{\text{from intervals in $K$}}
+			.
+		\end{align*}
+		As RHS is as small as we want by taking $\epsilon$ small enough, $f \in \mathscr{R}_{\alpha}[a,b]$.
 	\end{proof}
 	\begin{remark}
 		\begin{enumerate}
@@ -165,12 +171,130 @@
 \begin{thm}[11]
 	If $f \in \mathscr{R}_{\alpha}[a,b], m \le f(x)\le M$ for all $x \in [a,b]$, and $\phi:[m,M]\to \R$ is continuous, then $\phi \circ f \in \mathscr{R}_{\alpha}[a,b]$.
 	\begin{proof}
-		See textbook. pf similar to pf of Theorem~\ref{thm:6.10}.
+		Let $\epsilon>0$. As $\phi$ continuous on $[m,M]$, $\phi$ is uniformly continuous on $[m,M]$ by Theorem~\ref{thm:4.19}.
+		That is, $\exists{\delta < \epsilon} \text{ s.t. } |\phi(s)-\phi(t)|<\epsilon$ if $|s-t|<\delta$ for $s,t \in [m,M]$.\\
+		Since $f \in \mathscr{R}_{\alpha}$, there exists a partition $P=\{x_0,x_1,\ldots ,x_n\}$ of $[a,b]$ such that $U(P)-L(P)<\delta^2$.\\
+		Let $A=\{i \in \{1,2,\ldots ,n\}: M_i -m_i < \delta\}, B=\{i \in \{1,2,\ldots ,n\}: M_i -m_i \ge  \delta\}$.
+		Note $A \cup B=\{1,2,\ldots ,n\}$.
+		\\
+		Let $M^{*}_i=\sup\{f(x):x_{i-1}\le x\le x_i\}$ and $m^{*}_i=\inf\{f(x):x_{i-1}\le x\le x_i\}$.
+		Suppose $i \in A$. Then $M_i-m_i<\delta$. By definition of $\delta$, this implies $|M^{*}_i-m^{*}_i|\le \epsilon$.\\
+		Suppose $i \in B$.
+		By definition of $P$,
+		\[
+			U(P,f,\alpha)-L(P,f,\alpha)=\sum_{i \in B}{(M_i-m_i)\Delta \alpha_i}<\delta ^2.
+		\]
+		As $M_i-m_i\ge \delta$,
+		\[
+			\delta \sum_{i \in B}{\Delta \alpha_i}\le \sum_{i \in B}{(M_i-m_i)\Delta \alpha_i}<\delta ^2
+			.\]
+		Hence, $\sum_{i \in B}{\Delta \alpha_i}<\delta$. Then,
+		\begin{align*}
+			 & \sum_{i \in B}{(M^{*}_i-m^{*}_i)\Delta \alpha_i}                                                                            \\
+			 & \le 2 \cdot \underbrace{\sup\{|\phi|\}}_{=\sup\{|\phi(t)|: m\le t\le M\}} \cdot \left(\sum_{i \in B}{\Delta\alpha_i}\right) \\
+			 & < 2\cdot \sup\{|\phi|\} \cdot \delta                                                                                        \\
+			 & <2 \cdot \sup\{|\phi|\} \cdot \epsilon.
+		\end{align*}
+		Therefore,
+		\begin{align*}
+			 & U(P,\phi \circ f,\alpha)-L(P,\phi \circ f,\alpha)=\sum_{i=1}^{n}{(M^{*}_i-m^{*}_i)\Delta \alpha_i} \\
+			 & =\sum_{i \in A}{(M^{*}_i-m^{*}_i)\Delta \alpha_i}+\sum_{i \in B}{(M^{*}_i-m^{*}_i)\Delta \alpha_i} \\
+			 & < \epsilon[(\alpha(b)-\alpha(a)) + 2 \cdot \sup\{|\phi|\}]
+		\end{align*}
+
 	\end{proof}
 	\begin{example}
-		$f \in \mathscr{R}_{\alpha}[a,b]\implies f^2 \in \mathscr{R}_{\alpha}[a,b], |f| \in \mathscr{R}_{\alpha}[a,b]$ where $phi(t)=t^2$ and $\phi(t)=|t|$ respectively.
+		$f \in \mathscr{R}_{\alpha}[a,b]\implies f^2 \in \mathscr{R}_{\alpha}[a,b], |f| \in \mathscr{R}_{\alpha}[a,b]$ where $\phi(t)=t^2$ and $\phi(t)=|t|$ respectively.
 	\end{example}
 	\begin{note}
 		$\phi \in \mathscr{R}_{\alpha}[m,M]$ does not imply $\phi \circ f \in \mathscr{R}_{\alpha}[a,b]$. See A2.
 	\end{note}
 \end{thm}
+
+\begin{thm}[12](Linearity and related properties)
+	\begin{enumerate}
+		\item If $f,f_1,f_2 \in \mathscr{R}_{\alpha}[a,b]$, then $f_1+f_2 \in \mathscr{R}_{\alpha}[a,b]$, and $icf \in \mathscr{R}_{\alpha}[a,b]$. Also $\int_{a}^{b}{(f_1+f_2)\mathrm{d}\alpha}=\int_{a}^{b}{f_1\mathrm{d}\alpha}+\int_{a}^{b}{f_2\mathrm{d}\alpha}$ and $\int_{a}^{b}{c f\mathrm{d}\alpha}c \int_{a}^{b}{f\mathrm{d}\alpha}$.
+		      \begin{proof}
+			      TEXTBOOK
+		      \end{proof}
+		\item $f_1,f_2 \in \mathscr{R}_{\alpha}$ and $f_1(x)\le f_2(x)$ for all $x \in [a,b]$, then $\int_{a}^{b}{f_1\mathrm{d}\alpha}\le \int_{a}^{b}{f_2\mathrm{d}\alpha}$.
+		      \begin{proof}
+			      $L(P,f)\le L(P,f_2)$(for all $P$).
+			      $L(P,f_2)\le \sup_P L(P,f_2)=\int_{a}^{b}{f_2\mathrm{d}\alpha}$.
+			      $\int_{a}^{b}{f_1\mathrm{d}\alpha}=\sup_{P}L(P,f_1)\le  \int_{a}^{b}{f_2\mathrm{d}\alpha}$.
+		      \end{proof}
+		\item If $f \in \mathscr{R}_{\alpha}[a,b], c \in [a,b]$ then $f \in \mathscr{R}_{\alpha}][a,c] \text{ and } f \in \mathscr{R}_{\alpha}[a,b] \text{ and }  \int_{a}^{b}{f\mathrm{d}\alpha}=\int_{a}^{c}{f\mathrm{d}\alpha}+\int_{c}^{b}{f\mathrm{d}\alpha}$.
+		\item If $f \in \mathscr{R}_{\alpha} \text{ and }  |f(x)|\le M$ for all $x \in [a,b]$, then $|\int_{a}^{b}{f\mathrm{d}\alpha}|\le M(\alpha(b)-\alpha(a))$.
+		      \begin{proof}
+			      Let $P=\{a,b\}$. Then $-M[\alpha(b)-\alpha(a)]\le m_1 \Delta \alpha_1=L(P)\le \int_{a}^{b}{f\mathrm{d}\alpha}\le U(P)=M_1 \Delta \alpha_1\le M [\alpha(b)-\alpha(a)]$.
+		      \end{proof}
+		\item If $f \in \mathscr{R}_{\alpha_1} \text{ and }  f \in \mathscr{R}_{\alpha}$, then $f \in \mathscr{R}_{\alpha_1+\alpha_2}$ and
+		      \begin{equation*}
+			      \label{eq:s}
+			      \int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}=\int_{a}^{b}{f\mathrm{d}\alpha_1}+\int_{a}^{b}{f\mathrm{d}\alpha_2} \tag{*}
+		      \end{equation*}.
+		      \begin{proof} of ~\ref{eq:s}
+			      Let $\epsilon>0$. Choose $P_1,P_2$ s.t. $U(P_{j},f,\alpha_j)-L(P_{j},f,\alpha_j)<\dfrac{\epsilon}{2}$, where $j=1,2$.
+			      Let $P^{*}=P_1 \cup P_2$. By Theorem~\ref{thm:6.4},
+			      \begin{equation*}
+				      U(P^{*},f,\alpha_j)-L(P^{*},f,\alpha_j)<\dfrac{\epsilon}{2} \label{eq:ss}\tag{**}
+			      \end{equation*}.
+			      Since $(\Delta \alpha_1)_i+(\Delta \alpha_2)_i=(\Delta(\alpha_1+\alpha_2))_i$, adding gives $U(P^{*},f,\alpha_1+\alpha_2)-L(P^{*},f,\alpha_1+\alpha_2)<\dfrac{\epsilon}{2}+\dfrac{\epsilon}{2}=\epsilon$.
+			      By Theorem~\ref{thm:6.6}, $f \in \mathscr{R}_{\alpha_1+\alpha_2}$.
+			      Also $\int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}\le U(P^{*},f,\alpha_1+\alpha_2)=U(P^{*},f,\alpha_1)+U(P^{*},f,\alpha_2)<\int_{a}^{b}{f\mathrm{d}\alpha}+\dfrac{\epsilon}{2}+\int_{a}^{b}{f\mathrm{d}\alpha_2}+\dfrac{\epsilon}{2}$ by \eqref{eq:ss}.
+			      Similarly, $\int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}\ge L(P^{*},f,\alpha_1+\alpha_2)=L(P^{*},f,\alpha_1)+L(P^{*},f,\alpha_2)>\int_{a}^{b}{f\mathrm{d}\alpha_1}-\dfrac{\epsilon}{2}+\int_{a}^{b}{f\mathrm{d}\alpha_2}-\dfrac{\epsilon}{2}$ by \eqref{eq:ss}. As $\epsilon$ is arbitrary, \eqref{eq:s} holds.
+		      \end{proof}
+		      If $f \in \mathscr{R}_{\alpha} \text{ and }  c\ge 0$ then $f \in \mathscr{R}_{\alpha}$ and
+		      $\int_{a}^{b}{f\mathrm{d}c \alpha}= c \int_{a}^{b}{f\mathrm{d}\alpha}$.
+	\end{enumerate}
+\end{thm}
+\begin{thm}[13]
+	\begin{enumerate}
+		\item $f,g \in \mathscr{R}_{\alpha}\implies fg \in \mathscr{R}_{\alpha}$
+		      \begin{proof}
+			      By Theorem~\ref{thm:6.12}, $f,g \in \mathscr{R}_{\alpha}\implies f+g \in \mathscr{R}_{\alpha}$, so $f^2 \in \mathscr{R}_{\alpha}$.
+			      Then by Theorem~\ref{thm:6.11}, $(f\pm g)^2 \in \mathscr{R}_{\alpha}$.
+			      Since $(f+g)^2-(f-g)^2=4fg$, so by Theorem~\ref{thm:6.12}(a), $fg \in \mathscr{R}_{\alpha}$.
+		      \end{proof}
+		\item If $f \in \mathscr{R}_{\alpha}$, then $|f| \in \mathscr{R}_{\alpha}$, and $\left|\int_{a}^{b}{f\mathrm{d}\alpha}\right|\le \int_{a}^{b}{|f|\mathrm{d}\alpha}$.
+		      \begin{proof}
+			      By Theorem~\ref{thm:6.11}, $|f| \in \mathscr{R}_{\alpha}$ (take $\phi(t)=|t|$).
+			      Let \[
+				      c=\sgn{(\int_{a}^{b}{f\mathrm{d}\alpha})=
+				      \begin{cases}
+					      +1 & \text{if } \int_{a}^{b}{f\mathrm{d}\alpha}>0 \\
+					      0  & \text{if } \int_{a}^{b}{f\mathrm{d}\alpha}=0 \\
+					      -1 & \text{if } \int_{a}^{b}{f\mathrm{d}\alpha}<0
+				      \end{cases}}
+				      .\]
+			      Then $\left|   \int_{a}^{b}{f\mathrm{d}\alpha}\right|=c\int_{a}^{b}{f\mathrm{d}\alpha}\le \int_{a}^{b}{|f|\mathrm{d}\alpha}$.
+		      \end{proof}
+	\end{enumerate}
+
+\end{thm}
+\begin{thm}[15]
+	Suppose $f$ is bounded on $[a,b]$ and $s \in (a,b)$, $f$ continuous at $s$.
+	Let \[
+		\alpha(x)=\begin{cases}
+			0 & x\le s \\
+			1 & x>s
+		\end{cases}
+		.\]
+	Then $\int_{a}^{b}{f\mathrm{d}\alpha}$ exists and $\int_{a}^{b}{f\mathrm{d}\alpha}=f(s)$.
+\end{thm}
+
+\begin{remark}
+	\begin{enumerate}
+		\item By Theorem~\ref{thm:4.29}, if $\alpha$ is monotone-increasing,
+		      then $\alpha(x^{+})$ and $\alpha(x^{-})$ exist for all $x \in (a,b)$, and $\alpha(\overline{x})\le \alpha(x)\le \alpha(x^{+})$.
+		\item In Theorem~\ref{thm:6.15}, $\alpha$ is left-continuous at $s$.
+		      \begin{exercise}
+			      Conclusion same for $\alpha=\begin{cases}
+					      0 & x<s    \\
+					      1 & x\ge s
+				      \end{cases}$
+		      \end{exercise}
+
+	\end{enumerate}
+\end{remark}
+
