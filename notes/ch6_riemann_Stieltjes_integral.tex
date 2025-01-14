@@ -213,88 +213,104 @@
 
 \begin{thm}[12](Linearity and related properties)
 	\begin{enumerate}
-		\item If $f,f_1,f_2 \in \mathscr{R}_{\alpha}[a,b]$, then $f_1+f_2 \in \mathscr{R}_{\alpha}[a,b]$, and $icf \in \mathscr{R}_{\alpha}[a,b]$. Also $\int_{a}^{b}{(f_1+f_2)\mathrm{d}\alpha}=\int_{a}^{b}{f_1\mathrm{d}\alpha}+\int_{a}^{b}{f_2\mathrm{d}\alpha}$ and $\int_{a}^{b}{c f\mathrm{d}\alpha}c \int_{a}^{b}{f\mathrm{d}\alpha}$.
+		\item If $f,f_1,f_2 \in \mathscr{R}_{\alpha}[a,b]$, then $f_1+f_2 \in \mathscr{R}_{\alpha}[a,b]$, $cf \in \mathscr{R}_{\alpha}[a,b]$, and
+		      \begin{align*}
+			      \int_{a}^{b}{(f_1+f_2)\mathrm{d}\alpha} & =\int_{a}^{b}{f_1\mathrm{d}\alpha}+\int_{a}^{b}{f_2\mathrm{d}\alpha} \\
+			      \int_{a}^{b}{c f\mathrm{d}\alpha}       & =c\int_{a}^{b}{f\mathrm{d}\alpha}.
+		      \end{align*}
 		      \begin{proof}
 			      TEXTBOOK
 		      \end{proof}
 		\item $f_1,f_2 \in \mathscr{R}_{\alpha}$ and $f_1(x)\le f_2(x)$ for all $x \in [a,b]$, then $\int_{a}^{b}{f_1\mathrm{d}\alpha}\le \int_{a}^{b}{f_2\mathrm{d}\alpha}$.
 		      \begin{proof}
-			      $L(P,f)\le L(P,f_2)$(for all $P$).
-			      $L(P,f_2)\le \sup_P L(P,f_2)=\int_{a}^{b}{f_2\mathrm{d}\alpha}$.
+			      $L(P,f_1)\le L(P,f_2)\le \sup_P L(P,f_2)=\int_{a}^{b}{f_2\mathrm{d}\alpha}$.
 			      $\int_{a}^{b}{f_1\mathrm{d}\alpha}=\sup_{P}L(P,f_1)\le  \int_{a}^{b}{f_2\mathrm{d}\alpha}$.
 		      \end{proof}
-		\item If $f \in \mathscr{R}_{\alpha}[a,b], c \in [a,b]$ then $f \in \mathscr{R}_{\alpha}][a,c] \text{ and } f \in \mathscr{R}_{\alpha}[a,b] \text{ and }  \int_{a}^{b}{f\mathrm{d}\alpha}=\int_{a}^{c}{f\mathrm{d}\alpha}+\int_{c}^{b}{f\mathrm{d}\alpha}$.
+		\item If $f \in \mathscr{R}_{\alpha}[a,b], c \in [a,b]$ then $f \in \mathscr{R}_{\alpha}[a,c] \text{ and } f \in \mathscr{R}_{\alpha}[a,b] \text{ and }  \int_{a}^{b}{f\mathrm{d}\alpha}=\int_{a}^{c}{f\mathrm{d}\alpha}+\int_{c}^{b}{f\mathrm{d}\alpha}$.
 		\item If $f \in \mathscr{R}_{\alpha} \text{ and }  |f(x)|\le M$ for all $x \in [a,b]$, then $|\int_{a}^{b}{f\mathrm{d}\alpha}|\le M(\alpha(b)-\alpha(a))$.
 		      \begin{proof}
 			      Let $P=\{a,b\}$. Then $-M[\alpha(b)-\alpha(a)]\le m_1 \Delta \alpha_1=L(P)\le \int_{a}^{b}{f\mathrm{d}\alpha}\le U(P)=M_1 \Delta \alpha_1\le M [\alpha(b)-\alpha(a)]$.
 		      \end{proof}
-		\item If $f \in \mathscr{R}_{\alpha_1} \text{ and }  f \in \mathscr{R}_{\alpha}$, then $f \in \mathscr{R}_{\alpha_1+\alpha_2}$ and
+		\item If $f \in \mathscr{R}_{\alpha_1} \text{ and }  f \in \mathscr{R}_{\alpha_2}$, then $f \in \mathscr{R}_{\alpha_1+\alpha_2}$ and
 		      \begin{equation*}
 			      \label{eq:s}
-			      \int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}=\int_{a}^{b}{f\mathrm{d}\alpha_1}+\int_{a}^{b}{f\mathrm{d}\alpha_2} \tag{*}
-		      \end{equation*}.
-		      \begin{proof} of ~\ref{eq:s}
+			      \int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}=\int_{a}^{b}{f\mathrm{d}\alpha_1}+\int_{a}^{b}{f\mathrm{d}\alpha_2} \tag{*}.
+		      \end{equation*}\\
+		      If $f \in \mathscr{R}_{\alpha} \text{ and }  c\ge 0$ then $f \in \mathscr{R}_{\alpha}$ and
+		      $\int_{a}^{b}{f\mathrm{d}c \alpha}= c \int_{a}^{b}{f\mathrm{d}\alpha}$.
+		      \begin{proof}[\ref{eq:s}]
 			      Let $\epsilon>0$. Choose $P_1,P_2$ s.t. $U(P_{j},f,\alpha_j)-L(P_{j},f,\alpha_j)<\dfrac{\epsilon}{2}$, where $j=1,2$.
 			      Let $P^{*}=P_1 \cup P_2$. By Theorem~\ref{thm:6.4},
 			      \begin{equation*}
 				      U(P^{*},f,\alpha_j)-L(P^{*},f,\alpha_j)<\dfrac{\epsilon}{2} \label{eq:ss}\tag{**}
-			      \end{equation*}.
-			      Since $(\Delta \alpha_1)_i+(\Delta \alpha_2)_i=(\Delta(\alpha_1+\alpha_2))_i$, adding gives $U(P^{*},f,\alpha_1+\alpha_2)-L(P^{*},f,\alpha_1+\alpha_2)<\dfrac{\epsilon}{2}+\dfrac{\epsilon}{2}=\epsilon$.
+				      .
+			      \end{equation*}
+			      Since $(\Delta \alpha_1)_i+(\Delta \alpha_2)_i=(\Delta(\alpha_1+\alpha_2))_i$,
+			      \begin{align*}
+				       & U(P^{*},f,(\alpha_1+\alpha_2))-L(P^{*},f,(\alpha_1+\alpha_2))                                                                     \\
+				       & =\sum_{i=1}^{n}{(M_i-m_i)(\Delta(\alpha_1+\alpha_2))_i}                                                                           \\
+				       & =\sum_{i=1}^{n}{(M_i-m_i)[(\Delta \alpha_1)_i+(\Delta \alpha_2)_i]}                                                               \\
+				       & =\sum_{i=1}^{n}{(M_i-m_i)(\Delta \alpha_1)_i}+\sum_{i=1}^{n}{(M_i-m_i)(\Delta \alpha_2)_i}                                        \\
+				       & =U(P^{*},f,\alpha_1)-L(P^{*},f,\alpha_1)+U(P^{*},f,\alpha_2)-L(P^{*},f,\alpha_2)<\dfrac{\epsilon}{2}+\dfrac{\epsilon}{2}=\epsilon
+				      .\end{align*}
+			      % adding gives $U(P^{*},f,\alpha_1+\alpha_2)-L(P^{*},f,\alpha_1+\alpha_2)<\dfrac{\epsilon}{2}+\dfrac{\epsilon}{2}=\epsilon$.
 			      By Theorem~\ref{thm:6.6}, $f \in \mathscr{R}_{\alpha_1+\alpha_2}$.
-			      Also $\int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}\le U(P^{*},f,\alpha_1+\alpha_2)=U(P^{*},f,\alpha_1)+U(P^{*},f,\alpha_2)<\int_{a}^{b}{f\mathrm{d}\alpha}+\dfrac{\epsilon}{2}+\int_{a}^{b}{f\mathrm{d}\alpha_2}+\dfrac{\epsilon}{2}$ by \eqref{eq:ss}.
+			      Also $\int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}\le U(P^{*},f,\alpha_1+\alpha_2)=U(P^{*},f,\alpha_1)+U(P^{*},f,\alpha_2)<\int_{a}^{b}{f\mathrm{d}\alpha_1}+\dfrac{\epsilon}{2}+\int_{a}^{b}{f\mathrm{d}\alpha_2}+\dfrac{\epsilon}{2}$ by \eqref{eq:ss}.
 			      Similarly, $\int_{a}^{b}{f\mathrm{d}(\alpha_1+\alpha_2)}\ge L(P^{*},f,\alpha_1+\alpha_2)=L(P^{*},f,\alpha_1)+L(P^{*},f,\alpha_2)>\int_{a}^{b}{f\mathrm{d}\alpha_1}-\dfrac{\epsilon}{2}+\int_{a}^{b}{f\mathrm{d}\alpha_2}-\dfrac{\epsilon}{2}$ by \eqref{eq:ss}. As $\epsilon$ is arbitrary, \eqref{eq:s} holds.
 		      \end{proof}
-		      If $f \in \mathscr{R}_{\alpha} \text{ and }  c\ge 0$ then $f \in \mathscr{R}_{\alpha}$ and
-		      $\int_{a}^{b}{f\mathrm{d}c \alpha}= c \int_{a}^{b}{f\mathrm{d}\alpha}$.
 	\end{enumerate}
 \end{thm}
 \begin{thm}[13]
 	\begin{enumerate}
 		\item $f,g \in \mathscr{R}_{\alpha}\implies fg \in \mathscr{R}_{\alpha}$
 		      \begin{proof}
-			      By Theorem~\ref{thm:6.12}, $f,g \in \mathscr{R}_{\alpha}\implies f+g \in \mathscr{R}_{\alpha}$, so $f^2 \in \mathscr{R}_{\alpha}$.
-			      Then by Theorem~\ref{thm:6.11}, $(f\pm g)^2 \in \mathscr{R}_{\alpha}$.
-			      Since $(f+g)^2-(f-g)^2=4fg$, so by Theorem~\ref{thm:6.12}(a), $fg \in \mathscr{R}_{\alpha}$.
+			      By Theorem~\ref{thm:6.11} with $\phi(t)=t^2$, $h \in \mathscr{R}_{\alpha}\implies h^2 \in \mathscr{R}_{\alpha}$.
+			      By Theorem~\ref{thm:6.12}(a), $f,g \in \mathscr{R}_{\alpha}\implies f+g \in \mathscr{R}_{\alpha}$, so $(f\pm g)^2 \in \mathscr{R}_{\alpha}$.
+			      % so $f^2 \in \mathscr{R}_{\alpha}$.
+			      Since $(f+g)^2-(f-g)^2=4fg$, by Theorem~\ref{thm:6.12}(a), $fg \in \mathscr{R}_{\alpha}$.
 		      \end{proof}
 		\item If $f \in \mathscr{R}_{\alpha}$, then $|f| \in \mathscr{R}_{\alpha}$, and $\left|\int_{a}^{b}{f\mathrm{d}\alpha}\right|\le \int_{a}^{b}{|f|\mathrm{d}\alpha}$.
 		      \begin{proof}
 			      By Theorem~\ref{thm:6.11}, $|f| \in \mathscr{R}_{\alpha}$ (take $\phi(t)=|t|$).
 			      Let \[
-				      c=\sgn{(\int_{a}^{b}{f\mathrm{d}\alpha})=
+				      c=\sgn\left( \int_{a}^{b}{f\mathrm{d}\alpha}\right)=
 				      \begin{cases}
 					      +1 & \text{if } \int_{a}^{b}{f\mathrm{d}\alpha}>0 \\
 					      0  & \text{if } \int_{a}^{b}{f\mathrm{d}\alpha}=0 \\
 					      -1 & \text{if } \int_{a}^{b}{f\mathrm{d}\alpha}<0
-				      \end{cases}}
+				      \end{cases}
 				      .\]
-			      Then $\left|   \int_{a}^{b}{f\mathrm{d}\alpha}\right|=c\int_{a}^{b}{f\mathrm{d}\alpha}\le \int_{a}^{b}{|f|\mathrm{d}\alpha}$.
+			      As $cf\le |f|$,
+			      $\left|   \int_{a}^{b}{f\mathrm{d}\alpha}\right|=c\int_{a}^{b}{f\mathrm{d}\alpha}=\int_{a}^{b}{cf\mathrm{d}\alpha}\le \int_{a}^{b}{|f|\mathrm{d}\alpha}$.
 		      \end{proof}
 	\end{enumerate}
 
 \end{thm}
 \begin{thm}[15]
-	Suppose $f$ is bounded on $[a,b]$ and $s \in (a,b)$, $f$ continuous at $s$.
+	Suppose $f$ is bounded on $[a,b]$ and continuous for $s \in (a,b)$.
 	Let \[
 		\alpha(x)=\begin{cases}
 			0 & x\le s \\
 			1 & x>s
 		\end{cases}
 		.\]
-	Then $\int_{a}^{b}{f\mathrm{d}\alpha}$ exists and $\int_{a}^{b}{f\mathrm{d}\alpha}=f(s)$.
+	Then $\int_{a}^{b}{f\mathrm{d}\alpha}$ exists, and
+	\[
+		\int_{a}^{b}{f\mathrm{d}\alpha}=f (s).
+	\]
 \end{thm}
 
 \begin{remark}
 	\begin{enumerate}
 		\item By Theorem~\ref{thm:4.29}, if $\alpha$ is monotone-increasing,
-		      then $\alpha(x^{+})$ and $\alpha(x^{-})$ exist for all $x \in (a,b)$, and $\alpha(\overline{x})\le \alpha(x)\le \alpha(x^{+})$.
+		      then $\alpha(x^{+})$ and $\alpha(x^{-})$ exist for all $x \in (a,b)$, and $\alpha({x^{-}})\le \alpha(x)\le \alpha(x^{+})$.
 		\item In Theorem~\ref{thm:6.15}, $\alpha$ is left-continuous at $s$.
 		      \begin{exercise}
-			      Conclusion same for $\alpha=\begin{cases}
+			      Prove the same conclusion for $\alpha(x)=\begin{cases}
 					      0 & x<s    \\
 					      1 & x\ge s
-				      \end{cases}$
+				      \end{cases}$.
 		      \end{exercise}
-
 	\end{enumerate}
 \end{remark}
 

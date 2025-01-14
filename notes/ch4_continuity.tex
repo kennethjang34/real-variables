@@ -281,14 +281,27 @@ Assume general metric spaces $X,Y$ and $f: X\to Y$.
 	\end{enumerate}
 \end{example}
 
+\begin{theorem}[29]
+	Let $f$ be a monotonically increasing function on $(a,b)$. Then $f(x+)$ and $f(x-)$ exist at every $x \in (a,b)$; i.e.,
+	\[
+		\sup_{a<t<x}f(t)=f(x^{-})\le f(x)\le f(x^{+})=\inf_{x<t<b}f(t)
+		.\]
+	Moreover, if $a<x<y<b$, then
+	\[
+		f(x^{+})\le f(y^{-})
+		.\]
+	Analogous results hold for monotonically decreasing functions.
+\end{theorem}
+
+
 
 
 \begin{example}[18]
-	$x$ every rational $x$ can be written in the form $x=m/n$, where $n>0$ and $m$ and $n$ are integers without any common divisors. When $x=0$, we take $n=1$. Consider the function $f$ defined on $\R^{1}$ by
+	Every rational $x$ can be written in the form $x=m/n$, where $n>0$ and $m$ and $n$ are integers without any common divisors. When $x=0$, we take $n=1$. Consider the function $f$ defined on $\R^{1}$ by
 	\[
 		f(x)=
 		\begin{cases}
-			0            & (x \text{irrational}) \\
+			0            & (x \in \R\setminus \Q) \\
 			\dfrac{1}{n} & (x=\dfrac{m}{n})
 		\end{cases}
 		.\]
