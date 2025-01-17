@@ -298,7 +298,7 @@
 \end{define}
 
 \begin{thm}[15]
-	Suppose $f$ is bounded on $[a,b]$ and continuous for $s \in (a,b)$.
+	Suppose $f$ is bounded on $[a,b]$ and continuous at $s \in (a,b)$.
 	Let \[
 		\alpha(x)=\begin{cases}
 			0 & x\le s \\
@@ -432,15 +432,83 @@
 		\int_{a}^{b}{f\mathrm{d}\alpha}=\int_{a}^{b}{f\alpha'\mathrm{d}x}\tag{**}
 	\end{equation*}
 	\begin{proof}
-		\begin{description}
-			\item[~\eqref{eq:*}]:
+		\begin{enumerate}[label=(\roman*)]
+			\item
 			      It suffices to show that $\overline{\int_{a}^{b}}{f\mathrm{d}\alpha}=\overline{\int_{a}^{b}}{f\alpha'\mathrm{d}x}$ and $\underline{\int_{a}^{b}}{f\mathrm{d}\alpha}=\underline{\int_{a}^{b}}{f\alpha'\mathrm{d}x}$.
-			\item[~\eqref{eq:**}]:
-			      Let $\epsilon>0$. Since $\alpha \in \mathscr{R}$, there exists $P$ s.t. $U(P,\alpha')-L(P,\alpha')<\epsilon$ by Theorem~\ref{thm:6.6}.
-			      [Note: This and the rest of the proof hold for any refinement of $P$.]
-			      $U(P,\alpha')-L(P,\alpha')=\sum_{i=1}^{n}{A_i-a_i}\Delta x_i$,
+			\item
+			      Let $\epsilon>0$. Since $\alpha' \in \mathscr{R}$, there exists $P$ s.t. $U(P,\alpha')-L(P,\alpha')<\epsilon$ by Theorem~\ref{thm:6.6}.\\
+			      Note this and the rest of the proof hold for any refinement of $P$.
+			      $U(P,\alpha')-L(P,\alpha')=\sum_{i=1}^{n}{(A_i-a_i)}\Delta x_i$,
 			      where $A_i=\sup\{\alpha'(x):x \in [x_{i-1},x_i]\}$ and $a_i=\inf\{\alpha'(x):x_{i-1}\le x\le x_i\}$.
-		\end{description}
+			      By \hyperref[thm:mean-value-theorem]{the mean value theorem},
+			      \[
+				      \exists{t_1 \in [x_{i-1},x_{i}]} \text{ s.t. } \Delta \alpha_i=\alpha'(t_i) \cdot \Delta x_{i}
+				      .\]
+			      For any $s_i \in [x_{i-1},x_i]$, $\left|  \alpha'(s_i)-\alpha'(t_i)\right|\le A_{i}-a_{i}$, so
+			      \[
+				      \sum_{i=1}^{n}{\left|\alpha'(s_{i})-\alpha'(t_{i})\right| \Delta x_{i}}<\epsilon
+				      .\]
+			      [cf. Theorem~\ref{thm:6.7}(b)]
+			\item
+			      For any $s_i \in [x_{i-1},x_i]$,
+			      \[
+				      \left|\sum_{i=1}^{n}{f(s_{i})\cdot  \underbrace{\Delta \alpha_i}_{\alpha'(t_i) \Delta x_i}} - \sum_{i=1}^{n}{f(s_i)\alpha'(s_{i}) \Delta x_{i}}\right|
+				      =\left|\sum_{i=1}^{n}{f(s_i)[\alpha'(t_i)-\alpha'(s_i)]\Delta x_i}\right|<M \epsilon
+				      .\]
+			      Therefore,
+			      \[
+				      \sum_{i=1}^{n}{f(s_i)\Delta \alpha_i}\le \sum_{i=1}^{n}{f(s_i)\alpha'(s_i)\Delta x_i+M\epsilon}\le U(P,f\alpha')+M \epsilon
+				      .\]
+			      Taking supremum over $s_i$'s, $U(P,f,\alpha)\le U(P,f\alpha')+M \epsilon$, so
+			      \begin{align*}
+				      \overline{\int_{a}^{b}}{f\mathrm{d}\alpha} & \le U(P,f,\alpha)             \\
+				                                                 & \le U(P,f\alpha')+M \epsilon.
+			      \end{align*}
+			      As $\inf_{P}U(P,f,\alpha)\le \inf_{P}U(P,f\alpha')$,
+			      \[
+				      \overline{\int_{a}^{b}}{f\mathrm{d}\alpha}\le \overline{\int_{a}^{b}}{f \alpha'\mathrm{d}x} +M \epsilon
+				      .\]
+			      Since $\epsilon>0$ is arbitrary,
+			      \[
+				      \overline{\int_{a}^{b}}{f\mathrm{d}\alpha}\le \overline{\int_{a}^{b}}{f\alpha'\mathrm{d}x}
+				      .\]
+			      Similarly, $\underline{\int_{a}^{b}}{f\mathrm{d}\alpha}\ge \underline{\int_{a}^{b}}{f\alpha'\mathrm{d}x}$.
+		\end{enumerate}
 	\end{proof}
 \end{thm}
 
+\begin{thm}[19]
+	Suppose $\phi:[A,B]\to [a,b]$ is strictly increasing, continuous, and onto.
+	Suppose $\alpha$ is increasing on $[a,b]$ and $f \in \mathscr{R}_{\alpha}[a,b]$.
+	Let $g=f \circ \phi: [A,B]\to \R, \beta=\alpha \circ \phi: [A,B]\to \R$.
+	Then $g \in \mathscr{R}_{\beta}[A,B] \text{ and } \int_{A}^{B}{g\mathrm{d}\beta}= \int_{a}^{b}{f\mathrm{d}\alpha}$.
+	\begin{note}
+		This is the change of variables formula for Riemann-Stieltjes integrals.
+		It generalizes the calculus formula.
+		$\int_{a}^{b}{f(x)\mathrm{d}x}=\int_{{\phi ^{-1}}(a)}^{\phi^{-1}(b)}{f(\phi(y))\phi'(y)\mathrm{d}y}$. Here $\alpha(x)=x$, so $\beta=\phi$ and $\mathrm{d}\beta=\phi'(y)\mathrm{d}y$
+	\end{note}
+
+	\begin{proof}
+		Partition $P$ of $[a,b]$ and $Q$ of $[A,B]$ are in one-to-one correspondence via $x_i=\phi(y_i)$.
+		$g([y_{i-1},y_{i}])=f([x_{i-1},x_{i}])$ and $\alpha(x_{i})=(\alpha \circ \phi)(y_i)=\beta(y_i)$, so $U(P,f,\alpha)=U(Q,g,\beta)$, and $L(P,f,\alpha)=L(Q,g,\beta)$
+	\end{proof}
+	\begin{example}
+		$\int_{a}^{b}{\sin{x^2}\mathrm{d}x}$ for $0\le a<b$.
+		Here, $f(x)=\sin{x^2},\alpha(x)=x$.
+		Let $x^2=y$, so $x=\phi(y)=\sqrt[]{y}, \phi^{-1}(y)=y^2$.
+		Then $\phi:\underbrace{[a^2,b^2]}_{=[A,B]}\to [a,b]$ is continuous, strictly increasing, and onto.
+		$g(y)=(f \circ \phi)(y)=\sin{y}$.
+		$\beta(y)=(\alpha \circ \phi)(y)=\sqrt[]{y}$.
+		Theorem~\ref{thm:6.19} gives
+		\[
+			\int_{a}^{b}{\sin{x^2}\mathrm{d}dx}
+			=\int_{a^2}^{b^2}{\sin{y}\mathrm{d}\beta}
+			=\int_{a^2}^{b^2}{\sin{y}\dfrac{1}{2\sqrt[]{y}}\mathrm{d}y}
+			,\]
+		where the last equality follows from the Theorem~\ref{thm:6.17} as $\beta'=\dfrac{1}{2 \sqrt[]{y}} \in \mathscr{R}[a^2,b^2]$.
+		Hence,
+		\[
+			\int_{a}^{b}{\sin{x^2}\mathrm{d}x}=\int_{a^2}^{b^2}{\dfrac{\sin{y}}{2\sqrt[]{y}}\mathrm{d}y}.
+		\]
+	\end{example}
+\end{thm}
