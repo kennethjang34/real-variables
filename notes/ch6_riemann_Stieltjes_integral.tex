@@ -177,7 +177,7 @@
 		Let $A=\{i \in \{1,2,\ldots ,n\}: M_i -m_i < \delta\}, B=\{i \in \{1,2,\ldots ,n\}: M_i -m_i \ge  \delta\}$.
 		Note $A \cup B=\{1,2,\ldots ,n\}$.
 		\\
-		Let $M^{*}_i=\sup\{f(x):x_{i-1}\le x\le x_i\}$ and $m^{*}_i=\inf\{f(x):x_{i-1}\le x\le x_i\}$.
+		Let $M^{*}_i=\sup\{\phi(f(x)):x_{i-1}\le x\le x_i\}$ and $m^{*}_i=\inf\{\phi(f(x)):x_{i-1}\le x\le x_i\}$.
 		Suppose $i \in A$. Then $M_i-m_i<\delta$. By definition of $\delta$, this implies $|M^{*}_i-m^{*}_i|\le \epsilon$.\\
 		Suppose $i \in B$.
 		By definition of $P$,
@@ -595,5 +595,58 @@
 	\end{remark}
 \end{thm}
 
+\begin{define}[Limits of Integration]
+	If $f \in \mathscr{R}[a,b]$ for all $b>0$, then we define $\int_{a}^{\infty}{f(x)\mathrm{d}x}=\lim_{b\to \infty}{\int_{a}^{b}{f(x)\mathrm{d}x}}$ if the limit exists (in $(-\infty,\infty)$) and we say $\int_{a}^{\infty}{f(x)\mathrm{d}x}$ converges.
+	If $\int_{a}^{\infty}{\left|f(x)\right|\mathrm{d}x}$ converges, then we say the integral converges absolutely.
+\end{define}
 
+\begin{example}[1]
+	Prove that $\int_{0}^{\infty}{\sin{t^2}\mathrm{d}t}$ converges but not absolutely.
+	[$\int_{0}^{x}{\sin{t^2}\mathrm{d}t}$ is a Fresnel integral and $\int_{0}^{\infty}{\sin{t^2}\mathrm{d}t}= \sqrt{\dfrac{\pi}{8}}$, as can be shown by contour integration.]
+	\begin{proof}
+		Let $I_x=\int_{0}^{x}{\sin{t^2}\mathrm{d}t}$ for $x>0$.
+		\begin{description}
+			\item[Proof of Convergence]:
+			      \begin{enumerate}
+				      \item
+				            Claim: $I_n$ is a Cauchy Sequence $(n \in \N)$, so it has a limit in $\R$.
+				            \begin{proof}
+					            For $0<x<y$, $\int_{x}^{y}{\sin{t^2}\mathrm{d}t}=\int_{x^2}^{y^2}{\sin{u} \cdot \dfrac{1}{2 \sqrt{u}}\mathrm{d}u}$.
+					            Using Theorem~\ref{thm:ibp},
+					            \begin{align*}
+						            \int_{x^2}^{y^2}{\underbrace{\dfrac{1}{2 \sqrt{u}}}_{F(u)}\cdot  \underbrace{\vphantom{\dfrac{1}{2 \sqrt{u}}}\sin{u}\mathrm{d}u}_{\mathclap{\mathrm{d}G(u)}}} & =FG \mid_{x^2}^{y^2}- \int_{x^2}^{y^2}{G\mathrm{d}F}                                                                                                               \\
+						                                                                                                                                                                          & =\dfrac{\cos{y^2}}{2y}+\dfrac{\cos{x^2}}{2x}-\int_{x^2}^{y^2}{\cos{u}\dfrac{1}{4u^{3/2}}\mathrm{d}u}                                                               \\
+						            \therefore \left|I_x-I_y\right|                                                                                                                               & \le \dfrac{1}{2y}+\dfrac{1}{2x}+\underbrace{\int_{x^2}^{y^2}{\dfrac{1}{4u^{3/2}}\mathrm{d}u}}_{-\dfrac{1}{2u^{3/2}} \mid_{x^2}^{y^2}=-\dfrac{1}{2y}+\dfrac{1}{2x}} \\
+						                                                                                                                                                                          & =\dfrac{1}{x}
+						            .\end{align*}
+					            In particular, for $n\ge m$, $\left|I_n-I_m\right|\le \dfrac{1}{m}$, so $(I_n)$ is a Cauchy sequence.
+					            Therefore, $\exists{ I \in \R} \text{ s.t. } I_n\to I$ as $n\to \infty$.
+				            \end{proof}
 
+				      \item Let $\epsilon>0$. Choose $N_0$ s.t. $N\ge N_0\implies \left|I_n-I\right|<\epsilon$.
+				            Then given $b> N_0$, choose $N$ s.t. $b \in [N,N+1)$.
+				            Then $N\ge N_0$, and $\int_{0}^{b}{\sin{t^2}\mathrm{d}t}=I_n+ \underbrace{\int_{N}^{b}{\sin{t^2}\mathrm{d}t}}_{\le \dfrac{1}{N}}$.
+				            \[
+					            \left|I-I_b\right| \le \left|I-I_N\right|+\dfrac{1}{N} <\dfrac{1}{N}+\dfrac{1}{N}= \dfrac{2}{N}\le \dfrac{2}{N_0} <2 \epsilon
+					            .\]
+				            \[
+					            \therefore \int_{0}^{\infty}{\sin{t^2}\mathrm{d}t}=I
+					            .\]
+			      \end{enumerate}
+			\item[Failure of Absolute Convergence]:
+			      \begin{proof}
+				      For $n\ge 0$, let $[A_n,B_{n}]=[2n\pi,(2n+1)\pi]$, and let $a_n^2=A_n,b_{n}^{2}=B_n$.\\
+				      Then $\int_{0}^{b_N}{\left|\sin{t^2}\right|\mathrm{d}t}\ge \sum_{n=0}^{N}{\int_{a_n}^{b_n}{\sin{t^2}\mathrm{d}t}}$.
+				      Now $\int_{a_n}^{b_n}{\sin{t^2}\mathrm{d}t}=\int_{A_n}^{B_n}{\sin{u}\cdot \dfrac{1}{2 \sqrt{u}}\mathrm{d}u}\ge \dfrac{1}{2 \sqrt{B_n}} \cdot  \int_{A_n}^{B_n}{\sin{u}\mathrm{d}u}=\dfrac{1}{\sqrt{B_n}}$.
+				      \[
+					      \therefore \int_{0}^{b_N}{\left|\sin{t^2}\right|\mathrm{d}t}\ge \sum_{n=0}^{N}{\dfrac{1}{\sqrt{(2n+1)\pi}}}\ge \dfrac{1}{\sqrt{\pi}}\cdot  \underbrace{\sum_{n=0}^{N}{\dfrac{1}{\sqrt{2n+1}}}}_{\to \infty \text{as} N\to \infty}
+					      .\]
+				      Hence, $\int_{0}^{\infty}{\left|\sin{t^2}\right|\mathrm{d}t}=\infty$, diverges.
+			      \end{proof}
+		\end{description}
+	\end{proof}
+\end{example}
+
+\begin{note}
+	Material for MT 1 ends here, including A1,A2,A3.
+\end{note}
