@@ -614,19 +614,22 @@
 					            For $0<x<y$, $\int_{x}^{y}{\sin{t^2}\mathrm{d}t}=\int_{x^2}^{y^2}{\sin{u} \cdot \dfrac{1}{2 \sqrt{u}}\mathrm{d}u}$.
 					            Using Theorem~\ref{thm:ibp},
 					            \begin{align*}
-						            \int_{x^2}^{y^2}{\underbrace{\dfrac{1}{2 \sqrt{u}}}_{F(u)}\cdot  \underbrace{\vphantom{\dfrac{1}{2 \sqrt{u}}}\sin{u}\mathrm{d}u}_{\mathclap{\mathrm{d}G(u)}}} & =FG \mid_{x^2}^{y^2}- \int_{x^2}^{y^2}{G\mathrm{d}F}                                                                                                               \\
-						                                                                                                                                                                          & =\dfrac{\cos{y^2}}{2y}+\dfrac{\cos{x^2}}{2x}-\int_{x^2}^{y^2}{\cos{u}\dfrac{1}{4u^{3/2}}\mathrm{d}u}                                                               \\
-						            \therefore \left|I_x-I_y\right|                                                                                                                               & \le \dfrac{1}{2y}+\dfrac{1}{2x}+\underbrace{\int_{x^2}^{y^2}{\dfrac{1}{4u^{3/2}}\mathrm{d}u}}_{-\dfrac{1}{2u^{3/2}} \mid_{x^2}^{y^2}=-\dfrac{1}{2y}+\dfrac{1}{2x}} \\
+						            \int_{x^2}^{y^2}{\underbrace{\dfrac{1}{2 \sqrt{u}}}_{F(u)}\cdot  \underbrace{\vphantom{\dfrac{1}{2 \sqrt{u}}}\sin{u}\mathrm{d}u}_{\mathclap{\mathrm{d}G(u)}}} & =FG \bigg\rvert_{x^2}^{y^2}- \int_{x^2}^{y^2}{G\mathrm{d}F}                                                                                                           \\
+						                                                                                                                                                                          & =\dfrac{\cos{y^2}}{2y}+\dfrac{\cos{x^2}}{2x}-\int_{x^2}^{y^2}{\cos{u}\dfrac{1}{4u^{3/2}}\mathrm{d}u}                                                                  \\
+						            \therefore \left|I_x-I_y\right|                                                                                                                               & \le \frac{1}{2y}+\frac{1}{2x}+\underbrace{\int_{x^2}^{y^2}{\frac{1}{4u^{3/2}}\mathrm{d}u}}_{\left.-\frac{1}{2u^{1/2}} \right|_{x^2}^{y^2}=-\frac{1}{2y}+\frac{1}{2x}} \\
 						                                                                                                                                                                          & =\dfrac{1}{x}
 						            .\end{align*}
 					            In particular, for $n\ge m$, $\left|I_n-I_m\right|\le \dfrac{1}{m}$, so $(I_n)$ is a Cauchy sequence.
 					            Therefore, $\exists{ I \in \R} \text{ s.t. } I_n\to I$ as $n\to \infty$.
 				            \end{proof}
 
-				      \item Let $\epsilon>0$. Choose $N_0$ s.t. $N\ge N_0\implies \left|I_n-I\right|<\epsilon$.
-				            Then given $b> N_0$, choose $N$ s.t. $b \in [N,N+1)$.
-				            Then $N\ge N_0$, and $\int_{0}^{b}{\sin{t^2}\mathrm{d}t}=I_n+ \underbrace{\int_{N}^{b}{\sin{t^2}\mathrm{d}t}}_{\le \dfrac{1}{N}}$.
+				      \item Let $\epsilon>0$. Choose $N_0>\dfrac{1}{\epsilon}$, so that $N\ge N_0\implies \left|I_n-I\right|<\epsilon$.
+				            Let $b> N_0$. Choose $N$ s.t. $b \in [N,N+1)$.
+				            As $N_0 \le N$,
 				            \[
+					            \int_{0}^{b}{\sin{t^2}\mathrm{d}t}=I_n+ \int_{N}^{b}{\sin{t^2}\mathrm{d}t}\le \dfrac{1}{N}
+					            .\]
+				            Hence, \[
 					            \left|I-I_b\right| \le \left|I-I_N\right|+\dfrac{1}{N} <\dfrac{1}{N}+\dfrac{1}{N}= \dfrac{2}{N}\le \dfrac{2}{N_0} <2 \epsilon
 					            .\]
 				            \[
@@ -637,11 +640,17 @@
 			      \begin{proof}
 				      For $n\ge 0$, let $[A_n,B_{n}]=[2n\pi,(2n+1)\pi]$, and let $a_n^2=A_n,b_{n}^{2}=B_n$.\\
 				      Then $\int_{0}^{b_N}{\left|\sin{t^2}\right|\mathrm{d}t}\ge \sum_{n=0}^{N}{\int_{a_n}^{b_n}{\sin{t^2}\mathrm{d}t}}$.
-				      Now $\int_{a_n}^{b_n}{\sin{t^2}\mathrm{d}t}=\int_{A_n}^{B_n}{\sin{u}\cdot \dfrac{1}{2 \sqrt{u}}\mathrm{d}u}\ge \dfrac{1}{2 \sqrt{B_n}} \cdot  \int_{A_n}^{B_n}{\sin{u}\mathrm{d}u}=\dfrac{1}{\sqrt{B_n}}$.
+				      Now
 				      \[
-					      \therefore \int_{0}^{b_N}{\left|\sin{t^2}\right|\mathrm{d}t}\ge \sum_{n=0}^{N}{\dfrac{1}{\sqrt{(2n+1)\pi}}}\ge \dfrac{1}{\sqrt{\pi}}\cdot  \underbrace{\sum_{n=0}^{N}{\dfrac{1}{\sqrt{2n+1}}}}_{\to \infty \text{as} N\to \infty}
+					      \int_{a_n}^{b_n}{\sin{t^2}\mathrm{d}t}=\int_{A_n}^{B_n}{\sin{u}\cdot \dfrac{1}{2 \sqrt{u}}\mathrm{d}u}\ge \dfrac{1}{2 \sqrt{B_n}} \cdot  \int_{A_n}^{B_n}{\sin{u}\mathrm{d}u}=\dfrac{1}{\sqrt{B_n}}
 					      .\]
-				      Hence, $\int_{0}^{\infty}{\left|\sin{t^2}\right|\mathrm{d}t}=\infty$, diverges.
+				      \[
+					      \therefore \int_{0}^{b_N}{\left|\sin{t^2}\right|\mathrm{d}t}\ge \sum_{n=0}^{N}{\frac{1}{\sqrt{(2n+1)\pi}}}= \frac{1}{\sqrt{\pi}}\cdot  \underbrace{\sum_{n=0}^{N}{\frac{1}{\sqrt{2n+1}}}}_{\to \infty \text{ as } N\to \infty}
+					      .\]
+				      Hence,
+				      \[
+					      \int_{0}^{\infty}{\left|\sin{t^2}\right|\mathrm{d}t}=\infty
+					      .\]
 			      \end{proof}
 		\end{description}
 	\end{proof}

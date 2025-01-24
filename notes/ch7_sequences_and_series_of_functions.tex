@@ -1,0 +1,164 @@
+\chapter{Sequences and Series of Functions}
+\begin{example}
+	\label{eg:7.1}
+	Bad behaviour of limits
+	\begin{enumerate}[label=(\arabic*)]
+		\item For $m,n \in \N$, let $p_{m,n}=\frac{m}{n}$.
+		      Then
+		      \[
+			      \lim_{m\to \infty}{p_{m,n}}=\infty
+		      \]
+		      and
+		      \[
+			      \lim_{n\to \infty}{p_{m,n}}=0
+			      .\]
+		      Hence,
+		      \[
+			      \lim_{n\to \infty}{\underbrace{\lim_{m\to \infty}{p_{m,n}}}_{=\infty}}=\infty \neq \lim_{m\to \infty}{\underbrace{\lim_{n\to \infty}{p_{m,n}}}_{=0}}
+			      .\]
+		      This shows the order of limits matters.
+		\item Let
+		      \[
+			      f_n(x)=
+			      \begin{cases}
+				      1    & x\ge 0            \\
+				      1+nx & -\frac{1}{n}<x<0  \\
+				      0    & x\le -\frac{1}{n}
+			      \end{cases}
+			      .\]
+		      Then $f_n(x)$ is a continuous function.
+		      Then $\lim_{n\to \infty}{f_n(x)}= \begin{cases}
+				      1 & x\ge 0 \\
+				      0 & x<0
+			      \end{cases}$, which is not continuous at $0$.
+		      This shows that the limit of continuous functions need not be continuous.
+		      Moreover,
+		      \[
+			      \lim_{n\to \infty}{\underbrace{\lim_{x\to 0}{f_{n}(x)}}_{=1}}=1
+			      ,\]
+		      while
+		      \[
+			      \lim_{x\to 0}{\underbrace{\lim_{n\to \infty}{f_{n}(x)}}_{=f(x)}}
+		      \]
+		      does not exist. This shows again that the order of limits matters.
+		\item
+		      For $x \in [0,1]$, let \[
+			      f_n(x)= \begin{cases}
+				      1 & n!\cdot x \in \Z    \\
+				      0 & n!\cdot x \notin \Z \\
+			      \end{cases}
+			      .\]
+		      Each $f_n \in \mathscr{R}[0,1]$ by Theorem~\ref{thm:6.10}.
+		      However, \[
+			      f(x)=\lim_{n\to \infty}{f_n(x)}= \begin{cases}
+				      1 & x \in Q \cap [0,1]    \\
+				      0 & x \notin Q \cap [0,1]
+			      \end{cases}
+			      .\]
+		      Hence, $f(x)$ is nowhere continuous, and $f \notin \mathscr{R}[0,1]$.
+		\item
+		      Let \[
+			      f_n(x)= \begin{cases}
+				      0       & \left|x\right|\ge \frac{1}{n} \\
+				      n^2x +n & -\frac{1}{n}<x<0              \\
+				      -n^2x+n & 0<x<\frac{1}{n}               \\
+				      0       & x=0
+			      \end{cases}
+			      .\]
+		      Ten $f(x)=\lim_{n\to \infty}{f_n(x)}=0$ for all $x \in \R$.
+		      Moreover,
+		      \[
+			      \forall{n}: \int_{-1}^{1}{f_n(x)\mathrm{d}x}=1
+			      ,\]
+		      \[
+			      \int_{-1}^{1}{f(x)\mathrm{d}x}=0
+			      .\]
+		      Hence, $\lim_{n\to \infty}{\int_{-1}^{1}{f_n(x)\mathrm{d}x}}=1\neq  \int_{-1}^{1}{\left(\lim_{n\to \infty}{f_n(x)}\right) \mathrm{d}x}$
+		\item Let \[
+			      f_n(x)=\frac{\sin{nx}}{\sqrt{n}} \text{ for }  n \in \N, x \in \R
+			      .\]
+		      Let
+		      \[
+			      f(x)=\lim_{n\to \infty}{f_n(x)}=0
+			      ,\]
+		      so
+		      \[
+			      \forall{x \in \R}: f'(x)=0
+			      .\]
+		      However, \[
+			      f'_n(x)= \frac{n \cos{x}}{\sqrt{n}}=\sqrt{n} \cos{nx}
+			      .\]
+		      Therefore, $f_{n}'(\pi)=\sqrt{n}(-1)^{n}$ diverges as $n\to \infty$. Hence,
+		      \[
+			      \underbrace{f'(\pi)=\left(\lim_{n\to \infty}{f_n}\right)^{'}(\pi)}_{=0}\neq \underbrace{\lim_{n\to \infty}{f_n'(\pi)}}_{\text{DNE}}
+			      .\]
+	\end{enumerate}
+	These examples show bad behaviour under interchange of limits, which suggests the need of a stronger notion of convergence.
+\end{example}
+
+\begin{define}[7]
+	Let $E$ be any set and $f_n: E\to \R (\text{ or } \C) $ for $n \in \N$. Then $f_{n}$ converges uniformly to $f$ on $E$ if \[
+		\forall{\epsilon>0}: \exists{N} \text{ s.t. } \forall{n\ge N}: \forall{x \in E}: \left|f_{n}(x)-f(x)\right|<\epsilon
+		.\]
+\end{define}
+
+\begin{example}
+	\begin{enumerate}
+		\item
+		      Consider the example~\ref{eg:7.1}(2)
+		      \[
+			      f_n(x)=
+			      \begin{cases}
+				      1    & x\ge 0            \\
+				      1+nx & -\frac{1}{n}<x<0  \\
+				      0    & x\le -\frac{1}{n}
+			      \end{cases}
+			      ,\]
+		      \[
+			      f_n(x)-f(x)=	\begin{cases}
+				      1+nx & -\frac{1}{n}<x<0 \\
+				      0    & \text{otherwise}
+			      \end{cases}
+			      .\]
+		      In particular, $f_n(-\frac{1}{2n})-f(-\frac{1}{2n})=\frac{1}{2}$, so we cannot choose $N$ s.t. $n\ge N\implies \left|f_n(x)-f(x)\right|<\epsilon=\frac{1}{4}$ for all $x$.
+		      \[
+			      \therefore f_n \text{ does not converge uniformly to } f \text{ on } \R
+			      .\]
+		\item
+		      Consider the example~\ref{eg:7.1}(5).
+		      \[
+			      f(x)=\lim_{n\to \infty}{f_n(x)}=0
+			      ,\]
+		      \[
+			      \forall{x \in \R}: f'(x)=0
+			      .\]
+		      Then \[
+			      \left|f_n(x)-\underbrace{f(x)}_{=0}\right|=\left|\frac{\sin{nx}}{\sqrt{n}}\right|\le \frac{1}{\sqrt{n}}
+			      ,\]
+		      so $f_n\to f$ uniformly on $\R$.
+			      [Note: uniform convergence is not enough for $\lim_{n\to \infty}{f_n'}=(\lim_{n\to \infty}{f_n})'$.]
+	\end{enumerate}
+\end{example}
+
+\begin{thm}[8][Cauchy Criteria for Uniform Convergence]\\
+	$f_n$ converges uniformly to $f$ on $E$ if and only if \[
+		\forall{\epsilon>0}: \exists{N} \text{ s.t. } m,n\ge \N \implies \forall{x \in E}: \left|f_{n}(x)-f_{m}(x)\right|<\epsilon
+		.\]
+	That is, we can choose such $N$ independent of $x$.
+	\begin{proof}
+		\begin{description}
+			\item[$(\implies)$]
+			      Suppose $f_n$ converges uniformly to $f$ on $E$.
+			      Then \[
+				      \left|f_n(x)-f_m(x)\right|\le \left|f_n(x)-f(x)\right|+\left|f_m(x)-f(x)\right|
+				      .\]
+			      For $\epsilon>0$, choose $N$ s.t. $\forall{n\ge N}: \forall{x \in E}: \left|f_{n}(x)-f(x)\right|<\frac{\epsilon}{2}$.
+			      Then \[
+				      \forall{m,n\ge N}: \forall{x \in E}: \left|f_{n}(x)-f_{m}(x)\right|\le \left|f_{n}(x)-f(x)\right|+\left|f_{m}(x)-f(x)\right|<\epsilon
+				      .\]
+			\item[$(\impliedby)$]
+			      TODO: NEXT-WEEK
+		\end{description}
+	\end{proof}
+\end{thm}
+
