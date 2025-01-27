@@ -157,8 +157,74 @@
 				      \forall{m,n\ge N}: \forall{x \in E}: \left|f_{n}(x)-f_{m}(x)\right|\le \left|f_{n}(x)-f(x)\right|+\left|f_{m}(x)-f(x)\right|<\epsilon
 				      .\]
 			\item[$(\impliedby)$]
-			      TODO: NEXT-WEEK
+			      Let $x \in E$. $\{f_{n}(x)\}_{n \in \N}$ is a Cauchy sequence in $\C$, so has a limit $f(x)= \lim_{n\to \infty}{f_{n}(x)}$.
+			      To check uniformity, let $\epsilon>0$. We know that $\exists{N} \text{ s.t. } \left|f_{n}(x)-f_{m}(x)\right|<\epsilon$ if $n,m \ge N$ for all $x \in E$.
+			      Let $m\to \infty$. Then $\left|f_{n}(x)-f_{m}(x)\right|\le \epsilon$ if $n\ge N$ for all $x \in E$.
 		\end{description}
 	\end{proof}
 \end{thm}
+
+
+\begin{define}
+	$\sum_{n=1}^{\infty}{f_{n}(x)}$ converges uniformly on $E$ if $s_n(x)=\sum_{i=1}^{n}{f_{i}(x)}$	is a uniformly convergence sequence of functions.
+\end{define}
+
+
+\begin{thm}[10][Weierstass M test]
+	If $\left|f_{n}(x)\right| \le M_{n}$ for all $n \ge N_0$ and all $x \in E$ and if $\sum_{n=N_0}^{\infty}{M_n} < \infty$, then $\sum_{n=1}^{\infty}{f_{n}(x)}$ converges uniformly on $E$.
+	\begin{proof}
+		Let $s_{n}(x)=\sum_{i=1}^{n}{f_{i}(x)}$.
+		For $n>m\ge N_0$, \[
+			\forall{x \in E}:	\left|s_{n}(x)-s_{m}(x)\right| =\left|\sum_{i=m+1}^{n}{f_{i}(x)}\right| \le \sum_{i=m+1}^{n}{M_i}
+			.\]
+		Let $\epsilon>0$. Choose $N\ge N_0$ s.t. $\sum_{i=N+1}^{\infty}{M_i}<\epsilon$.
+		Then $\left|s_{n}(x)-s_{m}(x)\right| <\epsilon$ if $n>m\ge N$ for all $x \in E$. Hence, $s_{n}$ converges uniformly on $E$ by Theorem~\ref{thm:7.8}.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[11]
+	Let $E \subset X$ and $f_{n}: E \to \R (\text{ or } \C)$, $n \in \N$.
+	Suppose $f_{n}\to f$ uniformly on $E$. Let $x \in E'$ and suppose $\lim_{t\to x}{f_{n}(t)}=A_{n}$ exists for each $n$.
+	Then $A_{n}\to A$ for some $A$ and $\lim_{t\to x}{f(t)}=A$; i.e.,
+	\[
+		\lim_{t\to x}{\underbrace{\lim_{n\to \infty}{f_{n}(t)}}_{f(t)}}=\lim_{n\to \infty}{\underbrace{\lim_{t\to x}{f_{n}(t)}}_{A_n}}
+		.\]
+	\begin{proof}
+		\begin{describe}
+			\item[$A_n \to A$ for some A:]
+			It suffices to show that $\{A_{n}\}$ is a Cauchy sequence.
+			Given $\epsilon>0$, choose $N$ s.t. $m,n\ge N \implies \left|f_{m}(t)-f_{n}(t)\right| < \epsilon$ for all $t \in E$.
+			Let $t\to x$. $\left|A_{m}-A_{n}\right| < \epsilon$ if $m,n\ge N$. Therefore, $\{A_{n}\}$ is a Cauchy sequence.
+			\item[$f(t)\to A$ as $t\to x$:]
+			For $t \in E$ and $n \in \N$,
+			\begin{equation*}
+				\left|f(t)-A\right| \le \left|f(t)-f_{n}(t)\right| + \left|f_{n}(t)-A_n\right|  + \left|A_n -A\right| \tag{*}
+			\end{equation*}
+			Let $\epsilon>0$. Since $f_{n}\to f$ uniformly $\exists{N_1} \text{ s.t. } \left|f(t)-f_{n}(t)\right| <\frac{\epsilon}{3}$ if $n\ge N$ for all $t \in E$.
+			Since $A_{n}\to A$, $\exists{N_2} \text{ s.t. } \left|A_{n}-A\right| < \frac{\epsilon}{3}$ if $n\ge N_2$.
+			Let $N=\max\{N_1,N_2\}$ and use $n=N$ in (*).
+			Then
+			\[
+				\forall{t \in E}: \left|f(t)-A\right| \frac{\epsilon}{3}+\left|f_N(t)-A_N\right| +\frac{\epsilon}{3}
+				.\]
+			Since $\lim_{t\to x}{f_N(t)}=A_N$, we can choose $\delta>0$ s.t. $t \in N_{\delta}^{E}(x)\setminus \{x\}  \implies \left|f_N(t)-A_{N}\right| < \frac{\epsilon}{3}$.
+			Then $t \in N_{\delta}^{E}(x)\setminus \{x\}  \implies \left|f(t)-A\right|< \frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon$.
+		\end{describe}
+	\end{proof}
+\end{thm}
+\begin{Corollary}
+	If $f_{n}$ is continuous on $E$ and $f_{n}\to f$ uniformly on $E$, then $f$ is continuous on $E$.
+	\begin{proof}
+		Every function is continuous at an isolated point, so only need to consider $x \in E' \cap E$.\\
+		Then by Theorem~\ref{thm:7.11},
+		\begin{align*}
+			f(x) & =\lim_{n\to \infty}{f_{n}(x)}  = \lim_{n\to \infty}{\lim_{t\to x}{f_{n}(t)}} \;\;\;\hfill(\because f_{n} \text{ continuous}) \\
+			     & =\lim_{t\to x}{\lim_{n\to \infty}{f_{n}(t)}}=\lim_{t\to x}{f(t)}
+			.\end{align*}
+	\end{proof}
+
+	\begin{remark}
+		VERY IMPORTANT
+	\end{remark}
+\end{Corollary}
 
