@@ -393,11 +393,14 @@
 \makeatother
 
 \newlist{describe}{description}{1}
+% \setlist[description]{style=multiline}
 \setlist[describe,1]{%
-	font=\normalfont\textsf,
-	itemindent=0pt,
-	wide,
-	itemsep=0pt,topsep=2pt,
+	style=nextline,
+	font=\normalfont,
+	itemindent=2pt,
+	% wide,
+	topsep=2pt,
+	itemsep=2pt,
 }
 
 \setlist[enumerate,1]{label={(\alph*)}}

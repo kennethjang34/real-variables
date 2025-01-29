@@ -159,7 +159,7 @@
 			\item[$(\impliedby)$]
 			      Let $x \in E$. $\{f_{n}(x)\}_{n \in \N}$ is a Cauchy sequence in $\C$, so has a limit $f(x)= \lim_{n\to \infty}{f_{n}(x)}$.
 			      To check uniformity, let $\epsilon>0$. We know that $\exists{N} \text{ s.t. } \left|f_{n}(x)-f_{m}(x)\right|<\epsilon$ if $n,m \ge N$ for all $x \in E$.
-			      Let $m\to \infty$. Then $\left|f_{n}(x)-f_{m}(x)\right|\le \epsilon$ if $n\ge N$ for all $x \in E$.
+			      Let $m\to \infty$. Then $\left|f_{n}(x)-f(x)\right| \le \epsilon$ if $n\ge N$ for all $x \in E$.
 		\end{description}
 	\end{proof}
 \end{thm}
@@ -187,44 +187,171 @@
 	Suppose $f_{n}\to f$ uniformly on $E$. Let $x \in E'$ and suppose $\lim_{t\to x}{f_{n}(t)}=A_{n}$ exists for each $n$.
 	Then $A_{n}\to A$ for some $A$ and $\lim_{t\to x}{f(t)}=A$; i.e.,
 	\[
-		\lim_{t\to x}{\underbrace{\lim_{n\to \infty}{f_{n}(t)}}_{f(t)}}=\lim_{n\to \infty}{\underbrace{\lim_{t\to x}{f_{n}(t)}}_{A_n}}
+		\lim_{t\to x}{\underbrace{\lim_{n\to \infty}{f_{n}(t)}}_{f(t)}}=\lim_{n\to \infty}{\underbrace{\lim_{t\to x}{f_{n}(t)}}_{A_n}}=A
 		.\]
 	\begin{proof}
 		\begin{describe}
 			\item[$A_n \to A$ for some A:]
 			It suffices to show that $\{A_{n}\}$ is a Cauchy sequence.
-			Given $\epsilon>0$, choose $N$ s.t. $m,n\ge N \implies \left|f_{m}(t)-f_{n}(t)\right| < \epsilon$ for all $t \in E$.
-			Let $t\to x$. $\left|A_{m}-A_{n}\right| < \epsilon$ if $m,n\ge N$. Therefore, $\{A_{n}\}$ is a Cauchy sequence.
+			Since $f_n\to f$ uniformly on $E$, for any $\epsilon>0$, we can choose $N$ s.t. $m,n\ge N \implies \left|f_{m}(t)-f_{n}(t)\right| < \epsilon$ for all $t \in E$.
+			Let $t\to x$. $\left|A_{m}-A_{n}\right| < \epsilon$ if $m,n\ge N$. Therefore, $\{A_{n}\}$ is a Cauchy sequence and converges to some $A$ by completeness of $\R(\text{ or } \C)$.
 			\item[$f(t)\to A$ as $t\to x$:]
 			For $t \in E$ and $n \in \N$,
 			\begin{equation*}
 				\left|f(t)-A\right| \le \left|f(t)-f_{n}(t)\right| + \left|f_{n}(t)-A_n\right|  + \left|A_n -A\right| \tag{*}
 			\end{equation*}
-			Let $\epsilon>0$. Since $f_{n}\to f$ uniformly $\exists{N_1} \text{ s.t. } \left|f(t)-f_{n}(t)\right| <\frac{\epsilon}{3}$ if $n\ge N$ for all $t \in E$.
+			Let $\epsilon>0$. Since $f_{n}\to f$ uniformly $\exists{N_1} \text{ s.t. } \left|f(t)-f_{n}(t)\right| <\frac{\epsilon}{3}$ if $n\ge N_1$ for all $t \in E$.\\
 			Since $A_{n}\to A$, $\exists{N_2} \text{ s.t. } \left|A_{n}-A\right| < \frac{\epsilon}{3}$ if $n\ge N_2$.
+			\\
 			Let $N=\max\{N_1,N_2\}$ and use $n=N$ in (*).
 			Then
 			\[
-				\forall{t \in E}: \left|f(t)-A\right| \frac{\epsilon}{3}+\left|f_N(t)-A_N\right| +\frac{\epsilon}{3}
+				\forall{t \in E}: \left|f(t)-A\right|\le  \frac{\epsilon}{3}+\left|f_N(t)-A_N\right| +\frac{\epsilon}{3}
 				.\]
-			Since $\lim_{t\to x}{f_N(t)}=A_N$, we can choose $\delta>0$ s.t. $t \in N_{\delta}^{E}(x)\setminus \{x\}  \implies \left|f_N(t)-A_{N}\right| < \frac{\epsilon}{3}$.
-			Then $t \in N_{\delta}^{E}(x)\setminus \{x\}  \implies \left|f(t)-A\right|< \frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon$.
+			Since $\lim_{t\to x}{f_N(t)}=A_N$, there exists $\delta>0$ s.t. $t \in N_{\delta}^{E}(x)\setminus \{x\}  \implies \left|f_N(t)-A_{N}\right| < \frac{\epsilon}{3}$.
+			Then
+			\[
+				t \in N_{\delta}^{E}(x)\setminus \{x\}  \implies \left|f(t)-A\right|< \frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon
+			\]
+			Hence, $\lim_{t\to x}{f(t)}=A$.
 		\end{describe}
 	\end{proof}
 \end{thm}
 \begin{Corollary}
+	\label{cor:7.12}
 	If $f_{n}$ is continuous on $E$ and $f_{n}\to f$ uniformly on $E$, then $f$ is continuous on $E$.
 	\begin{proof}
 		Every function is continuous at an isolated point, so only need to consider $x \in E' \cap E$.\\
-		Then by Theorem~\ref{thm:7.11},
-		\begin{align*}
-			f(x) & =\lim_{n\to \infty}{f_{n}(x)}  = \lim_{n\to \infty}{\lim_{t\to x}{f_{n}(t)}} \;\;\;\hfill(\because f_{n} \text{ continuous}) \\
-			     & =\lim_{t\to x}{\lim_{n\to \infty}{f_{n}(t)}}=\lim_{t\to x}{f(t)}
-			.\end{align*}
+		\begin{flalign*}
+			f(x) & :=\lim_{n\to \infty}{f_{n}(x)}  = \lim_{n\to \infty}{\lim_{t\to x}{f_{n}(t)}} & (\because f_{n} \text{ continuous})      \\
+			     & =\lim_{t\to x}{\lim_{n\to \infty}{f_{n}(t)}}=\lim_{t\to x}{f(t)}              & (\because \text{Theorem~\ref{thm:7.11}})
+			.\end{flalign*}
 	\end{proof}
 
 	\begin{remark}
 		VERY IMPORTANT
 	\end{remark}
 \end{Corollary}
+
+\begin{thm}[13]
+	Suppose $K$ is compact and
+	\begin{enumerate}
+		\item $f_n$ is continuous on $K$ for all $n \in \N$
+		\item $f_{n}\to f$ pointwise on $K$ and $f$ is continuous on $K$
+		\item $f_{n}(x)\ge f_{n+1}(x)$ $\forall x \in K$, $\forall n \in \N$.
+	\end{enumerate}
+	Then $f_{n}\to f$ uniformly on $K$.
+	\begin{proof}
+		Let $g_{n}=f_{n}-f$. Then
+		\begin{enumerate}
+			\item $g_{n}$ is continuous on $K$ for all $n \in \N$
+			\item $g_{n}\to 0$ pointwise on $K$
+			\item $g_{n}(x)\ge g_{n+1}(x)$ $\forall x \in K$, $\forall n \in \N$.
+		\end{enumerate}
+		Goal: Prove $g_{n}\to 0$ uniformly on $K$; i.e., given $\epsilon>0$, $\exists{N}$ s.t. $\forall{n\ge N}: \forall{x \in K}: \left|g_{n}(x)\right|<\epsilon$.\\
+		For this, it suffices if $\exists{N} \text{ s.t. } g_N(x)<\epsilon$ for all $x \in K$.\\
+		Let $K_n=g_n^{-1}([\epsilon,\infty])$.\\
+		Then the goal becomes: find $N$ s.t. $K_{N}=\emptyset$, since this implies $K=K_N^{c}=g_{N}^{-1}([0,\epsilon])$.\\
+		Since $g_{n}$ is continuous, $K_{n}$ is closed and since $K_{n} \subset K$, $K_{n}$ is compact. Also $K_{n+1} \subset K_{n}$ because $g_{n+1}(x)\ge \epsilon \implies g_{n}(x)\ge \epsilon$.\\
+		Let $x \in K$. Since $g_{n}(x)\to 0$, $\exists{N_{x}} \text{ s.t. } \underbrace{x \not\in K_{N_x}}_{\because g_{n}(x)<\epsilon \text{ for large } n}$ for all $n \ge N_x$.
+		Hence, $x \not\in \bigcap_{n=1}^{\infty}K_n$.
+		$x$ is arbitrary, so $\bigcup_{n=1}^{\infty}K_n=\emptyset$.
+		By corollary to Theorem~\ref{thm:2.36}, this implies $\exists{N } \text{ s.t. } K_N=\emptyset$.
+	\end{proof}
+\end{thm}
+\begin{example}
+	Let \[
+		f_{n}(x)= \begin{cases}
+			1-nx & 0<x\le \frac{1}{n} \\
+			0    & \frac{1}{n}<x\le 1
+		\end{cases}
+		.\]
+	\begin{enumerate}
+		\item Let $K=(0,1]$ (not compact).
+		      $f_{n}(x)\to 0$ for all $x \in K$ so (a), (b), (c) all hold, but $f_{n}$ does not converge uniformly to zero function on $K$ as $K$ not compact.
+		      \begin{center}
+			      \begin{tikzpicture}
+				      \begin{axis}[
+						      axis lines = left,
+						      xlabel = $x$,
+						      ylabel = {$f_n(x)$},
+						      ymin=0,ymax=1.5,
+						      xmin=0,xmax=1.5,
+					      ]
+					      \addplot [
+						      domain=0:1,
+						      samples=100,
+						      color=blue,
+					      ]
+					      {1-x};
+					      \addlegendentry{$f_n(x)=1-nx$}
+					      \addplot [
+						      domain=0:1,
+						      samples=100,
+						      color=red,
+					      ]
+					      {0};
+					      \addlegendentry{$f_n(x)=0$}
+				      \end{axis}
+			      \end{tikzpicture}
+		      \end{center}
+		\item Let $K=[0,1]$ (compact).
+		      $f_{n}$ continuous, $f_{n}(x)\to 0$ for all $x \in K$ but not uniformly. Here, (a) and (b) hold, but (c) does not.
+	\end{enumerate}
+\end{example}
+\begin{define}[14]
+	For a metric space $X$,
+	let \[
+		\mathscr{C}(X)=\{f: X \to \C \text{ s.t. } f \text{ is continuous}\}
+		.\]
+	The supremum norm of $f \in \mathscr{C}(X)$ is defined by \[
+		\|f\|=\sup_{x \in X}\{\left|f(x)\right|\}
+		.\]
+	\begin{notation}
+		When $X=[a,b]$, often write $\|f\|_{\infty}$ instead of $\|f\|$ since $\lim_{p\to \infty}{\|f\|_p}= \|f\|_{\infty}$ (C.f A3-Q2).
+	\end{notation}
+\end{define}
+
+\begin{prop}
+	\[
+		d(f,g)= \|f-g\| \text{ defines a metric on } \mathscr{C}(X)
+		.\]
+	Proof:
+	\begin{enumerate}
+		\item {$d(f,g)=0 \iff \sup_{x \in X}\{\left|f(x)-g(x)\right| \}=0$ and hence $f(x)=g(x)$  $\forall x \in X$; i.e., $f=g$.}
+		\item {$d(f,g)=d(g,f)$}
+		\item {$d(f,g)\le d(f,h)+d(h,g)$ since $\forall{x \in X}: \left|f(x)-g(x)\right|\le \left|f(x)-h(x)\right|+ \left|h(x)-g(x)\right|\le \|f-h\|+ \|h-g\|$. Hence, $\|f-g\|\le \|f-h\|+\|h-g\|$.}
+	\end{enumerate}
+	As a consequence, $f_{n}\to f$ uniformly on $X$ if and only if $f_{n}\to f$ in the metric space $(\mathscr{C}(X),\|\cdot\|)$.
+	Proof:	\begin{flalign*}
+		\text{LHS} & \Leftrightarrow  \forall{\epsilon > 0}: \exists{N} \text{ s.t. } \left|f_{n}(x)-f(x)\right|<\epsilon  \text{ if $n\ge N$ for all $x \in X$}. \\
+		           & \Leftrightarrow \forall{\epsilon > 0}: \exists N \text{ s.t. }  \|f_{n}-f\|<\epsilon \text{ if } n\ge N                                      \\
+		           & \Leftrightarrow f_{n}\to f \text{ in } (\mathscr{C}(X),\|\cdot\|)
+		.\end{flalign*}
+\end{prop}
+
+\begin{thm}[15]
+	$\mathscr{C}$ is a complete metric space.
+	\begin{proof}
+		Let $\{f_{n}\} $ be a Cauchy sequence in $\mathscr{C}(X)$; i.e., \[
+			\forall{\epsilon > 0}: \exists N \text{ s.t. } n,m\ge N \implies \|f_{m}-f_{n}\| <\epsilon
+			.\]
+		By Cauchy criterion (Theorem~\ref{thm:7.8}), $f_{n}\to f$ uniformly for some $f$.\\
+		Now it is sufficient to check that $f \in \mathscr{C}(X)$.\\
+		By Cor~\ref{cor:7.12}, $f$ is continuous.
+		Also, $f$ is bounded since $\exists{N_0} \text{ s.t. } \left|f(x)-f_{N_0}(x)\right| <1$ for all $x \in X$.
+		Then \[
+			\left|f(x)\right| \le \left|f_{N_0}(x)\right| +\left|f(x)-f_{N_0}(x)\right| \le \underbrace{M_0+1}_{\text{bound for $f_{N_0}$}} \text{ for all } x \in X
+			.\]
+		$\therefore f \in \mathscr{C}(X)$.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[16]
+	Suppose $f_{n} \in \mathscr{R}_{\alpha}[a,b]$ for $n \in \N$ and $f_{n}\to f$ uniformly on $[a,b]$.
+	Then $f \in \mathscr{R}_{\alpha}[a,b]$ and \[
+		\int_{a}^{b}{f\mathrm{d}\alpha}=\lim_{n\to \infty}{\int_{a}^{b}{f_{n}\mathrm{d}\alpha}}
+		.\]
+\end{thm}
+
 
