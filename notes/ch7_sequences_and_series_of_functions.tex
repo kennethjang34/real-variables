@@ -250,53 +250,86 @@
 		\end{enumerate}
 		Goal: Prove $g_{n}\to 0$ uniformly on $K$; i.e., given $\epsilon>0$, $\exists{N}$ s.t. $\forall{n\ge N}: \forall{x \in K}: \left|g_{n}(x)\right|<\epsilon$.\\
 		For this, it suffices if $\exists{N} \text{ s.t. } g_N(x)<\epsilon$ for all $x \in K$.\\
-		Let $K_n=g_n^{-1}([\epsilon,\infty])$.\\
-		Then the goal becomes: find $N$ s.t. $K_{N}=\emptyset$, since this implies $K=K_N^{c}=g_{N}^{-1}([0,\epsilon])$.\\
-		Since $g_{n}$ is continuous, $K_{n}$ is closed and since $K_{n} \subset K$, $K_{n}$ is compact. Also $K_{n+1} \subset K_{n}$ because $g_{n+1}(x)\ge \epsilon \implies g_{n}(x)\ge \epsilon$.\\
-		Let $x \in K$. Since $g_{n}(x)\to 0$, $\exists{N_{x}} \text{ s.t. } \underbrace{x \not\in K_{N_x}}_{\because g_{n}(x)<\epsilon \text{ for large } n}$ for all $n \ge N_x$.
+		Let $K_n=g_n^{-1}([\epsilon,\infty))$.\\
+		Then the goal becomes: find $N$ s.t. $K_{N}=\emptyset$, since this implies $\left(K_N\right)^{c}=g_{N}^{-1}([0,\epsilon))=K$; i.e., $\forall{x \in K}: g_N(x)<\epsilon$.\\
+		Since $g_{n}$ is continuous, $K_{n}$ is closed by Theorem~\ref{thm:4.8}.\\
+		Since $K_{n} \subset K$, $K_{n}$ is compact. Also $K_{n+1} \subset K_{n}$ because $g_{n+1}(x)\ge \epsilon \implies g_{n}(x)\ge \epsilon$.\\
+		Let $x \in K$. Since $g_{n}(x)\to 0$, $\exists{N_{x}} \text{ s.t. } \underbrace{x \not\in K_{N_x}=g_{N_x}^{-1}([\epsilon,\infty))}_{\because g_{n}(x)<\epsilon \text{ for large } n}$ for all $n \ge N_x$.
 		Hence, $x \not\in \bigcap_{n=1}^{\infty}K_n$.
-		$x$ is arbitrary, so $\bigcup_{n=1}^{\infty}K_n=\emptyset$.
+		$x$ is arbitrary, so $\bigcap_{n=1}^{\infty}K_n=\emptyset$.
 		By corollary to Theorem~\ref{thm:2.36}, this implies $\exists{N } \text{ s.t. } K_N=\emptyset$.
 	\end{proof}
 \end{thm}
 \begin{example}
-	Let \[
-		f_{n}(x)= \begin{cases}
-			1-nx & 0<x\le \frac{1}{n} \\
-			0    & \frac{1}{n}<x\le 1
-		\end{cases}
-		.\]
 	\begin{enumerate}
 		\item Let $K=(0,1]$ (not compact).
+		      Let \[
+			      f_{n}(x)= \begin{cases}
+				      1-nx & 0<x\le \frac{1}{n} \\
+				      0    & \frac{1}{n}<x\le 1
+			      \end{cases}
+			      .\]
 		      $f_{n}(x)\to 0$ for all $x \in K$ so (a), (b), (c) all hold, but $f_{n}$ does not converge uniformly to zero function on $K$ as $K$ not compact.
 		      \begin{center}
-			      \begin{tikzpicture}
-				      \begin{axis}[
-						      axis lines = left,
-						      xlabel = $x$,
-						      ylabel = {$f_n(x)$},
-						      ymin=0,ymax=1.5,
-						      xmin=0,xmax=1.5,
-					      ]
-					      \addplot [
-						      domain=0:1,
-						      samples=100,
-						      color=blue,
-					      ]
-					      {1-x};
-					      \addlegendentry{$f_n(x)=1-nx$}
-					      \addplot [
-						      domain=0:1,
-						      samples=100,
-						      color=red,
-					      ]
-					      {0};
-					      \addlegendentry{$f_n(x)=0$}
-				      \end{axis}
+			      \begin{tikzpicture}[scale=5]
+				      \def\n{2} % Adjust n here (e.g., n=1, 2, 3,...)
+				      \pgfmathsetmacro{\xend}{1/\n} % Spike ends at x = 1/n
+
+				      % Axes
+				      \draw[->] (-0.1,0) -- (1.1,0) node[right] {$x$};
+				      \draw[->] (0,-0.1) -- (0,1.1) node[above] {$f_n(x)$};
+
+				      % Plot f_n(x) with open circle at x=0
+				      \draw[thick, blue]
+				      (0,1) --
+				      (\xend,0) --
+				      (1,0);
+
+				      % Dashed line for critical point
+				      \draw[dashed, gray]
+				      (\xend,0) node[below, black] {$\frac{1}{n}$} -- (\xend,1);
+
+				      % Labels
+				      \node[below] at (0.5, -0.15) {$K = (0, 1]$};
+				      % \node[blue, right] at (0.5, 0) {$f_n(x) \to 0$ pointwise};
+				      % \node[blue, right] at (0.5, -0.2) {but not uniformly};
 			      \end{tikzpicture}
 		      \end{center}
 		\item Let $K=[0,1]$ (compact).
+		      Let \[
+			      f_n(x)= \begin{cases}
+				      2nx    & 0\le x\le \frac{1}{2n}           \\
+				      -2nx+2 & \frac{1}{2n}\le x\le \frac{1}{n} \\
+				      0      & \frac{1}{n}<x\le 1
+			      \end{cases}
+			      .\]
 		      $f_{n}$ continuous, $f_{n}(x)\to 0$ for all $x \in K$ but not uniformly. Here, (a) and (b) hold, but (c) does not.
+		      \begin{center}
+			      \begin{tikzpicture}[scale=5]
+				      \def\n{2} % Adjust n here (e.g., n=1, 2, 3,...)
+				      \pgfmathsetmacro{\xpeak}{1/(2*\n)} % Peak at x = 1/(2n)
+				      \pgfmathsetmacro{\xend}{1/\n}      % Spike ends at x = 1/n
+
+				      % Axes
+				      \draw[->] (-0.1,0) -- (1.1,0) node[right] {$x$};
+				      \draw[->] (0,-0.1) -- (0,1.1) node[above] {$f_n(x)$};
+
+				      % Plot f_n(x)
+				      \draw[thick, blue]
+				      (0,0) --
+				      (\xpeak,1) --
+				      (\xend,0) --
+				      (1,0);
+
+				      % Dotted lines for critical points
+				      \draw[dashed, gray]
+				      (\xpeak,0) node[below, black] {$\frac{1}{2n}$} -- (\xpeak,1)
+				      (\xend,0) node[below, black] {$\frac{1}{n}$} -- (\xend,0);
+
+				      % Label the compact interval
+				      \node[below] at (0.5, -0.15) {$K = [0, 1]$};
+			      \end{tikzpicture}
+		      \end{center}
 	\end{enumerate}
 \end{example}
 \begin{define}[14]
@@ -316,7 +349,6 @@
 	\[
 		d(f,g)= \|f-g\| \text{ defines a metric on } \mathscr{C}(X)
 		.\]
-	Proof:
 	\begin{enumerate}
 		\item {$d(f,g)=0 \iff \sup_{x \in X}\{\left|f(x)-g(x)\right| \}=0$ and hence $f(x)=g(x)$  $\forall x \in X$; i.e., $f=g$.}
 		\item {$d(f,g)=d(g,f)$}
@@ -341,7 +373,7 @@
 		By Cor~\ref{cor:7.12}, $f$ is continuous.
 		Also, $f$ is bounded since $\exists{N_0} \text{ s.t. } \left|f(x)-f_{N_0}(x)\right| <1$ for all $x \in X$.
 		Then \[
-			\left|f(x)\right| \le \left|f_{N_0}(x)\right| +\left|f(x)-f_{N_0}(x)\right| \le \underbrace{M_0+1}_{\text{bound for $f_{N_0}$}} \text{ for all } x \in X
+			\left|f(x)\right| \le \left|f_{N_0}(x)\right| +\left|f(x)-f_{N_0}(x)\right| \le \underbrace{M_0}_{\text{bound for $f_{N_0}$}}+1 \text{ for all } x \in X
 			.\]
 		$\therefore f \in \mathscr{C}(X)$.
 	\end{proof}
@@ -352,6 +384,127 @@
 	Then $f \in \mathscr{R}_{\alpha}[a,b]$ and \[
 		\int_{a}^{b}{f\mathrm{d}\alpha}=\lim_{n\to \infty}{\int_{a}^{b}{f_{n}\mathrm{d}\alpha}}
 		.\]
+	\begin{proof}
+		First, we prove $f \in \mathscr{R}_{\alpha}[a,b]$; i.e., \[
+			\overline{\int_{a}^{b}}{f\mathrm{d}\alpha}=\underline{\int_{a}^{b}}{f\mathrm{d}\alpha}.\]
+		Let $\epsilon>0$. Since $f_{n}\to f$ uniformly on $[a,b]$, $\exists{N}$ s.t. \[
+			n\ge N \implies  \forall{x \in [a,b]}: f_{n}(x)-\epsilon<f(x)<f_{n}(x)+\epsilon.\]
+		Hence,\[
+			\underline{\int_{a}^{b}}{(f_{n}-\epsilon)\mathrm{d}\alpha} \le \underline{\int_{a}^{b}}{f\mathrm{d}\alpha}\le \overline{\int_{a}^{b}}{f\mathrm{d}\alpha}\le \overline{\int_{a}^{b}}{(f_{n}+\epsilon)\mathrm{d}\alpha}.\]
+		Therefore,
+		\[\overline{\int_{a}^{b}}{f\mathrm{d}\alpha}-\underline{\int_{a}^{b}}{f\mathrm{d}\alpha}\le \int_{a}^{b}{2 \epsilon\mathrm{d}\alpha}=2 \epsilon \left[ \alpha(b)-\alpha(a) \right].\]
+		As $\epsilon$ arbitrary, this implies \[
+			\overline{\int_{a}^{b}}{f\mathrm{d}\alpha}=\underline{\int_{a}^{b}}{f\mathrm{d}\alpha},\]
+		so $f \in \mathscr{R}_{\alpha}[a,b]$.
+		\\
+		Since \[
+			\int_{a}^{b}{f\mathrm{d}\alpha}-\int_{a}^{b}{f_{n}\mathrm{d}\alpha}= \int_{a}^{b}{f-f_n\mathrm{d}\alpha}\le {\int_{a}^{b}}{\underbrace{\left|f-f_{n}\right|}_{\small<\epsilon \text{ for all } x \text{ if } n\ge N } \mathrm{d}\alpha}\le \epsilon \int_{a}^{b}{\mathrm{d}\alpha}=\epsilon \left[ \alpha(b)-\alpha(a) \right]
+			,\]
+		We have
+		\[
+			\lim_{n\to \infty}{\int_{a}^{b}{f_{n}\mathrm{d}\alpha}}=\int_{a}^{b}{f\mathrm{d}\alpha}
+			.\]
+	\end{proof}
 \end{thm}
 
+\begin{corollary}
+	If $f_{n} \in \mathscr{R}_{\alpha}[a,b]$ and $f(x)=\sum_{n=1}^{\infty}{f_{n}(x)}$ converges uniformly on $[a,b]$ then \[
+		\int_{a}^{b}{f\mathrm{d}\alpha}=\sum_{n=1}^{\infty}{\int_{a}^{b}{f_{n}\mathrm{d}\alpha}}
+		.\]
+	\begin{proof}
+		Let $s_{n}(x)=\sum_{i=1}^{n}{f_{i}(x)}$. Then $s_{n}\to f$ uniformly so \[
+			\int_{a}^{b}{f\mathrm{d}\alpha}=\lim_{n\to \infty}{\int_{a}^{b}{s_{n}\mathrm{d}\alpha}}=\lim_{n\to \infty}{\sum_{i=1}^{n}{\int_{a}^{b}{f_{i}\mathrm{d}\alpha}}}=\sum_{i=1}^{\infty}{\int_{a}^{b}{f_{i}\mathrm{d}\alpha}}
+			.\]
+	\end{proof}
+	\begin{note}
+		Recall the example $f_{n}(x)=\frac{\sin{nx}}{\sqrt{n}}$, $f_{n}\to 0$ uniformly on $\R$, but $f_{n}'(x)$ does not converge.
+	\end{note}
+\end{corollary}
+\begin{notation}
+	For $a,b$, $\int_{b}^{a}{f\mathrm{d}\alpha}=-\int_{a}^{b}{f\mathrm{d}\alpha}$.
+\end{notation}
+\begin{thm}[17]
+	Suppose
+	\begin{enumerate}
+		\item $f_{n}$ is differentiable on $[a,b]$.
+		\item $\exists{x_0 \in [a,b]} \text{ s.t. } f_{n}(x_0)$ converges, say to $L_0$, as $n\to \infty$.
+		\item $f_{n}'$ converges uniformly on $[a,b]$.
+	\end{enumerate}
+	Then $\exists f \text{ s.t. } f_{n}\to f$ uniformly on $[a,b]$ and $\lim_{n\to \infty}{f_{n}'(x)}=f'(x)$ for all $x \in [a,b]$.
+	\begin{remark}
+		\begin{enumerate}[label=\arabic*.]
+			\item The hypothesis (b) is needed. E.g., $f_{n}(x)=n$ obeys hypotheses (a),(c), but the conclusion of the theorem fails as it fails (b).
+			      We can assume $f_{n}(x)\to 0$ by replacing $f_{n}$ by $f_{n}-L_0$.
+			\item We add a hypothesis (d) to make the proof simpler: $f_n'$ is continuous on $[a,b]$ for all $n \in \N$
+		\end{enumerate}
+	\end{remark}
+	\begin{proof}[With hypothesis (d) added]
+		\begin{enumerate}[label=\arabic*.]
+			\item By (c), $\exists{g} \text{ s.t. } f'_{n}\to g$ uniformly on $[a,b]$, and hence on any subintervals of $[a,b]$.
+			      By (d), $g$ is continuous.
+			\item By Theorem~\ref{thm:7.16} (applied to $[x,x_0]$ or $[x_0,x]$ in $[a,b]$),
+			      \[
+				      (\pm) \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}\to \int_{x_0}^{x}{g(t)\mathrm{d}t}\underbrace{=}_{\text{by defn. of } f(x)}f(x)
+				      .\]
+			      By Theorem~\ref{thm:ftc}, this implies
+			      \begin{flalign*}
+				      \left[ f_{n}(x)-f_{n}(x_0) \right] & \to f(x) \\
+				      f'(x)                              & =g(x)
+				      .\end{flalign*}
+			      As $L_0=0$, for all $x \in [a,b]$,
+			      \begin{align*}
+				      f_{n}(x)  & \to f(x)        \\
+				      f'_{n}(x) & \to g(x)=f'(x).
+			      \end{align*}
+			\item It remains to prove that $f_{n}\to f$ uniformly on $[a,b]$:
+			      Let $\epsilon>0$.
+			      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|<\frac{\epsilon}{2}$.\\
+			      By (c), $\exists{N_1} \text{ s.t. } n\ge N_1 \implies \left|f'_{n}(x)-g(x)\right|<\frac{\epsilon}{2(b-a)}$ for all $x \in [a,b]$.\\
+			      Let $N=\max\{N_0,N_1\}$.
+			      Then $N$ is independent of $x$. \\
+			      For $n\ge N$,
+			      \begin{flalign*}
+				      \forall{x \in [a,b]}: \left|f(x)-f_{n}(x)\right| & =\left|\int_{x_0}^{x}{g(t)\mathrm{d}t}-\left(\int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}+f_{n}(x_0)\right) \right|                                                                 \\
+				                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x)\right|                                                                          \\
+				                                                       & < \left|\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t}\right| + \left|\frac{\epsilon}{2}\right|=\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t} + \frac{\epsilon}{2} \\
+				                                                       & =\frac{\epsilon}{2(b-a)}\cdot (b-a)+\frac{\epsilon}{2}=\epsilon.
+			      \end{flalign*}
+			      % Let $N=\max\{N_0,N_1\}$.
+		\end{enumerate}
+	\end{proof}
+\end{thm}
 
+\begin{thm}[18]
+	There exists continuous function $f: \R\to \R$ s.t. for all $x \in \R$, $f'(x)$ does not exist.
+	\begin{proof}
+		Let \[
+			\phi: \R\to \R \text{ by } \phi(x)=\begin{cases}
+				\left|x\right|    & \left|x\right| \le 1 \\
+				\phi(x)=\phi(x-2) & \text{otherwise}
+			\end{cases}
+			.\]
+		\begin{center}
+			\begin{tikzpicture}
+				\begin{axis}[
+						axis lines=middle,
+						xlabel={$x$},
+						ylabel={$\phi(x)$},
+						xtick={-2, -1, 0, 1, 2},
+						xticklabels={$-2$, $-1$, $0$, $1$, $2$},
+						ytick={0, 1},
+						yticklabels={$0$, $1$},
+						ymin=0,
+						ymax=1.5,
+						xmin=-4,
+						xmax=4,
+					]
+					\addplot[domain=-1:1, samples=100, color=blue]{abs(x)};
+					\addplot[domain=1:3, samples=100, color=blue]{abs(x-2)};
+					\addplot[domain=-3:-1, samples=100, color=blue]{abs(x+2)};
+				\end{axis}
+			\end{tikzpicture}
+		\end{center}
+		Then $\phi$ is continuous on $\R$, and in fact, $\left|\phi(x)-\phi(y)\right|\le \left|x-y\right|$ for all $x,y \in \R$ (Lipschitz bound).
+		Let $f(x)=\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}\phi(4^{n}x)}$
+	\end{proof}
+\end{thm}

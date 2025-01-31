@@ -194,7 +194,7 @@
 \declaretheorem[style=thmbox, numbered=no, name=Corollary]{corollary*}
 \declaretheorem[style=thmbox, numbered=yes, name=Corollary,sibling=theorem]{Corollary}
 \declaretheorem[style=thmbox, numbered=yes, name=Corollary,sibling=theorem]{corollary}
-\declaretheorem[style=thmproofbox, name=Proof]{replacementproof}
+\declaretheorem[style=thmproofbox, name=Proof, numbered=no]{replacementproof}
 
 \newenvironment{define}[1][]{
 \def\argI{#1}
@@ -349,7 +349,6 @@
 }
 \declaretheorem[style=thmbox, numbered=yes, name=Theorem, sibling=theorem]{inner}
 \declaretheorem[style=thmbox, numbered=no, name=Theorem]{inner*}
-
 
 \newenvironment{thm}[1][]{
 \ifstrempty{#1}
