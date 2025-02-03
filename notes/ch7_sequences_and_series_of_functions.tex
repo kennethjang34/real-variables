@@ -1,4 +1,5 @@
 \chapter{Sequences and Series of Functions}
+\allowdisplaybreaks
 \begin{example}
 	\label{eg:7.1}
 	Bad behaviour of limits
@@ -407,7 +408,7 @@
 	\end{proof}
 \end{thm}
 
-\begin{corollary}
+\begin{corollary*}
 	If $f_{n} \in \mathscr{R}_{\alpha}[a,b]$ and $f(x)=\sum_{n=1}^{\infty}{f_{n}(x)}$ converges uniformly on $[a,b]$ then \[
 		\int_{a}^{b}{f\mathrm{d}\alpha}=\sum_{n=1}^{\infty}{\int_{a}^{b}{f_{n}\mathrm{d}\alpha}}
 		.\]
@@ -419,7 +420,7 @@
 	\begin{note}
 		Recall the example $f_{n}(x)=\frac{\sin{nx}}{\sqrt{n}}$, $f_{n}\to 0$ uniformly on $\R$, but $f_{n}'(x)$ does not converge.
 	\end{note}
-\end{corollary}
+\end{corollary*}
 \begin{notation}
 	For $a,b$, $\int_{b}^{a}{f\mathrm{d}\alpha}=-\int_{a}^{b}{f\mathrm{d}\alpha}$.
 \end{notation}
@@ -438,73 +439,168 @@
 			\item We add a hypothesis (d) to make the proof simpler: $f_n'$ is continuous on $[a,b]$ for all $n \in \N$
 		\end{enumerate}
 	\end{remark}
-	\begin{proof}[With hypothesis (d) added]
-		\begin{enumerate}[label=\arabic*.]
-			\item By (c), $\exists{g} \text{ s.t. } f'_{n}\to g$ uniformly on $[a,b]$, and hence on any subintervals of $[a,b]$.
-			      By (d), $g$ is continuous.
-			\item By Theorem~\ref{thm:7.16} (applied to $[x,x_0]$ or $[x_0,x]$ in $[a,b]$),
-			      \[
-				      (\pm) \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}\to \int_{x_0}^{x}{g(t)\mathrm{d}t}\underbrace{=}_{\text{by defn. of } f(x)}f(x)
-				      .\]
-			      By Theorem~\ref{thm:ftc}, this implies
-			      \begin{flalign*}
-				      \left[ f_{n}(x)-f_{n}(x_0) \right] & \to f(x) \\
-				      f'(x)                              & =g(x)
-				      .\end{flalign*}
-			      As $L_0=0$, for all $x \in [a,b]$,
-			      \begin{align*}
-				      f_{n}(x)  & \to f(x)        \\
-				      f'_{n}(x) & \to g(x)=f'(x).
-			      \end{align*}
-			\item It remains to prove that $f_{n}\to f$ uniformly on $[a,b]$:
-			      Let $\epsilon>0$.
-			      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|<\frac{\epsilon}{2}$.\\
-			      By (c), $\exists{N_1} \text{ s.t. } n\ge N_1 \implies \left|f'_{n}(x)-g(x)\right|<\frac{\epsilon}{2(b-a)}$ for all $x \in [a,b]$.\\
-			      Let $N=\max\{N_0,N_1\}$.
-			      Then $N$ is independent of $x$. \\
-			      For $n\ge N$,
-			      \begin{flalign*}
-				      \forall{x \in [a,b]}: \left|f(x)-f_{n}(x)\right| & =\left|\int_{x_0}^{x}{g(t)\mathrm{d}t}-\left(\int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}+f_{n}(x_0)\right) \right|                                                                 \\
-				                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x)\right|                                                                          \\
-				                                                       & < \left|\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t}\right| + \left|\frac{\epsilon}{2}\right|=\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t} + \frac{\epsilon}{2} \\
-				                                                       & =\frac{\epsilon}{2(b-a)}\cdot (b-a)+\frac{\epsilon}{2}=\epsilon.
-			      \end{flalign*}
-			      % Let $N=\max\{N_0,N_1\}$.
-		\end{enumerate}
-	\end{proof}
 \end{thm}
+\begin{proof}[Theorem~\ref{thm:7.17}][With hypothesis (d) added]
+	\begin{enumerate}[label=\arabic*.]
+		\item By (c), $\exists{g} \text{ s.t. } f'_{n}\to g$ uniformly on $[a,b]$, and hence on any subintervals of $[a,b]$.
+		      By (d), $g$ is continuous.
+		\item By Theorem~\ref{thm:7.16} (applied to $[x,x_0]$ or $[x_0,x]$ in $[a,b]$),
+		      \[
+			      (\pm) \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}\to \int_{x_0}^{x}{g(t)\mathrm{d}t}\underbrace{=}_{\text{by defn. of } f(x)}f(x)
+			      .\]
+		      By Theorem~\ref{thm:ftc}, this implies
+		      \begin{flalign*}
+			      \left[ f_{n}(x)-f_{n}(x_0) \right] & \to f(x) \\
+			      f'(x)                              & =g(x)
+			      .\end{flalign*}
+		      As $L_0=0$, for all $x \in [a,b]$,
+		      \begin{align*}
+			      f_{n}(x)  & \to f(x)        \\
+			      f'_{n}(x) & \to g(x)=f'(x).
+		      \end{align*}
+		\item It remains to prove that $f_{n}\to f$ uniformly on $[a,b]$:
+		      Let $\epsilon>0$.
+		      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|<\frac{\epsilon}{2}$.\\
+		      By (c), $\exists{N_1} \text{ s.t. } n\ge N_1 \implies \left|f'_{n}(x)-g(x)\right|<\frac{\epsilon}{2(b-a)}$ for all $x \in [a,b]$.\\
+		      Let $N=\max\{N_0,N_1\}$.
+		      Then $N$ is independent of $x$. \\
+		      For $n\ge N$,
+		      \begin{flalign*}
+			      \forall{x \in [a,b]}: \left|f(x)-f_{n}(x)\right| & =\left|\int_{x_0}^{x}{g(t)\mathrm{d}t}-\left(\int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}+f_{n}(x_0)\right) \right|                                                                 \\
+			                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x)\right|                                                                          \\
+			                                                       & < \left|\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t}\right| + \left|\frac{\epsilon}{2}\right|=\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t} + \frac{\epsilon}{2} \\
+			                                                       & =\frac{\epsilon}{2(b-a)}\cdot (b-a)+\frac{\epsilon}{2}=\epsilon.
+		      \end{flalign*}
+		      % Let $N=\max\{N_0,N_1\}$.
+	\end{enumerate}
+\end{proof}
 
 \begin{thm}[18]
-	There exists continuous function $f: \R\to \R$ s.t. for all $x \in \R$, $f'(x)$ does not exist.
-	\begin{proof}
-		Let \[
-			\phi: \R\to \R \text{ by } \phi(x)=\begin{cases}
-				\left|x\right|    & \left|x\right| \le 1 \\
-				\phi(x)=\phi(x-2) & \text{otherwise}
-			\end{cases}
-			.\]
-		\begin{center}
-			\begin{tikzpicture}
-				\begin{axis}[
-						axis lines=middle,
-						xlabel={$x$},
-						ylabel={$\phi(x)$},
-						xtick={-2, -1, 0, 1, 2},
-						xticklabels={$-2$, $-1$, $0$, $1$, $2$},
-						ytick={0, 1},
-						yticklabels={$0$, $1$},
-						ymin=0,
-						ymax=1.5,
-						xmin=-4,
-						xmax=4,
-					]
-					\addplot[domain=-1:1, samples=100, color=blue]{abs(x)};
-					\addplot[domain=1:3, samples=100, color=blue]{abs(x-2)};
-					\addplot[domain=-3:-1, samples=100, color=blue]{abs(x+2)};
-				\end{axis}
-			\end{tikzpicture}
-		\end{center}
-		Then $\phi$ is continuous on $\R$, and in fact, $\left|\phi(x)-\phi(y)\right|\le \left|x-y\right|$ for all $x,y \in \R$ (Lipschitz bound).
-		Let $f(x)=\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}\phi(4^{n}x)}$
-	\end{proof}
+	There exists a continuous function $f: \R\to \R$ s.t. for all $x \in \R$, $f'(x)$ does not exist.
 \end{thm}
+\begin{proof}[Theorem~\ref{thm:7.18}]
+	Let \[
+		\phi: \R\to \R \text{ by } \phi(x)=\begin{cases}
+			\left|x\right|    & \left|x\right| \le 1 \\
+			\phi(x)=\phi(x-2) & \text{otherwise}
+		\end{cases}
+		.\]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					axis lines=middle,
+					xlabel={$x$},
+					ylabel={$\phi(x)$},
+					xtick={-2, -1, 0, 1, 2},
+					xticklabels={$-2$, $-1$, $0$, $1$, $2$},
+					ytick={0, 1},
+					yticklabels={$0$, $1$},
+					ymin=0,
+					ymax=1.5,
+					xmin=-4,
+					xmax=4,
+				]
+				\addplot[domain=-1:1, samples=100, color=blue]{abs(x)};
+				\addplot[domain=1:3, samples=100, color=blue]{abs(x-2)};
+				\addplot[domain=-3:-1, samples=100, color=blue]{abs(x+2)};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	Then $\phi$ is continuous on $\R$, and in fact, $\left|\phi(x)-\phi(y)\right|\le \left|x-y\right|$ for all $x,y \in \R$ (Lipschitz bound).\\
+	Let
+	\begin{flalign*}
+		f_n(x) & =\sum_{k=0}^{n}{{\left(\frac{3}{4}\right)}^{n}\phi(4^{n}x)}                                \\
+		f(x)   & = \lim_{n\to \infty}{f_n(x)}=\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}\phi(4^{n}x)}
+		.\end{flalign*}
+	Then the series $f(x)$ converges uniformly on $\R$ by the Weierstrass M-test (Theorem~\ref{thm:7.10}) since $\left|\left(\frac{3}{4}\right)^{n}\phi(4^{n}x)\right|\le \left(\frac{3}{4}\right)^{n}$ and $\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}}<\infty$.\\
+	Also, $f$ is continuous on $\R$ by Corollary~\ref{cor:7.12}.\\
+	Claim: $f'(x)$ does not exist for any $x \in \R$.\\
+	It suffices to show that for $x \in \R$, there exists $\delta_m\to 0$  s.t. \[
+		\left|\underbrace{\frac{f(x+\delta_m)-f(x)}{\delta_m}}_{= \sum_{n=0}^{\infty}{{\frac{3}{4}}^{n}\gamma_n}, \gamma_n= \frac{\phi(4^{n}(x+\delta_m))-\phi(4^{n}x)}{\delta_m}}\right| \to  \infty \text{ as } m\to \infty
+		.\]
+	Note
+	\[
+		4^m \left( x + \delta_m \right) = 4^m x - \frac{1}{2}
+		,\]
+	\[
+		4^m \left( x + 1 - \delta_m \right) = 4^m x + \frac{1}{2}
+		.\]
+	Choose $\delta_m=\pm \frac{1}{2} \cdot 4^{-m}$ with sign chosen (depending on $x$) so that there is no integer between $4^m x$ and $4^m (x+\delta_m)$.\\
+	\begin{center}
+		\begin{tikzpicture}[thick, scale=1.5]
+			% Draw the number line
+			\draw[->] (-2.5, 0) -- (2.5, 0);
+
+			% Draw the intervals and points
+			\draw[-] (0, -0.1) -- (0, 0.1);
+			\node[below] at (0, -0.1) {\(4^m x\)};
+
+			\draw[-] (-2, -0.1) -- (-2, 0.1);
+			\node[below] at (-2, -0.1) {\(\underbrace{4^m (x - \left|\delta_m\right|)}_{=4^{m}x-\frac{1}{2}}\)};
+
+			\draw[-] (2, -0.1) -- (2, 0.1);
+			\node[below] at (2, -0.1) {\(\underbrace{4^m (x + \left|\delta_m)\right|}_{=4^{m}x+\frac{1}{2}}\)};
+
+			\node[above, red] at (0, 0.2) {\(1\)};
+
+			\draw[<-, red] (-2, 0.2) -- (0, 0.2);
+			\draw[->, red] (0, 0.2) -- (2, 0.2);
+		\end{tikzpicture}
+	\end{center}
+	Then $\gamma_n=0$ if $n\neq m$ and $\gamma_m=\frac{\phi(4^{m}(x+4^{-m}))- \phi(4^{m}x)}{4^{-m}}$.
+	In particular, \[
+		\left|\phi(4^{m}(x+\delta_m))-\phi(4^{m}x)\right| =\left|4^{m} \delta_m\right| =\frac{1}{2}
+		.\]
+	If $n>m$, then \[
+		\phi(4^{n}(x+\delta_m))-\phi(4^{m}x)=\phi(4^{n}x \pm \underbrace{4^{n}\cdot \frac{1}{2}\cdot \frac{1}{4^{m}}}_{\text{even integer}})-\phi(4^{m}x)=0
+		.\]
+	Hence, $\gamma_n=0$ for $n>m$.\\
+	Since $\phi(x)-\phi(y)\le \left|x-y\right| $, for $n\le m$,
+	\[
+		\gamma_n\le  \frac{1}{\left|\delta_m\right|} \cdot \left|4^{m}\delta_m\right| =4^{m}
+		.\]
+	In fact, $\left|\gamma_m\right| =\frac{1}{\left|\delta_m\right| }\cdot \frac{1}{2}=4^{m}$.\\
+	Therefore,
+	\begin{flalign*}
+		\left|\frac{f(x+\delta_m)-f(x)}{\delta_m}\right| & = \left|\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}\gamma_n} \right|
+		=\left|\sum_{n=0}^{m}{\left(\frac{3}{4}\right)^{n} \gamma_n}\right|                                                                                                             \\
+		                                                 & \ge \left(\frac{3}{4}\right)^{m} \left|\gamma_m\right| -\sum_{n=0}^{m-1}{\left(\frac{3}{4}\right)^{n} \left|\gamma_n\right|} \\ & \ge \left(\frac{3}{4}\right)^{m} \cdot 4^{m}-\sum_{n=0}^{m-1}{\left(\frac{3}{4}\right)^{n}4^{n}} \\
+		                                                 & =3^{m}-\frac{3^{m}-1}{3-1}=\frac{1}{2}(3^{m}+1)\to \infty \text{ as } m\to \infty
+		.\end{flalign*}
+\end{proof}
+\begin{define}[Equicontinuity]
+	A family $\mathscr{F}$ of functions on $E$ is equicontinuous if $\forall{\epsilon > 0}: \exists{\delta > 0} \text{ s.t. } f \in  \mathscr{F}; x,y \in E; d(x,y)<\delta\implies  \left|f(x)-f(y)\right| < \epsilon$.
+	\begin{remark}
+		\begin{enumerate}
+			\item If $\mathscr{F}$ is equicontinuous, then every ${f \in  \mathscr{F}}$ is uniformly continuous on $E$.
+			\item Any finite set of uniformly continuous functions is equicontinuous.
+		\end{enumerate}
+	\end{remark}
+	\begin{example}
+		Let $\mathscr{F}=\{f_1,f_2,\ldots \}$, where $f_n(x)=\frac{\sin{nx}}{\sqrt{n}}$, $x \in E=[0,1]$. We have seen $f_n\to 0$ uniformly on $E$.\\
+		Claim $\mathscr{F}$ is equicontinuous.\\
+		Let $\epsilon>0$. Choose $N$ s.t. $\frac{2}{\sqrt{n}}<\epsilon$ for all $n\ge N$.\\
+		Since $\{f_1,f_2,\ldots f_{N-1}\}$ is a finite set of uniformly continuous functions, it is equicontinuous.\\
+		Hence, $\exists{\delta>0} \text{ s.t. } n<N \text{ and } \left|x-y\right| <\delta\implies \left|f_n(x)-f_n(y)\right| <\epsilon$.\\
+		Therefore, $n \in \N$ and $\left|x-y\right| < \delta \implies \left|f_n(x)-f_n(y)<\right| \epsilon$.
+	\end{example}
+\end{define}
+
+\begin{problem}[7.16]
+Let $\{f_n\}$ be an equicontinuous sequence of functions $f_n:K\to \C$, where $K$ is compact.\\
+Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to f$ uniformly on $K$.
+\begin{proof}
+	We use $\frac{\epsilon}{3}$ argument.\\
+	Let $\epsilon>0$. $\exists{\delta > 0} \text{ s.t. } \left|f_n(x)-f_n(y)\right| <\frac{\epsilon}{3}$ for all $x,y \in K$ s.t. $d(x,y)<\delta$ and $n \in \N$.\\
+	Since $K$ is compact, the open cover $\{N_{\delta}(x)\}_{x \in K}$ has a finite subcover $\{N_{\delta}(x_1),\ldots,N_{\delta}(x_k)\}$.\\
+	Thus, given any $x \in K$, $\exists j \text{ s.t. } d(x,x_j)<\delta$. Then,
+	\begin{flalign*}
+		\left|f_n(x)-f_m(x)\right| & \le \underbrace{\left|f_n(x)-f_n(x_j)\right|}_{<\frac{\epsilon}{3}} +\left|f_n(x_j)-f_m(x_j)\right| +\underbrace{\left|f_m(x_j)-f_m(x)\right|}_{<\frac{\epsilon}{3}}
+		.\end{flalign*}
+	For each $i=1,\ldots ,k$, we know $\{f_n(x_i)\}_n$ is a convergent sequence, so it's a Cauchy sequence. Hence, $\exists{N_i} \text{ s.t. } m,n\ge N_i\implies \left|f_m(x_i)-f_n(x_i)\right|<\frac{\epsilon}{3}$.\\
+	Let $N=\max\{N_1,N_2,\ldots ,N_k\} $. Then \[
+		m,n\ge N\implies \left|f_m(x)-f_n(x)\right| <\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3} =\epsilon
+		.\]
+	Therefore, $f_{n}\to f$ uniformly on $K$.
+\end{proof}
+\end{problem}

@@ -2,9 +2,14 @@
 \renewcommand\qedsymbol{Q.E.D.}
 \usepackage{enumitem}
 \makeatletter
+\usepackage{needspace}
 \usepackage{listings}
 \usepackage{xstring}
+\usepackage{environ}
 \usepackage{framed}
+\usepackage{sectsty}
+\allsectionsfont{\sloppy}
+% \allsubseciontsfont{\raggedbottom}
 
 % \colorlet{shadecolor}{lightgray!25}
 
@@ -119,7 +124,8 @@
 	mdframed={
 			thmbox=2pt,
 			rightline=false, topline=false, bottomline=false,
-			% linecolor=NavyBlue, backgroundcolor=NavyBlue!5,
+			linecolor=NavyBlue,
+			% backgroundcolor=NavyBlue!5,
 		}
 ]{thmbluebox}
 
@@ -142,16 +148,6 @@
 		}
 ]{thmredbox}
 
-\declaretheoremstyle[
-	headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
-	numbered=no,
-	mdframed={
-			linewidth=2pt,
-			rightline=false, topline=false, bottomline=false,
-			% linecolor=RawSienna, backgroundcolor=RawSienna!1,
-		},
-	qed=\qedsymbol\space
-]{thmproofbox}
 
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily\color{NavyBlue!70!black}, bodyfont=\normalfont,
@@ -159,7 +155,8 @@
 	mdframed={
 			linewidth=2pt,
 			rightline=false, topline=false, bottomline=false,
-			% linecolor=NavyBlue, backgroundcolor=NavyBlue!1,
+			linecolor=NavyBlue,
+			% backgroundcolor=NavyBlue!1,
 		},
 ]{thmexplanationbox}
 
@@ -171,6 +168,17 @@
 			rightline=false, topline=false, bottomline=false,
 		}
 ]{thmbox}
+\declaretheoremstyle[
+	headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+	numbered=no,
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=RawSienna,
+			%backgroundcolor=RawSienna!1,
+		},
+	qed=\qedsymbol\space
+]{thmproofbox}
 
 
 % \declaretheoremstyle[headfont=\bfseries\sffamily, bodyfont=\normalfont, mdframed={ nobreak } ]{thmgreenbox}
@@ -238,7 +246,6 @@
 {
 	\begin{replacementproof}[#1]
 		}}{\end{replacementproof}}
-
 
 \renewenvironment{theorem}[1][]{
 \ifstrempty{#1}
@@ -433,3 +440,4 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \setlength{\jot}{10pt}
+\raggedbottom
