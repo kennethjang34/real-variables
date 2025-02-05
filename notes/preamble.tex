@@ -1,6 +1,7 @@
 \usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb, thmtools}
 \renewcommand\qedsymbol{Q.E.D.}
 \usepackage{enumitem}
+\usepackage{changepage}
 \makeatletter
 \usepackage{needspace}
 \usepackage{listings}
@@ -29,6 +30,7 @@
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{afterpage}
 \usepackage{parskip}
 \usepackage{emptypage}
 \usepackage{subcaption}
@@ -105,18 +107,21 @@
 \makeatother
 \usepackage{thmtools}
 \usepackage[framemethod=TikZ]{mdframed}
-\mdfsetup{skipabove=1em,skipbelow=0em}
+% \usepackage{mdframed}
+% \mdfsetup{skipabove=1em,skipbelow=0em}
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
 
 
 \theoremstyle{definition}
 
 \declaretheoremstyle[
 	headfont=\bfseries\sffamily\color{ForestGreen!70!black}, bodyfont=\normalfont,
-	mdframed={
-			linewidth=2pt,
-			rightline=false, topline=false, bottomline=false,
-			% linecolor=ForestGreen, backgroundcolor=ForestGreen!5,
-		}
+	% mdframed={
+	% 		linewidth=2pt,
+	% 		rightline=false, topline=false, bottomline=false,
+	% 		linecolor=ForestGreen,
+	% 		% backgroundcolor=ForestGreen!5,
+	% 	}
 ]{thmgreenbox}
 
 \declaretheoremstyle[
@@ -175,6 +180,7 @@
 			linewidth=2pt,
 			rightline=false, topline=false, bottomline=false,
 			linecolor=RawSienna,
+			nobreak=false,
 			%backgroundcolor=RawSienna!1,
 		},
 	qed=\qedsymbol\space
@@ -226,6 +232,9 @@
 			}
 			{\end{definition*}}
 }
+
+
+%%%
 %
 % \newenvironment{define}[1][]{
 % \ifstrempty{#1}
@@ -328,9 +337,25 @@
 
 % notes
 \usepackage{todonotes}
-\usepackage{tcolorbox}
-
+\usepackage[most]{tcolorbox}
+% \usepackage{keytheorems}
+\tcbuselibrary{theorems}
 \tcbuselibrary{breakable}
+% \tcbset{
+% 	defstyle/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
+% 			arc=0mm, colback=blue!5!white,colframe=blue!75!black},
+% 	theostyle/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
+% 			colback=red!10!white,colframe=red!75!black},
+% }
+% \newtcbtheorem[number within=section,crefname={define}{definitions}]%
+% {define}{define}{defstyle}{def}
+% \newtheorem{definition}{Definition}
+% \newenvironment{define}[1]{\begin{tcolorboxenvironment}{definition}
+% 		}{\end{tcolorboxenvironment}}
+% \newtcbtheorem[number within=section,crefname={define}{define}]%
+% {Definition}{define}{defstyle}{def}
+
+
 \newenvironment{verbetering}{\begin{tcolorbox}[
 			arc=0mm,
 			colback=white,
@@ -357,6 +382,22 @@
 \declaretheorem[style=thmbox, numbered=yes, name=Theorem, sibling=theorem]{inner}
 \declaretheorem[style=thmbox, numbered=no, name=Theorem]{inner*}
 
+
+
+% \newkeytheoremstyle{boxthm}
+% {
+% 	headfont=\bfseries\sffamily\color{RawSienna!70!black}, bodyfont=\normalfont,
+% numbered=no,
+% mdframed={
+% 		linewidth=2pt,
+% 		rightline=false, topline=false, bottomline=false,
+% 		linecolor=RawSienna,
+% 		nobreak=false,
+% 		%backgroundcolor=RawSienna!1,
+% 	},
+% 	qed=\qedsymbol\space
+% 	tcolorbox
+% }
 \newenvironment{thm}[1][]{
 \ifstrempty{#1}
 {

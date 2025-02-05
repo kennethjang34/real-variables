@@ -439,42 +439,40 @@
 			\item We add a hypothesis (d) to make the proof simpler: $f_n'$ is continuous on $[a,b]$ for all $n \in \N$
 		\end{enumerate}
 	\end{remark}
+	\begin{proof}[With hypothesis (d) added]
+		\begin{enumerate}[label=\arabic*.]
+			\item By (c), $\exists{g} \text{ s.t. } f'_{n}\to g$ uniformly on $[a,b]$, and hence on any subintervals of $[a,b]$.
+			      By (d), $g$ is continuous.
+			\item By Theorem~\ref{thm:7.16} (applied to $[x,x_0]$ or $[x_0,x]$ in $[a,b]$),
+			      \[
+				      (\pm) \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}\to \int_{x_0}^{x}{g(t)\mathrm{d}t}\underbrace{=}_{\text{by defn. of } f(x)}f(x)
+				      .\]
+			      By Theorem~\ref{thm:ftc}, this implies
+			      \begin{flalign*}
+				      \left[ f_{n}(x)-f_{n}(x_0) \right] & \to f(x) \\
+				      f'(x)                              & =g(x)
+				      .\end{flalign*}
+			      As $L_0=0$, for all $x \in [a,b]$,
+			      \begin{align*}
+				      f_{n}(x)  & \to f(x)        \\
+				      f'_{n}(x) & \to g(x)=f'(x).
+			      \end{align*}
+			\item It remains to prove that $f_{n}\to f$ uniformly on $[a,b]$:
+			      Let $\epsilon>0$.
+			      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|<\frac{\epsilon}{2}$.\\
+			      By (c), $\exists{N_1} \text{ s.t. } n\ge N_1 \implies \left|f'_{n}(x)-g(x)\right|<\frac{\epsilon}{2(b-a)}$ for all $x \in [a,b]$.\\
+			      Let $N=\max\{N_0,N_1\}$.
+			      Then $N$ is independent of $x$. \\
+			      For $n\ge N$,
+			      \begin{flalign*}
+				      \forall{x \in [a,b]}: \left|f(x)-f_{n}(x)\right| & =\left|\int_{x_0}^{x}{g(t)\mathrm{d}t}-\left(\int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}+f_{n}(x_0)\right) \right|                                                                 \\
+				                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x)\right|                                                                          \\
+				                                                       & < \left|\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t}\right| + \left|\frac{\epsilon}{2}\right|=\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t} + \frac{\epsilon}{2} \\
+				                                                       & =\frac{\epsilon}{2(b-a)}\cdot (b-a)+\frac{\epsilon}{2}=\epsilon.
+			      \end{flalign*}
+		\end{enumerate}
+	\end{proof}
 \end{thm}
-\begin{proof}[Theorem~\ref{thm:7.17}][With hypothesis (d) added]
-	\begin{enumerate}[label=\arabic*.]
-		\item By (c), $\exists{g} \text{ s.t. } f'_{n}\to g$ uniformly on $[a,b]$, and hence on any subintervals of $[a,b]$.
-		      By (d), $g$ is continuous.
-		\item By Theorem~\ref{thm:7.16} (applied to $[x,x_0]$ or $[x_0,x]$ in $[a,b]$),
-		      \[
-			      (\pm) \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}\to \int_{x_0}^{x}{g(t)\mathrm{d}t}\underbrace{=}_{\text{by defn. of } f(x)}f(x)
-			      .\]
-		      By Theorem~\ref{thm:ftc}, this implies
-		      \begin{flalign*}
-			      \left[ f_{n}(x)-f_{n}(x_0) \right] & \to f(x) \\
-			      f'(x)                              & =g(x)
-			      .\end{flalign*}
-		      As $L_0=0$, for all $x \in [a,b]$,
-		      \begin{align*}
-			      f_{n}(x)  & \to f(x)        \\
-			      f'_{n}(x) & \to g(x)=f'(x).
-		      \end{align*}
-		\item It remains to prove that $f_{n}\to f$ uniformly on $[a,b]$:
-		      Let $\epsilon>0$.
-		      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|<\frac{\epsilon}{2}$.\\
-		      By (c), $\exists{N_1} \text{ s.t. } n\ge N_1 \implies \left|f'_{n}(x)-g(x)\right|<\frac{\epsilon}{2(b-a)}$ for all $x \in [a,b]$.\\
-		      Let $N=\max\{N_0,N_1\}$.
-		      Then $N$ is independent of $x$. \\
-		      For $n\ge N$,
-		      \begin{flalign*}
-			      \forall{x \in [a,b]}: \left|f(x)-f_{n}(x)\right| & =\left|\int_{x_0}^{x}{g(t)\mathrm{d}t}-\left(\int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}+f_{n}(x_0)\right) \right|                                                                 \\
-			                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x)\right|                                                                          \\
-			                                                       & < \left|\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t}\right| + \left|\frac{\epsilon}{2}\right|=\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t} + \frac{\epsilon}{2} \\
-			                                                       & =\frac{\epsilon}{2(b-a)}\cdot (b-a)+\frac{\epsilon}{2}=\epsilon.
-		      \end{flalign*}
-		      % Let $N=\max\{N_0,N_1\}$.
-	\end{enumerate}
-\end{proof}
-
 \begin{thm}[18]
 	There exists a continuous function $f: \R\to \R$ s.t. for all $x \in \R$, $f'(x)$ does not exist.
 \end{thm}
@@ -513,6 +511,7 @@
 		f(x)   & = \lim_{n\to \infty}{f_n(x)}=\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}\phi(4^{n}x)}
 		.\end{flalign*}
 	Then the series $f(x)$ converges uniformly on $\R$ by the Weierstrass M-test (Theorem~\ref{thm:7.10}) since $\left|\left(\frac{3}{4}\right)^{n}\phi(4^{n}x)\right|\le \left(\frac{3}{4}\right)^{n}$ and $\sum_{n=0}^{\infty}{\left(\frac{3}{4}\right)^{n}}<\infty$.\\
+
 	Also, $f$ is continuous on $\R$ by Corollary~\ref{cor:7.12}.\\
 	Claim: $f'(x)$ does not exist for any $x \in \R$.\\
 	It suffices to show that for $x \in \R$, there exists $\delta_m\to 0$  s.t. \[
@@ -539,7 +538,7 @@
 			\node[below] at (-2, -0.1) {\(\underbrace{4^m (x - \left|\delta_m\right|)}_{=4^{m}x-\frac{1}{2}}\)};
 
 			\draw[-] (2, -0.1) -- (2, 0.1);
-			\node[below] at (2, -0.1) {\(\underbrace{4^m (x + \left|\delta_m)\right|}_{=4^{m}x+\frac{1}{2}}\)};
+			\node[below] at (2, -0.1) {\(\underbrace{4^m (x + \left|\delta_m\right|)}_{=4^{m}x+\frac{1}{2}}\)};
 
 			\node[above, red] at (0, 0.2) {\(1\)};
 
@@ -604,3 +603,92 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 	Therefore, $f_{n}\to f$ uniformly on $K$.
 \end{proof}
 \end{problem}
+
+
+\begin{thm}[24]
+	If $f_{n}: K\to \C$ are continuous and $K$ is compact and $f_{n}\to f$ uniformly on $K$, then $\{f_{n}\}$ is equicontinuous.
+	\begin{proof}
+		(Using $\frac{\epsilon}{3}$ argument)\\
+		Let $\epsilon>0$. Since $f_{n}\to f$ uniformly, $\exists{N} \text{ s.t. } $ $m,n\ge N \implies \left|f_{m}(x)-f_{n}(x)\right|<\frac{\epsilon}{3}$  for all $x \in K$. Since $K$ is compact, each $f_{n}$ is uniformly continuous.
+		Hence, $\{f_1,\ldots ,f_{N}\} $ is equicontinuous, so $\exists{\delta >0} \text{ s.t. } \left|f_{i}(x)-f_{i}(y)\right| <\frac{\epsilon}{3}$ if $d(x,y)<\delta$ for all $i \in \{1,2,\ldots ,N\}$.\\
+		For $n\ge N$,
+		\[
+			\left| f_{n}(x)-f_{n}(y)\right| \le \underbrace{\left|f_{n}(x)-f_{N}(x)\right|} _{<\frac{\epsilon}{3}}+ \underbrace{\left|f_N(x)-f_N(y)\right|}_{<\frac{\epsilon}{3} \text{ if } d(x,y)<\delta}+\underbrace{\left|f_N(y)-f_n(y)\right|}_{<\frac{\epsilon}{3}}<\epsilon \text{ if } d(x,y)<\delta
+			.\]
+	\end{proof}
+\end{thm}
+
+\begin{example}
+	Let \[
+		f_{n}(x)=\begin{cases}
+			2nx    & 0\le x< \frac{1}{2n}           \\
+			-2nx+2 & \frac{1}{2n}\le x< \frac{1}{n} \\
+			0      & \frac{1}{n}\le x\le 1
+		\end{cases}
+		.\]
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+					axis lines=middle,
+					xlabel={$x$},
+					ylabel={$y=f_n(x)$},
+					xtick={0, 0.5, 1},
+					xticklabels={$0$, $\frac{1}{2n}$, $\frac{1}{n}$},
+					ytick={0, 1},
+					yticklabels={$0$, $1$},
+					ymin=0,
+					ymax=1.5,
+					xmin=-0.1,
+					xmax=2,
+				]
+				\addplot[domain=0:0.5, samples=100, color=blue]{2*x};
+				\addplot[domain=0.5:1, samples=100, color=blue]{-2*x+2};
+				\addplot[domain=1:1.8, samples=100, color=blue]{0};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	$\{f_{n}\}$ obeys $\left|f_{n}(x)\right| \le 1$ for all $ n \in \N, x \in [0,1]$. It is not equicontinuous because $\left|f_{n}(\frac{1}{2n})-f_{n}(0)\right|=1-0=1$ for all $n$. Also, no subsequence of $\{f_{n}\} $ can converge uniformly since $f_{n}(\frac{1}{2n})=1$ whereas $\lim_{n\to \infty}{f_{n}(x)}=0$ for all $x \in [0,1]$.
+\end{example}
+
+\begin{define}[7.19]
+	\label{def:7.19}
+	\begin{enumerate}
+		\item $\{f_{n}\}$ is pointwise bounded on $E$ if $\exists{\phi : E\to \R} \text{ s.t. } \left|f_{n}(x)\right| \underbrace{<}_{\text{can be replaced by }\le \text{, but Rudin uses strict inequality}} \phi(x) $ for all $n \in \N, x \in E$.
+		\item $\{f_{n}\}$ is uniformly bounded on $E$ if $\exists{M>0} \text{ s.t. } \left|f_{n}(x)\right|<M$ for all $n \in \N, x \in E$.
+	\end{enumerate}
+\end{define}
+
+\begin{example}
+	Let \[
+		f_{n}(x)=\frac{1}{x}+\frac{1}{n}, n \in \N, x \in E=(0,1].
+		.\]
+	Then $f_n(x)$ is pointwise bounded on $E$ since $\left|f_{n}(x)\right|<\frac{1}{x}+2$ for all $n \in \N, x \in E$.\\
+	However, $\{f_{n}\}$ is not uniformly bounded on $E$ since $f_{n}(x)>\frac{1}{x}$ and $\frac{1}{x\to \infty}$ as $x\to 0^{+}$.
+\end{example}
+
+\begin{thm}[23][Selection Theorem]
+	Suppose $E$ is a countable set and $f_{n}:E\to \C$ is pointwise bounded.
+	Then there exists $\{f_{n_k}\}$ of $\{ {f}_{n}\} $ which is pointwise convergent on $E$; i.e., \[
+		\lim_{k\to \infty}{\{ {f}_{n_{k}}(x)\}} \text{exists for all } x \in E
+		.\]
+	\begin{proof}
+		(Using diagonal argument)\\
+		Let $E=\{x_1,x_2,x_3,\ldots \}$.
+		$\{{f}_{n}(x_1)\}_{n}$ is bounded, so $\exists{\text{subsequence }\{f_{1,k}\}} \text{ s.t. } \lim_{k\to \infty}{f_{1,k}(x_1)}$ exists by Weierstrass theorem~\ref{thm:2.42}.\\
+		Successive subsequences can be constructed as follows:\\
+		\begin{flalign*}
+			S_1 & : f_{1,1},f_{1,2},f_{1,3},f_{1,4},\ldots \text{ converges on $x_1$}          \\
+			S_2 & : f_{2,1},f_{2,2},f_{3,3},f_{4,4},\ldots \text{ converges on $x_1, x_2$}     \\
+			S_3 & : f_{3,1},f_{3,2},f_{3,3},f_{3,4},\ldots \text{ converges on $x_1, x_2,x_3$} \\
+			    & \vdots                                                                       \\.
+		\end{flalign*}
+		Form diagonal subsequence $S: f_{1,1}, f_{2,2}, f_{3,3}, f_{4,4}, \ldots $.
+		Then $S$ is eventually a subsequence of each $S_j$, so it converges on $x_1,x_2,x_3,\ldots ,x_j$. This is true for all $j$, so $\{f_{n,n}(x_i)\}_n $ converges for each $x_{i} \in E$.
+	\end{proof}
+\end{thm}
+
+\begin{lemma}
+	If $K$ is compact then $K$ has a countable dense subset $E \subset K$; i.e., $\exists{E \subset  K} \text{ s.t. } \overline{E}=K$, or $\forall{p \in K}: \forall{r>0}: \exists{x\in E} \text{ s.t. } d(p,x)<r$.
+	(I.e., $K$ is separable. See Problem 2.25)
+\end{lemma}
+
