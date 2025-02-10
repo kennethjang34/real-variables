@@ -623,11 +623,11 @@
 					            Therefore, $\exists{ I \in \R} \text{ s.t. } I_n\to I$ as $n\to \infty$.
 				            \end{proof}
 
-				      \item Let $\epsilon>0$. Choose $N_0>\dfrac{1}{\epsilon}$, so that $N\ge N_0\implies \left|I_n-I\right|<\epsilon$.
+				      \item Let $\epsilon>0$. Choose $N_0>\dfrac{1}{\epsilon}$, so that $N\ge N_0\implies \left|I_N-I\right|<\epsilon$.
 				            Let $b> N_0$. Choose $N$ s.t. $b \in [N,N+1)$.
-				            As $N_0 \le N$,
+				            As $N_0 \le N$
 				            \[
-					            \int_{0}^{b}{\sin{t^2}\mathrm{d}t}=I_n+ \int_{N}^{b}{\sin{t^2}\mathrm{d}t}\le \dfrac{1}{N}
+					            I_b=\int_{0}^{b}{\sin{t^2}\mathrm{d}t}=I_N+ \int_{N}^{b}{\sin{t^2}\mathrm{d}t}\le I_N+\dfrac{1}{N}
 					            .\]
 				            Hence, \[
 					            \left|I-I_b\right| \le \left|I-I_N\right|+\dfrac{1}{N} <\dfrac{1}{N}+\dfrac{1}{N}= \dfrac{2}{N}\le \dfrac{2}{N_0} <2 \epsilon

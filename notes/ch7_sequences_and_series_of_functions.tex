@@ -447,26 +447,35 @@
 			      \[
 				      (\pm) \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}\to \int_{x_0}^{x}{g(t)\mathrm{d}t}\underbrace{=}_{\text{by defn. of } f(x)}f(x)
 				      .\]
-			      By Theorem~\ref{thm:ftc}, this implies
+			      By Theorem~\ref{thm:ftc},
+			      \begin{flalign*}
+				      \int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t} & =f_{n}(x)-f_{n}(x_0) \\
+				      \int_{x_0}^{x}{g(t)\mathrm{d}t}      & =f(x)-f(x_0)
+				      .\end{flalign*}
+			      Hence,
 			      \begin{flalign*}
 				      \left[ f_{n}(x)-f_{n}(x_0) \right] & \to f(x) \\
-				      f'(x)                              & =g(x)
+				      g(x)                               & =f'(x)
 				      .\end{flalign*}
-			      As $L_0=0$, for all $x \in [a,b]$,
+			      Note we assume $f_{n}(x_0)\to 0$.\\
+			      Then for all $x \in [a,b]$,
 			      \begin{align*}
-				      f_{n}(x)  & \to f(x)        \\
-				      f'_{n}(x) & \to g(x)=f'(x).
+				      f_{n}(x)-f_n(x_0) & \to f(x)-0=f(x).
 			      \end{align*}
+			      Therefore,
+			      \[
+				      f'_{n}(x)         \to g(x)=f'(x).
+				      .\]
 			\item It remains to prove that $f_{n}\to f$ uniformly on $[a,b]$:
 			      Let $\epsilon>0$.
-			      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|<\frac{\epsilon}{2}$.\\
+			      By (b), $\exists{N_0} \text{ s.t. } n\ge N_0 \implies \left|f_{n}(x_0)-L_0\right|=\left|f_{n}(x_0)\right|<\frac{\epsilon}{2}$.\\
 			      By (c), $\exists{N_1} \text{ s.t. } n\ge N_1 \implies \left|f'_{n}(x)-g(x)\right|<\frac{\epsilon}{2(b-a)}$ for all $x \in [a,b]$.\\
 			      Let $N=\max\{N_0,N_1\}$.
 			      Then $N$ is independent of $x$. \\
 			      For $n\ge N$,
 			      \begin{flalign*}
 				      \forall{x \in [a,b]}: \left|f(x)-f_{n}(x)\right| & =\left|\int_{x_0}^{x}{g(t)\mathrm{d}t}-\left(\int_{x_0}^{x}{f'_{n}(t)\mathrm{d}t}+f_{n}(x_0)\right) \right|                                                                 \\
-				                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x)\right|                                                                          \\
+				                                                       & \le  \left|\int_{x_0}^{x}{\left[ g(t)-f'_{n}(t) \right] \mathrm{d}t}\right|+ \left|f_{n}(x_0)\right|                                                                        \\
 				                                                       & < \left|\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t}\right| + \left|\frac{\epsilon}{2}\right|=\int_{x_0}^{x}{\frac{\epsilon}{2(b-a)}\mathrm{d}t} + \frac{\epsilon}{2} \\
 				                                                       & =\frac{\epsilon}{2(b-a)}\cdot (b-a)+\frac{\epsilon}{2}=\epsilon.
 			      \end{flalign*}
@@ -653,7 +662,8 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 \begin{define}[7.19]
 	\label{def:7.19}
 	\begin{enumerate}
-		\item $\{f_{n}\}$ is pointwise bounded on $E$ if $\exists{\phi : E\to \R} \text{ s.t. } \left|f_{n}(x)\right| \underbrace{<}_{\text{can be replaced by }\le \text{, but Rudin uses strict inequality}} \phi(x) $ for all $n \in \N, x \in E$.
+		\item $\{f_{n}\}$ is pointwise bounded on $E$ if $\exists{\phi : E\to \R} \text{ s.t. } \left|f_{n}(x)\right|{<} \phi(x) $ for all $n \in \N, x \in E$.\\
+		      Note: $<$ can be replaced with $\le $ but Rudin uses strict inequality
 		\item $\{f_{n}\}$ is uniformly bounded on $E$ if $\exists{M>0} \text{ s.t. } \left|f_{n}(x)\right|<M$ for all $n \in \N, x \in E$.
 	\end{enumerate}
 \end{define}
@@ -663,32 +673,96 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 		f_{n}(x)=\frac{1}{x}+\frac{1}{n}, n \in \N, x \in E=(0,1].
 		.\]
 	Then $f_n(x)$ is pointwise bounded on $E$ since $\left|f_{n}(x)\right|<\frac{1}{x}+2$ for all $n \in \N, x \in E$.\\
-	However, $\{f_{n}\}$ is not uniformly bounded on $E$ since $f_{n}(x)>\frac{1}{x}$ and $\frac{1}{x\to \infty}$ as $x\to 0^{+}$.
+	However, $\{f_{n}\}$ is not uniformly bounded on $E$ since $f_{n}(x)>\frac{1}{x}$ and $\frac{1}{x}\to \infty$ as $x\to 0^{+}$.
 \end{example}
 
 \begin{thm}[23][Selection Theorem]
 	Suppose $E$ is a countable set and $f_{n}:E\to \C$ is pointwise bounded.
 	Then there exists $\{f_{n_k}\}$ of $\{ {f}_{n}\} $ which is pointwise convergent on $E$; i.e., \[
-		\lim_{k\to \infty}{\{ {f}_{n_{k}}(x)\}} \text{exists for all } x \in E
+		\lim_{k\to \infty}{\{ {f}_{n_{k}}(x)\}} \text{ exists for all } x \in E
 		.\]
 	\begin{proof}
 		(Using diagonal argument)\\
-		Let $E=\{x_1,x_2,x_3,\ldots \}$.
-		$\{{f}_{n}(x_1)\}_{n}$ is bounded, so $\exists{\text{subsequence }\{f_{1,k}\}} \text{ s.t. } \lim_{k\to \infty}{f_{1,k}(x_1)}$ exists by Weierstrass theorem~\ref{thm:2.42}.\\
+		Let $E=\{x_1,x_2,x_3,\ldots \}$.\\
+		Since $\{{f}_{n}(x_1)\}_{n}$ is bounded, $\exists{\text{ subsequence }\{f_{1,k}\}} \text{ s.t. } \lim_{k\to \infty}{f_{1,k}(x_1)}$ exists by Weierstrass theorem~\ref{thm:2.42}.\\
 		Successive subsequences can be constructed as follows:\\
 		\begin{flalign*}
 			S_1 & : f_{1,1},f_{1,2},f_{1,3},f_{1,4},\ldots \text{ converges on $x_1$}          \\
-			S_2 & : f_{2,1},f_{2,2},f_{3,3},f_{4,4},\ldots \text{ converges on $x_1, x_2$}     \\
+			S_2 & : f_{2,1},f_{2,2},f_{2,3},f_{2,4},\ldots \text{ converges on $x_1, x_2$}     \\
 			S_3 & : f_{3,1},f_{3,2},f_{3,3},f_{3,4},\ldots \text{ converges on $x_1, x_2,x_3$} \\
 			    & \vdots                                                                       \\.
 		\end{flalign*}
-		Form diagonal subsequence $S: f_{1,1}, f_{2,2}, f_{3,3}, f_{4,4}, \ldots $.
+		Note we can make $S_n$ converges not just on $x_n$ but also for $\{x_1,x_2,\ldots ,x_{n-1}\}$ by taking a subsequence of $S_{n-1}$.\\
+		This is because $f_{n-1, k}$ is also a pointwise bounded sequence itself.\\
+		Form a diagonal subsequence $S: f_{1,1}, f_{2,2}, f_{3,3}, f_{4,4}, \ldots $.
 		Then $S$ is eventually a subsequence of each $S_j$, so it converges on $x_1,x_2,x_3,\ldots ,x_j$. This is true for all $j$, so $\{f_{n,n}(x_i)\}_n $ converges for each $x_{i} \in E$.
 	\end{proof}
 \end{thm}
 
 \begin{lemma}
-	If $K$ is compact then $K$ has a countable dense subset $E \subset K$; i.e., $\exists{E \subset  K} \text{ s.t. } \overline{E}=K$, or $\forall{p \in K}: \forall{r>0}: \exists{x\in E} \text{ s.t. } d(p,x)<r$.
-	(I.e., $K$ is separable. See Problem 2.25)
+	If $K$ is compact then $K$ has a countable dense subset $E \subset K$; i.e., $\overline{E} = K$, or $\forall{p \in K}: \forall{r > 0}: \exists{x \in E} \text{ s.t. } d(p,x)<r$.
+	We also say $K$ is separable. See Problem 2.25.
+	\begin{proof}
+		For $n \in \N$, $\{N_{\frac{1}{n}}(p)\}_{p \in K}$ is an open cover of $K$, so $\exists $ finite subcover $\{N_{\frac{1}{n}}(p)\}_{p \in E_{n}}$, $E_{n} \subset K$, $E_{n}$ finite. Let $E= \bigcup_{n=1}^{\infty} E_n$, a countable set.\\
+		Let $p \in K$ and $r >0$. Choose $n_0$ s.t. $\frac{1}{n_0}<r$.\\
+		By definition of $E_{n_0}$, there exists $x_0 \in E_{n_0}$ s.t. $p \in N_{\frac{1}{n_0}}(x_0)$.\\
+		Then $d(p,x_0)<\frac{1}{n_0}<r$, so $E$ is dense in $K$.
+	\end{proof}
 \end{lemma}
+
+
+\begin{thm}[25]
+	Suppose $K$ is compact and that $\mathscr{F}=\{f_{n}\} \subset \mathscr{C}(K)$ is equicontinuous and pointwise bounded on $K$. Then
+	\begin{enumerate}
+		\item $\{f_{n}\} $ is uniformly bounded
+		\item $\{f_{n}\}$ has a uniformly convergent subsequence; i.e., a subsequence that converges uniformly in $(\mathscr{C}(K), \|\cdot\|)$
+	\end{enumerate}
+	\begin{remark}
+		\begin{enumerate}[label=\arabic*.]
+			\item  A more topological statement: A5.3
+			\item Converse: [(b)$\implies$ equicontinuity and uniform boundedness] see A5.4
+			\item need for compactness of $K$: see A5.5
+			\item good theorem/proof to master..
+		\end{enumerate}
+	\end{remark}
+	\begin{proof}
+		\begin{enumerate}
+			\item Goal: Find $M$ s.t. $\left|f_{n}(x)\right| \le M	 \text{ for all } n \in \N, x \in K$.\\
+			      Since $\mathscr{F}$ is equicontinuous,
+			      \[
+				      \forall{\epsilon > 0}: \exists{\delta > 0} \text{ s.t. } \forall{n \in \N}: d(x,y)<\delta \implies \left|f_{n}(x)-f_{n}(y)\right|<\epsilon
+				      .\]
+			      As $K$ is compact, $\exists{\{p_1,p_2,\ldots ,p_{n}\} \in K} \text{ s.t. } \{N_{\delta}(p_{i})\}_{i \in \{1,\ldots,r\}}$ covers $K$. Given $x \in K$, choose $p_{i}$ s.t. $x \in N_{\delta}(p_{i})$.\\
+			      For each $i$, $\{f_{n}(p_{i})\}_n$ is bounded, say $\left|f_{n}(p_{i})\right|\le M_i$ for all $n \in \N$.\\
+			      Let $M_0=\max\{M_1,\ldots ,M_r\}$. Then $\left|f_{n}(x)\right|\le \left|f_{n}(p_{i})\right|+\left|f_{n}(x)-f_{n}(p_{i})\right| \le M_0+\epsilon=M$ (can take $\epsilon=1$ in part (a)).
+			\item Goal: Construct a uniformly convergent subsequence of $\{ {f}_{n}\}$.\\
+			      Step 1. By the lemma, $K$ has a countable dense subset $E \subset K$.\\
+			      By Theorem~\ref{thm:7.23}, $\exists{\{f_{n_i}\}}$ s.t. $\lim_{i\to \infty}{f_{n_i}(x)}$ exists for all $x \in E$.
+			      Write $g_{i}=f_{n_i}$. We show $g_i$ converges uniformly on $K$ via the Uniform Cauchy Criterion Theorem~\ref{thm:7.8}.\\
+			      Step 2. Let $\epsilon>0$. By equicontinuity, $\exists{\delta > 0} \text{ s.t. } d(x,y) < \delta \implies \left|g_{i}(x)-g_{i}(y)\right|<\frac{\epsilon}{3}$ for all $i$.\\
+			      $\{ {N}_{\delta}(p)\}_{p \in E}$ covers $K$ since $E$ is dense.
+			      There exists a finite subcover $\{N_{\delta}(x_1),\ldots ,N_{\delta}(x_{m})\}$ with each $x_s \in E$. Given $x \in K$ there exists $x_s$ s.t. $d(x,x_s)<\delta$.\\
+			      Step 3. (using $\frac{\epsilon}{3}$ argument)\\
+			      \begin{flalign*}
+				      g_{i}(x)-g_{j}(x) & \le \underbrace{\left|g_{i}(x)-g_{i}(x_s)\right|}_{<\frac{\epsilon}{3} \;\; (\because d(x,x_s)<\delta)} + \left|g_{i}(x_s)-g_{j}(x_s)\right| + \underbrace{\left|g_{j}(x_s)-g_{j}(x)\right|}_{<\frac{\epsilon}{3}}
+				      .\end{flalign*}
+
+			      Since $\lim_{i\to \infty}{\{g_{i}(x)\}}$ converges for any $x \in K$, $\{g_{i}(x_s)\}_i$ is a Cauchy sequence.\\
+			      % Since $\{g_{i}(x_{s})\}_i$ converges
+			      Hence for $s=1,\ldots ,m$, we can choose $N_s$ s.t. $ i,j\ge N_{s}\implies \left|g_{i}(x_{s})-g_{j}(x_{s})\right| <\frac{\epsilon}{3}$.\\
+			      Let $N= \max\{N_1,\ldots ,N_m\}$. Then for $i,j\ge N (\text{independent of }x)$,
+			      \[
+				      \left|g_i(x)-g_j(x)\right|<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}
+				      .\]
+			      Hence, $\{g_{i}\}$ converges uniformly on $K$ by Theorem~\ref{thm:7.8}.
+		\end{enumerate}
+	\end{proof}
+\end{thm}
+
+
+\begin{thm}[26][Weierstrass's Theorem]
+	Let $f: [a,b]\to \R (\text{ or } \C)$ be continuous.\\
+	There exists polynomials $p_{n}$ s.t. $p_{n}\to f$ uniformly on $[a,b]$.
+
+\end{thm}
 

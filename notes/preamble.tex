@@ -210,6 +210,7 @@
 \declaretheorem[style=thmbox, numbered=yes, name=Corollary,sibling=theorem]{corollary}
 \declaretheorem[style=thmproofbox, name=Proof, numbered=no]{replacementproof}
 
+% \usepackage{tcolorbox}
 \newenvironment{define}[1][]{
 \def\argI{#1}
 \ifstrempty{#1}{
@@ -341,6 +342,16 @@
 % \usepackage{keytheorems}
 \tcbuselibrary{theorems}
 \tcbuselibrary{breakable}
+\newtcbtheorem
+[]% init options
+{definitiontcb}% name
+{Definition}% title
+{%
+	% colback=green!5,
+	% colframe=green!35!black,
+	% fonttitle=\bfseries,
+}% options
+{def}% prefix
 % \tcbset{
 % 	defstyle/.style={fonttitle=\bfseries\upshape, fontupper=\slshape,
 % 			arc=0mm, colback=blue!5!white,colframe=blue!75!black},
