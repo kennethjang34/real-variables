@@ -272,7 +272,8 @@
 			      .\]
 		      $f_{n}(x)\to 0$ for all $x \in K$ so (a), (b), (c) all hold, but $f_{n}$ does not converge uniformly to zero function on $K$ as $K$ not compact.
 		      \begin{center}
-			      \begin{tikzpicture}[scale=5]
+			      \begin{tikzpicture}[scale=5
+				      ]
 				      \def\n{2} % Adjust n here (e.g., n=1, 2, 3,...)
 				      \pgfmathsetmacro{\xend}{1/\n} % Spike ends at x = 1/n
 
@@ -763,6 +764,109 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 \begin{thm}[26][Weierstrass's Theorem]
 	Let $f: [a,b]\to \R (\text{ or } \C)$ be continuous.\\
 	There exists polynomials $p_{n}$ s.t. $p_{n}\to f$ uniformly on $[a,b]$.
-
 \end{thm}
 
+\begin{exercise}
+	By a linear change of variable, can assume $[a,b]=[0,1]$.\\
+	We'll discuss Bernstein's proof (1912), which needs some background in probability theory.\\
+	Fix $p \in [0,1]$. Perform a sequence of $n$ independent of Bernoulli trials:\\
+	Success with probability $p$, failure with probability $1-p$.\\
+	Let $S_{n}$ be the number of successes observed. Then
+	\[
+		p_{m}=P(S_{n}=m)= \binom{n}{m} p^{m}(1-p)^{n-m}
+		.\]
+	\begin{note}
+		\[
+			\sum_{m=0}^{n}{p_{m}}=\sum_{m=0}^{n}{\binom{n}{m}p^{m}(1-p)^{n-m}}=[p+(1-p)]^{n}=1
+			.\]
+	\end{note}
+	Random variable: a function $X: \{0,1,\ldots ,n\}\to \R$; e.g.,
+	\begin{itemize}
+		\item $X=S_{n}$ is the identity function $S_{n}(m)=m$. \\
+		\item $X(m)= \begin{cases}
+				      0 & m<\frac{n}{2}    \\
+				      1 & m\ge \frac{n}{2}
+			      \end{cases}$ is the indicator random variable for the event that at least half of trials are success.
+	\end{itemize}
+	Expectation of $X$: $EX=E(X)=\sum_{m=0}^{n}{X(m)p_{m}}$.\\
+	E.g.,
+	\begin{flalign*}
+		ES_n & =\sum_{m=0}^{\infty}{m \binom{n}{m}p^{m}(1-p)^{n-m}}                            \\
+		     & =np\sum_{m=1}^{n}{\frac{(n-1)!}{(m-1)!(n-m)!} p^{m-1}(1-p)^{n-m}}               \\
+		     & =np\sum_{k=0}^{n-1}{\binom{n-1}{k}p^{k}(1-p)^{(n-1)-k}}           \;\; (k:=m-1) \\
+		     & =np
+		.\end{flalign*}
+	Hence, $ES_n=np$.\\
+	Variance of $X$: $VarX=Var(X)=E[(X-EX)^2]=E(X^{2})-(EX)^{2}$.\\
+	E.g., $VarS_n=E{S_n^{2}}-(ES_n)^{2}=np(1-p)$\\
+	Standard deviation of $X$: $\sigma_{X}=\sqrt{VarX}$.\\
+	E.g., $\sigma_{S_n}=\sqrt{np(1-p)}$.\\
+	Now let $X_{n}=\frac{1}{n}S_n=$ proportion of successes.\\
+	Then
+	\begin{itemize}
+		\item $EX_{n}=\frac{1}{n}ES_n=\frac{1}{n}np=p$
+		\item $VarX_{n}=\frac{1}{n^{2}}$
+		\item $\sigma_{X_{n}}=\sqrt{\frac{np(1-p)}{n}}$
+	\end{itemize}
+	% The figure for $P(X_n=\frac{m}{n})$  is as follows:\\
+	% \begin{center}
+	% 	\begin{tikzpicture}[declare function={binom(\k,\n,\p)=\n!/(\k!*(\n-\k)!)*\p^\k*(1-\p)^(\n-\k);}]
+	% 		\begin{axis}[
+	% 				axis lines=middle,
+	% 				xlabel={$m$},
+	% 				ylabel={$P(X_n=\frac{m}{n})$},
+	% 				xtick={0, 1, 2, 3, 4, 5, 6},
+	% 				xticklabels={$0$, $\frac{1}{n}$, $\frac{2}{n}$, $\frac{3}{n}$, $\frac{4}{n}$, $\frac{5}{n}$, $\frac{6}{n}$},
+	% 				ytick={0, 1},
+	% 				yticklabels={$0$, $1$},
+	% 				ymin=0,
+	% 				ymax=1.5,
+	% 				xmin=-1,
+	% 				xmax=7,
+	% 			]
+	% 			\addplot[domain=0:6, samples=7, color=blue]{binom(6, x, 0.5)*0.5^6};
+	% 		\end{axis}
+	% 	\end{tikzpicture}
+	% \end{center}
+	\begin{prop}[Chebyshev's Inequality]
+		For all $\delta>0$, $p \in [0,1]$, $n \in \N$,
+		\[
+			P(\left|X_n -p\right|>\delta)\le \frac{1}{\delta^2}\frac{p(1-p)}{n}
+			.\]
+		\begin{proof}
+			\begin{flalign*}
+				\text{LHS} & = \sum_{m:\left|\frac{m}{n}-p\right|>\delta }{p_{m}\cdot 1}\le \sum_{m=0}^{n}{\left(\frac{\frac{m}{n}-p}{\delta}\right)^2 p_m } \\
+				           & =\frac{1}{\delta^2}\sum_{m=0}^{n}{\left(X_{n}(m)-p\right)^{2}p_m}=\frac{1}{\delta^2}E \left[ \left(X_{n}-p\right)^2  \right]    \\
+				           & =\frac{1}{\delta^2}\text{Var}X_n = \frac{1}{\delta^2}\frac{p(1-p)}{n}
+			\end{flalign*}
+		\end{proof}
+	\end{prop}
+\end{exercise}
+
+\begin{proof}[Theorem~\ref{thm:7.26}]
+	Choose $p=x \in [0,1]$ in above, so now \[
+		p_m= \binom{n}{m}x^{m}(1-x)^{n-m}
+		.\]
+	Let $P_{n}(x)=E \left[ f(X_n)\right]=\sum_{n=0}^{n}{f(\frac{m}{n})p_m}$.\\
+	Then \[
+		f(x)-P_n(x)=\sum_{m=0}^{n}{\left[ f(x)-f(\frac{m}{n})\right]p_m}
+		.\]
+	\begin{remark}
+		C.f. A4-Q3\\
+		For any $\delta>0$
+		\begin{flalign*}
+			\left|f(x)-P_n(x)\right| & \le \sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m} + \sum_{m:\left|\frac{m}{n}-x\right| > \delta}{2\underline{M}_{\max\left|f(x)\right|}p_m}
+			.\end{flalign*}
+		Let $\epsilon>0$. Choose $\delta>0$ s.t. \[
+			\left|x-y\right| \le \delta \implies \left|f(x)-f(y)\right|<\frac{\epsilon}{2}
+			.\]
+		Note $\left|x-y\right| \le \delta$ is possible since $f$ is uniformly continuous on $[0,1]$.\\
+		Since
+		\begin{flalign*}
+			\sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m} & \le  \frac{\epsilon}{2}	 \sum_{m=0}^{n}{p_m}=\frac{\epsilon}{2} \\
+			\sum_{m:\left|\frac{m}{n}-x\right| > \delta}{2\underline{M}_{\max\left|f(x)\right|}p_m} \le 2M \frac{1}{\delta^2} \frac{x(1-x)}{n} \;\;(\because \text{Chebyshev's})\le \frac{1}{4}\le \frac{M}{2 \delta^2 \frac{1}{n}}
+			.\end{flalign*}
+		Choose $N$ s.t. $n\ge N\implies \frac{M}{2delta^2}\frac{1}{n}<\frac{\epsilon}{2}$.
+		Then for $n\ge N$, $\left|f(x)-p_n(x)\right|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
+	\end{remark}
+\end{proof}
