@@ -870,3 +870,89 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 		Then for $n\ge N$, $\left|f(x)-p_n(x)\right|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
 	\end{remark}
 \end{proof}
+
+
+\begin{define}[28]
+	\hfill
+	\begin{description}
+		\item[Algebra]:Let $\mathcal{A}$ be a set of functions $f:E\to \C$. Then $\mathcal{A}$ is an \textit{algebra} $\forall{f,g \in A}\;\forall{c \in \C}: f+g \in \mathcal{A}, \; fg \in \mathcal{A}, \; cf \in \mathcal{A}$.
+		      \begin{example}
+			      Let $E=[0,1]$, $\mathcal{A}=\mathcal{P}=$ polynomials or $\mathcal{A}=\mathcal{C}(E)$.
+		      \end{example}
+		\item[Uniform Closure]: The \textit{uniform closure} of $\mathcal{A}$ is $\mathcal{B}=\{f: E\to \C \;| \; \exists{f_{n} \in \mathcal{A}} \text{ s.t. } f_{n}\to f \text{ uniformly }\} $.
+		      \begin{example}
+			      \begin{itemize}
+				      \item $\mathcal{C}[0,1]$ is the uniform closure of $\mathcal{P}$.
+				      \item $\mathcal{P}$ is uniformly closed on $\R$ (See A6)
+				      \item $\mathcal{P}$ is not uniformly closed on $[0,1]$
+				      \item $\mathcal{C}[0,1]$ is uniformly closed
+			      \end{itemize}
+		      \end{example}
+	\end{description}
+	\begin{note}
+		If $\mathcal{A}$ is an algebra of bounded functions then it has a metric
+		\[
+			d(f,g)= \|f-g\|=\sup_{x \in E}{\left|f(x)-g(x)\right|}
+			.\]
+		In this case, uniform convergence is convergent in this metric, and the uniform closure is the closure in this metric; i.e., $\mathcal{B}=\overline{\mathcal{A}}$.
+	\end{note}
+\end{define}
+\begin{thm}[29]
+	The uniform closure $\mathcal{B}=\mathbf{\overline{A}}$ of an algebra $\mathcal{A}$ of bounded functions is a uniformly closed algebra.
+	\begin{proof}
+		Suppose $f,g \in \mathcal{B}$ and $c \in \C$. Then $\exists{f_{n},g_{n} \in \mathcal{A}} \text{ s.t. } f_{n}\to f$ uniformly and $g_{n}\to g$ uniformly:
+		\[
+			\|f-f_{n}\|	\to 0, \;\; \|g-g_{n}\|\to 0
+			.\]
+		Then $f_{n}+g_{n}\to f+g$ uniformly (Prob. 7.2 of Rudin's) so $f+g \in \mathcal{B}$, and $f_{n} g_{n} \to fg$ uniformly (Prob. 7.2,7.3 of Rudin's; need for bounded functions here), so $fg \in \mathcal{B},\; c f_n \to cf$ uniformly so $cf \in \mathcal{B}$.\\
+		Therefore, $\mathcal{B}$ is an algebra.
+		$\mathcal{B}$ is uniformly closed because it consists of $\mathcal{A}$ and all limit points of $\mathcal{A}$;i.e., $B=\overline{\mathcal{A}}$.
+	\end{proof}
+\end{thm}
+
+\begin{define}[30]
+	\hfill
+	\begin{description}
+		\item[Separation of Points]: A set $\mathcal{A}$ (not necessarily algebra) of functions $f:E\to \C$ \textit{separates points}  on $E$ if for all $x_1,x_2 \in E$, there exists $f \in \mathcal{A}$ such that $f(x_1)=f(x_2)$
+		\item[Non-Vanishment of $\mathcal{A}$] $\mathcal{A}$ \textit{vanishes at no point} if  $\forall{x \in E}: \exists{f \in \mathcal{A}} \text{ s.t. } f(x)\neq 0$.
+	\end{description}
+	\begin{example}
+		\begin{itemize}
+			\item The set of polynomials  on $[-1,1]$ separates points and vanishes at no point.
+			\item The set of even polynomials on $[-1,1]$ does not separate points.
+			\item The set of odd polynomials on $[-1,1]$ vanishes at $x=0$.
+		\end{itemize}
+	\end{example}
+\end{define}
+
+\begin{thm}[32][Stone-Weierstrass Theorem]
+	The uniform closure of any algebra of real continuous functions on a compact set $K$, which separates points and vanishes at no point, is $\mathcal{C}(K)$, where $\mathcal{C}(K)$ is the set of real-valued continuous functions on $K$.
+\end{thm}
+
+\begin{thm}[33]
+	Complex case: as in Theorem~\ref{thm:7.32} with additional hypothesis that $\mathbf{A}$ is self-adjoint, i.e., if $f \in \mathcal{A}$ then
+	\[
+		\overline{f}  \in \mathcal{A} \;\; (\overline{f}(x) = \overline{f(x)})
+		.\]
+	\begin{proof}
+		For the proof of Theorem~\ref{thm:7.32}, we need the following lemma:
+		\begin{lemma}[1]
+			Let $\mathcal{A}$ be an algebra of real-valued continuous functions on a compact set $K$.\\
+			If $f \in \overline{\mathcal{A}}$ then $\left|f\right| \in \overline{\mathcal{A}}$.
+			\begin{proof}
+				Let $f \in \overline{\mathcal{A}}$. Let $M=\sup_{x \in K} \left|f(x)\right| $. Then $M<\infty$.\\
+				Let $\epsilon>0$. By Theorem~\ref{thm:7.26}, there exists a polynomial $\tilde{P}$ such that $\sup_{\left|y\right| \le M} \left|\tilde{P}(y)-\left|y\right| \right| <\frac{\epsilon}{2}$.
+				Let $P(y)=\tilde(P)(y)-\tilde{P}(0)= \sum_{j=1}^{n}{c_jy^{j}}$.
+				Then
+				\begin{flalign*}
+					\left|P(y)-\left|y\right|\right| & = \left|\tilde{P}(y)-\tilde{P}(0)-\left|y\right|\right|                                                     \\
+					                                 & \le \left|\tilde{P}(y)-\left|y\right| \right| + \left|\tilde{P}(0)-\left|0\right| \right|                   \\
+					                                 & <\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon \text{ for all } y \text{ such that } \left|y\right|  \le M
+					.\end{flalign*}
+				Also, $P(f)=\sum_{j=1}^{n}{c_{j}f^{j}} \in \overline{\mathcal{A}}$ [Note we don't know if constants are in $\overline{\mathcal{A}}$, so we omitted the $j=0$ term], and $\sup_{x \in K}\left|(P(f))(x)-\left|f(x)\right| \right| <\epsilon$ since $\left|f(x)\right| \le M$.\\
+				Thus, $f$ can be approximated arbitrarily by an element of $\overline{\mathcal{A}}$, so $\left|f\right| \in \overline{\mathcal{A}}$.
+			\end{proof}
+		\end{lemma}
+	\end{proof}
+\end{thm}
+
