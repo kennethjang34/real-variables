@@ -733,13 +733,16 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 			      \[
 				      \forall{\epsilon > 0}: \exists{\delta > 0} \text{ s.t. } \forall{n \in \N}: d(x,y)<\delta \implies \left|f_{n}(x)-f_{n}(y)\right|<\epsilon
 				      .\]
-			      As $K$ is compact, $\exists{\{p_1,p_2,\ldots ,p_{n}\} \in K} \text{ s.t. } \{N_{\delta}(p_{i})\}_{i \in \{1,\ldots,r\}}$ covers $K$. Given $x \in K$, choose $p_{i}$ s.t. $x \in N_{\delta}(p_{i})$.\\
-			      For each $i$, $\{f_{n}(p_{i})\}_n$ is bounded, say $\left|f_{n}(p_{i})\right|\le M_i$ for all $n \in \N$.\\
-			      Let $M_0=\max\{M_1,\ldots ,M_r\}$. Then $\left|f_{n}(x)\right|\le \left|f_{n}(p_{i})\right|+\left|f_{n}(x)-f_{n}(p_{i})\right| \le M_0+\epsilon=M$ (can take $\epsilon=1$ in part (a)).
+			      As $K$ is compact, $\exists{\{p_1,p_2,\ldots ,p_{r}\} \in K} \text{ s.t. } \{N_{\delta}(p_{i})\}_{i \in \{1,\ldots,r\}}$ covers $K$.\\
+			      For each $i$, $\{f_{n}(p_{i})\}_n$ is bounded as $\mathscr{F}$ is pointwise bounded, so there exists $M_i$ s.t. $\left|f_{n}(p_{i})\right|\le M_i$ for all $n \in \N$.\\
+			      Let $M_0=\max\{M_1,\ldots ,M_r\}$. \\
+			      Given $x \in K$, choose $p \in \{p_1,p_2,\ldots ,p_r\}$ such that $x \in N_{\delta}(p)$.\\
+			      Then $\left|f_{n}(x)\right|\le \left|f_{n}(p)\right|+\left|f_{n}(x)-f_{n}(p)\right| \le M_0+\epsilon$ for any $\epsilon>0$.\\
+			      Let $M=M_0+1$. Then $\left|f_{n}(x)\right|\le M$ for all $n \in \N, x \in K$.
 			\item Goal: Construct a uniformly convergent subsequence of $\{ {f}_{n}\}$.\\
 			      Step 1. By the lemma, $K$ has a countable dense subset $E \subset K$.\\
 			      By Theorem~\ref{thm:7.23}, $\exists{\{f_{n_i}\}}$ s.t. $\lim_{i\to \infty}{f_{n_i}(x)}$ exists for all $x \in E$.
-			      Write $g_{i}=f_{n_i}$. We show $g_i$ converges uniformly on $K$ via the Uniform Cauchy Criterion Theorem~\ref{thm:7.8}.\\
+			      Write $g_{i}=f_{n_i}$. We can show $g_i$ converges uniformly on $K$ via the Uniform Cauchy Criterion Theorem~\ref{thm:7.8}.\\
 			      Step 2. Let $\epsilon>0$. By equicontinuity, $\exists{\delta > 0} \text{ s.t. } d(x,y) < \delta \implies \left|g_{i}(x)-g_{i}(y)\right|<\frac{\epsilon}{3}$ for all $i$.\\
 			      $\{ {N}_{\delta}(p)\}_{p \in E}$ covers $K$ since $E$ is dense.
 			      There exists a finite subcover $\{N_{\delta}(x_1),\ldots ,N_{\delta}(x_{m})\}$ with each $x_s \in E$. Given $x \in K$ there exists $x_s$ s.t. $d(x,x_s)<\delta$.\\
@@ -791,7 +794,7 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 	Expectation of $X$: $EX=E(X)=\sum_{m=0}^{n}{X(m)p_{m}}$.\\
 	E.g.,
 	\begin{flalign*}
-		ES_n & =\sum_{m=0}^{\infty}{m \binom{n}{m}p^{m}(1-p)^{n-m}}                            \\
+		ES_n & =\sum_{m=0}^{n}{m \binom{n}{m}p^{m}(1-p)^{n-m}}                                 \\
 		     & =np\sum_{m=1}^{n}{\frac{(n-1)!}{(m-1)!(n-m)!} p^{m-1}(1-p)^{n-m}}               \\
 		     & =np\sum_{k=0}^{n-1}{\binom{n-1}{k}p^{k}(1-p)^{(n-1)-k}}           \;\; (k:=m-1) \\
 		     & =np
@@ -805,7 +808,7 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 	Then
 	\begin{itemize}
 		\item $EX_{n}=\frac{1}{n}ES_n=\frac{1}{n}np=p$
-		\item $VarX_{n}=\frac{1}{n^{2}}$
+		\item $VarX_{n}=\frac{1}{n^{2}}\cdot VarS_n= \frac{p(1-p)}{n}$
 		\item $\sigma_{X_{n}}=\sqrt{\frac{np(1-p)}{n}}$
 	\end{itemize}
 	% The figure for $P(X_n=\frac{m}{n})$  is as follows:\\
@@ -847,7 +850,7 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 	Choose $p=x \in [0,1]$ in above, so now \[
 		p_m= \binom{n}{m}x^{m}(1-x)^{n-m}
 		.\]
-	Let $P_{n}(x)=E \left[ f(X_n)\right]=\sum_{n=0}^{n}{f(\frac{m}{n})p_m}$.\\
+	Let $P_{n}(x)=E \left[ f(X_n)\right]=\sum_{m=0}^{n}{f(\frac{m}{n})p_m}$.\\
 	Then \[
 		f(x)-P_n(x)=\sum_{m=0}^{n}{\left[ f(x)-f(\frac{m}{n})\right]p_m}
 		.\]
@@ -855,18 +858,18 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 		C.f. A4-Q3\\
 		For any $\delta>0$
 		\begin{flalign*}
-			\left|f(x)-P_n(x)\right| & \le \sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m} + \sum_{m:\left|\frac{m}{n}-x\right| > \delta}{2\underline{M}_{\max\left|f(x)\right|}p_m}
+			\left|f(x)-P_n(x)\right| & \le \sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m} + \sum_{m:\left|\frac{m}{n}-x\right| > \delta}{2\underbrace{M}_{\sup\left|f(x)\right|}p_m}
 			.\end{flalign*}
 		Let $\epsilon>0$. Choose $\delta>0$ s.t. \[
 			\left|x-y\right| \le \delta \implies \left|f(x)-f(y)\right|<\frac{\epsilon}{2}
 			.\]
-		Note $\left|x-y\right| \le \delta$ is possible since $f$ is uniformly continuous on $[0,1]$.\\
+		Note this is possible since $f$ is uniformly continuous on $[0,1]$.\\
 		Since
 		\begin{flalign*}
-			\sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m} & \le  \frac{\epsilon}{2}	 \sum_{m=0}^{n}{p_m}=\frac{\epsilon}{2} \\
-			\sum_{m:\left|\frac{m}{n}-x\right| > \delta}{2\underline{M}_{\max\left|f(x)\right|}p_m} \le 2M \frac{1}{\delta^2} \frac{x(1-x)}{n} \;\;(\because \text{Chebyshev's})\le \frac{1}{4}\le \frac{M}{2 \delta^2 \frac{1}{n}}
+			 & \sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m}  \le  \frac{\epsilon}{2}	 \sum_{m=0}^{n}{p_m}=\frac{\epsilon}{2}                                                                       \\
+			 & \sum_{m:\left|\frac{m}{n}-x\right| > \delta}{2Mp_m}                                 \le 2M \frac{1}{\delta^2} \frac{\overbrace{x(1-x)}^{\le \frac{1}{4}}}{n}\le \frac{M}{2 \delta^2 n}  \;\;(\because \text{Chebyshev's})
 			.\end{flalign*}
-		Choose $N$ s.t. $n\ge N\implies \frac{M}{2delta^2}\frac{1}{n}<\frac{\epsilon}{2}$.
+		Choose $N$ s.t. $n\ge N\implies \frac{M}{2\delta^2}\frac{1}{n}<\frac{\epsilon}{2}$.
 		Then for $n\ge N$, $\left|f(x)-p_n(x)\right|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
 	\end{remark}
 \end{proof}
@@ -875,47 +878,48 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 \begin{define}[28]
 	\hfill
 	\begin{description}
-		\item[Algebra]:Let $\mathcal{A}$ be a set of functions $f:E\to \C$. Then $\mathcal{A}$ is an \textit{algebra} $\forall{f,g \in A}\;\forall{c \in \C}: f+g \in \mathcal{A}, \; fg \in \mathcal{A}, \; cf \in \mathcal{A}$.
+		\item[Algebra]:Let $\mathscr{A}$ be a set of functions $f:E\to \C$. Then $\mathscr{A}$ is an \textit{algebra} if $\forall{f,g \in \mathscr{A}}\;\forall{c \in \C}: f+g \in \mathscr{A}, \; fg \in \mathscr{A}, \; cf \in \mathscr{A}$.
 		      \begin{example}
-			      Let $E=[0,1]$, $\mathcal{A}=\mathcal{P}=$ polynomials or $\mathcal{A}=\mathcal{C}(E)$.
+			      Let $E=[0,1]$, $\mathscr{A}=\mathscr{P}=$ polynomials, or $\mathscr{A}=\mathscr{C}(E)$.
 		      \end{example}
-		\item[Uniform Closure]: The \textit{uniform closure} of $\mathcal{A}$ is $\mathcal{B}=\{f: E\to \C \;| \; \exists{f_{n} \in \mathcal{A}} \text{ s.t. } f_{n}\to f \text{ uniformly }\} $.
+		\item[Uniform Closure]: The \textit{uniform closure} of $\mathscr{A}$ is $\mathscr{B}=\{f: E\to \C \;| \; \exists{f_{n} \in \mathscr{A}} \text{ s.t. } f_{n}\to f \text{ uniformly }\} $.
 		      \begin{example}
 			      \begin{itemize}
-				      \item $\mathcal{C}[0,1]$ is the uniform closure of $\mathcal{P}$.
-				      \item $\mathcal{P}$ is uniformly closed on $\R$ (See A6)
-				      \item $\mathcal{P}$ is not uniformly closed on $[0,1]$
-				      \item $\mathcal{C}[0,1]$ is uniformly closed
+				      \item $\mathscr{C}[0,1]$ is the uniform closure of $\mathscr{P}$.
+				      \item $\mathscr{P}$ is uniformly closed on $\R$ (See A6)
+				      \item $\mathscr{P}$ is not uniformly closed on $[0,1]$
+				      \item $\mathscr{C}[0,1]$ is uniformly closed
 			      \end{itemize}
 		      \end{example}
 	\end{description}
 	\begin{note}
-		If $\mathcal{A}$ is an algebra of bounded functions then it has a metric
+		If $\mathscr{A}$ is an algebra of bounded functions then it has a metric
 		\[
 			d(f,g)= \|f-g\|=\sup_{x \in E}{\left|f(x)-g(x)\right|}
 			.\]
-		In this case, uniform convergence is convergent in this metric, and the uniform closure is the closure in this metric; i.e., $\mathcal{B}=\overline{\mathcal{A}}$.
+		In this case, uniform convergence is merely convergence in this metric, and the uniform closure is the closure in this metric; i.e., $\mathscr{B}=\overline{\mathscr{A}}$.
 	\end{note}
 \end{define}
 \begin{thm}[29]
-	The uniform closure $\mathcal{B}=\mathbf{\overline{A}}$ of an algebra $\mathcal{A}$ of bounded functions is a uniformly closed algebra.
+	The uniform closure $\mathscr{B}=\mathbf{\overline{\mathscr{A}}}$ of an algebra $\mathscr{A}$ of bounded functions is a uniformly closed algebra.
 	\begin{proof}
-		Suppose $f,g \in \mathcal{B}$ and $c \in \C$. Then $\exists{f_{n},g_{n} \in \mathcal{A}} \text{ s.t. } f_{n}\to f$ uniformly and $g_{n}\to g$ uniformly:
+		Suppose $f,g \in \mathscr{B}$ and $c \in \C$. Then $\exists{f_{n},g_{n} \in \mathscr{A}} \text{ s.t. } f_{n}\to f$ uniformly and $g_{n}\to g$ uniformly:
 		\[
 			\|f-f_{n}\|	\to 0, \;\; \|g-g_{n}\|\to 0
 			.\]
-		Then $f_{n}+g_{n}\to f+g$ uniformly (Prob. 7.2 of Rudin's) so $f+g \in \mathcal{B}$, and $f_{n} g_{n} \to fg$ uniformly (Prob. 7.2,7.3 of Rudin's; need for bounded functions here), so $fg \in \mathcal{B},\; c f_n \to cf$ uniformly so $cf \in \mathcal{B}$.\\
-		Therefore, $\mathcal{B}$ is an algebra.
-		$\mathcal{B}$ is uniformly closed because it consists of $\mathcal{A}$ and all limit points of $\mathcal{A}$;i.e., $B=\overline{\mathcal{A}}$.
+		Then $f_{n}+g_{n}\to f+g$ uniformly (Prob. 7.2 of Rudin's) so $f+g \in \mathscr{B}$, and $f_{n} g_{n} \to fg$ uniformly (Prob. 7.2,7.3 of Rudin's; need for bounded functions here), so $fg \in \mathscr{B},\; c f_n \to cf$ uniformly so $cf \in \mathscr{B}$.\\
+		Therefore, $\mathscr{B}$ is an algebra.
+		$\mathscr{B}$ is uniformly closed because it consists of $\mathscr{A}$ and all limit points of $\mathscr{A}$;i.e., $B=\overline{\mathscr{A}}$.
 	\end{proof}
 \end{thm}
 
 \begin{define}[30]
 	\hfill
 	\begin{description}
-		\item[Separation of Points]: A set $\mathcal{A}$ (not necessarily algebra) of functions $f:E\to \C$ \textit{separates points}  on $E$ if for all $x_1,x_2 \in E$, there exists $f \in \mathcal{A}$ such that $f(x_1)=f(x_2)$
-		\item[Non-Vanishment of $\mathcal{A}$] $\mathcal{A}$ \textit{vanishes at no point} if  $\forall{x \in E}: \exists{f \in \mathcal{A}} \text{ s.t. } f(x)\neq 0$.
+		\item[Separation of Points]: A set $\mathscr{A}$ (not necessarily algebra) of functions $f:E\to \C$ \textit{separates points}  on $E$ if for all $x_1,x_2 \in E$ with $x_1\neq x_2$, there exists $f \in \mathscr{A}$ such that $f(x_1)\neq f(x_2)$
+		\item[Non-Vanishment]: A set $\mathscr{A}$ \textit{vanishes at no point} if  $\forall{x \in E}: \exists{f \in \mathscr{A}} \text{ s.t. } f(x)\neq 0$.
 	\end{description}
+	\hfill
 	\begin{example}
 		\begin{itemize}
 			\item The set of polynomials  on $[-1,1]$ separates points and vanishes at no point.
@@ -925,34 +929,82 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 	\end{example}
 \end{define}
 
-\begin{thm}[32][Stone-Weierstrass Theorem]
-	The uniform closure of any algebra of real continuous functions on a compact set $K$, which separates points and vanishes at no point, is $\mathcal{C}(K)$, where $\mathcal{C}(K)$ is the set of real-valued continuous functions on $K$.
+
+\begin{thm}[31]
+	If an algebra $\mathscr{A}$ of functions on $E$ separates points and vanishes at no point, then given any $x_{1},x_{2} \in E$ with $(x_{1}\neq x_{2})$ and constants $c_{1},c_{2}$, there exists $f \in \mathscr{A}$ such that $f(x_{1})=c_{1}$ and $f(x_{2})=c_{2}$.
+	\begin{proof}
+		By hypothesis, $\exists{g,h,k \in \mathscr{A}} \text{ such that }$
+		\begin{flalign*}
+			g(x_{1}) & \neq g(x_{2}) & (\because A \text{ separates points } )        \\
+			h(x_{1}) & \neq 0        & (\because A \text{ does not vanish at }x_{1} ) \\
+			k(x_{2}) & \neq 0        & (\because A \text{ does not vanish at }x_{2} )
+			.\end{flalign*}
+	\end{proof}
+	Let $u(x)=[g(x)-g(x_{1})]k(x)$. Then $u \in \mathscr{A}, u(x_{1})= 0$, $u(x_{2})\neq 0$.\\
+	Let $v(x)=[g(x)-g(x_{2})]h(x)$. Then $v \in \mathscr{A}, v(x_{1})\neq 0$, $v(x_{2})= 0$.\\
+	Let
+	\[
+		f(x)=c_{1} \frac{v(x)}{v(x_{1})}+c_{2} \frac{u(x)}{u(x_{2})}
+		.\]
+	Then $f \in \mathscr{A}$, $f(x_{1})=c_{1}\cdot 1 + c_{2}\cdot 0=c_{1}$, $f(x_{2})=c_{1}\cdot 0 + c_{2}\cdot 1=c_{2}$.
 \end{thm}
+
+
+
+\begin{thm}[32][Stone-Weierstrass Theorem]
+	The uniform closure of any algebra of real continuous functions on a compact set $K$, which separates points and vanishes at no point, is the set of real-valued continuous functions on $K$; i.e., $\mathscr{C}(K)$.
+\end{thm}
+For the proof of Theorem~\ref{thm:7.32}, we need the following lemmas
+\begin{lemma}[1]
+	\label{lem:7.32a}
+	Let $\mathscr{A}$ be an algebra of real-valued continuous functions on a compact set $K$.\\
+	If $f \in \overline{\mathscr{A}}$ then $\left|f\right| \in \overline{\mathscr{A}}$.
+	\begin{proof}
+		Let $f \in \overline{\mathscr{A}}$. Let $M=\sup_{x \in K} \left|f(x)\right| $. Then $M<\infty$.\\
+		Let $\epsilon>0$. By Theorem~\ref{thm:7.26}, there exists a polynomial $\tilde{P}$ such that $\sup_{\left|y\right| \le M} \left|\tilde{P}(y)-\left|y\right| \right| <\frac{\epsilon}{2}$.
+		Let $P(y)=\tilde(P)(y)-\tilde{P}(0)= \sum_{j=1}^{n}{c_jy^{j}}$.
+		Then
+		\begin{flalign*}
+			\left|P(y)-\left|y\right|\right| & = \left|\tilde{P}(y)-\tilde{P}(0)-\left|y\right|\right|                                                     \\
+			                                 & \le \left|\tilde{P}(y)-\left|y\right| \right| + \left|\tilde{P}(0)-\left|0\right| \right|                   \\
+			                                 & <\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon \text{ for all } y \text{ such that } \left|y\right|  \le M
+			.\end{flalign*}
+		Also, $P(f)=\sum_{j=1}^{n}{c_{j}f^{j}} \in \overline{\mathscr{A}}$ [Note we don't know if constants are in $\overline{\mathscr{A}}$, so we omitted the $j=0$ term], and $\sup_{x \in K}\left|(P(f))(x)-\left|f(x)\right| \right| <\epsilon$ since $\left|f(x)\right| \le M$.\\
+		Thus, $f$ can be approximated arbitrarily by an element of $\overline{\mathscr{A}}$, so $\left|f\right| \in \overline{\mathscr{A}}$.
+	\end{proof}
+\end{lemma}
+\begin{lemma}[2]
+	\label{lem:7.32b}
+	Let $\mathscr{A}$ as in Lemma~\nameref{lem:7.32a}.\\
+	If $f_{1},f_{2},\ldots f_{n} \in \overline{\mathscr{A}}$, then $\max\{f_{1},f_{2},\ldots ,f_{n}\}  \in \overline{\mathscr{A}}$ and $\min\{f_{1},f_{2},\ldots ,f_{n}\} \in \overline{\mathscr{A}}$.
+	\begin{proof}
+		It suffices to consider $n=2$, and for this,
+		use
+		\begin{equation*}
+			\max\{f_{1},f_{2}\}=\frac{1}{2}(f_{1}+f_{2})+\frac{1}{2} \left|f_{1}-f_{2}\right|\tag{*}
+		\end{equation*}
+		\begin{equation*}
+			\min\{f_{1},f_{2}\}=\frac{1}{2}(f_{1}+f_{2})-\frac{1}{2} \left|f_{1}-f_{2}\right|
+			,\end{equation*}
+		and apply Lemma~\nameref{lem:7.32a}.\\
+		(*) holds because:\\
+		If $f_{1}(x)\le f_{2}(x)$, then $(\text{LHS(*)})(x)=f_{2}(x)$, and $(\text{RHS(*)})(x)=\frac{1}{2}(f_{1}(x)+f_{2}(x))+\frac{1}{2}(f_{2}(x)-f_{1}(x))=f_{2}(x)$.\\
+	\end{proof}
+\end{lemma}
+\begin{proof}[Theorem~\ref{thm:7.32}]
+	It suffices to prove that if $\mathscr{A}$ is an algebra of real continuous functions on a compact set $K$ that separates points and vanishes at no points, then $\forall{f \in \mathscr{C}(K)}:\forall{\epsilon > 0}: \exists{h \in \mathscr{B}=\overline{\mathscr{A}}} \text{ such that }  \|f-h\|<\epsilon$. This suffices because if there exists such an $h$, then we can choose $g \in \mathscr{A}$ such that $\|g-h\|<\epsilon$, so $\|f-g\|\le \|f-h\|+\|h-g\|<\epsilon+\epsilon=2\epsilon$.\\
+	Claim 1. Let $f:K\to \R$ be continuous, $\epsilon>0$. Then \[
+		\exists{g_x  \in \mathscr{B}} \text{ such that } g_{x}(x)=f(x) \text{ and } g_{x}(t)-f(t)>-\epsilon \text{ for all } t \in K
+		.\]
+	\begin{proof}[Claim 1]
+		Given $y \in K$ with $y\neq x$,  by Theorem~\ref{thm:7.31}, there exists $h_y \in \mathscr{A}$ such that $h_y(x)=f(x)$, $h_y(y)=f(y)$.
+		Since $h_y -f$ is continuous and $h_y(y)-f(y)=0$, there exists open $J_y \subset K$ with $y \in J_y$ such that $h_y(t)-f(t)>-\epsilon$ for all $t \in J_y$.\\
+		Since $K$ is compact, $K \subset J_{y_{1}} \cup \cdots \cup J_{y_{n}}$ for some $y_{1},y_{2}, \ldots ,y_{n} \in K$, where some $y_j$ may be $x$.\\
+		Let $g_x=\max\{h_{y_{1}},h_{y_{2}}, \ldots , h_{y_n}\}$. Then $g(x) \in \mathscr{B}$ by Lemma~\ref{lem:7.32b}, and $g_x(x)=\max\{h_{y_{1}}(x), \ldots , h_{y_{n}}(x)\}=f(x)$.\\
+		Also, $g_x(t)-f(t)\ge h_{y_i}(t)\to f(t)>-\epsilon$, where $i$ is chosen such that $t \in J_{y_i}$.
+	\end{proof}
+\end{proof}
 
 \begin{thm}[33]
-	Complex case: as in Theorem~\ref{thm:7.32} with additional hypothesis that $\mathbf{A}$ is self-adjoint, i.e., if $f \in \mathcal{A}$ then
-	\[
-		\overline{f}  \in \mathcal{A} \;\; (\overline{f}(x) = \overline{f(x)})
-		.\]
-	\begin{proof}
-		For the proof of Theorem~\ref{thm:7.32}, we need the following lemma:
-		\begin{lemma}[1]
-			Let $\mathcal{A}$ be an algebra of real-valued continuous functions on a compact set $K$.\\
-			If $f \in \overline{\mathcal{A}}$ then $\left|f\right| \in \overline{\mathcal{A}}$.
-			\begin{proof}
-				Let $f \in \overline{\mathcal{A}}$. Let $M=\sup_{x \in K} \left|f(x)\right| $. Then $M<\infty$.\\
-				Let $\epsilon>0$. By Theorem~\ref{thm:7.26}, there exists a polynomial $\tilde{P}$ such that $\sup_{\left|y\right| \le M} \left|\tilde{P}(y)-\left|y\right| \right| <\frac{\epsilon}{2}$.
-				Let $P(y)=\tilde(P)(y)-\tilde{P}(0)= \sum_{j=1}^{n}{c_jy^{j}}$.
-				Then
-				\begin{flalign*}
-					\left|P(y)-\left|y\right|\right| & = \left|\tilde{P}(y)-\tilde{P}(0)-\left|y\right|\right|                                                     \\
-					                                 & \le \left|\tilde{P}(y)-\left|y\right| \right| + \left|\tilde{P}(0)-\left|0\right| \right|                   \\
-					                                 & <\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon \text{ for all } y \text{ such that } \left|y\right|  \le M
-					.\end{flalign*}
-				Also, $P(f)=\sum_{j=1}^{n}{c_{j}f^{j}} \in \overline{\mathcal{A}}$ [Note we don't know if constants are in $\overline{\mathcal{A}}$, so we omitted the $j=0$ term], and $\sup_{x \in K}\left|(P(f))(x)-\left|f(x)\right| \right| <\epsilon$ since $\left|f(x)\right| \le M$.\\
-				Thus, $f$ can be approximated arbitrarily by an element of $\overline{\mathcal{A}}$, so $\left|f\right| \in \overline{\mathcal{A}}$.
-			\end{proof}
-		\end{lemma}
-	\end{proof}
+	Complex case of Theorem~\ref{thm:7.32} requires additional hypothesis that $\mathscr{A}$ is self-adjoint; i.e., if $f \in \mathscr{A}$ then $\overline{f}  \in \mathscr{A}$, where $\overline{f}(x) = \overline{f(x)}$.
 \end{thm}
-
