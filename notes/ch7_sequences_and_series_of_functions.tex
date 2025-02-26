@@ -993,18 +993,60 @@ For the proof of Theorem~\ref{thm:7.32}, we need the following lemmas
 \end{lemma}
 \begin{proof}[Theorem~\ref{thm:7.32}]
 	It suffices to prove that if $\mathscr{A}$ is an algebra of real continuous functions on a compact set $K$ that separates points and vanishes at no points, then $\forall{f \in \mathscr{C}(K)}:\forall{\epsilon > 0}: \exists{h \in \mathscr{B}=\overline{\mathscr{A}}} \text{ such that }  \|f-h\|<\epsilon$. This suffices because if there exists such an $h$, then we can choose $g \in \mathscr{A}$ such that $\|g-h\|<\epsilon$, so $\|f-g\|\le \|f-h\|+\|h-g\|<\epsilon+\epsilon=2\epsilon$.\\
-	Claim 1. Let $f:K\to \R$ be continuous, $\epsilon>0$. Then \[
-		\exists{g_x  \in \mathscr{B}} \text{ such that } g_{x}(x)=f(x) \text{ and } g_{x}(t)-f(t)>-\epsilon \text{ for all } t \in K
-		.\]
-	\begin{proof}[Claim 1]
+	\begin{claim}[1]
+		\namedlabel{clm:1}{1}
+		Let $f:K\to \R$ be continuous, $\epsilon>0$. Then \[
+			\exists{g_x  \in \mathscr{B}} \text{ such that } g_{x}(x)=f(x) \text{ and } g_{x}(t)-f(t)>-\epsilon \text{ for all } t \in K
+			.\]
+	\end{claim}
+	\begin{proof}[Claim~\ref{clm:1}]
 		Given $y \in K$ with $y\neq x$,  by Theorem~\ref{thm:7.31}, there exists $h_y \in \mathscr{A}$ such that $h_y(x)=f(x)$, $h_y(y)=f(y)$.
 		Since $h_y -f$ is continuous and $h_y(y)-f(y)=0$, there exists open $J_y \subset K$ with $y \in J_y$ such that $h_y(t)-f(t)>-\epsilon$ for all $t \in J_y$.\\
 		Since $K$ is compact, $K \subset J_{y_{1}} \cup \cdots \cup J_{y_{n}}$ for some $y_{1},y_{2}, \ldots ,y_{n} \in K$, where some $y_j$ may be $x$.\\
 		Let $g_x=\max\{h_{y_{1}},h_{y_{2}}, \ldots , h_{y_n}\}$. Then $g(x) \in \mathscr{B}$ by Lemma~\ref{lem:7.32b}, and $g_x(x)=\max\{h_{y_{1}}(x), \ldots , h_{y_{n}}(x)\}=f(x)$.\\
 		Also, $g_x(t)-f(t)\ge h_{y_i}(t)\to f(t)>-\epsilon$, where $i$ is chosen such that $t \in J_{y_i}$.
 	\end{proof}
+	\begin{claim}[2]
+		\namedlabel{clm:2}{2}
+		Let $f:K\to \R$ be continuous, $\epsilon>0$. Then \[
+			\exists{h \in \mathscr{B}} \text{ such that }\sup_{x \in K}\left|h(x)-f(x)\right| <\epsilon
+			.\]
+	\end{claim}
+	\begin{proof}[Claim \ref{clm:2}]
+		Since $g_x -f$ is continuous and $g_x(x)-f(x)=0$, there exists open
+		${V_x \subset K}, {V_x \ni x}, g_x(t)-f(t) < \epsilon \text{ for all }  t \in V_x $.
+		Since $K$ is compact, $K \subset V_{x_{1}} \cup  V _{x_{2}} \cup \cdots \cup V_{x_{m}} $ for some $x_{1},x_{2},\ldots ,x_m \in K$.
+		Let $h= \min\{g_{x_{1},g_{x_{2}}}, \ldots ,g_{x_{n}}\} \in \mathscr{B}$.
+		Then $\forall{t \in K}: h(t)-f(t)\underbrace{=}_{\text{ choose } i \text{ s.t. } g_{x_i}(t) \text{ gives the minimum }}g_{x_i}(t)-f(t)>-\epsilon $ by Claim~\ref{clm:1}, and $h(t)-f(t) \le g_{x_j}(t)-f(t)<\epsilon$ (Choose $j$ s.t. $t \in V_{x_j}$).
+		Therefore, $h(t)-f(t) <\epsilon$ for all $t \in K$, and hence $\sup_{t \in K}\left|h(t)-f(t)\right| < \epsilon$.
+	\end{proof}
 \end{proof}
 
-\begin{thm}[33]
+\begin{thm}[33][Complex Stone-Weierstrass Theorem]
+	Let $\mathscr{A}$ be a self-adjoint algebra of complex continuous functions on a compact set $K$ that separates points and vanishes at no point. Then the uniform closure of $\mathscr{A}$ is the set of complex continuous functions on $K$; i.e.,\[
+		\overline{\mathscr{A}}=\mathscr{C}_{\C}(K)
+	.\] 
+	\begin{note}
 	Complex case of Theorem~\ref{thm:7.32} requires additional hypothesis that $\mathscr{A}$ is self-adjoint; i.e., if $f \in \mathscr{A}$ then $\overline{f}  \in \mathscr{A}$, where $\overline{f}(x) = \overline{f(x)}$.
+	\end{note}
+	\begin{proof}
+		Let $\mathscr{A}_{\R}$ be the algebra of real continuous functions in $\mathscr{A}$.
+		\begin{enumerate}[label=(\roman*)]
+			\item If $f=u+iv \in \mathscr{A}$, then $u \in \mathscr{A}_{\R}$ since $u=\frac{1}{2}(f+\overline{f})$ by self-adjointness of $\mathscr{A}$.
+				Also, $v=\frac{1}{2i}(f-\overline{f}) \in \mathscr{A}_{\R}$.
+			\item $\mathscr{A}_{\R}$ separates points:\\
+				Let $x_{1},x_{2} \in K$ with $x_{1}\neq x_{2}$. 
+				By Theorem~\ref{thm:7.31}, $\exists{f \in \mathscr{A}}$ such that $f(x_{1})=1$ and $f(x_{2})=0$.\\
+				Write $f=u+iv$. Then $u(x_{1})=1,u(x_{2})=0,u \in \mathscr{A}_{\R}$
+			\item $\mathscr{A}_{\R}$ vanishes at no point:\\
+				Let $x \in K$. Choose $g \in \mathscr{A}$ s.t. $g(x)\neq 0$.\\
+				Write $g(x)=re^{i\theta}(r>0)$. Let $f=e^{-i \theta}g$.\\
+				Then $\Re{f} \in \mathscr{A}$ obeys $(\Re{f})(x)=e^{-i \theta}g(x)=e^{-i \theta}r e^{i \theta}=r \neq 0$.\\
+		Therefore, by Theorem~\ref{thm:7.32}, $\overline{\mathscr{A}_{\R}}=\mathscr{C}(K)$.
+		\end{enumerate}
+		Let $f= u+iv \in \mathscr{C}_{\C}(K)$. Let $\epsilon>0$.\\
+		Since $u,v \in \mathscr{C}_{\R}(K)$, there exists $\tilde{u},\tilde{v} \in \mathscr{A}_{\R}$ s.t. $\|u-\tilde{u}\|<\frac{\epsilon}{2} \text{ and } \|v-\tilde{v}\|<\frac{\epsilon}{2}$, so \[
+			\|f-\underbrace{(\tilde{u}+i\tilde{v})}_{\in \mathscr{A}}\|\le \|u-\tilde{u}\|+\|v-\tilde{v}\|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon
+		.\] 
+	\end{proof}
 \end{thm}
