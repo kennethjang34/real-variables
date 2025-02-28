@@ -3,5 +3,79 @@ Power series, $e^{x}, \log{x},\sin{x},\cos{x}$, Fourier series (we're omitting G
 
 
 \section{Power Series}
-Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}{\limsup_{n\to \infty}{\sqrtn{\left|c_{n}\right| }}}$ such that the series absolutely converges for $\left|x\right| < R$, diverges for $\left|x\right| >R$ and anything possible for $\left|x\right| =R$.
+Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}{\limsup_{n\to \infty}{\sqrt[n]{\left|c_{n}\right| }}}$ such that the series absolutely converges for $\left|x\right| < R$, diverges for $\left|x\right| >R$ and anything possible for $\left|x\right| =R$.
 
+\begin{remark}
+	To determine $R$, we often use the ratio test instead:
+	\[
+		\left|\frac{c_{n+1}x^{n+1}}{c_nx^{n}}\right| =\left|x\right| \cdot \left|\frac{c_{n+1}}{c_n}\right|\underbrace{\to}_{\text{ if limit exists } } \left|x\right| \cdot L\implies \text{ absolute convergence if } \left|x\right| <\frac{1}{L}, \text{ diverges if }  \left|x\right| >\frac{1}{L}
+		,\] where $R=\frac{1}{L}=\frac{1}{\lim_{n\to \infty}{\left|\frac{c_{n+1}}{c_n}\right| }}$.\\
+	In general, by Theorem~\ref{thm:3.37}, we also have \[
+		\frac{1}{\lim_{n\to \infty}{\left|\frac{c_{n+1}}{c_n}\right|}}\le R\le \frac{1}{\liminf_{n\to \infty}{\frac{c_{n+1}}{c_n}}}
+		.\]
+\end{remark}
+
+\begin{theorem}[1]
+	Suppose $\sum_{n=0}^{\infty}{c_n x^{n}}$ has a radius of convergence $R>0$ and define $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$ for $\left|x\right| < R$. Such a function $f(x)$ is called an \textit{analytic function} .\\
+	If $R<\infty$, then the series converges uniformly on $[-R+\epsilon,R-\epsilon]$ for all $\epsilon>0$.\\
+	If $R=\infty$, then the series converges uniformly on $[-M,M]$ for all $M < \infty$.
+	The function $f$ is continuous and differentiable on $(-R,R)$ with $f'(x)=\sum_{c_n n x^{n-1}}$
+	\begin{note}
+		Uniform convergence may not hold on $(-R,R)$. C.f. A7-Q3.
+	\end{note}
+	\begin{proof}
+		\hfill
+		\begin{description}
+			\item[Uniform convergence:]
+			      For $\left|x\right| \le R-\epsilon$,
+			      if $\left|c_n x^{n}\right|\le \left|c_n\right| (R-\epsilon)^{n}$.\\
+			      Since $\sum_{n=0}^{\infty}{\left|c_n\right|(R-\epsilon)^{n}}<\infty$ by absolute convergence on $(-R,R)$. Hence, by Weierstrass M-test, $\sum_{n=0}^{\infty}{c_n x^{n}}$ converges uniformly on $[-R+\epsilon,R-\epsilon]$.\\
+			\item[Derivative:]
+			      The radius of convergence of $\sum_{n=1}^{\infty}{nc_n x^{n-1}}$ is \[
+				      \frac{1}{\limsup_{n\to \infty}{\sqrt[n]{n \left|c_n\right| }}}=\frac{1}{\limsup_{n\to \infty}{\sqrt[n]{n}\sqrt[n]{\left|c_n\right|}}}=\text{ radius of convergence of } \sum_{n=\infty}^{c_n}{x^{n}}
+				      .\]
+			      (Note that $\lim_{n\to \infty}{\sqrt[n]{n}}=1$.)\\
+			      Let $S_n(x)=\sum_{m=0}^{n}{c_m x^{m}}$. Then $S'_n(x)=\sum_{m=1}^{n}{c_m m x^{m-1}}$.
+			      By the first part of the proof, $S'_n(x)\to \sum_{m=1}^{\infty}{c_m m x^{m-1}}$ uniformly on $[-R+\epsilon, R-\epsilon]$. Since also $S_n(x)\to f(x)$, by Theorem~\ref{thm:7.17}, $f'$ exists on $[-R+\epsilon,R-\epsilon]$, and $f'(x)=\sum_{m=1}^{\infty}{c_m m x^{m-1}}$.\\
+			      Since $\epsilon$ is arbitrary, $f'(x)=\sum_{m=1}^{\infty}{c_m m x^{m-1}}$ for all $x \in (-R,R)$. In particular, $f$ is also continuous.
+		\end{description}
+	\end{proof}
+\end{theorem}
+
+\begin{corollary}
+	If $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$ converges for $\left|x\right| < R$, then $f^{(k)}(x)$ exists for all $k \in \N$, and
+	\begin{equation*}
+		f^{(k)}(x)=\sum_{n=k}^{\infty}{c_n n(n-1)\cdots (n-k+1)x^{n-k}}
+		\tag{*}
+		.\end{equation*}
+	Consequently, $c_k=f^{(k)}(0)$ and $f(x)=\sum_{n=0}^{\infty}{\frac{f^{(n)}(0)}{n!} x^{n}}$.
+	\begin{note}
+		C.f. Taylor's theorem.
+	\end{note}
+	\begin{proof}
+		By Theorem~\ref{thm:8.1}, $f'(x)=\sum_{n=1}^{\infty}{c_n n x^{n-1}}, f''(x)=(f')'(x)=\sum_{n=2}^{\infty}{c_n n(n-1)x^{n-2}}, \ldots $.\\
+		Set $x=0$ in (*) to get $f^{(k)}(0)\underbrace{=}_{\text{ only } n=k \text{ term survives } }c_k k (k-1) \cdots \cdot 1=c_k k!$.
+	\end{proof}
+\end{corollary}
+\begin{example}
+	Let $f(x)=\begin{cases}
+			e^{-\frac{1}{x^2}} & x\neq 0 \\
+			0                  & x=0
+		\end{cases}$.
+	By Rudin's problem 8.1, $f^{(n)}(0)=0$ for all $n=0,1,2,\ldots $, so
+	$f(x)\neq \sum_{n=0}^{\infty}{\frac{f^{(n)}}{n!} x^{n}}$ except for $x=0$.
+	\begin{remark}[Bump Function]
+		\textit{Bump functions} are infinitely differentiable functions with compact support. E.g.,
+		\[
+			f(x)=\begin{cases}
+				e^{-\frac{1}{1-x^2}} & x \in (-1,1)         \\
+				0                    & \left|x\right| \ge 1
+			\end{cases}
+			.\]
+	\end{remark}
+\end{example}
+
+\begin{thm}[2][\namedlabel{thm:abel}{Abel's Theorem}]
+	Suppose $\sum_{n=0}^{\infty}{c_n}$ converges (perhaps conditionally). Let $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$.
+	Then $f(x)$ converges for $\left|x\right| < 1$ and $\lim_{x\to 1^{-}}{f(x)}=\sum_{n=0}^{\infty}{c_n}$.
+\end{thm}
