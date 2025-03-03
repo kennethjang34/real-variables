@@ -766,7 +766,7 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 
 \begin{thm}[26][Weierstrass's Theorem]
 	Let $f: [a,b]\to \R (\text{ or } \C)$ be continuous.\\
-	There exists polynomials $p_{n}$ s.t. $p_{n}\to f$ uniformly on $[a,b]$.
+	There exists a polynomial sequence $\{ {P}_{n}\}$ s.t. $P_{n}\to f$ uniformly on $[a,b]$.
 \end{thm}
 
 \begin{exercise}
@@ -809,7 +809,7 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 	\begin{itemize}
 		\item $EX_{n}=\frac{1}{n}ES_n=\frac{1}{n}np=p$
 		\item $VarX_{n}=\frac{1}{n^{2}}\cdot VarS_n= \frac{p(1-p)}{n}$
-		\item $\sigma_{X_{n}}=\sqrt{\frac{np(1-p)}{n}}$
+		\item $\sigma_{X_{n}}=\sqrt{\frac{p(1-p)}{n}}$
 	\end{itemize}
 	% The figure for $P(X_n=\frac{m}{n})$  is as follows:\\
 	% \begin{center}
@@ -838,9 +838,9 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 			.\]
 		\begin{proof}
 			\begin{flalign*}
-				\text{LHS} & = \sum_{m:\left|\frac{m}{n}-p\right|>\delta }{p_{m}\cdot 1}\le \sum_{m=0}^{n}{\left(\frac{\frac{m}{n}-p}{\delta}\right)^2 p_m } \\
+				\text{LHS} & = \sum_{m:\left|\frac{m}{n}-p\right|>\delta }{p_{m}\cdot 1}\le \sum_{m=0}^{n}{p_m \cdot \left(\frac{\frac{m}{n}-p}{\delta}\right)^2} \\
 				           & =\frac{1}{\delta^2}\sum_{m=0}^{n}{\left(X_{n}(m)-p\right)^{2}p_m}=\frac{1}{\delta^2}E \left[ \left(X_{n}-p\right)^2  \right]    \\
-				           & =\frac{1}{\delta^2}\text{Var}X_n = \frac{1}{\delta^2}\frac{p(1-p)}{n}
+						   &=\frac{1}{\delta^2}E \left[ \left(X_{n}-EX_n\right)^2  \right]=\frac{1}{\delta^2}\text{Var}X_n = \frac{1}{\delta^2}\frac{p(1-p)}{n}
 			\end{flalign*}
 		\end{proof}
 	\end{prop}
@@ -863,7 +863,7 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 		Let $\epsilon>0$. Choose $\delta>0$ s.t. \[
 			\left|x-y\right| \le \delta \implies \left|f(x)-f(y)\right|<\frac{\epsilon}{2}
 			.\]
-		Note this is possible since $f$ is uniformly continuous on $[0,1]$.\\
+			Note this is possible since $f$ is continuous on $[0,1]$, which is a compact set, and thus uniformly continuous on $[0,1]$.\\
 		Since
 		\begin{flalign*}
 			 & \sum_{m:\left|\frac{m}{n}-x\right|\le \delta}{\left|f(x)-f(\frac{m}{n})\right|p_m}  \le  \frac{\epsilon}{2}	 \sum_{m=0}^{n}{p_m}=\frac{\epsilon}{2}                                                                       \\
@@ -878,14 +878,17 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 \begin{define}[28]
 	\hfill
 	\begin{description}
-		\item[Algebra]:Let $\mathscr{A}$ be a set of functions $f:E\to \C$. Then $\mathscr{A}$ is an \textit{algebra} if $\forall{f,g \in \mathscr{A}}\;\forall{c \in \C}: f+g \in \mathscr{A}, \; fg \in \mathscr{A}, \; cf \in \mathscr{A}$.
+		\item[Algebra:]Let $\mathscr{A}$ be a set of functions $f:E\to \C$. Then $\mathscr{A}$ is an \textit{algebra} if $\forall{f,g \in \mathscr{A}}\;\forall{c \in \C}: f+g \in \mathscr{A}, \; fg \in \mathscr{A}, \; cf \in \mathscr{A}$.
 		      \begin{example}
 			      Let $E=[0,1]$, $\mathscr{A}=\mathscr{P}=$ polynomials, or $\mathscr{A}=\mathscr{C}(E)$.
 		      \end{example}
-		\item[Uniform Closure]: The \textit{uniform closure} of $\mathscr{A}$ is $\mathscr{B}=\{f: E\to \C \;| \; \exists{f_{n} \in \mathscr{A}} \text{ s.t. } f_{n}\to f \text{ uniformly }\} $.
+		\item[Uniform Closure:] The \textit{uniform closure} $\mathscr{B}$ of $\mathscr{A}$ is $\{f: E\to \C \;| \; \exists{\{ {f}_{n}\} \text{ in }  \mathscr{A}} \text{ s.t. } f_{n}\to f \text{ uniformly }\}$. 
+			\begin{note}
+				We say an algebra $\mathscr{A}$ is \textit{uniformly closed} if $\mathscr{A}=\mathscr{B}$.
+			\end{note}
 		      \begin{example}
 			      \begin{itemize}
-				      \item $\mathscr{C}[0,1]$ is the uniform closure of $\mathscr{P}$.
+				      \item $\mathscr{C}[0,1]$ is the uniform closure of $\mathscr{P}$. (by Theorem~\ref{thm:7.26})
 				      \item $\mathscr{P}$ is uniformly closed on $\R$ (See A6)
 				      \item $\mathscr{P}$ is not uniformly closed on $[0,1]$
 				      \item $\mathscr{C}[0,1]$ is uniformly closed
@@ -952,25 +955,27 @@ Suppose $\lim_{n\to \infty}{f_n(x)}=f(x)$ exists for all $x \in K$. Then $f_n\to
 
 
 \begin{thm}[32][Stone-Weierstrass Theorem]
-	The uniform closure of any algebra of real continuous functions on a compact set $K$, which separates points and vanishes at no point, is the set of real-valued continuous functions on $K$; i.e., $\mathscr{C}(K)$.
+	The uniform closure of any algebra of real continuous functions on a compact set $K$, which separates points and vanishes at no point, is the set of all real-valued continuous functions on $K$; i.e., $\mathscr{C}(K)$.
 \end{thm}
 For the proof of Theorem~\ref{thm:7.32}, we need the following lemmas
 \begin{lemma}[1]
 	\label{lem:7.32a}
-	Let $\mathscr{A}$ be an algebra of real-valued continuous functions on a compact set $K$.\\
-	If $f \in \overline{\mathscr{A}}$ then $\left|f\right| \in \overline{\mathscr{A}}$.
+	Let $\mathscr{A}$ be an algebra of real-valued continuous functions on a compact set $K$. If $f \in \overline{\mathscr{A}}$ then $\left|f\right| \in \overline{\mathscr{A}}$.
 	\begin{proof}
+		Note that $\overline{\mathscr{A}}$ is an algebra since it is a uniform closure of a bounded algebra, where the boundedness is due to the continuity of functions in $\mathscr{A}$ on a compact set $K$.\\
 		Let $f \in \overline{\mathscr{A}}$. Let $M=\sup_{x \in K} \left|f(x)\right| $. Then $M<\infty$.\\
 		Let $\epsilon>0$. By Theorem~\ref{thm:7.26}, there exists a polynomial $\tilde{P}$ such that $\sup_{\left|y\right| \le M} \left|\tilde{P}(y)-\left|y\right| \right| <\frac{\epsilon}{2}$.
-		Let $P(y)=\tilde(P)(y)-\tilde{P}(0)= \sum_{j=1}^{n}{c_jy^{j}}$.
+		Let $P(y)=\tilde{P}(y)-\tilde{P}(0)= \sum_{j=1}^{n}{c_jy^{j}}$.
 		Then
 		\begin{flalign*}
 			\left|P(y)-\left|y\right|\right| & = \left|\tilde{P}(y)-\tilde{P}(0)-\left|y\right|\right|                                                     \\
 			                                 & \le \left|\tilde{P}(y)-\left|y\right| \right| + \left|\tilde{P}(0)-\left|0\right| \right|                   \\
 			                                 & <\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon \text{ for all } y \text{ such that } \left|y\right|  \le M
 			.\end{flalign*}
-		Also, $P(f)=\sum_{j=1}^{n}{c_{j}f^{j}} \in \overline{\mathscr{A}}$ [Note we don't know if constants are in $\overline{\mathscr{A}}$, so we omitted the $j=0$ term], and $\sup_{x \in K}\left|(P(f))(x)-\left|f(x)\right| \right| <\epsilon$ since $\left|f(x)\right| \le M$.\\
-		Thus, $f$ can be approximated arbitrarily by an element of $\overline{\mathscr{A}}$, so $\left|f\right| \in \overline{\mathscr{A}}$.
+		Also, $P(f)=\sum_{j=1}^{n}{c_{j}f^{j}} \in \overline{\mathscr{A}}$ since $\overline{A}$ is an algebra, and $\sup_{x \in K}\left|(P(f))(x)-\left|f(x)\right| \right| <\epsilon$ as $\left|f(x)\right| \le M$.\\
+		Thus, $\left|f\right| $ can be approximated arbitrarily by an element of $\overline{\mathscr{A}}$, so $\left|f\right| \in \overline{\mathscr{A}}$.
+
+		[Note we don't know if constants are in $\overline{\mathscr{A}}$, so we omitted the $j=0$ term]
 	\end{proof}
 \end{lemma}
 \begin{lemma}[2]
@@ -994,12 +999,13 @@ For the proof of Theorem~\ref{thm:7.32}, we need the following lemmas
 \begin{proof}[Theorem~\ref{thm:7.32}]
 	It suffices to prove that if $\mathscr{A}$ is an algebra of real continuous functions on a compact set $K$ that separates points and vanishes at no points, then $\forall{f \in \mathscr{C}(K)}:\forall{\epsilon > 0}: \exists{h \in \mathscr{B}=\overline{\mathscr{A}}} \text{ such that }  \|f-h\|<\epsilon$. This suffices because if there exists such an $h$, then we can choose $g \in \mathscr{A}$ such that $\|g-h\|<\epsilon$, so $\|f-g\|\le \|f-h\|+\|h-g\|<\epsilon+\epsilon=2\epsilon$.\\
 	\begin{claim}[1]
-		\namedlabel{clm:1}{1}
+		\label{clm:1}
+		% [{\namedlabel{clm:1}{1}}]
 		Let $f:K\to \R$ be continuous, $\epsilon>0$. Then \[
 			\exists{g_x  \in \mathscr{B}} \text{ such that } g_{x}(x)=f(x) \text{ and } g_{x}(t)-f(t)>-\epsilon \text{ for all } t \in K
 			.\]
 	\end{claim}
-	\begin{proof}[Claim~\ref{clm:1}]
+	\begin{proof}[Claim~\nameref{clm:1}]
 		Given $y \in K$ with $y\neq x$,  by Theorem~\ref{thm:7.31}, there exists $h_y \in \mathscr{A}$ such that $h_y(x)=f(x)$, $h_y(y)=f(y)$.
 		Since $h_y -f$ is continuous and $h_y(y)-f(y)=0$, there exists open $J_y \subset K$ with $y \in J_y$ such that $h_y(t)-f(t)>-\epsilon$ for all $t \in J_y$.\\
 		Since $K$ is compact, $K \subset J_{y_{1}} \cup \cdots \cup J_{y_{n}}$ for some $y_{1},y_{2}, \ldots ,y_{n} \in K$, where some $y_j$ may be $x$.\\
@@ -1007,17 +1013,17 @@ For the proof of Theorem~\ref{thm:7.32}, we need the following lemmas
 		Also, $g_x(t)-f(t)\ge h_{y_i}(t)\to f(t)>-\epsilon$, where $i$ is chosen such that $t \in J_{y_i}$.
 	\end{proof}
 	\begin{claim}[2]
-		\namedlabel{clm:2}{2}
+		\label{clm:2}
 		Let $f:K\to \R$ be continuous, $\epsilon>0$. Then \[
 			\exists{h \in \mathscr{B}} \text{ such that }\sup_{x \in K}\left|h(x)-f(x)\right| <\epsilon
 			.\]
 	\end{claim}
-	\begin{proof}[Claim \ref{clm:2}]
+	\begin{proof}[Claim~\nameref{clm:2}]
 		Since $g_x -f$ is continuous and $g_x(x)-f(x)=0$, there exists open
 		${V_x \subset K}, {V_x \ni x}, g_x(t)-f(t) < \epsilon \text{ for all }  t \in V_x $.
 		Since $K$ is compact, $K \subset V_{x_{1}} \cup  V _{x_{2}} \cup \cdots \cup V_{x_{m}} $ for some $x_{1},x_{2},\ldots ,x_m \in K$.
 		Let $h= \min\{g_{x_{1},g_{x_{2}}}, \ldots ,g_{x_{n}}\} \in \mathscr{B}$.
-		Then $\forall{t \in K}: h(t)-f(t)\underbrace{=}_{\text{ choose } i \text{ s.t. } g_{x_i}(t) \text{ gives the minimum }}g_{x_i}(t)-f(t)>-\epsilon $ by Claim~\ref{clm:1}, and $h(t)-f(t) \le g_{x_j}(t)-f(t)<\epsilon$ (Choose $j$ s.t. $t \in V_{x_j}$).
+		Then $\forall{t \in K}: h(t)-f(t)\underbrace{=}_{\text{ choose } i \text{ s.t. } g_{x_i}(t) \text{ gives the minimum }}g_{x_i}(t)-f(t)>-\epsilon $ by Claim~\nameref{clm:1}, and $h(t)-f(t) \le g_{x_j}(t)-f(t)<\epsilon$ (Choose $j$ s.t. $t \in V_{x_j}$).
 		Therefore, $h(t)-f(t) <\epsilon$ for all $t \in K$, and hence $\sup_{t \in K}\left|h(t)-f(t)\right| < \epsilon$.
 	\end{proof}
 \end{proof}

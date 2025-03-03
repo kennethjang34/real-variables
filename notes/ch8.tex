@@ -77,5 +77,70 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 
 \begin{thm}[2][\namedlabel{thm:abel}{Abel's Theorem}]
 	Suppose $\sum_{n=0}^{\infty}{c_n}$ converges (perhaps conditionally). Let $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$.
-	Then $f(x)$ converges for $\left|x\right| < 1$ and $\lim_{x\to 1^{-}}{f(x)}=\sum_{n=0}^{\infty}{c_n}$.
+	Then $f(x)$ converges for $\left|x\right| < 1$ and $\lim_{x\to 1^{-}}{f(x)}=f(1)=\sum_{n=0}^{\infty}{c_n}$.
+	\begin{remark}
+		Interesting case is at $R=1$, since $R>1$ implies continuity at of $f$ for $\left|x\right| < R$.
+	\end{remark}
+	\begin{proof}
+		By the root test, $\limsup_{n\to \infty}{\sqrt[n]{\left|c_n\right|}}\le 1$, so $\sum_{n=0}^{\infty}{c_n x^{n}}$ has $R\ge 1$.
+		Let $S_n=\sum_{m=0}^{n}{c_m}$ and $S=\sum_{m=0}^{\infty}{c_m}=\lim_{n\to \infty}{S_n}$.\\
+		Set $S_{-1}=0$. Then $c_{n}=s_{n}-s_{n-1}$ for $n\ge 0$.\\
+		Let $\epsilon>0$. We need to show $\exists{\delta > 0} \text{ such that } 1-\delta<x<1 \implies \left|f(x)-S\right| < \epsilon$.\\
+		Start with partial sum for $f(x)$. For $\left|x\right| < 1$,
+		\begin{flalign*}
+			\sum_{m=0}^{n}{c_m x^{m}}=\sum_{m=0}^{n}{(S_m-S_{m-1})x^{m}}=\sum_{m=0}^{n}{S_m x^{m}}-\sum_{m=0}^{n}{S_{m-1}x^{m}}
+			.\end{flalign*}
+		Let $k=m-1$ so that $m=k+1$. Then
+		\begin{flalign*}
+			\sum_{m=-1}^{n}{S_{m-1}x^{m}} & =x\sum_{k=0}^{n-1}{S_k x^{k}}                                                                                                                     \\
+			\sum_{m=0}^{n}{c_m x^{m}}     & =(1-x)\sum_{m=0}^{n}{S_m x^{m}}+\underbrace{S_n x^{n+1}}_{\to 0 \text{ as } n\to \infty \text{ since $S_n$ is bounded and $\left|x\right| < 1$} }
+			.\end{flalign*}
+		Let $n\to \infty$.
+		Then
+		\begin{flalign*}
+			f(x) & =(1-x)\sum_{n=0}^{\infty}{S_n x^{n}}+0=(1-x)S
+			.\end{flalign*}
+		\begin{flalign*}
+			\left|f(x)-S\right| & =\left|(1-x)\sum_{n=0}^{\infty}{S_n x^{n}}-S(1-x)\sum_{n=0}^{\infty}{x^{n}}\right| \\                                                                                   & =(1-x) \left|\sum_{n=0}^{\infty}{(S_n-S)x^{n}}\right|\le (1-x)\sum_{n=0}^{\infty}{\left|S_n-S\right|\cdot \left|x \right|^{n}  }
+			.\end{flalign*}
+		Choose $N$ s.t. $n\ge N \implies \left|S_n-S\right|<\frac{\epsilon}{2} $.
+		For $x \in (0,1)$,
+		\[
+			\left|f(x)-S\right| \le (1-x) \sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}+(1-x) \sum_{n=N+1}^{\infty}{\left|S_n-S\right|x^{n}}<\frac{\epsilon}{2}\cdot (1-x)\cdot \frac{1}{1-x}
+			.\]
+		$(1-x)\sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}$ is a polynomial in $x$, so continuous and equals $0$ at $x=1$, so $<\frac{\epsilon}{2}$ if $\left|x-1\right| <\delta$ for some $delta>0$.
+		Therefore, for $1-\delta<x<1$, $\left|f(x)-S\right|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
+	\end{proof}
+	\begin{note}
+		For an application of Abel's theorem, see Rudin's p. 175.\\
+		For the case $\sum_{n=0}^{\infty}{c_n}=\infty$, see A7.
+	\end{note}
 \end{thm}
+
+\begin{thm}[3]
+	If $\sum_{i=1}^{\infty}{\sum_{j=1}^{\infty}{\left|a_{ij}\right|}}$, then \[
+		\sum_{i=1}^{\infty}{\sum_{j=1}^{\infty}{a_{ij}}}= \sum_{j=1}^{\infty}{\sum_{i=1}^{\infty}{a_{ij}}},\] where both sides converge.
+	\begin{proof}
+		Rudin has a too clever proof \ldots  A7 involves a more straightforward proof.
+	\end{proof}
+\end{thm}
+
+\begin{thm}[4]
+	Suppose $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$ (Taylor series of $f$ at $x=0$, a.k.a Maclauren series) has a radius of convergence $R>0$.
+	Let $\left|a\right|<R$.
+	Then $f(x)=\sum_{n=0}^{\infty}{\frac{f^{(n)}(a)}{n!}(x-a)^{n}}$ for (at least) $\left|x-a\right|<R-\left|a\right|$.
+	\begin{proof}
+		Note \[
+			f(x)=\sum_{n=0}^{\infty}{c_n \left( a+(x-a) \right)^{n}}=\sum_{n=0}^{\infty}{c_n}\sum_{m=0}^{n}{\binom{n}{m}(x-a)^{m}a^{n-m}}
+			.\]
+		We want to interchange the order of summation.\\
+		By Theorem~\ref{thm:8.3}, interchange of summations is justified if \[
+			\sum_{n=0}^{\infty}{\sum_{m=0}^{n}{\left|c_n\right|\binom{n}{m}\left|x-a\right|^{m}\left|a\right|^{n-m}}}<\infty
+			.\]
+		Since $\text{LHS} =\sum_{n=0}^{\infty}{\left|c_{n}\right|\left( \left|x-a\right|+\left|a\right|\right)^{n}}$, which does converge if $\left|x-a\right|+\left|a\right|<R$, which we are assuming.\\
+		Therefore, \[
+			f(x)=\sum_{m}^{\infty}{\sum_{n}^{\infty}{c_n \binom{n}{m}a^{n-m}(x-a)^{m}}}=\sum_{m}{\left(\sum_{n}{c_n \binom{n}{m}a^{n-m}}\right)(x-a)^{m}}
+			.\]
+	\end{proof}
+\end{thm}
+
