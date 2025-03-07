@@ -180,14 +180,23 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 		\begin{claim}
 			$A$ is also open.
 			\begin{proof}
-				Let $x_{0}' \in A=E' \cap (-R,R)$.
-				Then $\exists{\{ {d}_{n}\}} \text{ such that } f(x)=\sum_{n=0}^{\infty}{d_n (x-x_{0}}^{n}$.
-				TODO
+				Let $x_{0} \in A=E' \cap (-R,R)$.
+				Then $\exists{\{ {d}_{n}\}} \text{ such that } f(x)=\sum_{n=0}^{\infty}{d_n (x-x_{0})}^{n}$ for $\left|x-x_{0}\right|<R-\left|x_{0}\right|$.
+				If we show that $d_{n}=0$ for all $n\ge 0$, it proves $(x_{0}-r,x_{0}+r) \subset A$, and hence that $A$ is open.
+				Suppose for contradiction there exists $k\ge 0$ such that $d_k\neq 0$ and $f(x)=\sum_{n=k}^{\infty}{d_n (x-x_{0})^{n}}$.
+				Then $f(x)=(x-x_{0})^{k} \sum_{n=k}^{\infty}{d_n(x-x_{0})^{n-k}}$.
+				Let $m=n-k$. Then \[
+					f(x)=(x-x_{0})^{k} \sum_{m=0}^{\infty}{d_{m+k}(x-x_{0})^{m}}=(x-x_{0})^{k}f(x)
+					.\]
+				Say $g(x)=\sum_{m=0}^{\infty}{d_{m+k}(x-x_{0})^{m}}$. Then
+				$g(x_0)=d_k\neq 0$, and by continuity of $g$, $\exists{\delta>0} \text{ such that } g(x)\neq 0$ if $\left|x-x_{0}\right|<\delta$.
+				However, $f(x)=(x-x_{0})^{k}g(x)\neq 0	 \text{ if } 0<\left|x-x_{0}\right|<\delta$, so $x_{0}$ is an isolated zero of $f$ and $x_{0} \in E'$.
+				This is a contradiction, so $d_{n}=0$ for all $n\ge 0$.
 			\end{proof}
 		\end{claim}
 		Given the claim, in $(-R,R)$, $A$ and $B$ are both open and closed.
 		Since $(-R,R)$ is connected (C.f. MATH-320's A5.3(c)),
-		one of \begin{enumerate}
+		one of \begin{enumerate}[label=(\roman*)]
 			\item $A=\emptyset,B=(-R,R)$
 			\item $A=(-R,R),B=\emptyset$
 		\end{enumerate}
@@ -195,7 +204,73 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 		As $A$ is non-empty, $A=(-R,R)=E'$.\\
 		Therefore, $\forall{x \in (-R,R)}: \exists{\{ {x}_{n}\} \text{ in } E} \text{ such that } x_n\to x$.
 		Since $f$ is continuous on $(-R,R)$, $f(x)=\lim_{n\to \infty}{f(x_n)}=0$.\\
-		Therefore, $x \in E$, so $(-R,R)\subset E$.
+		Therefore, $x \in E$, so $(-R,R)\subset E$.\\
 	\end{proof}
 \end{thm}
+
+\begin{remark}
+	CUT-OFF for MT2 ends here, including A4,5,6,7 and up to Rudin's p.143-178.
+\end{remark}
+
+
+
+
+\section{Exponential Function}
+Recall \[
+	e:=\sum_{n=0}^{\infty}{\frac{1}{n!}}
+	.\]
+
+Also, $e=\lim_{n\to \infty}{\left(1+\frac{1}{n}\right)^{n}}$, $e <3, e \in \Q$.
+\begin{define}
+	For $z \in \C$, $E(z):=\sum_{n=0}^{\infty}{\frac{z^{n}}{n!}}$ and it has a radius of convergence $R=\infty$.
+	Note $E(1)=e$ is given by the definition of $e$.
+\end{define}
+
+\begin{thm}
+	For $p \in \Q$, $E(p)=e^{p}$.
+	\begin{proof}
+		\begin{enumerate}[label=(\roman*)]
+			\item
+			      Note \begin{flalign*}
+				      E(w)E(z) & =\sum_{m=0}^{\infty}{\frac{w^{m}}{m!}} \sum_{n=0}^{\infty}{\frac{z^{n}}{n!}}= \sum_{n=0}^{\infty}{\sum_{k=0}^{n}{\frac{z^{k}}{k!} \frac{w^{n-k}}{(n-k)!}}} \;\; (\text{ by Theorem~\ref{thm:3.50}}) \\
+				               & =\sum_{n=0}^{\infty}{\frac{1}{n!} \sum_{k=0}^{n}{\binom{n}{k}z^{k}w^{n-k}}}=\sum_{n=0}^{\infty}{\frac{(z+w)^{n}}{n!}}=E(z+w).
+			      \end{flalign*}
+			      In particular,
+			      \begin{flalign*}
+				      E(2) & =E(1+1)=E(1)^{2}=e^2                                        \\
+				      E(3) & =E(1+2)=E(1)E(2)=e\cdot e^2=e^3                             \\
+				      \vdots
+				      E(n) & =e^n \text{ for } n =0, 1,2,3,\ldots, (E(0)=\frac{1}{0!}=1)
+				      .\end{flalign*}
+			\item  Since $E(z)E^{-z}=E(z-z)=1$, $E(-z)=\frac{1}{E(z)}$.
+			      Hence, $E(-n)=\frac{1}{E(n)}=\frac{1}{e^n}=e^{-n}$.\\
+			      Thus, $E(n)=e^{n}$ for $n \in \Z$.
+			\item Let $p=\frac{m}{n}$, $m \in \Z, n \in \N$. Then
+			      \begin{flalign*}
+				      e^{m}=E(m)=E(np)=E(p+p+\cdots +p)=E(p)^{n}
+				      .\end{flalign*}
+			      Hence, $E(\frac{m}{n})=E(p)=e^{\frac{m}{n}}=e^{p}$.
+		\end{enumerate}
+	\end{proof}
+\end{thm}
+
+\begin{define}
+	For $x \in \R$, let $e^{x}=\sum_{n=0}^{\infty}{\frac{x^{n}}{n!}}=E(x)$.
+	This defines $x \mapsto e^{x}$ as an analytic function on $\R$, which must be infinitely differentiable and \[
+		\frac{\mathrm{d}}{\mathrm{d}x}e^{x}=\sum_{n=1}^{\infty}{\frac{1}{n!}n x^{n-1}}= \sum_{n=1}^{\infty}{\frac{1}{(n-1)!} x^{n-1}}=e^{x}
+		.\]
+	We then have $\frac{\mathrm{d}^{k}}{\mathrm{d}x^{k}}e^{x}=e^{x}$ for all $x=0,1,2,\ldots $.\\
+	Since $e^{x}e^{-x}=1$ and since $e^{x}>0$ for $x\ge 0$, $e^{-x}>0$, so $e^{x}>0$ for all $x \in \R$.\\
+	From the first two derivatives, $x \mapsto e^{x}$ is strictly increasing and strictly convex.\\
+	For $n\ge 0$ and $x>0$, $e^{x}> \frac{x^{n+1}}{(n+1)!}$, so $\frac{e^{x}}{x^{n}}>\frac{x}{(n+1)!}\to \infty$ as $x\to \infty$. \\
+	In particular, with $n=0$, $e^{x}\to \infty$ as $x\to \infty$, and $e^{-x}=\frac{1}{e^{x}}\to 0$ as $x\to \infty$.
+\end{define}
+
+\begin{define}
+	For $y>0$, define $L(y)=\log{y}(= \ln{y})$ by $E(L(y))=y$.
+	Equivalently, $L(E(x))=x$ for all $x \in \R$, or
+	$e^{\log{y}}=y$ for all $y>0$ and $\log{e^{x}}=x$.\\
+	Since $x \mapsto e^{x}$ is strictly increasing and differentiable,
+	its inverse $y \mapsto \log{y}$ is also strictly increasing and differentiable.\\
+\end{define}
 
