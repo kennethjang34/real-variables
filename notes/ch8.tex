@@ -20,19 +20,22 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 	If $R=\infty$, then the series converges uniformly on $[-M,M]$ for all $M < \infty$.
 	The function $f$ is continuous and differentiable on $(-R,R)$ with $f'(x)=\sum_{n}{c_n n x^{n-1}}$
 	\begin{note}
-		Uniform convergence may not hold on $(-R,R)$. C.f. A7-Q3.
+		a function of the form $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$ is called an \textit{analytic function} .\\
 	\end{note}
+	\begin{remark}
+		Uniform convergence may not hold on $(-R,R)$. C.f. A7-Q3.
+	\end{remark}
 	\begin{proof}
 		\hfill
 		\begin{description}
 			\item[Uniform convergence:]
 			      For $\left|x\right| \le R-\epsilon$, $\left|c_n x^{n}\right|\le \left|c_n\right| (R-\epsilon)^{n}$.\\
-			      Since $\sum_{n=0}^{\infty}{\left|c_n\right|(R-\epsilon)^{n}}<\infty$ by absolute convergence on $(-R,R)$. Hence, by Weierstrass M-test, $\sum_{n=0}^{\infty}{c_n x^{n}}$ converges uniformly on $[-R+\epsilon,R-\epsilon]$.\\
+			      $\sum_{n=0}^{\infty}{\left|c_n\right|(R-\epsilon)^{n}}<\infty$ by absolute convergence on $(-R,R)$. Hence, by \ref{thm:M-test}, $\sum_{n=0}^{\infty}{c_n x^{n}}$ converges uniformly on $[-R+\epsilon,R-\epsilon]$.\\
 			\item[Derivative:]
 			      The radius of convergence of $\sum_{n=1}^{\infty}{nc_n x^{n-1}}$ is
 			      \begin{flalign*}
-				      \frac{1}{\limsup_{n\to \infty}{\sqrt[n]{n \left|c_n\right| }}} & =\frac{1}{\limsup_{n\to \infty}{\sqrt[n]{n}\sqrt[n]{\left|c_n\right|}}}                                                   \\
-				                                                                     & =\text{ radius of convergence of } \sum_{n=0}^{\infty}{c_n x^{n}} \text{  ($\because \lim_{n\to \infty}{\sqrt[n]{n}}=1$)}
+				      \frac{1}{\limsup_{n\to \infty}{\sqrt[n]{n \left|c_n\right| }}} & =\frac{1}{\limsup_{n\to \infty}{\sqrt[n]{n}\sqrt[n]{\left|c_n\right|}}}                                                      \\
+				                                                                     & =R =\text{ radius of convergence of } \sum_{n=0}^{\infty}{c_n x^{n}} \text{  ($\because \lim_{n\to \infty}{\sqrt[n]{n}}=1$)}
 				      .\end{flalign*}
 			      Let $S_n(x)=\sum_{m=0}^{n}{c_m x^{m}}$. Then $S'_n(x)=\sum_{m=1}^{n}{c_m m x^{m-1}}$.
 			      By the first part of the proof, $S'_n(x)\to \sum_{m=1}^{\infty}{c_m m x^{m-1}}$ uniformly on $[-R+\epsilon, R-\epsilon]$. Since also $S_n(x)\to f(x)$, by Theorem~\ref{thm:7.17}, $f'$ exists on $[-R+\epsilon,R-\epsilon]$, and $f'(x)=\sum_{m=1}^{\infty}{c_m m x^{m-1}}$.\\
@@ -91,13 +94,13 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 			.\end{flalign*}
 		Let $k=m-1$ so that $m=k+1$. Then
 		\begin{flalign*}
-			\sum_{m=-1}^{n}{S_{m-1}x^{m}} & =x\sum_{k=0}^{n-1}{S_k x^{k}}                                                                                                                     \\
-			\sum_{m=0}^{n}{c_m x^{m}}     & =(1-x)\sum_{m=0}^{n}{S_m x^{m}}+\underbrace{S_n x^{n+1}}_{\to 0 \text{ as } n\to \infty \text{ since $S_n$ is bounded and $\left|x\right| < 1$} }
+			 & \sum_{m=0}^{n}{S_{m-1}x^{m}} =\underbrace{S_{0-1}}_{0}\cdot 1+\sum_{m=1}^{n}{S_{m-1}x^{m}} =x\sum_{k=0}^{n-1}{S_k x^{k}}                                                        \\
+			 & \sum_{m=0}^{n}{c_m x^{m}}     =(1-x)\sum_{m=0}^{n}{S_m x^{m}}+\underbrace{S_n x^{n+1}}_{\to 0 \text{ as } n\to \infty \text{ since $S_n$ is bounded and $\left|x\right| < 1$} }
 			.\end{flalign*}
 		Let $n\to \infty$.
 		Then
 		\begin{flalign*}
-			f(x) & =(1-x)\sum_{n=0}^{\infty}{S_n x^{n}}+0=(1-x)S
+			f(x) & =(1-x)\sum_{n=0}^{\infty}{S_n x^{n}}
 			.\end{flalign*}
 		\begin{flalign*}
 			\left|f(x)-S\right| & =\left|(1-x)\sum_{n=0}^{\infty}{S_n x^{n}}-S(1-x) \cdot \frac{1}{1-x}\right|
@@ -108,7 +111,7 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 		\begin{flalign*}
 			\left|f(x)-S\right| & \le (1-x) \sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}+(1-x) \sum_{n=N+1}^{\infty}{\left|S_n-S\right|x^{n}}     \\
 			                    & <(1-x) \sum_{n=0}^{N}{\left|S_n-S\right| x^{n}} +(1-x)\left( \frac{\epsilon}{2} \cdot \frac{1}{1-x}\right)=
-			(1-x) \sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}+\frac{\epsilon}{2}
+			(1-x) \left(\sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}\right)+\frac{\epsilon}{2}
 			.\end{flalign*}
 		Since $(1-x)\sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}$ is a polynomial in $x$, so it is continuous and equals $0$ at $x=1$.\\
 		Hence, $(1-x)\sum_{n=0}^{N}{\left|S_n-S\right| x^{n}}<\frac{\epsilon}{2}$ if $\left|x-1\right| <\delta$ for some $\delta>0$. Therefore, for $1-\delta<x<1$, $\left|f(x)-S\right|<\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon$.
@@ -165,17 +168,16 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 	\end{example}
 \end{thm}
 
-\begin{thm}[5][Principle of Permanence of Form]
+\begin{thm}[5][\namedlabel{thm:pop}{Principle of Permanence of Form}]
 	Suppose $\sum_{n}{a_{n}x^{n}}$ and $\sum_{n}{b_{n}x^{n}}$ have radii of convergence at least  $R$. Suppose $D \subset (-R,R)$ has a limit point in $(-R,R)$.\\
 	If $\sum_{n}{a_{n}x^{n}}=\sum_{n}{b_{n}x^{n}}$ for all $x \in D$, then $a_{n}=b_{n}$ for all $n$, and hence $\sum_{n}{a_{n}x^{n}}=\sum_{n}{b_{n}x^{n}}$ for all $\left|x\right|<R$.
-	\namedlabel{thm:pop}{Principle of Permanence of Form}
 	\begin{proof}
 		Let $c_{n}=a_{n}-b_{n}$ and $f(x)=\sum_{n=0}^{\infty}{c_n x^{n}}$.
 		Then $f(x)=0$ for all $x \in D$.\\
 		Let $E=\{x \in (-R,R): f(x)=0\}$. Then $D \subset E$.\\
 		We want to show $E=(-R,R)$.
 		Let $A=E' \cap (-R,R)$. Then $A\neq \emptyset$ because $D$ has a limit point in $(-R,R)$.\\
-		Also, relative to $(-R,R)$, $A$ is closed as the set of limit points is always closed (C.f. Problem 2.6).\\
+		Also, relative to $(-R,R)$, $A$ is closed as the set of all limit points is always closed (C.f. Problem 2.6).\\
 		Let $B=(-R,R)\setminus A$. Then $A\cup B=(-R,R)$, $A\cap B=\emptyset$, and $B$ is open.\\
 		\begin{claim}
 			$A$ is also open.
@@ -186,7 +188,7 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 				Suppose for contradiction there exists $k\ge 0$ such that $d_k\neq 0$ and $f(x)=\sum_{n=k}^{\infty}{d_n (x-x_{0})^{n}}$.
 				Then $f(x)=(x-x_{0})^{k} \sum_{n=k}^{\infty}{d_n(x-x_{0})^{n-k}}$.
 				Let $m=n-k$. Then \[
-					f(x)=(x-x_{0})^{k} \sum_{m=0}^{\infty}{d_{m+k}(x-x_{0})^{m}}=(x-x_{0})^{k}f(x)
+					f(x)=(x-x_{0})^{k} \sum_{m=0}^{\infty}{d_{m+k}(x-x_{0})^{m}}
 					.\]
 				Say $g(x)=\sum_{m=0}^{\infty}{d_{m+k}(x-x_{0})^{m}}$. Then
 				$g(x_0)=d_k\neq 0$, and by continuity of $g$, $\exists{\delta>0} \text{ such that } g(x)\neq 0$ if $\left|x-x_{0}\right|<\delta$.
@@ -204,14 +206,13 @@ Recall $\sum_{n=0}^{\infty}{c_n{x^{n}}}$ has a radius of convergence $R=\frac{1}
 		As $A$ is non-empty, $A=(-R,R)=E'$.\\
 		Therefore, $\forall{x \in (-R,R)}: \exists{\{ {x}_{n}\} \text{ in } E} \text{ such that } x_n\to x$.
 		Since $f$ is continuous on $(-R,R)$, $f(x)=\lim_{n\to \infty}{f(x_n)}=0$.\\
-		Therefore, $x \in E$, so $(-R,R)\subset E$.\\
+		Therefore, for all $x \in (-R,R)$, $x \in E$, so $(-R,R)\subset E$.\\
 	\end{proof}
 \end{thm}
 
 \begin{remark}
 	CUT-OFF for MT2 ends here, including A4,5,6,7 and up to Rudin's p.143-178.
 \end{remark}
-
 
 
 
@@ -273,4 +274,95 @@ Also, $e=\lim_{n\to \infty}{\left(1+\frac{1}{n}\right)^{n}}$, $e <3, e \in \Q$.
 	Since $x \mapsto e^{x}$ is strictly increasing and differentiable,
 	its inverse $y \mapsto \log{y}$ is also strictly increasing and differentiable.\\
 \end{define}
+\begin{thm*}
+	$L'(y)=\frac{1}{y}$ for $y>0$, $L(uv)=L(U)+L(v)$ for $u,v>0$.
+	\begin{proof}
+		Apply the chain rule to $L(E(x))=x$ (C.f. Rudin's Problem 5.2).\\
+		Then $L'(E(x))E'(x)=1$, so $L'(y)=L'(E(x))=\frac{1}{E(x)}=\frac{1}{y}$.\\
+		Also, since there exist unique $x,y$ such that $E(x)=u,E(y)=v$, $L(uv)=L(E(x)E(y))=L(E(x+y))=x+y=L(u)+L(v)$.\\
+	\end{proof}
+\end{thm*}
+\begin{corollary*}
+	For $y>0$, $L(y)= \int_{1}^{y}{\frac{1}{t}\mathrm{d}t}$.
+	\begin{proof}
+		By Theorem~\ref{thm:ftc},
+		$\text{RHS} = L(t)\bigg{\rvert}_{1}^{y}=L(y)-L(1)=L(y)$.
+	\end{proof}
+\end{corollary*}
 
+\begin{thm*}
+	For $p \in \Q$ and $x>0$, $L(x^{p})=pL(x)$, so $x^{p}=e^{p \log{x}}$.
+	\begin{proof}
+		C.f. Rudin's p.181.
+	\end{proof}
+\end{thm*}
+
+\begin{define}
+	For $\alpha \in \R$, $x>0$, define $x^{\alpha}=e^{\alpha \log{x}}$.
+\end{define}
+\begin{thm}
+	For $x>0$, $\alpha \in \R$, $\frac{\mathrm{d}}{\mathrm{d}x} x^{\alpha}=\alpha x^{\alpha-1}$.
+	Hence, $x^{\alpha}$ has an antiderivative of $\begin{cases}
+			\frac{x^{\alpha+1}}{\alpha+1}+C & \alpha \neq -1 \\
+			\log{x}+C                       & \alpha=-1
+		\end{cases}$.
+	\begin{proof}
+		$\frac{\mathrm{d}}{\mathrm{d}x}x^{\alpha}=\frac{\mathrm{d}}{\mathrm{d}x}e^{\alpha \log{x}}=e^{\alpha \log{x}}\frac{\alpha}{x}=\frac{x^{\alpha}\alpha}{x}=\alpha x^{\alpha-1}$.
+	\end{proof}
+\end{thm}
+
+\begin{thm}
+	\begin{enumerate}
+		\item $\lim_{x\to \infty}{\log{x}}=\infty$
+		\item $\lim_{x\to 0^{+}}{\log{x}}=-\infty$
+		\item $\lim_{x\to \infty}{ \frac{\log{x}}{x^{\alpha}}}=0 \text{ if }  \alpha>0$
+	\end{enumerate}.
+	\begin{proof}
+		\begin{enumerate}
+			\item exercise
+			\item exercise
+			\item For $a>0$, $x>1$, \[
+				      \log{x}= \int_{1}^{x}{\frac{1}{t}\mathrm{d}t}\le \int_{1}^{x}{t^{a} \frac{1}{t}\mathrm{d}t}=\frac{1}{a}(x^{a}-1)<\frac{1}{a}x^{a}
+				      .\]
+			      Choose $a \in (0, \alpha)$. Then \[
+				      \frac{1}{x^{\alpha}} \log{x}\le \frac{1}{x^{\alpha}}\frac{1}{a}x^{a} =\frac{1}{a} \frac{1}{x^{\alpha-a}}\to 0 \text{ as } x\to \infty
+				      .\]
+		\end{enumerate}
+	\end{proof}
+\end{thm}
+For sine,cosine, pi, read Rudin's p. 182-184.
+
+\begin{thm}[8][\namedlabel{thm:fta}{Fundamental Theorem of Algebra}]\\
+	Let $n \in \N$, $a_{0},a_{1},a_{2},\ldots ,a_n \in \C$, $a_n\neq 0$,\\
+	$P(z)=a_{0}+a_{1}z+a_{2}z^2+\cdots + a_{n-1}z^{n-1}+a_n z^{n}$ for $z \in \C$.\\
+	Then there exists $z_{0} \in \C$ such that $P(z_{0})=0$.
+	\begin{proof}
+		Can assume $a_n=1$. Let $\mu=\inf_{z \in \C}\left|P(z)\right|$.
+		We want to show $\mu=0$ and $\inf_{z \in \C}\{\left|P(z)\right|\}$ is attained at some $z_{0} \in \C$.
+		\begin{claim}[1]
+			There exists $z_{0} \in \C$ such that $\left|P(z_{0})\right|=\mu$.
+			\begin{proof}
+				Suppose $\left|z\right|=R$. Then
+				\[
+					\left|P(z)\right|= \left|z\right|^{n} \cdot \left|1+ \frac{a_{n-1}}{z}+ \cdots + \frac{a_{0}}{z^{n}}\right|\ge \left|z\right|^{n} \left(1- \frac{\left|a_{n-1}\right|}{\left|z\right|}- \cdots - \frac{\left|a_0\right|}{\left|z\right|^{n}}\right)=R^{n}\left(1- \frac{\left|a_{n-1}\right|}{R}- \cdots - \frac{\left|a_0\right|}{R^{n}}\right)
+					.\]
+				Hence, $\left|P(z)\right|\to \infty$ as $R\to \infty$.
+				$\left|P(z)\ge \mu+1\right|$ if $\left|z\right|\ge R_{0}$ for some $R_{0}<\infty$, where $R$ depends on $\mu$.\\
+				Now $\left|P\right|$ is continuous and $\left|z\right|\le R_{0}$ is compact, so $\mu=\inf_{\left|z\right|\le R_{0}}\left|P(z)\right|=P(z_{0})$ for some $z_{0}$ with $\left|z_{0}\right|\le R_{0}$.
+			\end{proof}
+		\end{claim}
+		\begin{claim}[2]
+			$\mu=0$.
+			\begin{proof}
+				Suppose for contradiction $\mu>0$, so $\mu=P(z_{0})\neq 0$. Let $Q(z)= \frac{P(z_{0}+z)}{P(z_{0})}$. Then $Q(0)=1$, so $Q(z)=1+b_{k}z^{k}+ \cdots + b_n z^{n}$, where $b_k$ is the first non-zero coefficient.\\
+				Since $\left|Q(z)\right|\ge \left|Q(0)\right|=1$ for all $z \in \C$.
+				On the other hand, $\left|Q(z)\right|\le \left|1+b_k z^{k}\right|+ \sum_{m=k+1}^{n}{\left|b_k\right| \left|z\right|^{k}}$.
+				We need to choose $z$ s.t. $\left|1+b_kz^{k}\right|<1$.\\
+				Write $b_{k}z^{k}=\left|b_k\right| \frac{b_k}{\left|b_k\right|}z^{k}$, $\frac{b_k}{\left|b_k\right|}=e^{it}$. $z=re^{i\theta}$ to be chosen..\\
+				Then $b_k z^{k}=\left|b_k\right|e^{it}r^{k}e^{ik \theta}=\left|b_k\right|r^{k} e^{i(t+k \theta)}$. Choose $\theta$ so that $t+k\theta=\pi$; i.e., $\theta=\frac{\pi-t}{k}$.
+				Since $e^{i(t+k \theta)}=-1<0$.
+				Choose $r$ small enough that $1+b_k z^{k}=1- \left|b_k\right|r^{k}<1$. TODO
+			\end{proof}
+		\end{claim}
+	\end{proof}
+\end{thm}
