@@ -338,7 +338,7 @@ For sine,cosine, pi, read Rudin's p. 182-184.
 	Then there exists $z_{0} \in \C$ such that $P(z_{0})=0$.
 	\begin{proof}
 		Can assume $a_n=1$. Let $\mu=\inf_{z \in \C}\left|P(z)\right|$.
-		We want to show $\mu=0$ and $\inf_{z \in \C}\{\left|P(z)\right|\}$ is attained at some $z_{0} \in \C$.
+		We want to show that $\mu=0$ and is attained at some $z_{0} \in \C$.
 		\begin{claim}[1]
 			There exists $z_{0} \in \C$ such that $\left|P(z_{0})\right|=\mu$.
 			\begin{proof}
@@ -347,7 +347,7 @@ For sine,cosine, pi, read Rudin's p. 182-184.
 					\left|P(z)\right|= \left|z\right|^{n} \cdot \left|1+ \frac{a_{n-1}}{z}+ \cdots + \frac{a_{0}}{z^{n}}\right|\ge \left|z\right|^{n} \left(1- \frac{\left|a_{n-1}\right|}{\left|z\right|}- \cdots - \frac{\left|a_0\right|}{\left|z\right|^{n}}\right)=R^{n}\left(1- \frac{\left|a_{n-1}\right|}{R}- \cdots - \frac{\left|a_0\right|}{R^{n}}\right)
 					.\]
 				Hence, $\left|P(z)\right|\to \infty$ as $R\to \infty$.
-				$\left|P(z)\ge \mu+1\right|$ if $\left|z\right|\ge R_{0}$ for some $R_{0}<\infty$, where $R$ depends on $\mu$.\\
+				$\left|P(z)\right|\ge \mu+1$ if $\left|z\right|\ge R_{0}$ for some $R_{0}<\infty$, where $R$ depends on $\mu$.\\
 				Now $\left|P\right|$ is continuous and $\left|z\right|\le R_{0}$ is compact, so $\mu=\inf_{\left|z\right|\le R_{0}}\left|P(z)\right|=P(z_{0})$ for some $z_{0}$ with $\left|z_{0}\right|\le R_{0}$.
 			\end{proof}
 		\end{claim}
@@ -361,8 +361,73 @@ For sine,cosine, pi, read Rudin's p. 182-184.
 				Write $b_{k}z^{k}=\left|b_k\right| \frac{b_k}{\left|b_k\right|}z^{k}$, $\frac{b_k}{\left|b_k\right|}=e^{it}$. $z=re^{i\theta}$ to be chosen..\\
 				Then $b_k z^{k}=\left|b_k\right|e^{it}r^{k}e^{ik \theta}=\left|b_k\right|r^{k} e^{i(t+k \theta)}$. Choose $\theta$ so that $t+k\theta=\pi$; i.e., $\theta=\frac{\pi-t}{k}$.
 				Since $e^{i(t+k \theta)}=-1<0$.
-				Choose $r$ small enough that $1+b_k z^{k}=1- \left|b_k\right|r^{k}<1$. TODO
+				Choose $r$ small enough that $1+b_k z^{k}=1- \left|b_k\right|r^{k}<1$.
+				This contradicts $\left|Q(z)\right|\ge 1$ for all $z \in \C$, so $\mu=0$.
 			\end{proof}
 		\end{claim}
 	\end{proof}
 \end{thm}
+
+\section{Fourier Series}
+\begin{define}[Fourier Series]
+	Given $a<b$ and integrable $f,g: [a,b]\to \C$, we write \[
+		<f,g> = \int_{a}^{b}{f(x)\overline{g(x)}\mathrm{d}x}
+		.\]
+	\begin{remark}
+		$<f,g>=\overline{<g,f>}$, $\|f\|_2^{2}= < f,f> = \int_{a}^{b}{\left|f(x)\right|^2\mathrm{d}x}$.
+	\end{remark}
+	\begin{note}
+		\begin{enumerate}
+			\item $d(f,g)= \|f-g\|_2$ defines a metric on $\mathscr{C}([a,b])$ but not on $R[a,b]$, as we can have $f \in R[a,b], f\neq 0, \int_{a}^{b}{\left|f(x)\right|^2\mathrm{d}x}=0$.
+			\item Sometimes when $[a,b]= [-\pi,\pi]$, we prefer $<f ,g > = \frac{1}{2\pi} \cdot \int_{-\pi}^{\pi}{f(x) \overline{g(x)}\mathrm{d}x}$.
+		\end{enumerate}
+	\end{note}
+\end{define}
+
+\begin{define}[Orthogonal Family of Functions]
+	Functions $\phi_n:[a,b]\to \C$ are \textit{orthogonal} if $<\phi_n,\phi_m>=0$ for $n\neq m$.\\
+	They are \textit{orthonormal} if $<\phi_m,\phi_n>=\delta_{mn}= \begin{cases}
+			1 & m= n    \\
+			0 & m\neq n
+		\end{cases}$.
+\end{define}
+
+\begin{example}
+	\begin{enumerate}
+		\item $[a,b]=[-\pi,\pi]$, $\phi_n(x)=\frac{1}{\sqrt{2\pi}}e^{i n x}$ for $n \in \Z$ obey $<\phi_m, \phi_n> =\int_{-\pi}^{\pi}{\frac{1}{2\pi}e^{-i(m-n)x}\mathrm{d}x}=\frac{1}{2\pi}\int_{-\pi}^{\pi}{\left[\cos{(m-n)x}+i \sin{(m-n)x}\right] \mathrm{d}x}
+			      =\delta_{mn}$. Hence $\{\phi_n\}_{n \in \Z}$ is an orthonormal set.
+		\item $\phi_{1},\phi_{2}, \phi_{3}, \ldots  $ given by $\frac{1}{\sqrt{2\pi}}, \frac{1}{\sqrt{\pi}} \cos{(nx)}, \frac{1}{\sqrt{\pi}} \sin{(nx)}, \ldots$ are orthonormal on $[-\pi,\pi]$.
+		\item Legendre polynomials $\{P_n(x)\}$ are orthogonal with $\|P_n\|_{2}=\sqrt{\frac{2}{2n+1}}$ on $[-1,1]$:
+		      \[
+			      P_{n}(x)=\sum_{k=0}^{n}{\binom{n}{k}\binom{n+k}{n} {\left(\frac{x-1}{2}\right)}^{k}} \text{ for } n=0,1,2,\ldots
+			      .\]
+	\end{enumerate}
+\end{example}
+
+
+\begin{define}[Fourier Coefficients]
+	Let $\{\phi_n\}_{n \in \Z}$ be an orthonormal set on $[a,b]$.\\
+	Suppose $f(x)=\sum_{m=0}^{N}{c_m \phi_m (x)}$ with $\{\phi_n\}_{n \in \Z}$ orthonormal on $[a,b]$. Then
+	\begin{flalign*}
+		<f,\phi_n > & = <\sum_{m=0}^{n}{c_{m} \phi_m}, \phi_n > = \sum_{m=0}^{n}{c_m < \phi_m , \phi_n >}= \sum_{m=0}^{n}{c_m \delta_{mn}}=c_n
+		.\end{flalign*}
+	I.e., $c_n = < f, \phi_{n} > =  \int_{a}^{b}{f(x) \overline{\phi_n(x)}\mathrm{d}x}$.
+	E.g., if $f(x)=\sum_{n=-N}^{N}{c_n e^{inx}}=\sum_{n=-N}^{N}{c_{n} \sqrt{2\pi}} \cdot \left(\frac{1}{\sqrt{2\pi}} e^{inx}\right)$, then $\sqrt{2\pi}c_n= < f, \phi_n > =\int_{-\pi}^{\pi}{f(x) \frac{1}{\sqrt{2\pi}} e^{-inx}\mathrm{d}x}$; i.e., $c_n= \frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x) e^{-inx}\mathrm{d}x}$.
+\end{define}
+
+Question: When does the Fourier series converge and when does it equal $f$?
+\begin{thm}[11]
+	Suppose $f \in \mathscr{R}[a,b]$ and $\{\phi_m\}_{m=1,2,\ldots }$ is orthonormal. Let $c_{n}= < f, \phi_m> , s_n= \sum_{m=1}^{n}{c_m \phi_m}$.\\
+	Let $t_n= \sum_{m=1}^{n}{a_m \phi_m}$ for some $a_m \in \C$. Then
+	\[
+		\|f-s_n\|_{2} \le \|f-t_n\|_2
+		,\] where the equality holds if and only if $a_m=c_m$ for all $m=1,2,\ldots $.
+	\begin{proof}
+		${\|f-t_n\|}_{2}^{2}= <f-t_n, f-t_n> = <f,f > - <t_n, f> - <f,t_n> + \underbrace{<t_n, t_n>}_{=\|t_n\|_{2}^{2}}$.
+		Note
+		\begin{flalign*}
+			\|t_n\|_{2}^{2}= <t_n, t_n> = \sum_{k,m=1}^{n}{a_k \overline{a_m} \underbrace{< \phi_k , \phi_m>}_{=\delta_{k,m}}}
+			.\end{flalign*}
+	\end{proof}
+\end{thm}
+
