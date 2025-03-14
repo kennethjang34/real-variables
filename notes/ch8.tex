@@ -417,8 +417,7 @@ For sine,cosine, pi, read Rudin's p. 182-184.
 
 Question: When does the Fourier series converge and when does it equal $f$?
 \begin{thm}[11]
-	Suppose $f \in \mathscr{R}[a,b]$ and $\{\phi_m\}_{m=1,2,\ldots }$ is orthonormal. Let $c_{n}= < f, \phi_m> , s_n= \sum_{m=1}^{n}{c_m \phi_m}$.\\
-	Let $t_n= \sum_{m=1}^{n}{a_m \phi_m}$ for some $a_m \in \C$. Then
+	Suppose $f \in \mathscr{R}[a,b]$ and $\{\phi_m\}_{m=1,2,\ldots }$ is orthonormal. Let $c_{n}= < f, \phi_m> , s_n= \sum_{m=1}^{n}{c_m \phi_m}, t_n= \sum_{m=1}^{n}{a_m \phi_m}$ for some $a_m \in \C$. Then
 	\[
 		\|f-s_n\|_{2} \le \|f-t_n\|_2
 		,\] where the equality holds if and only if $a_m=c_m$ for all $m=1,2,\ldots $.
@@ -426,8 +425,90 @@ Question: When does the Fourier series converge and when does it equal $f$?
 		${\|f-t_n\|}_{2}^{2}= <f-t_n, f-t_n> = <f,f > - <t_n, f> - <f,t_n> + \underbrace{<t_n, t_n>}_{=\|t_n\|_{2}^{2}}$.
 		Note
 		\begin{flalign*}
-			\|t_n\|_{2}^{2}= <t_n, t_n> = \sum_{k,m=1}^{n}{a_k \overline{a_m} \underbrace{< \phi_k , \phi_m>}_{=\delta_{k,m}}}
+			 & \|t_n\|_{2}^{2}  = <t_n, t_n> = \sum_{k,m=1}^{n}{a_k \overline{a_m} \underbrace{< \phi_k , \phi_m>}_{=\delta_{k,m}}}=\sum_{m=1}^{n}{a_m \overline{a_m}}                                                                                 \tag{*} \\
+			 & <f,t_n>          = \sum_{m=1}^{n}{\overline{a_m} \underbrace{< f, \phi_m > }_{=c_m}}=\sum_{m=1}^{n}{\overline{a_m}c_m}
 			.\end{flalign*}
+		\begin{flalign*}
+			\|f-t_n\|_{2}^{2} & = \|f\|_{2}^{2}+ \sum_{m=1}^{n}{\underbrace{a_m \overline{a}_m - \overline{a}_mc_m - a_m \overline{c}_m+c_m\overline{c}_m}_{=\left|a_m-c_m\right|^2}}- \underbrace{\sum_{m=1}^{n}{c_m \overline{c}_m}}_{=\|s_n\|_{2}^2 \text{ by } (*)}
+			.\end{flalign*}
+		Thus, $\|f-t_n\|_{2}^2=\|f\|_{2}^2 - \|s_n\|^2+\sum_{m=1}^{n}{\left|a_m-c_m\right|^2}$. With $a_m=c_m$, this gives $\|f-s_n\|_{2}^2=\|f\|_2^{2}-\|s_n\|_{2}^2+0$.
+		Hence,
+		\[
+			\|f-t_n\|_{2}^2=\|f-s_n\|_{2}^2+\underbrace{\sum_{m=1}^{n}{\left|a_m-c_m\right|^2}}_{\ge 0}
+			,\]
+		so \[
+			\|f-s_n\|_{2}^2\le \|f-t_n\|_{2}^2
+			,\] with equality if and only if $a_m=c_m$ for all $m=1,2,\ldots $.
 	\end{proof}
+	\begin{note}
+		We have proven that $\|f\|_2^{2}=\|s_n\|_2^2+\|f-s_n\|_{2}^2$.
+		Let $V_n$ be a subspace of linear combinations of $\{\phi_m\}_{m=1,2,\ldots ,n}$; i.e., $V_n=\left\{ \sum_{m=1}^{n}{a_m \phi_m}: a_m \in \C\right\}$.
+		Then $s_n=L^2$ projection of $f$ onto $V_n$. Also, $\|s_n\|_{2}^2=\sum_{m=1}^{n}{\left|c_m\right|^2}\le \|f\|_{2}^2$.
+		If we have an infinite set $\{\phi_m\}_{m \in \N}$ then we can let $n\to \infty$, and we get $\sum_{n=1}^{\infty}{\left|c_n\right|^2}\le \|f\|_2^{2}$.
+		This is called \textit{Bessel's inequality}.
+		In particular, $\lim_{n\to \infty}{c_n}=0$.
+	\end{note}
 \end{thm}
+
+\begin{example}
+	If $f \in \mathscr{R}[-\pi,\pi]$, then
+	\[
+		\lim_{n\to \infty}{\int_{-\pi}^{\pi}{f(x) \cos{(nx)}\mathrm{d}x}}=0
+		.\]
+	This is an instance of \textit{Riemann-Lebesgue lemma}.
+\end{example}
+
+
+From here on, we restrict to $f:[-\pi,\pi]\to \C$ with $f \in \mathscr{R}[-\pi,\pi]$ and take $\phi_n(x)=e^{inx}, n \in \Z$. We extend $f$ by $2\pi$-periodicity to $\R$; i.e., $f(x+2\pi)=f(x)$ for all $x \in \R$.\\
+In order to make $\{\phi_n\}$ orthonormal, we change the definition of $<f,g>$ to
+\[
+	<f,g> = \frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x) \overline{g(x)}\mathrm{d}x}
+	,\]
+and
+\[
+	\|f\|_2^2= <f, f> =\frac{1}{2\pi} \int_{-\pi}^{\pi}{\left|f(x)\right|^2\mathrm{d}x}
+	.\]
+Then, $<\phi_m \phi_n > = \delta_{mn}$, so Theorem~\ref{thm:8.11} still holds.\\
+
+
+\begin{define}[Fourier Series]
+	\hfill
+	\begin{itemize}
+		\item
+		      For $f \in \mathscr{R}[-\pi,\pi]$, the \textit{Fourier series} of $f$ is
+		      \[
+			      f(x)=\sum_{n=-\infty}^{\infty}{c_n \phi_n(x)}
+		      \] with $c_n= <f, \phi_n>$.
+		      \begin{remark}
+			      At this point, we don't claim that the series converges or equals $f(x)$
+		      \end{remark}
+		\item The \textit{$N^{\text{ th } }$ partial Fourier series} of  $f$ is \[
+			      s_N(x)=\sum_{n=-N}^{N}{c_n e^{inx}}
+			      .\]
+		      We have seen that $\sum_{n=-N}^{N}{\left|c_{n}\right|^2}=\|s_N\|_{2}^2\le \|f\|_{2}^2$.
+	\end{itemize}
+\end{define}
+\begin{lemma}
+	For $x \in \R$, $S_N(x)=\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x-t)D_{N}(t)\mathrm{d}t}$ with $D_{N}(t)=\sum_{n=-N}^{N}{e^{int}}= \frac{\sin{(N+ \frac{1}{2})t}}{\sin{\frac{t}{2}}}$.
+	\begin{note}
+		$D_N$ is called the Dirichlet kernel.
+	\end{note}
+	\begin{proof}
+		\begin{description}
+			\item[$D_N$]:
+			      \begin{flalign*}
+				      D_N(t) & =\sum_{n=-N}^{N}{e^{in t}}= e^{-iNt} \sum_{k=0}^{2N}{(e^{it})^{k}}                                                                                                                                                                                \\
+				             & = e^{-iNt} \cdot \frac{e^{it(2N+1)}-1}{e^{it}-1} \cdot \frac{e^{-\frac{it}{2}}}{e^{- \frac{it}{2}}}=\frac{e^{i(N+\frac{1}{2})t}-e^{-i(N+ \frac{1}{2})t}}{e^{i \frac{t}{2}}-e^{-i \frac{t}{2}}}= \frac{\sin{(N+ \frac{1}{2})t}}{\sin{\frac{t}{2}}}
+				      .\end{flalign*}
+			\item [$S_N$]:
+			      \begin{flalign*}
+				      S_N(x) & =\sum_{n=-N}^{N}{c_n e^{inx}}= \sum_{n=-N}^{N}{<f, \phi_n > e^{inx}}                                                                                                          \\
+				             & =\sum_{n=-N}^{N}{\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(t) \overline{e^{int}}\mathrm{d}t} e^{inx}}=\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(t) \sum_{n=-N}^{N}{e^{in(x-t)}}\mathrm{d}t} \\
+				             & =\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(t) D_N(x-t)\mathrm{d}t}                                                                                                                   \\
+				             & =\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x-t) D_N(t)\mathrm{d}t}
+				      .\end{flalign*}
+					  (Last equality left as an exercise)
+		\end{description}
+	\end{proof}
+\end{lemma}
 
