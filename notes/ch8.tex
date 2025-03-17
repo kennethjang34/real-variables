@@ -490,8 +490,18 @@ Then, $<\phi_m \phi_n > = \delta_{mn}$, so Theorem~\ref{thm:8.11} still holds.\\
 \end{define}
 \begin{lemma}
 	For $x \in \R$, $S_N(x)=\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x-t)D_{N}(t)\mathrm{d}t}$ with $D_{N}(t)=\sum_{n=-N}^{N}{e^{int}}= \frac{\sin{(N+ \frac{1}{2})t}}{\sin{\frac{t}{2}}}$.
-	\begin{note}
+	\begin{remark}
 		$D_N$ is called the Dirichlet kernel.
+	\end{remark}
+	\begin{note}
+		\begin{enumerate}
+			\item \[
+				      \frac{1}{2\pi} \int_{-\pi}^{\pi}{D_{N}(t)\mathrm{d}t}= < D_{N}, \underbrace{1}_{\phi_0} > = \sum_{n=-N}^{N}\underbrace{<\phi_n , \phi_{0} > }_{=\delta_{n_{0}}}= 1
+				      .\]
+			\item \[
+				      D_N(t)= \frac{1}{\sin{(\frac{t}{2})}} \left[\sin{(\frac{t}{2})} \cos{(Nt)} + \cos{(\frac{t}{2})} \sin{(Nt)}\right] =\cos{(Nt)}+ \cot{(\frac{t}{2})} \sin{(Nt)}
+				      .\]
+		\end{enumerate}
 	\end{note}
 	\begin{proof}
 		\begin{description}
@@ -507,8 +517,84 @@ Then, $<\phi_m \phi_n > = \delta_{mn}$, so Theorem~\ref{thm:8.11} still holds.\\
 				             & =\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(t) D_N(x-t)\mathrm{d}t}                                                                                                                   \\
 				             & =\frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x-t) D_N(t)\mathrm{d}t}
 				      .\end{flalign*}
-					  (Last equality left as an exercise)
+			      (Last equality left as an exercise)
 		\end{description}
 	\end{proof}
 \end{lemma}
+
+\begin{thm}[14]
+	Let $x \in \R$ and $f \in \mathscr{R}[-\pi,\pi]$ with $f(x+2\pi)=f(x)$.
+	Suppose there exist $\delta,M$ such that
+	\[
+		\left|f(x+t)-f(x)\right|\le M \left|t\right| \text{ for } \left|t\right|\le \delta
+		.\]
+	Then $\lim_{N\to \infty}{S_N(x)}=f(x)$.
+	\begin{remark}
+		Such $f$ is said to be \textit{Lipschitz continuous} at $x$.
+	\end{remark}
+	\begin{proof}
+		\begin{flalign*}
+			f(x)-S_N(x) & = f(x) \cdot \underline{\frac{1}{2\pi} \int_{-\pi}^{\pi}{D_N(t)\mathrm{d}t}}_{=1} - \frac{1}{2\pi} \int_{-\pi}^{\pi}{f(x-t)D_N(t)\mathrm{d}t}                                                                                \\
+			            & =\frac{1}{2\pi} \int_{-\pi}^{\pi}{\left[f(x)-f(x-t)\right]D_N(t) \mathrm{d}t}                                                                                                                                                \\
+			            & = \underbrace{\frac{1}{2\pi} \int_{-\pi}^{\pi}{\left[f(x)-f(x-t)\right]\cos{(Nt)} \mathrm{d}t}}_{*} + \underbrace{\frac{1}{2\pi} \int_{-\pi}^{\pi}{\left[f(x)-f(x-t)\right] \cot{(\frac{t}{2})}\sin{(Nt)} \mathrm{d}t}}_{**}
+			.\end{flalign*}
+		Since $f(x)-f(x-t) \in \mathscr{R}(dt)$, $* \to 0$ as $N\to \infty$ by Riemann-Lebesgue lemma.\\
+		For $**$, note that $\left[f(x)-f(x-t)\right] \cot{(\frac{t}{2})}= \frac{f(x)-f(x-t)}{t} \cdot 2 \frac{\frac{t}{2}}{\sin{(\frac{t}{2})}} \cos{(\frac{t}{2})}$.
+		Since $\frac{f(x)-f(x-t)}{t}$ is bounded by hypothesis and $\cos{(\frac{t}{2})}$ is continuous, $** \to 0$ as $N\to \infty$ by Riemann-Lebesgue lemma.
+	\end{proof}
+\end{thm}
+\begin{corollary}
+	\begin{itemize}
+		\item
+		      If $f(x)=0$ for all $x \in (x_{0}-\epsilon,x_{0}+\epsilon)$ then $S_N(f;x)\to 0$ for all such $x$ because $f$ is Lipschitz continuous at $x$.
+		\item If $f(x)=g(x)$ for all $x \in (x_{0}-\epsilon,x_{0}+\epsilon)$, then by linearity, $S_N(f;x)- S_N(g;x)\to 0$ as $N\to \infty$ for all such $x$.
+	\end{itemize}
+\end{corollary}
+\begin{example}
+	Suppose
+	\begin{flalign*}
+		f(x) & =
+		\begin{cases}
+			0                       & x \in (0, \pi)                         \\
+			\frac{3}{\pi} x         & x \in (\pi , \frac{4}{3}\pi)           \\
+			1                       & x \in (\frac{4}{3}\pi, \frac{5}{3}\pi) \\
+			-\frac{3}{\pi} (x-2\pi) & x \in (\frac{5}{3}\pi, 2\pi)           \\
+			f(x)=f(x+2\pi)          & \text{otherwise}
+		\end{cases} \\
+		g(x) & =
+		\begin{cases}
+			0                       & x \in (0, \pi)               \\
+			\frac{2}{\pi} x         & x \in (\pi , \frac{3}{2}\pi) \\
+			-\frac{2}{\pi} (x-2\pi) & x \in (\frac{3}{2}\pi, 2\pi) \\
+			g(x)=g(x+2\pi)          & \text{otherwise}
+		\end{cases}
+		.\end{flalign*}
+	Then $f,g$ have different Fourier series, but both converge to zero on $[0,\pi]$: Localisation Principle. Contract this to the behaviour of power series in Theorem~\ref{thm:8.5}.
+\end{example}
+
+
+\begin{thm}[15]
+	If $f: \R\to \C$ is continuous and $2\pi$-periodic, then for all $\epsilon>0$, there exists a trigonometric polynomial $P(x)=\sum_{n=-N}^{N}{c_n e^{inx}}$ such that $\|f-P\|= \sup_{x \in \R} \left|f(x)-P(x)\right|<\epsilon$.
+	\begin{proof}
+		Let $T=\{ z \in \C \mid \left|z\right|=1\}$, the unit circle in $\C$.\\
+		$T$ is compact. Define $F: T\to \C$ by $F(z)=f(t)$, where $z=e^{it}$. This is well defined by the $2\pi$-periodicity of $f$.\\
+		Let $\mathscr{A}=\text{ Algebra of trigonometric polynomials } \sum_{n=-N}^{N}{a_{n}z^{n}}, \,\, z \in T, a_{n} \in \C, N=0,1,2, \ldots $. Then $\mathscr{A}$ vanishes at no point since it contains $1$.\\
+		Also, $\mathscr{A}$ separates points and self-adjoint since
+		\[
+			\sum_{n=-N}^{N}{a_{n}z^{n}}= \sum_{n=-N}^{N}{\overline{a_n} \underbrace{\overline{z}^{n}}_{=z^{-n}}}\underbrace{=}{m=-n} \sum_{m=-N}^{N}{\overline{a_{-m}} z^{m}} \in \mathscr{A}
+			.\]
+		By Stone-Weierstrass, $\overline{\mathscr{A}}= \mathscr{C}(T)$, so given $\epsilon>0$, there exists $\mathscr{P} \in \mathscr{A}$ such that $\left|F(z)-\mathscr{P}(z)\right|<\epsilon$ for all $z \in T$.
+		Write $\mathscr{P}(z)=\sum_{n=-N}^{N}{a_n z^{n}}$ and let $P(x)=\sum_{n=-N}^{N}{c_n e^{inx}}= \mathscr{P}(e^{ix})$.
+		Then $\left|f(x)-P(x)\right|=\left|F(e^{ix})-\mathscr{P}(e^{ix})\right|<\epsilon$ for all $x \in \R$.
+	\end{proof}
+	\begin{remark}
+		\begin{enumerate}
+			\item $\mathscr{P}$ in Theorem~\ref{thm:8.15} need not involve the Fourier coefficients. In fact, there exists a continuous $f$ whose Fourier series does not converge pointwise.
+			\item For a continuous $f$, Rudin's Problem 8.15 gives an explicit sequence of trigonometric polynomials that converge uniformly to $f$ (Cesaro summation of Fourier partial sums).
+			\item (theorem not in Rudin's) If $f$ is $2\pi$-periodic and continuously differentiable then its Fourier series converge uniformly to $f$ (proof omitted).
+		\end{enumerate}
+	\end{remark}
+\end{thm}
+
+
 
