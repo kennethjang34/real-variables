@@ -88,6 +88,9 @@ with $\lim_{h\to 0}{\frac{r(h)}{h}}=0$.
 	That is, if $f(x+h)=f(x)+Ah+r(h)$ with $\lim_{h\to 0}{\frac{\|r(h)\|}{\|h\|}}=0$.
 \end{define}
 
+\begin{notation}
+	$r(h)=o(h)$ means $\lim_{h\to 0}{\frac{\|r(h)\|}{\|h\|}}=0$.
+\end{notation}
 
 \begin{thm}[12]
 	$A$ in the definition of differentiability is unique if it exists.
@@ -106,12 +109,243 @@ with $\lim_{h\to 0}{\frac{r(h)}{h}}=0$.
 	\begin{note}
 		\begin{enumerate}
 			\item If $f'(x)$ exists for all $x \in E$ then we can regard $f'$ as a function $f':E\to L(\R^{n},\R^{m})$.
-			\item Suppose $f: \R^{n}\to \R^{m}$ is linear. Then $f(x+h)=f(x)+\underbrace{f(h)}_{=Ah \text{ with } A=f}+0$ for all $x,h \in \R^{n}$.
+			\item Suppose $f: \R^{n}\to \R^{m}$ is linear. Then for all $x,h \in \R^{n}$,
+			      \[
+				      f(x+h)=f(x)+\underbrace{f(h)}_{=Ah \text{ with } A=f}+0
+				      .\]
 			      Hence, $f'(x)=f(x)$ for all $x \in \R^{n}$.\\
-			      For $n=m=1$, we can identify a linear map $f: \R\to \R, f(x)=ax$ with $a \in \R$. Then $f'(x)=a$ is consistent with the above.
+			      For $n=m=1$, we can identify a linear map
+			      \[
+				      f: \R\to \R, f(x)=ax
+				      ,\]
+			      where $a \in \R$.
+			      Then $f'(x)=a$ is consistent with the above.
+			\item
+			      If $f'(x)$ exists then $f$ is continuous at $x$ since $\lim_{h\to 0}{f(x+h)}=f(x)+0+0=f(x)$.
 		\end{enumerate}
 	\end{note}
-
 \end{thm}
 
+\begin{define}
+	For a linear map $A: \R^{n}\to \R^{m}$, we define the \textit{norm} of $A$ as
+	\[
+		\|A\|=\sup_{\|h\|=1}{\|Ah\|}
+		.\]
+
+	\begin{note}
+		$\left|Ax\right|=\left|A \frac{x}{\left|x\right|}\right| \left|x\right|\le \|A\| \left|x\right|$ for all $x \in \R^{n}, x\neq 0$; i.e., $\|A\|$ is the best constant such that $\|Ax\|\le \|A\| \|x\|$.
+	\end{note}
+\end{define}
+
+\begin{note}
+	The following facts are immediate from Theorem 9.7 of Rudin's.
+	\begin{enumerate}
+		\item $\|A\|<\infty$
+		\item For $A: \R^{n}\to \R^{m}, B: \R^{m}\to \R^{k}$, $\|BA\|\le \|B\|\cdot \|A\|$
+		\item $d(A,B)=\|A-B\|$ defines a metric on $L(\R^{n},\R^{m})$.
+	\end{enumerate}
+\end{note}
+
+
+\begin{thm}[5][Chain Rule]
+	Suppose $E \subset \R^{n}$ is open, $f: E\to \R^{m}, V \subset \R^{m}$ is open, $f(E) \subset V$, $g:V\to \R^{k}$, $x_{0} \in E$, $f'(x)$ exists, $g'(f(x_{0}))$ exists. Let $F=g \circ f: E\to \R^{k}$. Then $F'(x_{0})$ exists and $F'(x)=g'(f(x_{0}))f'(x_{0}) \in L(\R^{n},\R^{k})$, where $g'(f(x_{0})) \in L(\R^{m},\R^{k})$, $f'(x_{0}) \in L(\R^{n},\R^{m})$.\\
+	\begin{tikzpicture}
+		% Define points
+		\coordinate (E) at (0,0);
+		\coordinate (V) at (4,0);
+		\coordinate (Rk) at (8,0);
+		\coordinate (x0) at (0,-1);
+		\coordinate (fx0) at (4,-1);
+		\coordinate (g_fx0) at (8,-1);
+
+		% Draw sets with square boxes
+		\draw[thick] (E) rectangle ++(2,2) node[midway, above] {$E \subset \mathbb{R}^n$};
+		\draw[thick] (V) rectangle ++(2,2) node[midway, above] {$V \subset \mathbb{R}^m$};
+		\draw[thick] (Rk) rectangle ++(2,2) node[midway, above] {$\mathbb{R}^k$};
+
+		% Draw arrows
+		\draw[->, thick] (1,1) -- (5,1) node[midway, above] {$f$};
+		\draw[->, thick] (5,1) -- (9,1) node[midway, above] {$g$};
+		\draw[->, thick] (1,1) -- (9,1) node[midway, below] {$F = g \circ f$};
+
+		% Draw points and labels
+		\fill (x0) circle (2pt) node[left] {$x_0$};
+		\fill (fx0) circle (2pt) node[below] {$f(x_0)$};
+		\fill (g_fx0) circle (2pt) node[right] {$g(f(x_0))$};
+
+		% Draw derivatives
+		\node at (1,-2) {$f'(x_0) \in L(\mathbb{R}^n, \mathbb{R}^m)$};
+		\node at (5,-2) {$g'(f(x_0)) \in L(\mathbb{R}^m, \mathbb{R}^k)$};
+		\node at (9,-2) {$F'(x_0) = g'(f(x_0)) f'(x_0) \in L(\mathbb{R}^n, \mathbb{R}^k)$};
+	\end{tikzpicture}
+\end{thm}
+
+\begin{proof}
+	\begin{remark}
+		Similar to the proof of Theorem~\ref{thm:5.5}.
+	\end{remark}
+	\begin{flalign*}
+		F(x_{0}+h)-F(x_{0}) & =g(f(x_{0}+h))-g(f(x_{0}))=g'(f(x_{0}))+\underbrace{v(k)}_{o(k)}            \\
+		                    & =g'(f(x_{0}))\left[f'(x_{0})h+u(h)\right] +v(k)=g'(f(x_{0}))f'(x_{0})h+r(h)
+		,\end{flalign*}
+	where $r(h)=g'(f(x_{0}))u(h)+v(k)$.\\
+	We want to prove that $r(h)=o(h)$; i.e., $\lim_{h\to 0}{\frac{\left|r(h)\right|}{\left|h\right|}}$.
+	Note
+	\[
+		\frac{\left|g'(f(x_{0}))u(h)\right|}{\left|h\right|}  \le \|g'(f(x_{0}))\| \cdot \frac{\left|u(h)\right|}{\left|h\right|}\to 0 \text{ as } h\to 0	\text{ since } u(h)=o(h)
+		.\]
+	\begin{flalign*}
+		\frac{\left|v(k)\right|}{\left|h\right|} & =\frac{\left|v(k)\right|}{\left|k\right|}\cdot \frac{\left|k\right|}{\left|h\right|}\le \frac{\left|v(k)\right|}{\left|k\right|} \left[\frac{\left|f'(x_{0})h\right|}{\left|h\right|}+ \frac{\left|u(h)\right|}{\left|h\right|}\right] \\
+		                                         & \le \frac{\left|v(k)\right|}{\left|k\right|} \cdot \left[\|f'(x_{0})\|\cdot \frac{\left|h\right|}{|\left| h \right|}+\frac{\left|u(h)\right|}{\left|h\right|}\right]\to 0 \text{ as } h\to 0
+		.\end{flalign*}
+	Thus, $r(h)=o(h)$.
+\end{proof}
+\begin{notation}
+	Standard bases of $\R^{n} \text{ and }  \R^{m}$ are denoted by $e_{1},\ldots,e_{n}$ and $u_{1},\ldots,u_{m}$ respectively, where
+	\[
+		e_{i}=(0,\ldots,0,1,0,\ldots,0),
+	\]
+	\[
+		u_{j}=(0,\ldots,0,1,0,\ldots,0)
+		,\]
+	where the $1$ is in the $i$-th position.\\
+	For $f: \R^{n}\to \R^{m}$, write \[
+		f(x)=\sum_{j=1}^{m}{f_j(x) u_j}
+		,\] so that
+	\[
+		f=(f_{1},\ldots,f_{m})
+		,\] where $f_j:\R^{n}\to \R$, $f_j(x)= u_j \cdot f$.
+\end{notation}
+
+\begin{define}[16][Partial Derivatives]
+	For $i=1,2,\ldots n$, $j=1,2,\ldots m$,
+	\[
+		\frac{\partial f_{i}}{\partial x_{j}}(x)=
+		(D_{j}f_{i})(x)=
+		\lim_{t\to 0}{\frac{f_{i}(x+te_{j})-f_{i}(x)}{t}} \text{ if the limit exists}
+		.\]
+\end{define}
+
+\begin{thm}[17]
+	If $f:\R^{n}\to \R^{m}$ is differentiable at $x \in \R^{n}$, then
+	$(D_i f_j)(x)$ exists for all $i=1,2,\ldots ,n$, $j=1,2,\ldots m$, and
+	\[
+		\left[f'(x)\right]=\left[\begin{array}{ccc}
+				(D_1 f_1)(x) & \ldots & (D_n f_1)(x) \\
+				\vdots       &        & \vdots       \\
+				(D_1 f_m)(x) & \ldots & (D_n f_m)(x)
+			\end{array}\right]
+		.\]
+	In other words, $\left[f'(x)\right]_{ij}=(D_i f_j)(x)=\frac{\partial f_j}{\partial x_i}(x)$.
+\end{thm}
+\begin{proof}
+	We want to prove that $A=f'(x)$ has matrix elements:
+	\[
+		u_{i}\cdot A e_{j}=(D_{j}f_{i})(x)=\frac{\partial f_{i}}{\partial x_{j}}(x)
+		.\]
+	That is, \[
+		f_i(+te_j)=f_i(x) + A_{ij}t + o(t)
+		.\]
+	Let
+	\[
+		\epsilon(t)=f_i(x+te_j)-f_i(x)-A_{ij}t=u_i \cdot \left[f(x+te_j)-f(x)-A(te_j)\right]
+		.\]
+	By Cauchy-Schwartz inequality,
+	\[
+		\left|\epsilon(t)\right|\le \left|u_i\right|\cdot \left|f(x+te_j)-f(x)-A(te_j)\right|
+		.\]
+	Since $\left|u_i\right|=1$ and
+	\[
+		\left|f(x+te_j)-f(x)-A(te_j)\right|=o(te_j)=o(t) \;\;(\because \text{ by def. of } f'(x))
+		,\]
+	we have $\epsilon(t)=o(t)$.
+	\begin{note}
+		Existence of all partial derivatives does not imply differentiability.
+	\end{note}
+\end{proof}
+\begin{example}
+	(see also p.215 of Rudin's)\\
+	\begin{enumerate}
+		\item
+		      (check desmos3d for the graph of)
+		      \[
+			      f(x,y)=
+			      \begin{cases}
+				      \frac{xy}{x^2+y^2} & \text{ if } (x,y)\neq (0,0) \\
+				      0                  & \text{ if } (x,y)=(0,0)
+			      \end{cases}
+			      .\]
+		      We have
+		      \[
+			      \frac{\partial f}{\partial x}\bigg{\rvert}_{(0,0)}=\lim_{t\to 0}{\frac{f(t,0)-f(0,0)}{t}}=\lim_{t\to 0}{\frac{0-0}{t}}=0
+			      ,\]
+		      \[
+			      \frac{\partial f}{\partial y}\bigg{\rvert}_{(0,0)}=\lim_{t\to 0}{\frac{f(0,t)-f(0,0)}{t}}=\lim_{t\to 0}{\frac{0-0}{t}}=0
+			      .\]
+		      However, $f$ is not continuous at $(0,0)$:
+		      \[
+			      \lim_{t\to 0}{f(t,at)}=\lim_{t\to 0}{\frac{at^2}{t^2+(at)^2}}=\lim_{t\to 0}{\frac{a}{1+a^2}}=\frac{a}{1+a^2}\neq f(0,0) \text{ if } a\neq 0
+			      .\]
+	\end{enumerate}
+\end{example}
+
+
+\begin{define}[Gradient]
+	Let $E \subset \R^{n}$ be open, $f: E\to \R^{1}$.
+	If the partial derivatives $\frac{\partial f}{\partial x_{i}}$ exist for all $i=1,2,\ldots n$, then the \textit{gradient} of $f$ at $x \in E$ is given by
+	\[
+		\nabla f(x)=\sum_{j=1}^{n}{\frac{\partial f}{\partial x_{j}}(x)e_{j}}=
+		\left(\frac{\partial f}{\partial x_{1}}(x),\ldots,\frac{\partial f}{\partial x_{n}}(x)\right)
+		.\]
+	Hence, $\nabla f: E\to \R^{n}$.\\
+	If $f'(x)$ exists then the gradient is the matrix representation of $f'(x)$.\\
+	In particular, if $h=(h_{1},h_{2},\ldots ,h_n) \in R^{n}$, then \[
+		f'(x)h=\nabla f(x) \cdot h=\sum_{i=1}^{n}{\frac{\partial f}{\partial x_{i}}(x)h_{i}}
+		.\]
+	Also, for $u \in \R^{n}$ with $\left|u\right|=1$,
+	\[
+		\lim_{t\to 0}{\frac{f(x+tu)-f(x)}{t}}= \frac{\mathrm{d}}{\mathrm{d}t}\bigg{\rvert}_{t=0}{f(x+tu)}=f'(x)u=\nabla f(x) \cdot u
+		.\]
+	This is the \textit{directional derivative} of $f$ at $x$ in the direction of $u$, and is denoted by $(D_u f)(x)$.
+	Note that $(D_u f)(x)=\nabla f(x) \cdot u$ is maximal when $u\parallel \nabla f$.
+	Hence, $\nabla f$ points in the direction of maximal increase of $f$ at $x$.
+\end{define}
+\begin{example}
+	Let $z=f(x,y)=x^2+y^2$. Then
+	\[
+		\nabla f(x,y)=\left(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}\right)=(2x,2y)
+		.\]
+	The maximal rate of increase of $f$ at $(x,y)$ is in direction of $\nabla f(x,y)$.
+\end{example}
+
+\begin{define}[Convexity]
+	A $E \subset \R^{n}$ is \textit{convex} if for all $x,y \in E$ and $\lambda \in [0,1]$, $(1-\lambda) x+\lambda y \in E$.
+\end{define}
+\begin{example}
+
+\end{example}
+
+
+\begin{thm}[19]
+	Let $E \subset \R^{n}$ be open and convex, and let $f: E\to \R^{m}$.\\
+	Suppose $f$ is differentiable on $E$ and $\|f'\|\le M$ for all $x \in E$.
+	Then for all $a,b \in E$, we have
+	\[
+		\left|f(b)-f(a)\right|\le M \left|b-a\right|
+		.\]
+	\begin{proof}
+		Note \[
+			f(b)-f(a)=\int_{0}^{1}{\frac{\mathrm{d}}{\mathrm{d}t}f((1-t)a+tb)\mathrm{d}t}
+		\]
+		by convexity of $E$,  component-wise integration (Theorem 6.23) and Theorem~\ref{thm:ftc}.
+		We now have \[
+			f(b)-f(a)=\int_{0}^{1}{f'((1-t)a+tb)(b-a)\mathrm{d}t}
+			.\]
+		Since $f'((1-t)a+tb) \in L(\R^{n},\R^{m})$ and $(b-a) \in \R^{n}$, we have
+		\begin{flalign*}
+			\left|f(b)-f(a)\right| & = \left|\int_{0}^{1}{f'((1-t)a+tb)(b-a)\mathrm{d}t}\right|                                                                         \\
+			                       & \le \int_{0}^{1}{\left|f'((1-t)a+tb)(b-a)\right|\mathrm{d}t}\le \int_{0}^{1}{ M \left|b-a\right|\mathrm{d}t}\le M \left|b-a\right|
+			.\end{flalign*}
+	\end{proof}
+\end{thm}
 
