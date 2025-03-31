@@ -349,3 +349,151 @@ with $\lim_{h\to 0}{\frac{r(h)}{h}}=0$.
 	\end{proof}
 \end{thm}
 
+\begin{corollary}
+	\label{cor:9.19}
+	If in addition, $f'(x)=0$ all $x \in E$, then $f$ is constant on $E$.
+\end{corollary}
+
+\begin{problem}[9.9]
+Corollary~\ref{cor:9.19} remains for open connected $E$.
+\end{problem}
+
+\begin{define}
+	$f:E\to \R^{m}$ is continuously differentiable if $f'(x)$ exists for all $x \in E$ and if $f':E\to L(\R^{n},\R^{m})$ is continuous; i.e., if
+	\[
+		\forall{x \in E}: \forall{\epsilon > 0}: \exists{\delta > 0} \text{ such that } \left|x-y\right|<\delta, y \in E \implies \|f'(x)-f'(y)\|<\epsilon
+		.\]
+\end{define}
+\begin{notation}
+	If $f:E\to \R^{m}$ is continuously differentiable, then we write $f \in \mathcal{C}'(E)$.
+\end{notation}
+
+\begin{thm}
+	Suppose $f: E\to \R^{m}$, where $E$ is an open subset of $R^{n}.$
+	Then $f \in \mathcal{C}'(E) \Leftrightarrow \frac{\partial{f_{i}}}{\partial{x_j}}$ exists for all $i=1,2,\ldots,m$ and $j=1,2,\ldots,n$ and are continuous on $E$.
+	\begin{proof}
+		check out Rudin's proof.
+	\end{proof}
+
+	\begin{note}
+		We've seen an example where all $\frac{\partial{f_i}}{\partial{x_j}}$ exist, but $f \not\in \mathcal{C}'(E)$ when the partial derivatives are not continuous.
+	\end{note}
+\end{thm}
+\section{Inverse Function Theorem}
+For 1-dimensional case:
+(check out Rudin's Problem~5.2)
+If $f'(x)>0$ for all $x \in (a,b)$ then $f$ is strictly increasing on $(a,b)$ and thus has an inverse function $g$. This $g$ is differentiable and $g'(f(x))=\frac{1}{f'(x)}$ for all $x \in (a,b)$.
+
+\begin{tikzpicture}[scale=1.2, font=\small]
+	% --- LEFT PLOT ---
+	% Axes
+	\draw[->] (-0.5,0) -- (4.5,0) node[right] {$x$};
+	\draw[->] (0,-1.0) -- (0,3.5) node[above] {$y$};
+
+	% Curve y = f(x)
+	\draw[thick, smooth, domain=0.5:4] plot (\x, {0.5*(\x-2)^2 + 1}) node[right] {$y = f(x)$};
+
+	% Points on curve
+	\coordinate (A) at (2,1);
+	\coordinate (B) at (2.8,{0.5*(2.8-2)^2 + 1});
+
+	% Mark points A and B
+	\fill (A) circle (1pt) node[below left] {$x$};
+	\fill (B) circle (1pt) node[right] {$x + \Delta x$};
+
+	% Draw delta x and delta y arrows
+	\draw[->] (A) -- ++(0.8,0) node[midway, below] {$\Delta x$};
+	\draw[->] (A) -- (2,{0.5*(2.8-2)^2 + 1}) node[midway, left] {$\Delta y$};
+
+	% Dashed lines to form a triangle
+	\draw[dashed] (A) -- (2.8,1);
+	\draw[dashed] (2.8,1) -- (B);
+
+	% Tangent line at A
+	\draw[dashed, thick] (1.5,0.875) -- (2.5,1.125); % approx tangent
+
+	% Derivative label
+	\node at (1.8,2.5) {$g'(f(x)) = \dfrac{1}{f'(x)}$};
+
+	% --- RIGHT PLOT ---
+	\begin{scope}[xshift=6cm]
+
+		% Axes
+		\draw[->] (-0.5,0) -- (4.5,0) node[right] {$x$};
+		\draw[->] (0,-0.5) -- (0,3.5) node[above] {$y$};
+
+		% Curve with a max
+		\draw[thick, smooth, domain=0.5:4] plot (\x, {-0.5*(\x-2)^2 + 3}) node[right] {$y = f(x)$};
+
+		% Points with same y-value
+		\coordinate (P1) at (1.3, {-0.5*(1.3-2)^2 + 3});
+		\coordinate (P2) at (2.7, {-0.5*(2.7-2)^2 + 3});
+
+		% Mark those points
+		\draw[dashed] (P1) -- (1.3,0) node[below] {$x_1$};
+		\draw[dashed] (P2) -- (2.7,0) node[below] {$x_2$};
+		\draw[dashed] (P1) -- (P2);
+		\node at (2,2.7) {Inverse does not exist};
+
+	\end{scope}
+
+\end{tikzpicture}
+
+\begin{thm}[24]
+	Suppose $f: E\to \R^{n}$, where $E$ is an open subset of $\R^{n}$, is in $\mathcal{C}'(E)$, $a \in E$, $f'(a)$ invertible (c.f., $f'(a)\neq 0$ for $n=1$).
+	Let $b = f(a)$. Then
+	\begin{enumerate}
+		\item there exists an open $U$ containing $a$ and an open $V$ containing $b$ such that $f:U\to V$ is a bijection.
+		      [Thus $g=f^{-1}$ exists on $V$ and $g:V\to U$ obeys $g'(f(x))=x$ for all $x \in E$]
+		\item $g \in \mathcal{C}'(E)$.
+	\end{enumerate}
+	\begin{remark}
+		\begin{enumerate}
+			\item By the chain rule, $g'(f(x))f'(x)=I$; i.e., $g'(f(x))=[f'(x)]^{-1}$ for $x \in U$.
+			\item write
+			      \begin{flalign*}
+				      y_{1} & =f_{1}(x_{1},\ldots,x_{n}) \\
+				      y_{2} & =f_{2}(x_{1},\ldots,x_{n}) \\
+				            & \vdots                     \\
+				      y_{n} & =f_{n}(x_{1},\ldots,x_{n})
+				      .\end{flalign*}
+			      If $f'(a)$ is invertible, then for $y$ near $b=f(a)$,
+			      there exists a unique solution $(x_{1},\ldots,x_{n}) \in C'(E)$ to the system of equations such that
+			      \begin{flalign*}
+				      x_{1}=g_{1}(y_{1},\ldots,y_{n}) \\
+				      x_{2}=g_{2}(y_{1},\ldots,y_{n}) \\
+				       & \vdots                       \\
+				      x_{n}=g_{n}(y_{1},\ldots,y_{n})
+				      .\end{flalign*}
+			\item Invertibility of $f'(a)$ is equivalent to the Jacobian determinant of $f$ at $a$ being non-zero; i.e.,
+			      \[
+				      J_f(a):=
+				      \begin{vmatrix}
+					      \frac{\partial f_1}{\partial x_1}(a) & \cdots & \frac{\partial f_1}{\partial x_n}(a) \\
+					      \vdots                               &        & \vdots                               \\
+					      \frac{\partial f_n}{\partial x_1}(a) & \cdots & \frac{\partial f_n}{\partial x_n}(a)
+				      \end{vmatrix}
+				      \neq 0
+				      .\]
+		\end{enumerate}
+	\end{remark}
+\end{thm}
+
+\begin{proof}[Theroem~\ref{thm:9.24}]
+	{\paragraph{Step 1.} prove there exists an open $U$ containing $a$ such that $f$ is one-to-one on $U$.
+		Write $A=f'(a)$. Given $y \in \R^{n}$, let $\phi:E\to \R^{n}$ by $\phi(x)=x+A^{-1}(y-f(x))$.
+		Then $\phi(x)=x \Leftrightarrow y=f(x)$ [$A^{-1}z=0 \Leftrightarrow z=0$].
+		Therefore, uniqueness of fixed points of $\phi$ would imply uniqueness of $x$ such that $y=f(x)$, which is the one-to-one point of our goal.}
+	\begin{note}
+		If $\phi$ is a contraction then fixed points are unique (if there is one) since if $\phi(x_{1})=x_{1}$ and $\phi(x_{2})=x_{2}$, then \[
+			\left|x_{1}-x_{2}\right|=\left|\phi(x_{1})-\phi(x_{2})\right|\le c \left|x_{1}-x_{2}\right|
+		\] with $c<1$ so $x_{1}=x_{2}$.
+	\end{note}
+	Now we have $\phi'(x)=I-A^{-1}f'(x)=A^{-1}(A-f'(x))=A^{-1}(f'(a) - f'(x))$.
+	Hence, \[
+		\|\phi'(x)\|\le \|A^{-1}\|\cdot \underbrace{\|f'(a)-f'(x)\|}_{\le \frac{1}{2 \|A^{-1}\|} \text{ if $\left|x-a\right|<\delta$ for some $\delta>0$ }} 
+		.\]
+	Thus, if $x \in N_{\delta}(a)$, then $\|\phi'(x)\|\le \frac{1}{2}$, and $N_\delta(a)$ is the desired open set $U$.
+\end{proof}
+
+
