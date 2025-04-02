@@ -445,7 +445,7 @@ If $f'(x)>0$ for all $x \in (a,b)$ then $f$ is strictly increasing on $(a,b)$ an
 	\begin{enumerate}
 		\item there exists an open $U$ containing $a$ and an open $V$ containing $b$ such that $f:U\to V$ is a bijection.
 		      [Thus $g=f^{-1}$ exists on $V$ and $g:V\to U$ obeys $g'(f(x))=x$ for all $x \in E$]
-		\item $g \in \mathcal{C}'(E)$.
+		\item $g \in \mathcal{C}'(V)$.
 	\end{enumerate}
 	\begin{remark}
 		\begin{enumerate}
@@ -480,20 +480,93 @@ If $f'(x)>0$ for all $x \in (a,b)$ then $f$ is strictly increasing on $(a,b)$ an
 \end{thm}
 
 \begin{proof}[Theroem~\ref{thm:9.24}]
-	{\paragraph{Step 1.} prove there exists an open $U$ containing $a$ such that $f$ is one-to-one on $U$.
-		Write $A=f'(a)$. Given $y \in \R^{n}$, let $\phi:E\to \R^{n}$ by $\phi(x)=x+A^{-1}(y-f(x))$.
-		Then $\phi(x)=x \Leftrightarrow y=f(x)$ [$A^{-1}z=0 \Leftrightarrow z=0$].
-		Therefore, uniqueness of fixed points of $\phi$ would imply uniqueness of $x$ such that $y=f(x)$, which is the one-to-one point of our goal.}
-	\begin{note}
-		If $\phi$ is a contraction then fixed points are unique (if there is one) since if $\phi(x_{1})=x_{1}$ and $\phi(x_{2})=x_{2}$, then \[
-			\left|x_{1}-x_{2}\right|=\left|\phi(x_{1})-\phi(x_{2})\right|\le c \left|x_{1}-x_{2}\right|
-		\] with $c<1$ so $x_{1}=x_{2}$.
-	\end{note}
-	Now we have $\phi'(x)=I-A^{-1}f'(x)=A^{-1}(A-f'(x))=A^{-1}(f'(a) - f'(x))$.
-	Hence, \[
-		\|\phi'(x)\|\le \|A^{-1}\|\cdot \underbrace{\|f'(a)-f'(x)\|}_{\le \frac{1}{2 \|A^{-1}\|} \text{ if $\left|x-a\right|<\delta$ for some $\delta>0$ }} 
-		.\]
-	Thus, if $x \in N_{\delta}(a)$, then $\|\phi'(x)\|\le \frac{1}{2}$, and $N_\delta(a)$ is the desired open set $U$.
+	\hfill
+	\begin{description}
+		\item[Step 1. Existence of open $U$ containing $a$ such that $f$ is one-to-one on $U$:]
+		      Write $A=f'(a)$. Given $y \in \R^{n}$, let $\phi:E\to \R^{n}$ by $\phi(x)=x+A^{-1}(y-f(x))$.
+		      Then $\phi(x)=x \Leftrightarrow y=f(x)$ [$A^{-1}z=0 \Leftrightarrow z=0$].
+		      Therefore, uniqueness of fixed points of $\phi$ would imply uniqueness of $x$ such that $y=f(x)$, which is the one-to-one point of our goal.
+		      \begin{note}
+			      If $\phi$ is a contraction then fixed points are unique (if there is one) since if $\phi(x_{1})=x_{1}$ and $\phi(x_{2})=x_{2}$, then \[
+				      \left|x_{1}-x_{2}\right|=\left|\phi(x_{1})-\phi(x_{2})\right|\le c \left|x_{1}-x_{2}\right|
+			      \] with $c<1$ so $x_{1}=x_{2}$.
+		      \end{note}
+		      Now we have $\phi'(x)=I-A^{-1}f'(x)=A^{-1}(A-f'(x))=A^{-1}(f'(a) - f'(x))$.
+		      Hence, \[
+			      \|\phi'(x)\|\le \|A^{-1}\|\cdot \underbrace{\|f'(a)-f'(x)\|}_{\le \frac{1}{2 \|A^{-1}\|} \text{ if $\left|x-a\right|<\delta$ for some $\delta>0$ }}
+			      .\]
+		      Thus, if $x \in N_{\delta}(a)$, then $\|\phi'(x)\|\le \frac{1}{2}$, and $N_\delta(a)$ is the desired open set $U$.
+		\item[Step 2. Openness of $V$:]
+		      Let $V=f(U)$.
+		      Let $y_{0} \in V$, say $y=f(x_{0})$, $x_{0} \in U$.
+		      $V$ is then open if and only if for all $y_{0} \in V$, there exists $\epsilon>0$ such that $N_{\epsilon}(y_{0}) \subset V$; i.e., $\forall{y \in N_\epsilon (y_{0})}: \exists{x \in U} \text{ such that } f(x)=y$.\\
+		      Given $y \in \R^{n}$, as before, define $\phi_y: E\to \R^{n}$ \[
+			      \phi_y(x)=x+A^{-1}(y-f(x))
+			      .\]
+		      Choose $r>0$ s.t. $\overline{B}=\overline{N_r(x)} \subset U$, which is possible since $U$ is open and $x_{0} \in U$.
+		      Next, we show that $\phi_y:\overline{B}\to \overline{B}$ if $y \in N_{\epsilon}(y_{0})$ with $\epsilon$ sufficiently small.
+		      In fact, for $x \in \overline{B}$, we have
+		      \[
+			      \left|\phi_y(x)-x_{0}\right|\le  \left|\phi_y(x)-\phi_y(x_{0})\right|+ \left|\phi_y(x_{0})-x_{0}\right| \le \frac{1}{2}\left|x-x_{0}\right|\le \frac{1}{2}r=\left|A^{-1}(y-f(x_{0}))\right|=\left|A^{-1}(y-y_{0})\right|
+			      .\]
+		      Hence,
+		      \[
+			      \left|\phi_y(x_{0})-x_{0}\right|=\left|A^{-1}(y-y_{0})\right|\le \|A^{-1}\| \left|y-y_{0}\right|
+			      .\]
+		      Choose $\epsilon=\frac{1}{2 \|A^{-1}\|}r$ for $y \in N_{\epsilon}(y_{0})$.
+		      Then
+		      \[
+			      \|A^{-1}\left|y-y_{0}\right|\|\le \|A^{-1}\|\epsilon=\frac{1}{2}r
+			      .\]
+		      Altogether, we have
+		      \[
+			      \left|\phi_y(x)-x_{0}\right|\le \frac{1}{2}r+\frac{1}{2}r=r
+			      .\]
+		      Therefore, \[
+			      \phi_y(x) \in \overline{B} \text{ for all } x \in \overline{B} \text{ if } y \in N_{\epsilon}(y_{0})
+			      .\]
+		      hence, $\phi_y:\overline{B}\to \overline{B}$, and since $\phi_y$ is a contraction and $\overline{B}$ is complete, by Theorem~\ref{thm:9.23}, $\phi_y$ has a unique fixed point $x_{*} \in \overline{B}$, for which $\phi(y)(x_{*})=x_*$.
+		      This $x_{*}$ obeys $f(x_{*})=y$, so $y \in V$.
+		      Thus, $N_\epsilon(y_{0}) \subset V$.
+		      This proves (i). of the theorem.
+		\item[$g=f^{-1}:V\to U$ is in $\mathcal{C}^{1}(V)$:]
+		      Let $y \in V=f(U)$, $y =f(x), x \in U$.
+		      Choose $k$ small enough that $y+k \in V$, say $f(x_K)=y+k$, $x_k \in U$.
+		      Let $S=f'(x), T=S^{-1}$.
+		      \begin{note}
+			      $(f'(x))^{-1}$ exists by Theorem 9.8
+			      since $f'(x)$ is close to $f'(a)$ and $f'(a)$ is invertible,
+		      \end{note}
+		      We want to show $\frac{\left|g(y+k)-g(y)-Tk\right|}{\left|k\right|}\to 0$ as $k\to 0$.
+		      We have
+		      \begin{flalign*}
+			      g(y+k)-g(y)-Tk & = x_k -x - Tk                                             \\
+			                     & =- T \left[\underbrace{f(x_k)-f(x)}_{=k}- S(x_k-x)\right]
+			      .\end{flalign*}
+		      Hence, \[
+			      \left|g(y+k)-g(y)-Tk\right|\le  \|T\| \left|f(x_k)-f(x)-S(x_k-x)\right|
+			      .\]
+		      \begin{claim}
+			      \[
+				      \frac{1}{\left|k\right|}\le \frac{2 \|A^{-1}\|}{x_k -x}
+				      .\]
+			      I.e.,
+			      \[
+				      \left|x_k-x\right|\le  2 \|A^{-1}\| \left|k\right|.
+			      \]
+		      \end{claim}
+		      \begin{proof}
+			      $x_k-x=\phi_y(x_k)-\phi_y(x)+A^{-1}k$, so
+			      \[
+				      \left|x_k-x\right|\le  \left|\phi_y(x_k)-\phi_y(x)\right|+\|A^{-1}\left|k\right|\|\le \frac{1}{2} \left|x_k-x\right|+\|A^{-1}\left|k\right|\| \le 2 \|A^{-1}\| \left|k\right|
+				      .\]
+		      \end{proof}
+		      Since have
+		      \[
+			      \frac{\left|g(y+k)-g(y)-Tk\right|}{\left|k\right|}\le 2 \|A^{-1}\| \cdot \|T\| \cdot  \frac{\left|f(x_k)-f(x)-S(x_k-x)\right|}{\left|x_k-x\right|}
+			      ,\]
+		      as $k\to 0$, by the claim, $\left|x_k-x\right|\to 0$, so the right hand side of the inequality goes to $0$ as $k\to 0$ by definition of $S=f'(x)$.
+		      This shows that $g'(y)=T$ exists for all $y \in V=f(U)$.
+	\end{description}
 \end{proof}
-
 
