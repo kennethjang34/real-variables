@@ -1,14 +1,14 @@
 \chapter{Functions of Several variables}
-\begin{thm}[23][Bananach's Fixed Point Theorem/Contraction Mapping Theorem]
-	Let $(X,d)$ be a complete metric space. Suppose $\exists{c < 1} \text{ such that } $ the map $\phi:X\to X$ obeys $d(\phi(x),\phi(y))\le c d(x,y)$ for all $x,y \in X$ ($\phi$ is a \textit{ contraction }).
+\begin{thm}[23][Bananach's Fixed Point Theorem/Contraction Mapping Theorem]\hfill\\
+	Let $(X,d)$ be a complete metric space. Suppose $\exists{c < 1} \text{ such that } $ the map $\phi:X\to X$ obeys $d(\phi(x),\phi(y))\le c \cdot d(x,y)$ for all $x,y \in X$ ($\phi$ is a \textit{ contraction }).
 	Then $\exists{!} x \in X$ such that $\phi(x) = x$.
 	\begin{proof}
 		\begin{description}
 			\item[Uniqueness:]
-			      If $\phi(x)=x$ and $\phi(y)=y$, then $d(x,y)=d(\phi(x),\phi(y))\le c d(x,y)$, so $d(x,y)=0$ and $x=y$.
+			      If $\phi(x)=x$ and $\phi(y)=y$, then $d(x,y)=d(\phi(x),\phi(y))\le c\cdot d(x,y)$, so $d(x,y)=0$ and $x=y$.
 			\item[Existence:]
-			      Given $x_{0} \in X$, let $x_{1}=\phi(x_{0}),x_{2}=\phi(x_{1})=(\phi \circ \phi)(x_{0})$, $x_{n+1}=\phi(x_n)=\underbrace{(\phi \circ \phi)}_{n+1}(x_{0})$.
-			      Then $d(x_{n+1},x_n)=d(\phi(x_n), \phi(x_{n-1}))\le c d(x_n,x_{n-1})$, so by induction, $d(x_{n+1},x_n)\le c^{n}d(x_{1},x_{0})$ and hence for $n>m$,
+			      Given $x_{0} \in X$, let $x_{1}=\phi(x_{0}),x_{2}=\phi(x_{1})=(\phi \circ \phi)(x_{0})$, $x_{n+1}=\phi(x_n)=\underbrace{(\phi \circ \phi \circ \cdots \circ \phi)}_{n+1}(x_{0})$.
+			      Then $d(x_{n+1},x_n)=d(\phi(x_n), \phi(x_{n-1}))\le c\cdot  d(x_n,x_{n-1})$, so by induction, $d(x_{n+1},x_n)\le c^{n}d(x_{1},x_{0})$ and hence for $n>m$,
 			      \[
 				      d(x_n,x_m)\le \sum_{i=m+1}^{n}{d(x_i,x_{i-1})}\le \sum_{i=m+1}^{n}{c^{i-1}d(x_{1},x_{0})} \le \sum_{i=m+1}^{\infty}{c^{i-1}d(x_{1},x_{0})}=\frac{c^{m}}{1-c} d(x_{1},x_{0}).\]
 			      Hence, $\{x_n\}$ is a Cauchy sequence. As $X$ is assumed to be complete, $\exists x \in X$ such that $x_n \to x$. Since $\phi$ is continuous $\phi(x)=\lim_{n\to \infty}{\phi(x_n)}=\lim_{n\to \infty}{x_{n+1}}=x$.
@@ -83,9 +83,9 @@ with $\lim_{h\to 0}{\frac{r(h)}{h}}=0$.
 	Then $f$ is \textit{differentiable} at $x$ and $f'(x)=A$ if
 	\[
 		\lim_{h\to 0}{\frac{\|f(x+h)-f(x)-Ah\|}{\|h\|}}=0
-		,\] where $A$ depends on $x$, $A \in L(\R^{n},\R^{m})$.
-	Note $L(\R^{n},\R^{m})$ is the vector space of linear maps from $\R^{n}$ to $\R^{m}$.
-	That is, if $f(x+h)=f(x)+Ah+r(h)$ with $\lim_{h\to 0}{\frac{\|r(h)\|}{\|h\|}}=0$.
+		,\] where $A \in L(\R^{n},\R^{m})$ depends on $x$ (but not $h$).\\
+	That is, if $f(x+h)=f(x)+Ah+r(h)$ with $\lim_{h\to 0}{\frac{\|r(h)\|}{\|h\|}}=0$, then $f$ is differentiable at $x$ and $f'(x)=A$.\\
+	Note $L(\R^{n},\R^{m})$ is the set of all linear maps from $\R^{n}$ to $\R^{m}$.
 \end{define}
 
 \begin{notation}
@@ -97,23 +97,24 @@ with $\lim_{h\to 0}{\frac{r(h)}{h}}=0$.
 	\begin{proof}
 		Suppose
 		\begin{flalign*}
-			f(x+h) & =f(x)+A_{1}h + r_{1}(h) \\
-			f(x+h) & =f(x)+A_{2}h + r_{2}(h) \\
+			f(\mathbf{x+h}) & =f(\mathbf{x})+A_{1}\mathbf{h} + r_{1}(\mathbf{h}) \\
+			f(\mathbf{x+h}) & =f(\mathbf{x})+A_{2}\mathbf{h} + r_{2}(\mathbf{h}) \\
 			.\end{flalign*}
-		with $r_{1}h=o(h), r_{2}h=o(h)$.
-		Let $B=A_{1}-A_{2}$. Then $Bh=r_{2}(h)-r_{1}(h)$, so for a fixed $h\neq 0$ and $t>0$, \[
-			\frac{\left|Bh\right|}{\left|h\right|}= \frac{\left|B(th)\right|}{\left|th\right|} \le \frac{\left|r_{2}(th)\right|}{th}+\frac{\left|r_{1}(th)\right|}{th}.\]
-		$\frac{\left|Bh\right|}{\left|h\right|}$ is independent of $t$. Hence, $\frac{\left|Bh\right|}{\left|h\right|}\to 0$ as $h\to 0$ (think of $th=h'\to 0$).
-		$Bh=0$ for all $h \in \R^{n}$; i.e., $B=0$; i.e., $A_{1}=A_{2}$.
+		with $r_{1}\mathbf{h}=o(\mathbf{h}), r_{2}\mathbf{h}=o(\mathbf{h})$.
+		Let $B=A_{1}-A_{2}$. Then $B\mathbf{h}=r_{2}(\mathbf{h})-r_{1}(\mathbf{h})$, so for a fixed $\mathbf{h}\neq \mathbf{0}$ and $t>0$, we have
+		\[
+			\frac{\left|B\mathbf{h}\right|}{\left|\mathbf{h}\right|}= \frac{\left|B(t \mathbf{h})\right|}{\left|t \mathbf{h}\right|} \le \frac{\left|r_{2}(t \mathbf{h})\right|}{t \mathbf{h}}+\frac{\left|r_{1}(t \mathbf{h})\right|}{t \mathbf{h}}.\]
+		Since $\frac{\left|B \mathbf{h}\right|}{\left| \mathbf{h}\right|}$ is independent of $t$, so the fact $\frac{\left|B \mathbf{h}\right|}{\left| \mathbf{h}\right|}\to 0$ as $t\to 0$ implies $B \mathbf{h}=\mathbf{0}$ for all $\mathbf{h} \in \R^{n}$; i.e., $B=A_{1}-A_{2}=0$.
 	\end{proof}
 	\begin{note}
 		\begin{enumerate}
-			\item If $f'(x)$ exists for all $x \in E$ then we can regard $f'$ as a function $f':E\to L(\R^{n},\R^{m})$.
-			\item Suppose $f: \R^{n}\to \R^{m}$ is linear. Then for all $x,h \in \R^{n}$,
+			\item If $f'(\mathbf{x})$ exists for all $\mathbf{x} \in E$ then we can regard $f'$ as a function $f':E\to L(\R^{n},\R^{m})$.
+			\item Suppose $f: \R^{n}\to \R^{m}$ is linear. Then for all $\mathbf{x}, \mathbf{h} \in \R^{n}$,
 			      \[
-				      f(x+h)=f(x)+\underbrace{f(h)}_{=Ah \text{ with } A=f}+0
+				      f(\mathbf{x+h})=f(\mathbf{x})+\underbrace{f(\mathbf{h})}_{=A \mathbf{h} \text{ with } A=f}+0
 				      .\]
-			      Hence, $f'(x)=f(x)$ for all $x \in \R^{n}$.\\
+			      Hence, $f'(\mathbf{x})=A=f$ for all $x \in \R^{n}$.\\
+			      Note that $\mathbf{x}$ does not appear on the right hand side of the above equality. In fact, $f'(\mathbf{x}) \in L(\R^{n}, \R^{m})$, while $f(\mathbf{x})$ is a vector in $\R^{m}$.
 			      For $n=m=1$, we can identify a linear map
 			      \[
 				      f: \R\to \R, f(x)=ax
@@ -481,92 +482,160 @@ If $f'(x)>0$ for all $x \in (a,b)$ then $f$ is strictly increasing on $(a,b)$ an
 
 \begin{proof}[Theroem~\ref{thm:9.24}]
 	\hfill
-	\begin{description}
-		\item[Step 1. Existence of open $U$ containing $a$ such that $f$ is one-to-one on $U$:]
-		      Write $A=f'(a)$. Given $y \in \R^{n}$, let $\phi:E\to \R^{n}$ by $\phi(x)=x+A^{-1}(y-f(x))$.
-		      Then $\phi(x)=x \Leftrightarrow y=f(x)$ [$A^{-1}z=0 \Leftrightarrow z=0$].
-		      Therefore, uniqueness of fixed points of $\phi$ would imply uniqueness of $x$ such that $y=f(x)$, which is the one-to-one point of our goal.
+	\begin{enumerate}
+		\item
+		      \begin{description}
+			      \item[Step 1. Existence of open $U$ containing $a$ such that $f$ is one-to-one on $U$:]
+			            Write $A=f'(a)$. Given $y \in \R^{n}$, let $\phi:E\to \R^{n}$ by $\phi(x)=x+A^{-1}(y-f(x))$.
+			            Then $\phi(x)=x \Leftrightarrow y=f(x)$ [$A^{-1}z=0 \Leftrightarrow z=0$].
+			            Therefore, uniqueness of fixed points of $\phi$ would imply uniqueness of $x$ such that $y=f(x)$, which is the one-to-one point of our goal.
+			            \begin{note}
+				            If $\phi$ is a contraction then fixed points are unique (if there is one) since if $\phi(x_{1})=x_{1}$ and $\phi(x_{2})=x_{2}$, then \[
+					            \left|x_{1}-x_{2}\right|=\left|\phi(x_{1})-\phi(x_{2})\right|\le c \left|x_{1}-x_{2}\right|
+				            \] with $c<1$ so $x_{1}=x_{2}$.
+			            \end{note}
+			            Now we have $\phi'(x)=I-A^{-1}f'(x)=A^{-1}(A-f'(x))=A^{-1}(f'(a) - f'(x))$.
+			            Hence, \[
+				            \|\phi'(x)\|\le \|A^{-1}\|\cdot \underbrace{\|f'(a)-f'(x)\|}_{\le \frac{1}{2 \|A^{-1}\|} \text{ if $\left|x-a\right|<\delta$ for some $\delta>0$ }}
+				            .\]
+			            Thus, if $x \in N_{\delta}(a)$, then $\|\phi'(x)\|\le \frac{1}{2}$, and $N_\delta(a)$ is the desired open set $U$.
+			      \item[Step 2. Openness of $V$:]
+			            Let $V=f(U)$.
+			            Let $y_{0} \in V$, say $y=f(x_{0})$, $x_{0} \in U$.
+			            $V$ is then open if and only if for all $y_{0} \in V$, there exists $\epsilon>0$ such that $N_{\epsilon}(y_{0}) \subset V$; i.e., $\forall{y \in N_\epsilon (y_{0})}: \exists{x \in U} \text{ such that } f(x)=y$.\\
+			            Given $y \in \R^{n}$, as before, define $\phi_y: E\to \R^{n}$ \[
+				            \phi_y(x)=x+A^{-1}(y-f(x))
+				            .\]
+			            Choose $r>0$ s.t. $\overline{B}=\overline{N_r(x)} \subset U$, which is possible since $U$ is open and $x_{0} \in U$.
+			            Next, we show that $\phi_y:\overline{B}\to \overline{B}$ if $y \in N_{\epsilon}(y_{0})$ with $\epsilon$ sufficiently small.
+			            In fact, for $x \in \overline{B}$, we have
+			            \[
+				            \left|\phi_y(x)-x_{0}\right|\le  \left|\phi_y(x)-\phi_y(x_{0})\right|+ \left|\phi_y(x_{0})-x_{0}\right| \le \frac{1}{2}\left|x-x_{0}\right|\le \frac{1}{2}r=\left|A^{-1}(y-f(x_{0}))\right|=\left|A^{-1}(y-y_{0})\right|
+				            .\]
+			            Hence,
+			            \[
+				            \left|\phi_y(x_{0})-x_{0}\right|=\left|A^{-1}(y-y_{0})\right|\le \|A^{-1}\| \left|y-y_{0}\right|
+				            .\]
+			            Choose $\epsilon=\frac{1}{2 \|A^{-1}\|}r$ for $y \in N_{\epsilon}(y_{0})$.
+			            Then
+			            \[
+				            \|A^{-1}\left|y-y_{0}\right|\|\le \|A^{-1}\|\epsilon=\frac{1}{2}r
+				            .\]
+			            Altogether, we have
+			            \[
+				            \left|\phi_y(x)-x_{0}\right|\le \frac{1}{2}r+\frac{1}{2}r=r
+				            .\]
+			            Therefore, \[
+				            \phi_y(x) \in \overline{B} \text{ for all } x \in \overline{B} \text{ if } y \in N_{\epsilon}(y_{0})
+				            .\]
+			            hence, $\phi_y:\overline{B}\to \overline{B}$, and since $\phi_y$ is a contraction and $\overline{B}$ is complete, by Theorem~\ref{thm:9.23}, $\phi_y$ has a unique fixed point $x_{*} \in \overline{B}$, for which $\phi(y)(x_{*})=x_*$.
+			            This $x_{*}$ obeys $f(x_{*})=y$, so $y \in V$.
+			            Thus, $N_\epsilon(y_{0}) \subset V$.
+			            This proves (i). of the theorem.
+			      \item[$g=f^{-1}:V\to U$ is in $\mathcal{C}^{1}(V)$:]
+			            Let $y \in V=f(U)$, $y =f(x), x \in U$.
+			            Choose $k$ small enough that $y+k \in V$, say $f(x_K)=y+k$, $x_k \in U$.
+			            Let $S=f'(x), T=S^{-1}$.
+			            \begin{note}
+				            $(f'(x))^{-1}$ exists by Theorem 9.8
+				            since $f'(x)$ is close to $f'(a)$ and $f'(a)$ is invertible,
+			            \end{note}
+			            We want to show $\frac{\left|g(\mathbf{y+k})-g(\mathbf{y})-T\mathbf{k}\right|}{\left|\mathbf{k}\right|}\to 0$ as $k\to 0$.
+			            We have
+			            \begin{flalign*}
+				            g(\mathbf{y+k})-g(\mathbf{y})-Tk & = \mathbf{x_k -x} - Tk                                                               \\
+				                                             & =- T \left[\underbrace{f(\mathbf{x_k})-f(\mathbf{x})}_{=k}- S(\mathbf{x_k-x})\right]
+				            .\end{flalign*}
+			            Hence, \[
+				            \left|g(\mathbf{y+k})-g(\mathbf{y})-Tk\right|\le  \|T\| \left|f(\mathbf{x_k})-f(\mathbf{x})-S(\mathbf{x_k-x})\right|
+				            .\]
+			            \begin{claim}
+				            \[
+					            \frac{1}{\left|k\right|}\le \frac{2 \|A^{-1}\|}{\mathbf{x_k -x}}
+					            .\]
+				            I.e.,
+				            \[
+					            \left|\mathbf{x_k-x}\right|\le  2 \|A^{-1}\| \left|k\right|.
+				            \]
+			            \end{claim}
+			            \begin{proof}
+				            $\mathbf{x_k-x}=\phi_{\mathbf{y}}(\mathbf{x_k})-\phi_{\mathbf{y}}(\mathbf{x})+A^{-1}k$, so
+				            \[
+					            \left|x_k-x\right|\le  \left|\phi_y(x_k)-\phi_y(x)\right|+\|A^{-1}\left|k\right|\|\le \frac{1}{2} \left|x_k-x\right|+\|A^{-1}\left|k\right|\| \le 2 \|A^{-1}\| \left|k\right|
+					            .\]
+			            \end{proof}
+			            Since we have
+			            \[
+				            \frac{\left|g(\mathbf{y+k})-g(\mathbf{y})-Tk\right|}{\left|k\right|}\le 2 \|A^{-1}\| \cdot \|T\| \cdot  \frac{\left|f(\mathbf{x_k})-f(\mathbf{x})-S(\mathbf{x_k-x})\right|}{\left|\mathbf{x_k-x}\right|}
+				            ,\]
+			            as $k\to 0$, by the claim, $\left|\mathbf{x_k}-\mathbf{x}\right|\to 0$, so the right hand side of the inequality goes to $0$ as $k\to 0$ by definition of $S=f'(\mathbf{x})$.
+			            This shows that $g'(\mathbf{y})=T$ exists for all $\mathbf{y} \in V=f(U)$.
+			            $f:U\to V=(U)$.
+		      \end{description}
+		\item
+		      Note $g'(\mathbf{y})$ exists for all $\mathbf{y}\in V$.
+		      Since $f(g(\mathbf{y}))=\mathbf{y}$ for all $\mathbf{y} \in V$, the chain rule gives $f'(g(\mathbf{y}))g'(\mathbf{y})=I$; i.e., $g'(\mathbf{y})=(f'(g(\mathbf{y})))^{-1}$.
+		      Since $g$ is continuous on $V$ because of its differentiability, $f'$ is differentiable on $U$ by hypothesis and the inversion is continuous by Theorem~\ref{thm:9.8} for $L(\R^{n}, \R^{n})$.
+		      We conclude $g':V\to L(\R^{n},\R^{n})$ is continuous.
 		      \begin{note}
-			      If $\phi$ is a contraction then fixed points are unique (if there is one) since if $\phi(x_{1})=x_{1}$ and $\phi(x_{2})=x_{2}$, then \[
-				      \left|x_{1}-x_{2}\right|=\left|\phi(x_{1})-\phi(x_{2})\right|\le c \left|x_{1}-x_{2}\right|
-			      \] with $c<1$ so $x_{1}=x_{2}$.
+			      In coordinates, we have $g(f(x))=x$, $g'(f(x))f'(x)=I$.
+			      The latter implies \[
+				      \sum_{k=1}^{n}\frac{\partial{g_i}}{\partial{y_k}}\cdot \frac{\partial{y_k}}{\partial{x_j}}= \delta_{ij} \text{ for } i,j=1,2,\ldots,n.\]
 		      \end{note}
-		      Now we have $\phi'(x)=I-A^{-1}f'(x)=A^{-1}(A-f'(x))=A^{-1}(f'(a) - f'(x))$.
-		      Hence, \[
-			      \|\phi'(x)\|\le \|A^{-1}\|\cdot \underbrace{\|f'(a)-f'(x)\|}_{\le \frac{1}{2 \|A^{-1}\|} \text{ if $\left|x-a\right|<\delta$ for some $\delta>0$ }}
-			      .\]
-		      Thus, if $x \in N_{\delta}(a)$, then $\|\phi'(x)\|\le \frac{1}{2}$, and $N_\delta(a)$ is the desired open set $U$.
-		\item[Step 2. Openness of $V$:]
-		      Let $V=f(U)$.
-		      Let $y_{0} \in V$, say $y=f(x_{0})$, $x_{0} \in U$.
-		      $V$ is then open if and only if for all $y_{0} \in V$, there exists $\epsilon>0$ such that $N_{\epsilon}(y_{0}) \subset V$; i.e., $\forall{y \in N_\epsilon (y_{0})}: \exists{x \in U} \text{ such that } f(x)=y$.\\
-		      Given $y \in \R^{n}$, as before, define $\phi_y: E\to \R^{n}$ \[
-			      \phi_y(x)=x+A^{-1}(y-f(x))
-			      .\]
-		      Choose $r>0$ s.t. $\overline{B}=\overline{N_r(x)} \subset U$, which is possible since $U$ is open and $x_{0} \in U$.
-		      Next, we show that $\phi_y:\overline{B}\to \overline{B}$ if $y \in N_{\epsilon}(y_{0})$ with $\epsilon$ sufficiently small.
-		      In fact, for $x \in \overline{B}$, we have
-		      \[
-			      \left|\phi_y(x)-x_{0}\right|\le  \left|\phi_y(x)-\phi_y(x_{0})\right|+ \left|\phi_y(x_{0})-x_{0}\right| \le \frac{1}{2}\left|x-x_{0}\right|\le \frac{1}{2}r=\left|A^{-1}(y-f(x_{0}))\right|=\left|A^{-1}(y-y_{0})\right|
-			      .\]
-		      Hence,
-		      \[
-			      \left|\phi_y(x_{0})-x_{0}\right|=\left|A^{-1}(y-y_{0})\right|\le \|A^{-1}\| \left|y-y_{0}\right|
-			      .\]
-		      Choose $\epsilon=\frac{1}{2 \|A^{-1}\|}r$ for $y \in N_{\epsilon}(y_{0})$.
-		      Then
-		      \[
-			      \|A^{-1}\left|y-y_{0}\right|\|\le \|A^{-1}\|\epsilon=\frac{1}{2}r
-			      .\]
-		      Altogether, we have
-		      \[
-			      \left|\phi_y(x)-x_{0}\right|\le \frac{1}{2}r+\frac{1}{2}r=r
-			      .\]
-		      Therefore, \[
-			      \phi_y(x) \in \overline{B} \text{ for all } x \in \overline{B} \text{ if } y \in N_{\epsilon}(y_{0})
-			      .\]
-		      hence, $\phi_y:\overline{B}\to \overline{B}$, and since $\phi_y$ is a contraction and $\overline{B}$ is complete, by Theorem~\ref{thm:9.23}, $\phi_y$ has a unique fixed point $x_{*} \in \overline{B}$, for which $\phi(y)(x_{*})=x_*$.
-		      This $x_{*}$ obeys $f(x_{*})=y$, so $y \in V$.
-		      Thus, $N_\epsilon(y_{0}) \subset V$.
-		      This proves (i). of the theorem.
-		\item[$g=f^{-1}:V\to U$ is in $\mathcal{C}^{1}(V)$:]
-		      Let $y \in V=f(U)$, $y =f(x), x \in U$.
-		      Choose $k$ small enough that $y+k \in V$, say $f(x_K)=y+k$, $x_k \in U$.
-		      Let $S=f'(x), T=S^{-1}$.
-		      \begin{note}
-			      $(f'(x))^{-1}$ exists by Theorem 9.8
-			      since $f'(x)$ is close to $f'(a)$ and $f'(a)$ is invertible,
-		      \end{note}
-		      We want to show $\frac{\left|g(y+k)-g(y)-Tk\right|}{\left|k\right|}\to 0$ as $k\to 0$.
-		      We have
-		      \begin{flalign*}
-			      g(y+k)-g(y)-Tk & = x_k -x - Tk                                             \\
-			                     & =- T \left[\underbrace{f(x_k)-f(x)}_{=k}- S(x_k-x)\right]
-			      .\end{flalign*}
-		      Hence, \[
-			      \left|g(y+k)-g(y)-Tk\right|\le  \|T\| \left|f(x_k)-f(x)-S(x_k-x)\right|
-			      .\]
-		      \begin{claim}
-			      \[
-				      \frac{1}{\left|k\right|}\le \frac{2 \|A^{-1}\|}{x_k -x}
-				      .\]
-			      I.e.,
-			      \[
-				      \left|x_k-x\right|\le  2 \|A^{-1}\| \left|k\right|.
-			      \]
-		      \end{claim}
-		      \begin{proof}
-			      $x_k-x=\phi_y(x_k)-\phi_y(x)+A^{-1}k$, so
-			      \[
-				      \left|x_k-x\right|\le  \left|\phi_y(x_k)-\phi_y(x)\right|+\|A^{-1}\left|k\right|\|\le \frac{1}{2} \left|x_k-x\right|+\|A^{-1}\left|k\right|\| \le 2 \|A^{-1}\| \left|k\right|
-				      .\]
-		      \end{proof}
-		      Since have
-		      \[
-			      \frac{\left|g(y+k)-g(y)-Tk\right|}{\left|k\right|}\le 2 \|A^{-1}\| \cdot \|T\| \cdot  \frac{\left|f(x_k)-f(x)-S(x_k-x)\right|}{\left|x_k-x\right|}
-			      ,\]
-		      as $k\to 0$, by the claim, $\left|x_k-x\right|\to 0$, so the right hand side of the inequality goes to $0$ as $k\to 0$ by definition of $S=f'(x)$.
-		      This shows that $g'(y)=T$ exists for all $y \in V=f(U)$.
-	\end{description}
+	\end{enumerate}
 \end{proof}
+
+
+\begin{notation}
+	\hfill \\
+	For $A \in L(\R^{n+m},\R^{n})$, define
+	$A_{\mathbf{x}} \in L(\R^{n},\R^{n})$ by $A_{\mathbf{x}} \mathbf{h}=A(\mathbf{h},\mathbf{0})$ for $\mathbf{h} \in \R^{n}$.\\
+	$A_\mathbf{y} \in L(\R^{m},\R^{n})$ by $A_{\mathbf{y}} \mathbf{k}=A(0,\mathbf{k})$ for $\mathbf{k} \in \R^{m}$.\\
+	E.g., if $A=f'(\mathbf{a},\mathbf{b})$ for $f: \R^{n+m}\to \R^{n}$, then
+	\begin{flalign*}
+		\left[f'(\mathbf{a},\mathbf{b})\right] & = \left[\begin{array}{cccccc}
+				                                                 \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} & \frac{\partial f_1}{\partial y_1} & \cdots & \frac{\partial f_1}{\partial y_m} \\
+				                                                 \vdots                            &        &                                   &                                   & \vdots                                     \\
+				                                                 \frac{\partial f_n}{\partial x_1} & \cdots & \frac{\partial f_n}{\partial x_n} & \frac{\partial f_n}{\partial y_1} & \cdots & \frac{\partial f_n}{\partial y_m}
+			                                                 \end{array}\right](\mathbf{a},\mathbf{b}) \\
+		\left[A_\mathbf{x}\right]              & = \left[\begin{array}{cccc}
+				                                                 \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\
+				                                                 \vdots                            &        &                                   \\
+				                                                 \frac{\partial f_n}{\partial x_1} & \cdots & \frac{\partial f_n}{\partial x_n}
+			                                                 \end{array}\right](\mathbf{a},\mathbf{b})                                                                                  \\
+		\left[A_\mathbf{y}\right]              & = \left[\begin{array}{cccc}
+				                                                 \frac{\partial f_1}{\partial y_1} & \cdots & \frac{\partial f_1}{\partial y_m} \\
+				                                                 \vdots                            &        &                                   \\
+				                                                 \frac{\partial f_n}{\partial y_1} & \cdots & \frac{\partial f_n}{\partial y_m}
+			                                                 \end{array}\right](\mathbf{a},\mathbf{b})                                                                                  \\
+		A                                      & =\left[\begin{array}{cc}
+				                                                A_{\mathbf{x}} & A_{\mathbf{y}}
+			                                                \end{array}\right]
+		.\end{flalign*}
+\end{notation}
+
+\begin{example}[29]
+	Let $f=(f_{1},f_{2}): \R^{2+3}\to \R^2$ defined by
+	\begin{flalign*}
+		f_{1}(x_{1},x_{2},y_{1},y_{2},y_{3}) & =2e^{x_{1}}+x_{2}y_{1}-4y_{2}+3,        \\
+		f_{2}(x_{1},x_{2},y_{1},y_{2},y_{3}) & =x_{2}\cos{(x_{1})}-6x_{1}+2y_{1}-y_{3}
+		.\end{flalign*}
+	For $\mathbf{a}=(0,1),\mathbf{b}=(3,2,7)$, we have $f(\mathbf{a},\mathbf{b})=0$.
+	Problem: if $\mathbf{y}$ is near $(3,2,7)$, can we find $\mathbf{x}=x(\mathbf{y})$ s.t. $f(\mathbf{x},\mathbf{y})=\mathbf{0}$?; i.e., can we solve the implicit equation $f(\mathbf{x},\mathbf{y})=0$ for $\mathbf{x}$ in terms of $\mathbf{y}$.
+	\begin{remark}
+		This motivates the~\ref{thm:9.28}.
+	\end{remark}
+\end{example}
+
+\begin{thm}[28][\namedlabel{thm:9.28}{Implicit Function Theorem}]
+	Let $f: E\to \R$ be $\mathcal{C}'(E)$ where $E \subset \R^{n+m}$ is open.\\
+	Suppose $f(\mathbf{a},\mathbf{b})$ for some $(\mathbf{a},\mathbf{b}) \in \R^{n+m}$ ($\mathbf{a} \in \R^{n}$, $\mathbf{b} \in \R^{m}$) and that for $A=f'(\mathbf{a},\mathbf{b})$, $A_{\mathbf{x}}$ is invertible.
+	Then there exists $U \subset \R^{n+m}$, $W \subset \R^{m}$ with $(\mathbf{a},\mathbf{b}) \in U$, $\mathbf{b} \in W$ s.t.
+	\begin{itemize}
+		\item $\forall{\mathbf{y} \in W}: \exists!{\mathbf{x} \in \R^{n}} \text{ such that } (\mathbf{x},\mathbf{y}) \in U \text{ and } f(\mathbf{x},\mathbf{y})=0$.
+		\item Write $\mathbf{x}=g(\mathbf{y})$.\\
+		      Then $g: W\to \R^{n}$ in $\mathcal{C}'(W)$, $g(\mathbf{b})=\mathbf{a}$, $f(g(\mathbf{y}),\mathbf{y})=0$ for all $\mathbf{y} \in W$ and $g'(\mathbf{b})=-A^{-1}_{\mathbf{x}} A_{\mathbf{y}}$, where $g'(\mathbf{b}) \in L(\R^{m},\R^{n})$, $A_{\mathbf{x}} \in L(\R^{n},\R^{n})$, $A_{\mathbf{y}} \in L(\R^{m},\R^{n})$.
+	\end{itemize}
+\end{thm}
+
 

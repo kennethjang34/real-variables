@@ -503,7 +503,7 @@ Then, $<\phi_m \phi_n > = \delta_{mn}$, so Theorem~\ref{thm:8.11} still holds.\\
 		\item
 		      For $f \in \mathscr{R}[-\pi,\pi]$, the \textit{Fourier series} of $f$ is
 		      \[
-			      f(x)=\sum_{n=-\infty}^{\infty}{c_n \phi_n(x)}
+			      s(x)=\sum_{n=-\infty}^{\infty}{c_n \phi_n(x)}
 		      \] with $c_n= <f, \phi_n>$.
 		      \begin{remark}
 			      At this point, we don't claim that the series converges or equals $f(x)$
@@ -607,8 +607,8 @@ Then, $<\phi_m \phi_n > = \delta_{mn}$, so Theorem~\ref{thm:8.11} still holds.\\
 		Let $\mathscr{A}=\text{ Algebra of trigonometric polynomials } \sum_{n=-N}^{N}{a_{n}z^{n}}, \,\, z \in T, a_{n} \in \C, N=0,1,2, \ldots $. Then $\mathscr{A}$ vanishes at no point since it contains $1$.\\
 		Also, $\mathscr{A}$ separates points and self-adjoint since
 		\begin{flalign*}
-			\sum_{n=-N}^{N}{a_{n}z^{n}} & = \sum_{n=-N}^{N}{\overline{a_n z^{n}}}      = \sum_{n=-N}^{N}{\overline{a_n}z^{-n}} \\
-			                            & \underbrace{=}_{m=-n} \sum_{m=-N}^{N}{\overline{a_{-m}} z^{m}} \in \mathscr{A}
+			\overline{\left(\sum_{n=-N}^{N}{a_{n}z^{n}}\right)} & = \sum_{n=-N}^{N}{\overline{a_n z^{n}}}      = \sum_{n=-N}^{N}{\overline{a_n}z^{-n}} \\
+			                                                    & \underbrace{=}_{m=-n} \sum_{m=-N}^{N}{\overline{a_{-m}} z^{m}} \in \mathscr{A}
 			.\end{flalign*}
 		By Stone-Weierstrass, $\overline{\mathscr{A}}= \mathscr{C}(T)$, so given $\epsilon>0$, there exists $\mathscr{P} \in \mathscr{A}$ such that $\left|F(z)-\mathscr{P}(z)\right|<\epsilon$ for all $z \in T$.
 		Write $\mathscr{P}(z)=\sum_{n=-N}^{N}{a_n z^{n}}$ and let $P(x)=\sum_{n=-N}^{N}{c_n e^{inx}}= \mathscr{P}(e^{ix})$.
@@ -646,50 +646,60 @@ Minkowski inequality: $\|f+g\|_2\le \|f\|_2+\|g\|_2$.\\
 
 \begin{problem}[6.12]
 \label{prob:6.12}
-For $f \in \mathscr{R}[-\pi,\pi], \epsilon>0$, there exists a continuous function (piecewise-linear) $h$ s.t. $\|f-h\|<\epsilon$..
+For $f \in \mathscr{R}[-\pi,\pi], \epsilon>0$, there exists a continuous function (piecewise-linear) $h$ s.t. $\|f-h\|<\epsilon$.
 If $f(-\pi)=f(\pi)$ then we can choose $h$ s.t. $h(-\pi)=h(\pi)$.
 \end{problem}
 
 \begin{thm}[16]
 	For $f,g \in \mathscr{R}[-\pi,\pi]$ that are $2\pi$-periodic,
 	let $c_n= <f, \phi_n>, \gamma_n = < g, \phi_n>$.
-	Then $\lim_{N\to \infty}{\|f-s_N(f)\|_2}=0$ (convergence of $s_N(f)$ to $f$ in $L^2$-norm), and $<f,g> = (c,\gamma)$ (Parseval's frelation).
+	Then $\lim_{N\to \infty}{\|f-s_N(f)\|_2}=0$ (convergence of $s_N(f)$ to $f$ in $L^2$-norm), and $<f,g> = (c,\gamma)$ (Parseval's relation).
 	In particular, $\|f\|_2^{2}=(c,c)$; i.e., $\frac{1}{2\pi}\int_{-\pi}^{\pi}{\left|f(x)\right|^2\mathrm{d}x}=\sum_{n=-\infty}^{\infty}{\left|c_n\right|^2}$.
 	This is called Bessel's equality.
-	\begin{proof}
-		\begin{description}
-			\item[$L^2$ convergence:]
-			      Let $\epsilon>0$. Choose a continuous $h$ (\ref{prob:6.12}) s.t. $\|f-h\|_2 < \frac{\epsilon}{3}$.
-			      Then $\|s_N(f)-f\|_{2}\le \underbrace{\|s_N(f)-s_N(h)\|_2}_{(*)}+\underbrace{\|s_N(h)-h\|_{2}}_{(**)}+\underbrace{\|h-f\|_2}_{<\frac{\epsilon}{3}}$.
-			      Note $(*)= \|s_N(f-h)\|_2 \le \|f-h\|_2$ from the proof of Bessel's inequality.
-			      Also by Theorem~\ref{thm:8.15}, there exists a trigonometric polynomial $P$ s.t. $\|P-h\|_{\infty}<\frac{\epsilon}{3}$ and hence $\|P-h\|_2 \le  \|P-h\|_{\infty}<\frac{\epsilon}{3}$.\\
-			      Say $\text{deg}(P)=N_{0}$. By Theorem~\ref{thm:8.11},
-			      for $N\ge N_{0}$, \[
-				      \|s_N(h)\|_{2}\le \|P-h\|_2
-				      .\]
-			      Thus, for $N\ge N_{0}$\[
-				      \|s_N(h)-h\|_{2} < \frac{\epsilon}{3}
-				      .\]
-			      Therefore, $\|s_N(f)-f\|_2<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon$ if $N\ge N_{0}$, so $\lim_{N\to \infty}{\|s_N(f)-f\|_2}=0$.
-			      \begin{remark}
-				      Good proof to master.
-			      \end{remark}
-
-			      \begin{note}
-				      $\|f\|_2 \le  \|f\|_{\infty}$ for all $f \in \mathscr{R}[-\pi,\pi]$ since $\|f\|_2^2=\frac{1}{2\pi} \int_{-\pi}^{\pi}{\left|f(x)\right|^2\mathrm{d}x}\le \frac{1}{2\pi} \int_{-\pi}^{\pi}{\|f\|_{\infty}^2\mathrm{d}x}=\|f\|_{\infty}^2$.
-			      \end{note}
-			\item[Parseval relation:]\hfill \\
-			      $<s_N(f),g> = \sum_{n=-N}^{N}{c_{n} \underbrace{< \phi_n , g>}_{\overline{\gamma}_n}}$.\\
-			      $\left|<f ,g > - \sum_{n=-N}^{N}{c_{n}\overline{\gamma}_n}\right|= \left|<f,g> - <s_N(f),g>\right|= \left|<f-s_N(f),g>\right| \le  \|f-s_N(f)\|_2 \|g\|_2 \to 0
-			      $ as $N\to \infty$, where the last inequality follows from Cauchy-Schwarz inequality (Problem~\nameref{prob:6.10}{6.10}).
-			      \begin{note}
-				      The symmetric sum $\sum_{n=-N}^{N}{c_{n} \overline{\gamma}_n}$ converges to $<f,g>$, but
-				      \begin{flalign*}
-					      \sum_{n=-N}^{N}{\left|c_{n} \overline{\gamma}_n\right|} & \le \left(\sum_{n=-N}^{N}{\left|c_n\right|^2}\right)^{\frac{1}{2}} \cdot \left(\sum_{n=-N}^{N}{\left|\overline{\gamma}_n\right|^2}\right)^{\frac{1}{2}} \\
-					                                                              & \le \|f\|_2 \cdot \|g\|_2,
-				      \end{flalign*}
-				      so $\sum_{n=-\infty}^{\infty}{c_n \overline{\gamma}_n}$ converges absolutely and its sum is independent of how we make partial sums.
-			      \end{note}
-		\end{description}
-	\end{proof}
 \end{thm}
+\begin{proof}[\ref{thm:8.16}]
+	\begin{description}
+		\item[$L^2$ convergence:]\hfill \\
+		      Let $\epsilon>0$. \\
+		      Choose a continuous $h$ (Problem~\nameref{prob:6.12}) s.t. $\|f-h\|_2 < \frac{\epsilon}{3}$.\\
+		      Then \[
+			      \|s_N(f)-f\|_{2}\le \underbrace{\|s_N(f)-s_N(h)\|_2}_{(*)}+\underbrace{\|s_N(h)-h\|_{2}}_{(**)}+\underbrace{\|h-f\|_2}_{<\frac{\epsilon}{3}}
+			      .\]
+		      Note $(*)= \|s_N(f-h)\|_2 \le \|f-h\|_2$ from the proof of Bessel's inequality, so \[
+			      (*)<\frac{\epsilon}{3}
+			      .\]
+		      Since $h$ is continuous and  by Theorem~\ref{thm:8.15}, there exists a trigonometric polynomial $P$ s.t. $\|P-h\|_{\infty}<\frac{\epsilon}{3}$ and hence \[
+			      \|P-h\|_2 \le  \|P-h\|_{\infty}<\frac{\epsilon}{3}
+			      .\]
+		      Say $\text{deg}(P)=N_{0}$. By Theorem~\ref{thm:8.11},
+		      for $N\ge N_{0}$, \[
+			      \|s_N(h)-h\|_{2}\le \|P-h\|_2<\frac{\epsilon}{3}
+			      .\]
+		      Therefore, for $N\ge N_{0}$, we have
+		      \[
+			      \|s_N(f)-f\|_2<\frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}=\epsilon
+			      .\]
+		      Hence, $\lim_{N\to \infty}{\|s_N(f)-f\|_2}=0$.
+		      \begin{remark}
+			      Good proof to master.
+		      \end{remark}
+
+		      \begin{note}
+			      $\|f\|_2 \le  \|f\|_{\infty}$ for all $f \in \mathscr{R}[-\pi,\pi]$ since $\|f\|_2^2=\frac{1}{2\pi} \int_{-\pi}^{\pi}{\left|f(x)\right|^2\mathrm{d}x}\le \frac{1}{2\pi} \int_{-\pi}^{\pi}{\|f\|_{\infty}^2\mathrm{d}x}=\|f\|_{\infty}^2$.
+		      \end{note}
+		\item[Parseval relation:]\hfill \\
+		      Note $<s_N(f),g> = \sum_{n=-N}^{N}{c_{n} \underbrace{< \phi_n , g>}_{\overline{\gamma}_n}}$.
+		      \[
+			      \left|<f ,g > - \sum_{n=-N}^{N}{c_{n}\overline{\gamma}_n}\right|= \left|<f,g> - <s_N(f),g>\right|= \left|<f-s_N(f),g>\right| \le  \|f-s_N(f)\|_2 \|g\|_2 \to 0
+		      \]
+		      as $N\to \infty$, where the last inequality follows from Cauchy-Schwarz inequality (Problem~\nameref{prob:6.10}).
+		      \begin{note}
+			      We showed the symmetric sum $\sum_{n=-N}^{N}{c_{n} \overline{\gamma}_n}$ converges to $<f,g>$, but the series also converges absolutely.
+			      Since \begin{flalign*}
+				      \sum_{n=-N}^{N}{\left|c_{n} \overline{\gamma}_n\right|} & \le \left(\sum_{n=-N}^{N}{\left|c_n\right|^2}\right)^{\frac{1}{2}} \cdot \left(\sum_{n=-N}^{N}{\left|\overline{\gamma}_n\right|^2}\right)^{\frac{1}{2}} \\
+				                                                              & \le \|f\|_2 \cdot \|g\|_2,
+				      ,\end{flalign*}
+			      The series $\sum_{n=-\infty}^{\infty}{c_n \overline{\gamma}_n}$ converges absolutely and its sum is independent of how we make partial sums.
+		      \end{note}
+	\end{description}
+\end{proof}
